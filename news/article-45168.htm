@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-45168.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue中使用geobuf的示例详解_vue.js</title>
+        <meta name="description" content="需要安装geobuf和pbf这两个库  cnpm i -S geobuf pbf  引入  import geobuf from 'geobuf';  import Pbf from 'pbf';  " />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-45168.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="vue中使用geobuf的示例详解_vue.js" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/83ad4f09af228aeb1e883b40f4ca0bc9.webp" />
+        <meta property="og:release_date" content="2025-01-23T10:41:44" />
+    <meta property="og:updated_time" content="2025-01-23T10:41:44" />
+        <meta property="og:description" content="需要安装geobuf和pbf这两个库  cnpm i -S geobuf pbf  引入  import geobuf from 'geobuf';  import Pbf from 'pbf';  " />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue中使用geobuf的示例详解_vue.js">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>vue中使用geobuf的示例详解_vue.js</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<p>需要安装geobuf和pbf这两个库</p> <div class="ay1code"> <pre class="brush:bash;">cnpm i -S geobuf pbf</pre> </div> <p>引入</p> <div class="ay1code"> <pre class="brush:js;">import geobuf from 'geobuf';  import Pbf from 'pbf';</pre> </div> <p>使用：</p> <div class="ay1code"> <pre class="brush:js;">    let geojson_multiPolygon = {        type: 'Feature',        properties: {},        geometry: {          type: 'MultiPolygon',          coordinates: [            [              [                [109.2041015625, 30.088107753367257],                [115.02685546875, 30.088107753367257],                [115.02685546875, 32.7872745269555],                [109.2041015625, 32.7872745269555],                [109.2041015625, 30.088107753367257]              ]            ],            [              [                [112.9833984375, 26.82407078047018],                [116.69677734375, 26.82407078047018],                [116.69677734375, 29.036960648558267],                [112.9833984375, 29.036960648558267],                [112.9833984375, 26.82407078047018]              ]            ]          ]        }      };      let a = geobuf.encode(geojson_multiPolygon, new Pbf());      console.log('序列化:', a);         let b = geobuf.decode(new Pbf(a));      console.log('反序列化:', b);</pre> </div> <p style="text-align:center"><img fetchpriority="high" decoding="async" alt="" height="353" src="http://img.555519.xyz/uploads3/20220423/88baf83c251b46d4dd098488c43c343d.jpg"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-45167.htm">用指针低三位存放额外信息的优化方法 &#8211; 程鑫 _在线工具</a></p>
+                                        <p>下一个：<a href="/news/article-45678.htm">动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-30032.htm" title="做动物疫苗检验的是做什么的（动物疫苗抗体检测）">做动物疫苗检验的是做什么的（动物疫苗抗体检测）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-clash-windows.htm" title="FlClash机场订阅推荐 | 19.7M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.7M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-43188.htm" title="动物医院的英文单词怎么写的呀（动物医院的英文单词怎么写的呀）">动物医院的英文单词怎么写的呀（动物医院的英文单词怎么写的呀）</a></li>
+                        <li class="py-2"><a href="/news/article-31981.htm" title="SpringBoot中处理的转发与重定向">SpringBoot中处理的转发与重定向</a></li>
+                        <li class="py-2"><a href="/news/article-33890.htm" title="深圳宠物医院加盟连锁（宠物医院 深圳）">深圳宠物医院加盟连锁（宠物医院 深圳）</a></li>
+                        <li class="py-2"><a href="/news/article-29605.htm" title="C#实现DataTable转TXT、CSV文件_C#教程_">C#实现DataTable转TXT、CSV文件_C#教程_</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-20-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新22.9M/S免费节点订阅链接">FlClash节点订阅每天更新22.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-28208.htm" title="哈尔滨王允海宠物医院怎么样呀多少钱啊（王允海动物医院道里店怎么样）">哈尔滨王允海宠物医院怎么样呀多少钱啊（王允海动物医院道里店怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 18.9M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18.9M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-27276.htm" title="山东联美物流有限公司 山东联美物流有限公司怎么样">山东联美物流有限公司 山东联美物流有限公司怎么样</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">72</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
