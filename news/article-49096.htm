@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-49096.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spring中ApplicationEvent和ApplicationListener的应用</title>
+        <meta name="description" content="这个是spring基于Application的监听器,继承ApplicationEvent类就可以创建一个监听器监听的对象。具体代码如下： 这个是spring基于Application的监听器,继承A" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-49096.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Spring中ApplicationEvent和ApplicationListener的应用" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/2264057b4a79eef4f455febd3bee6b17.webp" />
+        <meta property="og:release_date" content="2025-01-31T07:19:50" />
+    <meta property="og:updated_time" content="2025-01-31T07:19:50" />
+        <meta property="og:description" content="这个是spring基于Application的监听器,继承ApplicationEvent类就可以创建一个监听器监听的对象。具体代码如下： 这个是spring基于Application的监听器,继承A" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Spring中ApplicationEvent和ApplicationListener的应用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Spring中ApplicationEvent和ApplicationListener的应用</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-tomorrow-night"> <p>这个是spring基于Application的监听器,继承ApplicationEvent类就可以创建一个监听器监听的对象。具体代码如下：<br /> 这个是spring基于Application的监听器,继承ApplicationEvent类就可以创建一个监听器监听的对象。具体代码如下：</p> <ol> <li>创建监听器监听的类</li> </ol> <pre><code class="prism language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>event<span class="token punctuation">;</span><span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Data<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ApplicationEvent<span class="token punctuation">;</span><span class="token comment">/**  * 监听器监听的对象  */</span><span class="token annotation punctuation">@Data</span><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">DemoEvent</span><span class="token keyword">extends</span><span class="token class-name">ApplicationEvent</span><span class="token punctuation">{<!-- --></span><span class="token keyword">private</span> String msg<span class="token punctuation">;</span><span class="token keyword">public</span><span class="token function">DemoEvent</span><span class="token punctuation">(</span>Object source<span class="token punctuation">,</span>String msg<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">super</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">this</span><span class="token punctuation">.</span>msg<span class="token operator">=</span> msg<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <ol start="2"> <li>创建监听器监听 DemoEvent 事件</li> </ol> <pre><code class="prism language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>event<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ApplicationListener<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Configuration<span class="token punctuation">;</span><span class="token comment">/**  * 监听DemoEvent事件  * @author javacfox  */</span><span class="token annotation punctuation">@Configuration</span><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">DemoEventListener</span><span class="token keyword">implements</span><span class="token class-name">ApplicationListener</span><span class="token generics function"><span class="token punctuation">&lt;</span>DemoEvent<span class="token punctuation">&gt;</span></span><span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">onApplicationEvent</span><span class="token punctuation">(</span>DemoEvent demoEvent<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"DemoEventListener接受到了demoPublisher发布的消息："</span><span class="token operator">+</span>demoEvent<span class="token punctuation">.</span><span class="token function">getMsg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <ol start="3"> <li>事件发布</li> </ol> <pre><code class="prism language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>event<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Autowired<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ApplicationContext<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Configuration<span class="token punctuation">;</span><span class="token annotation punctuation">@Configuration</span><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">DemoEventPublisher</span><span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@Autowired</span><span class="token keyword">private</span> ApplicationContext applicationContext<span class="token punctuation">;</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">publish</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         DemoEvent event<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">DemoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span><span class="token string">"发布成功！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"发部event："</span><span class="token operator">+</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>         applicationContext<span class="token punctuation">.</span><span class="token function">publishEvent</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <ol start="4"> <li>测试</li> </ol> <pre><code class="prism language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>test<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>event<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>AnnotationConfigApplicationContext<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Configuration<span class="token punctuation">;</span><span class="token annotation punctuation">@Configuration</span><span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span><span class="token string">"com.test.demo.event"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">EventTest</span><span class="token punctuation">{<!-- --></span><span class="token keyword">public</span><span class="token keyword">static</span><span class="token keyword">void</span><span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         AnnotationConfigApplicationContext context<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span>EventTest<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 		context<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 		String targetObj<span class="token operator">=</span><span class="token string">"i am the target object"</span><span class="token punctuation">;</span> 		DemoEvent demoEvent<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">DemoEvent</span><span class="token punctuation">(</span>targetObj<span class="token punctuation">,</span><span class="token string">"目标发布成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 发布事件</span>         context<span class="token punctuation">.</span><span class="token function">publishEvent</span><span class="token punctuation">(</span>demoEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>          context<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <ol start="5"> <li>测试结果</li> </ol> <pre><code class="prism language-java"><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.065</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>AnnotationConfigApplicationContext<span class="token operator">-</span> Refreshing org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>AnnotationConfigApplicationContext<span class="token annotation punctuation">@16f65612</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.079</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.129</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ClassPathBeanDefinitionScanner<span class="token operator">-</span> Identified candidate component<span class="token keyword">class</span><span class="token operator">:</span> file<span class="token punctuation">[</span>F<span class="token operator">:</span>\spring<span class="token operator">-</span>boot<span class="token operator">-</span><span class="token number">2.0</span><span class="token number">.1</span><span class="token punctuation">.</span>RELEASE\spring<span class="token operator">-</span>boot<span class="token operator">-</span>project\DemoTest\target\classes\com\test\demo\event\DemoEventListener<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">]</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.130</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ClassPathBeanDefinitionScanner<span class="token operator">-</span> Identified candidate component<span class="token keyword">class</span><span class="token operator">:</span> file<span class="token punctuation">[</span>F<span class="token operator">:</span>\spring<span class="token operator">-</span>boot<span class="token operator">-</span><span class="token number">2.0</span><span class="token number">.1</span><span class="token punctuation">.</span>RELEASE\spring<span class="token operator">-</span>boot<span class="token operator">-</span>project\DemoTest\target\classes\com\test\demo\event\DemoEventPublisher<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">]</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.207</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'org.springframework.context.event.internalEventListenerProcessor'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.209</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'org.springframework.context.event.internalEventListenerFactory'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.210</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.211</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'org.springframework.context.annotation.internalCommonAnnotationProcessor'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.217</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'eventTest'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.221</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'demoEventListener'</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.222</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>support<span class="token punctuation">.</span>DefaultListableBeanFactory<span class="token operator">-</span> Creating shared instance of singleton bean<span class="token string">'demoEventPublisher'</span> DemoEventListener接受到了demoPublisher发布的消息：目标发布成功<span class="token operator">!</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21.248</span><span class="token punctuation">[</span>main<span class="token punctuation">]</span> DEBUG org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>AnnotationConfigApplicationContext<span class="token operator">-</span> Closing org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>AnnotationConfigApplicationContext<span class="token annotation punctuation">@16f65612</span><span class="token punctuation">,</span> started on Tue Jan<span class="token number">14</span><span class="token number">21</span><span class="token operator">:</span><span class="token number">55</span><span class="token operator">:</span><span class="token number">21</span> CST<span class="token number">2020</span>  Process finished with exit code<span class="token number">0</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-49095.htm">springboot常用组件的集成</a></p>
+                                        <p>下一个：<a href="/news/article-49631.htm">Vue3 学习笔记&#8211;组合式 API</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-19-node-share-links.htm" title="FlClash节点订阅每天更新20.8M/S免费节点订阅链接">FlClash节点订阅每天更新20.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22177.htm" title="2019国产放心狗粮推荐（国产十大放心狗粮）">2019国产放心狗粮推荐（国产十大放心狗粮）</a></li>
+                        <li class="py-2"><a href="/news/article-47120.htm" title="免费宠物领养平台有哪些公司好一点（免费领养宠物包邮）">免费宠物领养平台有哪些公司好一点（免费领养宠物包邮）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新20.6M/S免费节点订阅链接">FlClash节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-39198.htm" title="免费领养宠物包邮吗现在（免费领养宠物送到家）">免费领养宠物包邮吗现在（免费领养宠物送到家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-clash-node.htm" title="FlClash机场订阅推荐 | 21.8M/S，Clash/SSR/V2ray/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 21.8M/S，Clash/SSR/V2ray/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-19896.htm" title="动物疫苗接种时间表格模板 动物疫苗接种时间表格模板图片">动物疫苗接种时间表格模板 动物疫苗接种时间表格模板图片</a></li>
+                        <li class="py-2"><a href="/news/article-41682.htm" title="对宠物医院好评的文案（宠物医院好评文字）">对宠物医院好评的文案（宠物医院好评文字）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-subscribe-node.htm" title="FlClash节点订阅每天更新20.8M/S免费节点订阅链接">FlClash节点订阅每天更新20.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-30560.htm" title="宠物狗免费领取（免费领狗是真的吗）">宠物狗免费领取（免费领狗是真的吗）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

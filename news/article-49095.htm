@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-49095.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>springboot常用组件的集成</title>
+        <meta name="description" content="目录 springboot常用组件的集成 1.创建项目 2. web服务器配置 3. 配置数据库 4. 配置mybatis 5. 开启事务 6.aop配置 7. pagehelper分页 3. dru" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-49095.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="springboot常用组件的集成" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/65845bb25d53551caac078946948a84c.webp" />
+        <meta property="og:release_date" content="2025-01-31T07:19:50" />
+    <meta property="og:updated_time" content="2025-01-31T07:19:50" />
+        <meta property="og:description" content="目录 springboot常用组件的集成 1.创建项目 2. web服务器配置 3. 配置数据库 4. 配置mybatis 5. 开启事务 6.aop配置 7. pagehelper分页 3. dru" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="springboot常用组件的集成">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>springboot常用组件的集成</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p id="main-toc"><strong>目录</strong></p> <p id="springboot%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E7%9A%84%E9%9B%86%E6%88%90-toc" style="margin-left:0px;"><a href="#springboot%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E7%9A%84%E9%9B%86%E6%88%90" rel="nofollow">springboot常用组件的集成</a></p> <p id="1.%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE-toc" style="margin-left:40px;"><a href="#1.%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE" rel="nofollow">1.创建项目</a></p> <p id="2.%20web%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-toc" style="margin-left:0px;"><a href="#2.%20web%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE" rel="nofollow">2. web服务器配置</a></p> <p id="3.%20%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93-toc" style="margin-left:0px;"><a href="#3.%20%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93" rel="nofollow">3. 配置数据库</a></p> <p id="4.%20%E9%85%8D%E7%BD%AEmybatis-toc" style="margin-left:0px;"><a href="#4.%20%E9%85%8D%E7%BD%AEmybatis" rel="nofollow">4. 配置mybatis</a></p> <p id="5.%20%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1-toc" style="margin-left:0px;"><a href="#5.%20%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1" rel="nofollow">5. 开启事务</a></p> <p id="6.aop%E9%85%8D%E7%BD%AE-toc" style="margin-left:0px;"><a href="#6.aop%E9%85%8D%E7%BD%AE" rel="nofollow">6.aop配置</a></p> <p id="7.%20pagehelper%E5%88%86%E9%A1%B5-toc" style="margin-left:0px;"><a href="#7.%20pagehelper%E5%88%86%E9%A1%B5" rel="nofollow">7. pagehelper分页</a></p> <p id="3.%20druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0-toc" style="margin-left:0px;"><a href="#3.%20druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0" rel="nofollow">3. druid数据库连接池</a></p> <p id="4.%20%E9%9B%86%E6%88%90redis-toc" style="margin-left:0px;"><a href="#4.%20%E9%9B%86%E6%88%90redis" rel="nofollow">4. 集成redis</a></p> <p id="%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAcontroller%E7%94%A8%E4%BA%8E%E6%B5%8B%E8%AF%95-toc" style="margin-left:40px;"><a href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAcontroller%E7%94%A8%E4%BA%8E%E6%B5%8B%E8%AF%95" rel="nofollow">编写一个controller用于测试</a></p> <p id="2.%E6%89%8B%E5%8A%A8%E8%A3%85%E9%85%8Dredis-toc" style="margin-left:40px;"><a href="#2.%E6%89%8B%E5%8A%A8%E8%A3%85%E9%85%8Dredis" rel="nofollow">2.手动装配redis</a></p> <hr id="hr-toc"/> </h1> <p>1.idea创建项目</p> <p>创建步骤 ：File --&gt; New --&gt; project,,,--&gt;Spring initializr--&gt;选择项目所需要的架包</p> <p>项目创建完成后可以查看pom.xml文件，上面选择的的第三方组件已经加入到pom.xml中了。</p> <p>pom.xml:</p> <pre><code class="language-XML">&lt;dependency&gt;     &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;     &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;     &lt;version&gt;2.1.1&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt;     &lt;groupId&gt;mysql&lt;/groupId&gt;     &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;     &lt;version&gt;8.0.30&lt;/version&gt; &lt;/dependency&gt;</code></pre> </h1> <p>打开application.properties文件</p> <pre><code class="language-XML">#端口号 server.port=8080 #指定上下文路径 server.servlet.context-path=/ #指定url编码 server.tomcat.uri-encoding=utf-8</code></pre> </h1> <p>打开application.properties文件</p> <pre><code class="language-XML">#驱动 spring.datasource.driverClassName = com.mysql.cj.jdbc.Driver #数据库连接 spring.datasource.url = jdbc:mysql://127.0.0.1:3306/db_text?characterEncoding=utf-8&amp;serverTimezone=UTC&amp;useSSL=false #用户名 spring.datasource.username = root #密码 spring.datasource.password = 123456</code></pre> <p>mybatas-plus配置</p> <p><img fetchpriority="high" decoding="async" alt="" height="187" src="http://img.555519.xyz/uploads/20221130/84c54464b9127824f0b7e747245fafb4.jpg"></p> </h1> <p>打开application.properties文件</p> <pre><code class="language-XML">#mybatis核心配置文件 mybatis.config-locations=classpath:mybatis-config.xml  #mybatis xml配置文件的位置 mybatis.mapper-locations=classpath:/mapper/**/*.xml  #在控制台输出执行的sql语句 mybatis.configuration.logimpl=org.apache.ibatis.logging.stdout.StdOutImpl</code></pre> <pre>mybatis-config.xml文件内容：</pre> <pre><code class="language-XML">&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt; &lt;configuration&gt;  &lt;settings&gt; &lt;setting name="logImpl" value="SLF4J"/&gt; &lt;!-- 开启二级缓存 --&gt; &lt;!--&lt;setting name="cacheEnabled" value="true"/&gt;--&gt; &lt;/settings&gt;  &lt;!-- 别名 --&gt; &lt;typeAliases&gt; &lt;typeAlias alias="Integer" type="java.lang.Integer" /&gt; &lt;typeAlias alias="String" type="java.lang.String"/&gt; &lt;typeAlias alias="Long" type="java.lang.Long" /&gt; &lt;typeAlias alias="HashMap" type="java.util.HashMap" /&gt; &lt;typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" /&gt; &lt;typeAlias alias="ArrayList" type="java.util.ArrayList" /&gt; &lt;typeAlias alias="LinkedList" type="java.util.LinkedList" /&gt; &lt;!--&lt;typeAlias type="com.zking.test.model.Book" alias="Book"/&gt;--&gt; &lt;/typeAliases&gt;  &lt;!-- 分页插件 --&gt; &lt;plugins&gt; &lt;plugin interceptor="com.github.pagehelper.PageInterceptor"&gt; &lt;/plugin&gt; &lt;/plugins&gt;  &lt;/configuration&gt;</code></pre> </h1> <p>在启动类上加入如下注解：<img decoding="async" alt="" height="342" src="http://img.555519.xyz/uploads/20221130/230bca2912794579b5c1a6e4fa857ae4.jpg"></p> <p>在需要进行事务管理的类或方法上加入事务注解就可以了（@Transactional）</p> </h1> <pre><code class="language-XML">&lt;dependency&gt;  &nbsp; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  &nbsp; &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt; &lt;/dependency&gt;</code></pre> </h1> <ol> <li> <p>pom.xml</p> </li> </ol> <pre><code class="language-XML">&lt;dependency&gt;  &nbsp; &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;  &nbsp; &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;   &nbsp; &lt;version&gt;1.2.12&lt;/version&gt; &lt;/dependency&gt;</code></pre> <p>2)application.properties</p> <pre><code class="language-XML"># -------------------- pagehelper B --------------------------- pagehelper.helper-dialect= mysql #pagehelper.reasonable=true #pagehelper.support-methods-arguments=true #pagehelper.params=count=countSql # -------------------- pagehelper E ---------------------------</code></pre> <ol> <li> <p>将课件提供的PageBean.java, PagingInterceptor.java，</p> </li> </ol> <p>1.定义注解</p> <pre><code class="language-java">package com.example.springboot1.annotation;  import java.lang.annotation.ElementType; import java.lang.annotation.Retention; import java.lang.annotation.RetentionPolicy; import java.lang.annotation.Target;  /**  * @author L  * @site www.xiaomage.com  * @company xxx公司  * @create&nbsp; 2022-06-10 9:10  */ @Retention(RetentionPolicy.RUNTIME) @Target(ElementType.METHOD) public @interface Paging { }</code></pre> <pre></pre> <p>2.定义切面</p> <pre><code class="language-java">package com.example.springboot1.aop;  import com.example.springboot1.utils.PageBean; import com.github.pagehelper.PageHelper; import com.github.pagehelper.PageInfo; import org.aspectj.lang.ProceedingJoinPoint; import org.aspectj.lang.annotation.Around; import org.aspectj.lang.annotation.Aspect; import org.springframework.core.annotation.Order; import org.springframework.stereotype.Component;  import java.util.List;  /**  * @author L  * @site www.xiaomage.com  * @company xxx公司  * @create&nbsp; 2022-06-09 16:15  */  @Component @Aspect @Order(1) public class PagingAOP {    &nbsp;  //@Around("execution(* com.zking.mybatisdemo..*.*Page(..))")  &nbsp;  @Around("@annotation(com.example.springboot1.annotation.Paging)")  &nbsp;  public Object around(ProceedingJoinPoint point) throws Throwable {   &nbsp; &nbsp; &nbsp;  Object[] args = point.getArgs();   &nbsp; &nbsp; &nbsp;  PageBean pageBean = null;  &nbsp; &nbsp; &nbsp;  for(Object arg: args) {  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  if(arg instanceof PageBean) {  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  pageBean = (PageBean)arg;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  if(pageBean != null &amp;&amp; pageBean.isPagination()) {  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  PageHelper.startPage(pageBean.getPage(), pageBean.getRows());  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  }  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  }  &nbsp; &nbsp; &nbsp;  }   &nbsp; &nbsp; &nbsp;  Object rv = point.proceed();   &nbsp; &nbsp; &nbsp;  if(pageBean != null &amp;&amp; pageBean.isPagination()) {  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  PageInfo info = new PageInfo((List)rv);  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  pageBean.setTotal(Long.valueOf(info.getTotal()).intValue());  &nbsp; &nbsp; &nbsp;  }   &nbsp; &nbsp; &nbsp;  return rv;  &nbsp;  }  } </code></pre> <p>3.定义分页工具类</p> <pre><code class="language-java">package com.example.springboot1.utils;  import com.mysql.cj.util.StringUtils;  import javax.servlet.http.HttpServletRequest; import java.util.Map;  public class PageBean {      /**      * 页码      */     private int page = 1;      /**      * 每页显示的记录数      */     private int rows = 10;      /**      * 总记录数      */     private int total = 0;      /**      * 是否分页      */     private boolean pagination = true;      /**      * 记录查询的url，以便于点击分页时再次使用      */     private String url;      /**      * 存放请求参数，用于生成隐藏域中的元素      */     private Map&lt;String,String[]&gt; parameterMap;      /**      * 根据传入的Request初始化分页对象      * @param request      */     public void setRequest(HttpServletRequest request) {          if(!StringUtils.isNullOrEmpty(request.getParameter("page"))) {             this.page = Integer.valueOf(request.getParameter("page"));         }         if(!StringUtils.isNullOrEmpty(request.getParameter("rows"))) {             this.rows = Integer.valueOf(request.getParameter("rows"));         }         if(!StringUtils.isNullOrEmpty(request.getParameter("pagination"))) {             this.pagination = Boolean.valueOf(request.getParameter("pagination"));         }          this.url = request.getRequestURI();         this.parameterMap = request.getParameterMap();          request.setAttribute("pageBean", this);     }       public int getPage() {         return page;     }       public void setPage(int page) {         this.page = page;     }       public int getRows() {         return rows;     }       public void setRows(int rows) {         this.rows = rows;     }       public int getTotal() {         return total;     }       public void setTotal(int total) {         this.total = total;     }      public boolean isPagination() {         return pagination;     }      public void setPagination(boolean pagination) {         this.pagination = pagination;     }      public String getUrl() {         return url;     }      public void setUrl(String url) {         this.url = url;     }      public Map&lt;String, String[]&gt; getParameterMap() {         return parameterMap;     }      public void setParameterMap(Map&lt;String, String[]&gt; parameterMap) {         this.parameterMap = parameterMap;     }      //计算起始页码     public int getStartIndex() {         return (this.page - 1) * this.rows;     }      //获取总页数     public int getTotalPage() {         if (this.getTotal() % this.rows == 0) {             return this.getTotal() / this.rows;         } else {             return this.getTotal() / this.rows + 1;         }     }      //上一页     public int getPreviousPage() {         return this.page - 1 &gt; 0 ? this.page - 1 : 1;     }      //下一页     public int getNextPage() {         return this.page + 1 &gt; getTotalPage() ? getTotalPage() : this.page + 1;     }  }</code></pre> <p>4）集成结束，可以编写测试方法进行测试</p> <p><img decoding="async" alt="" height="151" src="http://img.555519.xyz/uploads/20221130/d8e4ca11b7f2d45fd41ae81f8c814124.jpg"></p> <p>然后调用方法测试即可</p> <p>注意此处 ，如使用两次界面 paging需要在最上方 否则失效</p> </h1> <p>阿里开源的数据库连接池，使用java开发，提供强大的监控和扩展功能，可以替换DBCP和C3P0连接池，性能要比其他的连接池要好。 1）pom.xml</p> <pre><code class="language-XML">&lt;dependency&gt;  &nbsp;  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;  &nbsp;  &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;  &nbsp;  &lt;version&gt;1.1.21&lt;/version&gt; &lt;/dependency&gt;</code></pre> <ol> <li> <p>application.properties</p> </li> </ol> <pre><code class="language-XML">#--------------------- druid config B ------------------------ #config druid spring.datasource.type=com.alibaba.druid.pool.DruidDataSource #初始化时建立物理连接的个数 spring.datasource.druid.initial-size=5 #最小连接池数量 spring.datasource.druid.min-idle=5 #最大连接池数量 maxIdle已经不再使用 spring.datasource.druid.max-active=20 #获取连接时最大等待时间，单位毫秒 spring.datasource.druid.max-wait=60000 #申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 spring.datasource.druid.test-while-idle=true #既作为检测的间隔时间又作为testWhileIdel执行的依据 spring.datasource.druid.time-between-eviction-runs-millis=60000 #销毁线程时检测当前连接的最后活动时间和当前时间差大于该值时，关闭当前连接 spring.datasource.druid.min-evictable-idle-time-millis=30000 #用来检测连接是否有效的sql 必须是一个查询语句 #mysql中为 select 1 #oracle中为 select 1 from dual spring.datasource.druid.validation-query=select 1 #申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true spring.datasource.druid.test-on-borrow=false #归还连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true spring.datasource.druid.test-on-return=false #当数据库抛出不可恢复的异常时,抛弃该连接 #spring.datasource.druid.exception-sorter=true #是否缓存preparedStatement,mysql5.5+建议开启 spring.datasource.druid.pool-prepared-statements=true #当值大于0时poolPreparedStatements会自动修改为true spring.datasource.druid.max-pool-prepared-statement-per-connection-size=20 #配置扩展插件 spring.datasource.druid.filters=stat,wall #通过connectProperties属性来打开mergeSql功能；慢SQL记录 spring.datasource.druid.connection-properties=druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500 #合并多个DruidDataSource的监控数据 spring.datasource.druid.use-global-data-source-stat=true  # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter #是否启用StatFilter默认值true spring.datasource.druid.web-stat-filter.enabled=true spring.datasource.druid.web-stat-filter.url-pattern=/* #经常需要排除一些不必要的url，比如*.js,/jslib/*等等 spring.datasource.druid.web-stat-filter.exclusions=*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*  #Druid内置提供了一个StatViewServlet用于展示Druid的统计信息 #设置访问druid监控页的账号和密码,默认没有 spring.datasource.druid.stat-view-servlet.enabled=true spring.datasource.druid.stat-view-servlet.reset-enable=false spring.datasource.druid.stat-view-servlet.login-username=admin spring.datasource.druid.stat-view-servlet.login-password=admin  #DruidStatView的servlet-mapping spring.datasource.druid.stat-view-servlet.url-pattern=/druid/* #允许列表，只有配置在此处的ip才允许访问durid监控平台 spring.datasource.druid.stat-view-servlet.allow=127.0.0.1 #拒绝列表，配置下此处的ip将被拒绝访问druid监控平台 spring.datasource.druid.stat-view-servlet.deny= #--------------------- druid config E ------------------------</code></pre> <p><strong>application.yml配置</strong></p> <pre><code class="language-XML">spring:   datasource:  &nbsp;  url: jdbc:mysql://ip:port/数据库?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false  &nbsp;  username: root  &nbsp;  password:   &nbsp;  driver-class-name: com.mysql.jdbc.Driver  &nbsp;  type: com.alibaba.druid.pool.DruidDataSource  &nbsp;  druid:  &nbsp; &nbsp; &nbsp;#初始化大小  &nbsp; &nbsp;  initialSize: 5  &nbsp; &nbsp; &nbsp;#最小值  &nbsp; &nbsp;  minIdle: 5  &nbsp; &nbsp; &nbsp;#最大值  &nbsp; &nbsp;  maxActive: 20  &nbsp; &nbsp; &nbsp;#最大等待时间，配置获取连接等待超时，时间单位都是毫秒ms  &nbsp; &nbsp;  maxWait: 60000  &nbsp; &nbsp; &nbsp;#配置间隔多久才进行一次检测，检测需要关闭的空闲连接  &nbsp; &nbsp;  timeBetweenEvictionRunsMillis: 60000  &nbsp; &nbsp; &nbsp;#配置一个连接在池中最小生存的时间  &nbsp; &nbsp;  minEvictableIdleTimeMillis: 300000  &nbsp; &nbsp;  validationQuery: SELECT 1 FROM DUAL  &nbsp; &nbsp;  testWhileIdle: true  &nbsp; &nbsp;  testOnBorrow: false  &nbsp; &nbsp;  testOnReturn: false  &nbsp; &nbsp;  poolPreparedStatements: true  &nbsp; &nbsp; &nbsp;# 配置监控统计拦截的filters，去掉后监控界面sql无法统计，  &nbsp; &nbsp; &nbsp;#'wall'用于防火墙，SpringBoot中没有log4j，我改成了log4j2  &nbsp; &nbsp;  filters: stat,wall,log4j2  &nbsp; &nbsp; &nbsp;#最大PSCache连接  &nbsp; &nbsp;  maxPoolPreparedStatementPerConnectionSize: 20  &nbsp; &nbsp;  useGlobalDataSourceStat: true  &nbsp; &nbsp; &nbsp;# 通过connectProperties属性来打开mergeSql功能；慢SQL记录  &nbsp; &nbsp;  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500  &nbsp; &nbsp; &nbsp;# 配置StatFilter  &nbsp; &nbsp;  web-stat-filter:  &nbsp; &nbsp; &nbsp; &nbsp;#默认为false，设置为true启动  &nbsp; &nbsp; &nbsp;  enabled: true  &nbsp; &nbsp; &nbsp;  url-pattern: "/*"  &nbsp; &nbsp; &nbsp;  exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"  &nbsp; &nbsp; &nbsp;#配置StatViewServlet  &nbsp; &nbsp;  stat-view-servlet:  &nbsp; &nbsp; &nbsp;  url-pattern: "/druid/*"  &nbsp; &nbsp; &nbsp; &nbsp;#允许那些ip  &nbsp; &nbsp; &nbsp;  allow: 127.0.0.1  &nbsp; &nbsp; &nbsp;  login-username: admin  &nbsp; &nbsp; &nbsp;  login-password: 123456  &nbsp; &nbsp; &nbsp; &nbsp;#禁止那些ip  &nbsp; &nbsp; &nbsp;  deny: 192.168.1.102  &nbsp; &nbsp; &nbsp; &nbsp;#是否可以重置  &nbsp; &nbsp; &nbsp;  reset-enable: true  &nbsp; &nbsp; &nbsp; &nbsp;#启用  &nbsp; &nbsp; &nbsp;  enabled: true</code></pre> </h1> <ol> <li> <p>pom.xml</p> </li> </ol> <pre><code class="language-XML">&lt;dependency&gt;  &nbsp; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  &nbsp; &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt; &lt;/dependency&gt;</code></pre> <ol> <li> <p>application.properties</p> </li> </ol> <pre><code class="language-XML"># -------------------- redis config B ------------------------- # Redis数据库索引（默认为0） spring.redis.database=0 # Redis服务器地址 spring.redis.host=192.168.0.24 # Redis服务器连接端口 spring.redis.port=6379 # Redis服务器连接密码（默认为空） spring.redis.password= # 连接池最大连接数（使用负值表示没有限制） spring.redis.jedis.pool.max-active=100 # 连接池最大阻塞等待时间（使用负值表示没有限制） spring.redis.jedis.pool.max-wait=-1ms # 连接池中的最大空闲连接 spring.redis.jedis.pool.max-idle=10 # 连接池中的最小空闲连接 spring.redis.jedis.pool.min-idle=0 # 连接超时时间（毫秒） spring.redis.jedis.timeout=1000 # -------------------- redis config E -------------------------</code></pre> <p>yml文件配置</p> <pre><code class="language-XML"> redis:  &nbsp;  database: 1  &nbsp;  host: 120.79.61.66 &nbsp; # Redis服务器地址  &nbsp;  port: 6379 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Redis服务器连接端口  &nbsp;  password: 123456 &nbsp; &nbsp; # Redis服务器连接密码（默认为空）  &nbsp;  jedis:  &nbsp; &nbsp;  pool:  &nbsp; &nbsp; &nbsp;  max-active: 200 &nbsp; &nbsp; # 连接池最大连接数（使用负值表示没有限制）  &nbsp; &nbsp; &nbsp;  max-wait: -1 &nbsp; &nbsp; &nbsp;  # 连接池最大阻塞等待时间（使用负值表示没有限制）  &nbsp; &nbsp; &nbsp;  max-idle: 10 &nbsp; &nbsp; &nbsp;  # 连接池中的最大空闲连接  &nbsp; &nbsp; &nbsp;  min-idle: 2 &nbsp; &nbsp; &nbsp; &nbsp; # 连接池中的最小空闲连接  &nbsp;  connect-timeout: 6000 &nbsp; # 连接超时时间（毫秒）</code></pre> <ol> <li> <h2 id="%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAcontroller%E7%94%A8%E4%BA%8E%E6%B5%8B%E8%AF%95">编写一个controller用于测试</h2> </li> </ol> <pre><code class="language-XML">/**  * 用于测试redis集成  * @author Administrator  * @create 2019-12-1822:16  */ @RestController public class RedisTestController {   &nbsp;  @Resource  &nbsp;  private RedisTemplate redisTemplate;   &nbsp;  @RequestMapping(value = "/redis")  &nbsp;  public Object redis() {   &nbsp; &nbsp; &nbsp;  String name = "redis test";  &nbsp; &nbsp; &nbsp;  redisTemplate.opsForValue().set("redisTest", name);   &nbsp; &nbsp; &nbsp;  Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();  &nbsp; &nbsp; &nbsp;  map.put("code", 1);  &nbsp; &nbsp; &nbsp;  map.put("msg", "操作成功");   &nbsp; &nbsp; &nbsp;  return map;  &nbsp;  }  }</code></pre> <p>可以通过postman进行测试，如果正常在redis中添加key，则说明集成成功。</p> <p>配置文件中需要写入redis基本配置</p> <pre><code class="language-XML"> redis:  &nbsp;  database: 1  &nbsp;  host: 120.79.61.66 &nbsp; # Redis服务器地址  &nbsp;  port: 6379 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Redis服务器连接端口  &nbsp;  password: 123456 &nbsp; &nbsp; # Redis服务器连接密码（默认为空）  &nbsp;  jedis:  &nbsp; &nbsp;  pool:  &nbsp; &nbsp; &nbsp;  max-active: 200 &nbsp; &nbsp; # 连接池最大连接数（使用负值表示没有限制）  &nbsp; &nbsp; &nbsp;  max-wait: -1 &nbsp; &nbsp; &nbsp;  # 连接池最大阻塞等待时间（使用负值表示没有限制）  &nbsp; &nbsp; &nbsp;  max-idle: 10 &nbsp; &nbsp; &nbsp;  # 连接池中的最大空闲连接  &nbsp; &nbsp; &nbsp;  min-idle: 2 &nbsp; &nbsp; &nbsp; &nbsp; # 连接池中的最小空闲连接  &nbsp;  connect-timeout: 6000 &nbsp; # 连接超时时间（毫秒）</code></pre> <p>手动配置后 利用json进行转换 所需架包</p> <pre><code class="language-XML">  &lt;!-- 导入解析 Json的包  --&gt;  &nbsp;  &lt;dependency&gt;  &nbsp; &nbsp;  &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;  &nbsp; &nbsp;  &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;  &nbsp; &nbsp;  &lt;version&gt;2.13.3&lt;/version&gt;  &nbsp;  &lt;/dependency&gt;</code></pre> <h2 id="2.%E6%89%8B%E5%8A%A8%E8%A3%85%E9%85%8Dredis">2.手动装配redis</h2> <pre><code class="language-java">package com.example.springboot1.confing;  import com.fasterxml.jackson.annotation.JsonAutoDetect; import com.fasterxml.jackson.annotation.PropertyAccessor; import com.fasterxml.jackson.databind.ObjectMapper; import lombok.extern.slf4j.Slf4j; import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.cache.CacheManager; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.data.redis.cache.RedisCacheConfiguration; import org.springframework.data.redis.cache.RedisCacheManager; import org.springframework.data.redis.connection.RedisConnectionFactory; import org.springframework.data.redis.core.RedisTemplate; import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer; import org.springframework.data.redis.serializer.RedisSerializationContext; import org.springframework.data.redis.serializer.RedisSerializer; import org.springframework.data.redis.serializer.StringRedisSerializer;  import java.time.Duration;  /**  * 配置rdeis 中的数据是 json 加入保存  */  @Configuration @ConfigurationProperties(prefix = "spring.cache.redis") @Slf4j public class RedisCacheConfig {    &nbsp;  private Duration timeToLive = Duration.ZERO;  &nbsp;  public void setTimeToLive(Duration timeToLive) {  &nbsp; &nbsp; &nbsp;  this.timeToLive = timeToLive;  &nbsp;  }     &nbsp;  @Bean  &nbsp;  public RedisTemplate&lt;String, Object&gt; redisTemplate(RedisConnectionFactory connectionFactory) {  &nbsp; &nbsp; &nbsp;  // 创建redisTemplate  &nbsp; &nbsp; &nbsp;  RedisTemplate&lt;String, Object&gt; redisTemplate = new RedisTemplate&lt;&gt;();  &nbsp; &nbsp; &nbsp;  redisTemplate.setConnectionFactory(connectionFactory);   &nbsp; &nbsp; &nbsp;  // 使用Jackson2JsonRedisSerialize替换默认序列化  &nbsp; &nbsp; &nbsp;  Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);   &nbsp; &nbsp; &nbsp;  ObjectMapper objectMapper = new ObjectMapper();  &nbsp; &nbsp; &nbsp;  objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);  &nbsp; &nbsp; &nbsp;  objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);   &nbsp; &nbsp; &nbsp;  jackson2JsonRedisSerializer.setObjectMapper(objectMapper);   &nbsp; &nbsp; &nbsp;  // key采用String的序列化方式  &nbsp; &nbsp; &nbsp;  redisTemplate.setKeySerializer(new StringRedisSerializer());  &nbsp; &nbsp; &nbsp;  // value序列化方式采用jackson  &nbsp; &nbsp; &nbsp;  redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);  &nbsp; &nbsp; &nbsp;  // hash的key也采用String的序列化方式  &nbsp; &nbsp; &nbsp;  redisTemplate.setHashKeySerializer(new StringRedisSerializer());  &nbsp; &nbsp; &nbsp;  // hash的value序列化方式采用jackson  &nbsp; &nbsp; &nbsp;  redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);  &nbsp; &nbsp; &nbsp;  redisTemplate.afterPropertiesSet();  &nbsp; &nbsp; &nbsp;  return redisTemplate;  &nbsp;  }    &nbsp; @Bean  &nbsp;  public CacheManager cacheManager(RedisConnectionFactory factory) {  &nbsp; &nbsp; &nbsp;  RedisSerializer&lt;String&gt; redisSerializer = new StringRedisSerializer();  &nbsp; &nbsp; &nbsp;  Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);   &nbsp; &nbsp; &nbsp;  //解决查询缓存转换异常的问题  &nbsp; &nbsp; &nbsp;  ObjectMapper om = new ObjectMapper();  &nbsp; &nbsp; &nbsp;  om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);  &nbsp; &nbsp; &nbsp;  om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);  &nbsp; &nbsp; &nbsp;  jackson2JsonRedisSerializer.setObjectMapper(om);   &nbsp; &nbsp; &nbsp;  // 配置序列化（解决乱码的问题）  &nbsp; &nbsp; &nbsp;  RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  .entryTtl(timeToLive)  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  .disableCachingNullValues();   &nbsp; &nbsp; &nbsp;  RedisCacheManager cacheManager = RedisCacheManager.builder(factory)  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  .cacheDefaults(config)  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  .build();  &nbsp; &nbsp; &nbsp;  return cacheManager;  &nbsp;  }    }</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-48468.htm">宠物领养市场调查报告范文（宠物领养网站设计的需求调研）</a></p>
+                                        <p>下一个：<a href="/news/article-49096.htm">Spring中ApplicationEvent和ApplicationListener的应用</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-23551.htm" title="【Android】ListView 控件的简单使用">【Android】ListView 控件的简单使用</a></li>
+                        <li class="py-2"><a href="/news/article-47120.htm" title="免费宠物领养平台有哪些公司好一点（免费领养宠物包邮）">免费宠物领养平台有哪些公司好一点（免费领养宠物包邮）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-13-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新18.3M/S免费节点订阅链接">FlClash节点订阅每天更新18.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-24017.htm" title="动物疫病预防中心预处员工资怎么样（动物疾病预防中心 是好单位吗）">动物疫病预防中心预处员工资怎么样（动物疾病预防中心 是好单位吗）</a></li>
+                        <li class="py-2"><a href="/news/article-32942.htm" title="广州领养宠物的平台有哪些（广州有没有领养宠物狗）">广州领养宠物的平台有哪些（广州有没有领养宠物狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.5M/S免费节点订阅链接">FlClash节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-48468.htm" title="宠物领养市场调查报告范文（宠物领养网站设计的需求调研）">宠物领养市场调查报告范文（宠物领养网站设计的需求调研）</a></li>
+                        <li class="py-2"><a href="/news/article-19436.htm" title="开宠物店有前途吗?（开宠物店好吗）">开宠物店有前途吗?（开宠物店好吗）</a></li>
+                        <li class="py-2"><a href="/news/article-23102.htm" title="宠物粮食加工厂设备生产厂家电话号码查询（宠物粮食加工厂设备生产厂家电话号码查询）">宠物粮食加工厂设备生产厂家电话号码查询（宠物粮食加工厂设备生产厂家电话号码查询）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-15-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新21.8M/S免费节点订阅链接">FlClash节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
