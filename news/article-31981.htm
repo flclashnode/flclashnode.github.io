@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-31981.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpringBoot中处理的转发与重定向</title>
+        <meta name="description" content="转发：一次请求，服务器内部调用另外的组件处理，request和response可以共用，有限制性，只能转发到本应用中的某些资源，页面或者controller请求 课可以访问WEB-INF目录下面的页面" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-31981.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="SpringBoot中处理的转发与重定向" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/65845bb25d53551caac078946948a84c.webp" />
+        <meta property="og:release_date" content="2024-12-27T10:03:01" />
+    <meta property="og:updated_time" content="2024-12-27T10:03:01" />
+        <meta property="og:description" content="转发：一次请求，服务器内部调用另外的组件处理，request和response可以共用，有限制性，只能转发到本应用中的某些资源，页面或者controller请求 课可以访问WEB-INF目录下面的页面" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot中处理的转发与重定向">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>SpringBoot中处理的转发与重定向</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>转发：一次请求，服务器内部调用另外的组件处理，request和response可以共用，有限制性，只能转发到本应用中的某些资源，页面或者controller请求</p> <p>课可以访问WEB-INF目录下面的页面</p> <p>重定向：两次请求，地址会改变，request和response不能共用，不能直接访问WEB-INF下面的资源，</p> <p>根据所要跳转的资源，可以分为跳转到页面或者跳转到其他controller</p> <p><img fetchpriority="high" decoding="async" alt="" class="has" height="277" src="http://img.555519.xyz/uploads/20221201/7031083fc032fddb6b8de0c8a3c22da1.jpg"></p> <h3 id="-modelandview-">一、返回ModelAndView时的请求转发</h3> <p>当controller中的方法返回ModelAndView的时候，默认是使用的转发。当然，我们也可以显式的指出要使用转发，此时，需在 setViewName()指定的视图前添加forward:，此时springmvc.xml文件中配置的视图解析器将会失效，即需要在setViewName中写上jsp相对于项目根的路径。</p> <p>1：转发到页面</p> <pre class="has"><code class="language-java">/**  * 转发返回ModelAndView对象  * @return  * @throws Exception  */ @RequestMapping("/forwardMAV.do") public ModelAndView forwardMAV()throws Exception{      ModelAndView mv = new ModelAndView();     mv.addObject("type", "转发返回ModelAndView");     //默认情况下使用转发     //mv.setViewName("/result");      //手动显式指定使用转发，此时springmvc.xml配置文件中的视图解析器将会失效     mv.setViewName("forward:/jsp/result.jsp");     return mv; }</code></pre> <p>需要在webapp目录下添加jsp/result.jsp文件：</p> <p>2：转发到controller</p> <p><strong>使用转发跳转到其他controller中</strong></p> <pre class="has"><code class="language-java">@RequestMapping("/forwardMAV.do") public ModelAndView forwardMAV()throws Exception{      ModelAndView mv = new ModelAndView();      //手动显式指定使用转发，此时springmvc.xml配置文件中的视图解析器将会失效     mv.setViewName("forward:other.do");     return mv; }</code></pre> <p>创建OtherController：</p> <pre class="has"><code class="language-java">/**  * 被跳转的controller  */ @Controller public class OtherController {      /**      * 被跳转的controller返回result.jsp      * @return      * @throws Exception      */     @RequestMapping("/other.do")     public ModelAndView other()throws Exception{          ModelAndView mv = new ModelAndView();         mv.addObject("type", "被跳转的controller");          mv.setViewName("result");         return mv;     } }</code></pre> <p>二、返回ModelAndView时的重定向：发送的get请求，参数在url后面</p> <p>如果要实现重定向，则需在setViewName()指定的视图前添加redirect:，此时springmvc.xml文件中配置的视图解析器将会失效，即需要在setViewName中写上jsp相对于项目根的路径。重定向的方式在request域中的数据会失效，此时可以通过ModelAndView来传递数据，但是只能传递基本数据类型和String类型，因为spring mvc会将传递的数据以请求参数的方式放到url的后面，此时任何数据类型都会被转换为普通的字符串。另外，我们在jsp中取值的时候需要使用 EL 表达式中的请求参数param读取。</p> <p>除此之外，你还可以将数据放到HttpSession域中，这里就不演示了。</p> <p>1.重定向到页面</p> <pre class="has"><code class="language-java">/**  * 重定向返回ModelAndView对象  * @return  * @throws Exception  */ @RequestMapping("/redirectMAV.do") public ModelAndView redirectMAV(School school,String name)throws Exception{      ModelAndView mv = new ModelAndView();      //在重定向中可以使用ModelAndView传递数据，但是只能传递基本数据类型和String类型     mv.addObject("school",school);     mv.addObject("name", name);      //使用重定向，此时springmvc.xml配置文件中的视图解析器将会失效     mv.setViewName("redirect:/jsp/result.jsp");     return mv;</code></pre> <p>result.jsp</p> <pre class="has"><code class="language-html">&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt; &lt;html&gt; &lt;head&gt;     &lt;title&gt;Title&lt;/title&gt; &lt;/head&gt; &lt;body&gt;  ${school.schoolName}&lt;br&gt; ${param.school.address}&lt;br&gt; ${param.name} &lt;/body&gt; &lt;/html&gt;</code></pre> <p>2，重定向到controller<br /> 在重定向到其他controller中的方法的时候，只要保证两者的参数名一致即可实现数据的传递。</p> <pre class="has"><code class="language-java">@RequestMapping("/redirectMAV.do") public ModelAndView redirectMAV(School school,String name)throws Exception{      ModelAndView mv = new ModelAndView();      mv.addObject("name", name);     mv.addObject("schoolName", school.getSchoolName());     mv.addObject("address", school.getAddress());      System.out.println(school.getAddress());     //使用重定向，此时springmvc.xml配置文件中的视图解析器将会失效     mv.setViewName("redirect:other.do");     return mv; }</code></pre> <pre class="has"><code class="language-java">RequestMapping("/other.do") public ModelAndView other(String name, School school)throws Exception{      ModelAndView mv = new ModelAndView();      //单个接收     mv.addObject("name", name);      //通过javabean对象接收     mv.addObject("school", school);      System.out.println(school.getAddress());     mv.setViewName("result");      return mv; }</code></pre> <h3 id="-string-">返回String类型的转发</h3> <p>这个整体上跟之前ModelAndView差不多，只不过在controller中的方法参数会被自动的放到request域中。</p> <pre class="has"><code class="language-java">@RequestMapping("/forwardStr.do") public String forwardStr(School school)throws Exception{      //默认会使用转发     //return "result";     //显式的使用转发     return "forward:/jsp/result.jsp"; }</code></pre> <p>result.jsp中直接通过request域获取数据，以下两种方式均可。</p> <p>${requestScope.school.schoolName}</p> <p>${school.schoolName}</p> <h3>返回String类型的重定向</h3> <p>这里要想传递数据的话，需要使用之前介绍过的Model实现，这里的数据同样会放在url中，所以只能传递基本数据类型和String类型。</p> <pre class="has"><code class="language-java">@RequestMapping("/redirectStr.do") public String redirectStr(School school, Model model)throws Exception{      //这里的数据同样会放在url中，所以只能传递基本数据类型和String类型     model.addAttribute("schoolName", school.getSchoolName());     model.addAttribute("address", school.getAddress());      return "redirect:/jsp/result.jsp"; }</code></pre> <p>result.jsp中需要通过param来获取数据：</p> <p>${param.schoolName}</p> <p>${param.address}</p> <p>这里转发和重定向跟之前返回ModelAndView的时候一样，所以就不演示了。</p> <h3 id="-void-">返回void的重定向和转发</h3> <p>当方法没有返回值即返回void的时候，重定向和转发操作都是使用的servlet的api，就是：<br /> 转发：</p> <pre class="has"><code class="language-java">request.getRequestDispatcher("/jsp/result.jsp").forward(request, response);</code></pre> <p>重定向：</p> <pre class="has"><code class="language-java">response.sendRedirect(request.getContextPath()+"/jsp/result.jsp");</code></pre> <p>***************************************</p> <p>@RequestMapping(value="/aa",method=RequestMethod.GET)</p> <p>public ModelAndView aaa (HttpServletRequest request) {<!-- --></p> <p>String user&nbsp; =&nbsp; request.getParameter("username");</p> <p>ModelAndView&nbsp; mv = new&nbsp;ModelAndView ("xyxyh/declaration/delcleView");</p> <p>mv.addObject("pas","bb"):</p> <p>return mv</p> <p>}</p> <pre><code class="language-java">@RequestMapping(value="/aa",method=RequestMethod.GET)  public ModelAndView aaa (HttpServletRequest request,ModelMap model) {  String user&nbsp; =&nbsp; request.getParameter("username");  ModelAndView&nbsp; mv = new&nbsp;ModelAndView ("xyxyh/declaration/delcleView");  mv.addObject("pas","bb"):  model.addAttribute("typeFlag","aaaaa"); return mv  }</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-31403.htm">动物疫苗是什么单位负责的呢知乎（动物疫苗是什么单位负责的呢知乎文章）</a></p>
+                                        <p>下一个：<a href="/news/article-31983.htm">一片枫叶的样子（一片枫叶的样子图片大全）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-36273.htm" title="开宠物店利润怎么样（开宠物店一天利润多少才能不亏）">开宠物店利润怎么样（开宠物店一天利润多少才能不亏）</a></li>
+                        <li class="py-2"><a href="/news/article-46150.htm" title="领养宠物协议书范本下载电子版大全（领养宠物协议怎么写）">领养宠物协议书范本下载电子版大全（领养宠物协议怎么写）</a></li>
+                        <li class="py-2"><a href="/news/article-45678.htm" title="动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询">动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询</a></li>
+                        <li class="py-2"><a href="/news/article-37243.htm" title="狗亲近的人,都是灵魂很轻的人（狗是与人最亲近的动物）">狗亲近的人,都是灵魂很轻的人（狗是与人最亲近的动物）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-5-free-node-subscribe.htm" title="FlClash节点订阅每天更新18.6M/S免费节点订阅链接">FlClash节点订阅每天更新18.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21271.htm" title="动物医院申请材料（动物医院诊疗许可证办理）">动物医院申请材料（动物医院诊疗许可证办理）</a></li>
+                        <li class="py-2"><a href="/news/article-29605.htm" title="C#实现DataTable转TXT、CSV文件_C#教程_">C#实现DataTable转TXT、CSV文件_C#教程_</a></li>
+                        <li class="py-2"><a href="/news/article-23105.htm" title="猫咪的三针疫苗（猫咪的3针疫苗）">猫咪的三针疫苗（猫咪的3针疫苗）</a></li>
+                        <li class="py-2"><a href="/news/article-46651.htm" title="宠物粮生产机器厂家电话（国内宠物粮生产厂家集中在哪里）">宠物粮生产机器厂家电话（国内宠物粮生产厂家集中在哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-clash-node.htm" title="FlClash机场订阅推荐 | 18.2M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 18.2M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

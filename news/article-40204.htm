@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-40204.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>面试官：请用SQL模拟一个死锁</title>
+        <meta name="description" content="文章首发于公众号：BiggerBoy  有读者说面试被问到怎么用SQL模拟数据库死锁？ 这位读者表示对Java中的死锁还是略知一二的，但是突然用SQL写死锁的案例之前还真没遇到过，这个问题没答上来。所" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-40204.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="面试官：请用SQL模拟一个死锁" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/8f75ebb8e4eed27f8ee3a1a35ebf47b5.webp" />
+        <meta property="og:release_date" content="2025-01-13T08:18:05" />
+    <meta property="og:updated_time" content="2025-01-13T08:18:05" />
+        <meta property="og:description" content="文章首发于公众号：BiggerBoy  有读者说面试被问到怎么用SQL模拟数据库死锁？ 这位读者表示对Java中的死锁还是略知一二的，但是突然用SQL写死锁的案例之前还真没遇到过，这个问题没答上来。所" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="面试官：请用SQL模拟一个死锁">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>面试官：请用SQL模拟一个死锁</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<blockquote> <p>文章首发于公众号：BiggerBoy</p> </blockquote> <p>有读者说面试被问到怎么用SQL模拟数据库死锁？<br /> 这位读者表示对Java中的死锁还是略知一二的，但是突然用SQL写死锁的案例之前还真没遇到过，这个问题没答上来。所以今天就带大家一起来看下怎么用SQL让数据库中产生死锁。</p> <h2 id="什么是死锁">什么是死锁</h2> <p>说到死锁，还是先来复习下什么是死锁吧。</p> <p>死锁是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p> <p>数据库死锁是指两个资源互相等待，如果需要“修改”一条数据，首先数据库管理系统会在上面加锁，以保证在同一时间只有一个事务能进行修改操作。锁定(Locking)发生在当一个事务获得对某一资源的“锁”时，这时，其他的事务就不能更改这个资源了，这种机制的存在是为了保证数据一致性。</p> <h2 id="数据库死锁示例">数据库死锁示例</h2> <p>好了，复习完回到今天的正题。</p> <p>有如下两个事务：<br /> 事务1先执行SQL1，更新id=1的，然后执行SQL2，更新id=2的。<br /> 事务2恰恰相反，它先更新id=2的，再更新id=1的。</p> <p>SQL代码如下：</p> <pre><code class="language-sql">-- 事务1 begin; -- SQL1更新id为1的 update user set age = 1 where id = 1; -- SQL2更新id为2的 update user set age = 2 where id = 2; commit;</code></pre> <pre><code class="language-sql">-- 事务2 begin; -- SQL1更新id为2的 update user set age = 3 where id = 2; -- SQL2更新id为1的 update user set age = 4 where id = 1; commit;</code></pre> <p><strong>我们怎么手动操作模拟一下呢？</strong></p> <p>先执行事务1的SQL1<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ae53bddd01c19e37df7ed5d93ca1f02f.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>再执行事务2的SQL1<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e1587f8fed07d5f348438d6fbc455f7e.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>此时不会有什么问题。<br /> 接着，我们执行事务1的SQL2。此时这条SQL没有执行成功，一直在等待，如下如所示，“查询时间”一直在增加<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/cb59550913c59a8a62ef01cd31b173a8.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>然后执行事务2的SQL2，事务2报错，“Deadlock found when trying to get lock; try restarting transaction”，即数据库发现死锁了。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8e525fe7b56777e7d647c3b3021c0c8e.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>此时执行事务1的commit操作，再查看数据，id为1和2的age字段分别被修改为了1和2，即事务1执行成功。事务2即使再执行commit数据也不会发生变化，因为事务2报错终止操作被回滚了。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/19c0333ff00201711a348d1d4d01bffe.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <h2 id="怎么造成死锁的呢">怎么造成死锁的呢？</h2> <p>下面给大家画个图，理解一下怎么造成死锁的。（事务1、事务2向下的箭头表示时间线）<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/da2bd6979e9fc7ed26a20f8ef47218be.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>当事务1和事务2都开始执行，如果都执行到第一个SQL时，是不会产生死锁的，因为操作的是不同的行，此时事务1对id=1的这条记录加了独占锁，事务2对id=2的这条记录加了独占锁，由于事务都没提交，所以这两个独占锁都没有释放。<br /> 然后两个事务都继续往下执行，我们手动控制了事务1先执行它的SQL2，即更新id=2的这条记录，由于id=2的这条记录被事务2锁着，所以这条SQL语句会被阻塞，一直等待，也就是上述图中显示的“查询时间”。<br /> 接着事务2执行它的SQL2，即更新id=1的这条记录，又因为事务1锁着id=1的这条记录，所以，此时形成了相互等待对方持有的锁的局面，即发生了死锁。但，数据库不会任由这两个事务一直等待下去，所以事务2执行SQL2时提示死锁，“Deadlock found when trying to get lock; try restarting transaction”，事务1不受影响，commit之后事务1执行成功。<br /> 此时可以通过看数据库状态，找到死锁相关的信息<br /><code>SHOW ENGINE INNODB STATUS;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ac7938e18f7082ea391b8d8304ad214d.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>将status字段内容复制出来，由于内容太多，这里只贴出和死锁相关的，如下：</p> <pre><code class="language-console">------------------------ LATEST DETECTED DEADLOCK ------------------------ 2022-04-23 15:47:53 0x10d08 *** (1) TRANSACTION: TRANSACTION 202027, ACTIVE 20 sec starting index read mysql tables in use 1, locked 1 LOCK WAIT 3 lock struct(s), heap size 1136, 2 row lock(s), undo log entries 1 MySQL thread id 4, OS thread handle 68972, query id 398 localhost ::1 root updating -- SQL2更新id为2的 update user set age = 2 where id = 2 *** (1) WAITING FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 495 page no 3 n bits 72 index PRIMARY of table `walking_mybatis`.`user` trx id 202027 lock_mode X locks rec but not gap waiting Record lock, heap no 2 PHYSICAL RECORD: n_fields 6; compact format; info bits 0  0: len 4; hex 80000002; asc     ;;  1: len 6; hex 00000003152c; asc      ,;;  2: len 7; hex 4000000132303f; asc @   20?;;  3: len 16; hex 77616c6b696e67383634353532303835; asc walking864552085;;  4: len 1; hex 30; asc 0;;  5: len 4; hex 80000003; asc     ;;  *** (2) TRANSACTION: TRANSACTION 202028, ACTIVE 12 sec starting index read, thread declared inside InnoDB 5000 mysql tables in use 1, locked 1 3 lock struct(s), heap size 1136, 2 row lock(s), undo log entries 1 MySQL thread id 5, OS thread handle 68872, query id 402 localhost ::1 root updating -- SQL2更新id为1的 update user set age = 4 where id = 1 *** (2) HOLDS THE LOCK(S): RECORD LOCKS space id 495 page no 3 n bits 72 index PRIMARY of table `walking_mybatis`.`user` trx id 202028 lock_mode X locks rec but not gap Record lock, heap no 2 PHYSICAL RECORD: n_fields 6; compact format; info bits 0  0: len 4; hex 80000002; asc     ;;  1: len 6; hex 00000003152c; asc      ,;;  2: len 7; hex 4000000132303f; asc @   20?;;  3: len 16; hex 77616c6b696e67383634353532303835; asc walking864552085;;  4: len 1; hex 30; asc 0;;  5: len 4; hex 80000003; asc     ;;  *** (2) WAITING FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 495 page no 3 n bits 72 index PRIMARY of table `walking_mybatis`.`user` trx id 202028 lock_mode X locks rec but not gap waiting Record lock, heap no 4 PHYSICAL RECORD: n_fields 6; compact format; info bits 0  0: len 4; hex 80000001; asc     ;;  1: len 6; hex 00000003152b; asc      +;;  2: len 7; hex 3f000001c31070; asc ?     p;;  3: len 16; hex 77616c6b696e67313533323639323335; asc walking153269235;;  4: len 1; hex 30; asc 0;;  5: len 4; hex 80000001; asc     ;;  *** WE ROLL BACK TRANSACTION (2)</code></pre> <p>从上面的日志中我们可以找到发生死锁的SQL和线程ID等相关信息。<br /> 通过以上的分析大家知道怎么模拟数据库中的死锁了吧。其实和Java多线程的死锁道理都是相通的，无非就是满足四个必要条件，即：<br /> 1、互斥条件：一个资源每次只能被一个进程使用；<br /> 2、请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放；<br /> 3、不剥夺条件：进程已获得的资源，在未使用完之前，不能强行剥夺；<br /> 4、循环等待条件：若干进程之间形成一种头尾相接的循环等待资源关系。</p> <h2 id="java应用中数据库死锁的表现">Java应用中数据库死锁的表现</h2> <p>通过Java操作数据库，模拟在实际应用中的数据库死锁。<br /> 首先是第一个业务方法，其实和上面用SQL模拟死锁的思路是一样的，这里的业务也很简单，先更新id为1的，再更新id为2的</p> <pre><code class="language-java">@Transactional(rollbackFor = Exception.class) public void updateById() {     User record1 = new User();     record1.setId(1);     record1.setAge(1);     userMapper.updateByPrimaryKey(record1);     System.out.println("事务1 执行第一条SQL完毕");      User record2 = new User();     record2.setId(2);     record2.setAge(2);     userMapper.updateByPrimaryKey(record1);     System.out.println("事务1 执行第二条SQL完毕"); }</code></pre> <p>然后第二个业务方法，同样，模拟上面的SQL死锁，先更新id为2的，然后为了使这个先后顺序更加明显，效果更突出，我们让第二个业务方法休眠30毫秒，再更新id为1的</p> <pre><code class="language-java">@Transactional(rollbackFor = Exception.class) public void updateById1() {     User record1 = new User();     record1.setId(2);     record1.setAge(3);     userMapper.updateByPrimaryKeySelective(record1);     System.out.println("事务2 执行第一条SQL完毕");     //休眠，保证先后执行顺序     try {         Thread.sleep(30);     } catch (InterruptedException e) {         e.printStackTrace();     }     User record2 = new User();     record2.setId(1);     record2.setAge(4);     userMapper.updateByPrimaryKeySelective(record2);     System.out.println("事务2 执行第二条SQL完毕"); }</code></pre> <p>然后我们进行单元测试，开两个线程，模拟多个用户请求，触发不同的业务操作数据库</p> <pre><code class="language-java">@Test public void testDeadLock() {     new Thread(() -&gt; {       userService.updateById();        System.out.println("事务1 执行完毕");     }).start();      new Thread(() -&gt; {       userService.updateById1();        System.out.println("事务2 执行完毕");     }).start();     Thread.sleep(2000);//休眠，等待两个线程，确保都能执行 }</code></pre> <p>运行以上代码，执行结果如下。通过日志我们发现事务1顺利执行，事务2抛出异常</p> <pre><code class="language-console">Exception in thread "Thread-5" org.springframework.dao.DeadlockLoserDataAccessException:  ### Error updating database.  Cause: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction\</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8d78f1a9fac405c447cb0f859ca4553d.jpg" alt="面试官：请用SQL模拟一个死锁"></p> <p>详细错误堆栈如下：</p> <pre><code class="language-console">事务1 执行第一条SQL完毕 事务2 执行第一条SQL完毕 事务1 执行第二条SQL完毕 事务1 执行完毕 Exception in thread "Thread-5" org.springframework.dao.DeadlockLoserDataAccessException:  ### Error updating database.  Cause: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction ### The error may exist in file [E:\idea_project\springboot-mybatis-demo\target\classes\mapper\UserMapper.xml] ### The error may involve com.wenbei.mapper.UserMapper.updateByPrimaryKeySelective-Inline ### The error occurred while setting parameters ### SQL: update user      SET age = ?      where id = ? ### Cause: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction ; Deadlock found when trying to get lock; try restarting transaction; nested exception is com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction   at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:267)   at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)   at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:88)   at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:440)   at com.sun.proxy.$Proxy81.update(Unknown Source)   at org.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:287)   at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67)   at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:152)   at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)   at com.sun.proxy.$Proxy82.updateByPrimaryKeySelective(Unknown Source)   at com.wenbei.service.UserService.updateById1(UserService.java:50)   at com.wenbei.service.UserService$$FastClassBySpringCGLIB$$de54ea56.invoke(&lt;generated&gt;)   at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)   at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)   at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)   at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)   at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:367)   at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)   at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)   at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)   at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)   at com.wenbei.service.UserService$$EnhancerBySpringCGLIB$$4badf6b6.updateById1(&lt;generated&gt;)   at com.wenbei.AppTests.lambda$testDeadLock$1(AppTests.java:54)   at java.lang.Thread.run(Thread.java:748) Caused by: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:123)   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)   at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)   at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)   at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:370)   at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3409)   at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)   at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3407)   at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167)   at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498)   at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)   at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)   at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)   at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)   at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)   at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)   at java.lang.reflect.Method.invoke(Method.java:498)   at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)   ... 20 more</code></pre> <p>你以为这就完了吗？回答完这个问题，面试官还有一连串的问题：</p> <ul> <li>什么是死锁？如何避免？</li> <li>数据库的锁与隔离级别的关系？</li> <li>数据库锁的类型有哪些？</li> <li>MySQL中InnoDB引擎的行锁模式及其是如何实现的？</li> <li>什么是数据库的乐观锁和悲观锁，如何实现？</li> </ul> <p>关于以上问题，咱们下期再讲~<br /> 如果对你有帮助，可以关注公众号BiggerBoy支持一下，第一时间获取文章干货。感谢！</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-40203.htm">SpringBoot admin+Eureka+钉钉通知 实现微服务监控</a></p>
+                                        <p>下一个：<a href="/news/article-40689.htm">Git基础Commit对象</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-20813.htm" title="动物疫苗上市公司排名榜最新公布（动物疫苗上市企业）">动物疫苗上市公司排名榜最新公布（动物疫苗上市企业）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新22.6M/S免费节点订阅链接">FlClash节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-24427.htm" title="Java实现最小高度树_java">Java实现最小高度树_java</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-4-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新19.8M/S免费节点订阅链接">FlClash节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-node-share.htm" title="FlClash节点订阅每天更新19.4M/S免费节点订阅链接">FlClash节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19895.htm" title="打疫苗的时候能不能吃（打疫苗的时候能不能吃感冒药）">打疫苗的时候能不能吃（打疫苗的时候能不能吃感冒药）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新20.4M/S免费节点订阅链接">FlClash节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19435.htm" title="Java基础之浅谈继承、多态">Java基础之浅谈继承、多态</a></li>
+                        <li class="py-2"><a href="/news/article-20814.htm" title="动物医院仪器有哪些种类的（动物医院常见的诊疗设备）">动物医院仪器有哪些种类的（动物医院常见的诊疗设备）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

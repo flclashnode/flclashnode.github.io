@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-21764.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>让我们写一个 Win32 文本编辑器吧 &#8211; 2. 计划和显示</title>
+        <meta name="description" content="如果你已经阅读了简介，相信你已经对我们接下来要做的事情有所了解。 本文，将会把简介中基础程序修改为一个窗体应用程序。并对编辑器接下来的编辑计划进行说明。  1. 程序改造 阅读过曾经我认为C语言就是个" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-21764.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="让我们写一个 Win32 文本编辑器吧 &#8211; 2. 计划和显示" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/8f75ebb8e4eed27f8ee3a1a35ebf47b5.webp" />
+        <meta property="og:release_date" content="2024-12-05T10:07:11" />
+    <meta property="og:updated_time" content="2024-12-05T10:07:11" />
+        <meta property="og:description" content="如果你已经阅读了简介，相信你已经对我们接下来要做的事情有所了解。 本文，将会把简介中基础程序修改为一个窗体应用程序。并对编辑器接下来的编辑计划进行说明。  1. 程序改造 阅读过曾经我认为C语言就是个" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="让我们写一个 Win32 文本编辑器吧 &#8211; 2. 计划和显示">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>让我们写一个 Win32 文本编辑器吧 &#8211; 2. 计划和显示</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				</h1> <blockquote> <p>如果你已经阅读了<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/YHxyZZwF7YVHDjuiaARThQ"  target="_blank" rel="nofollow"><code>简介</code></a>，相信你已经对我们接下来要做的事情有所了解。</p> <p>本文，将会把<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/YHxyZZwF7YVHDjuiaARThQ"  target="_blank" rel="nofollow"><code>简介</code></a>中基础程序修改为一个窗体应用程序。并对编辑器接下来的编辑计划进行说明。</p> </blockquote> <h2 id="1-程序改造">1. 程序改造</h2> <p>阅读过<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/gcGNQnoAjsy1vdHkDVzBaA"  target="_blank" rel="nofollow"><code>曾经我认为C语言就是个弟弟</code></a>这篇文章的读者应该知道，编辑器（包括所有<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/windows/win32/learnwin32/learn-to-program-for-windows"  target="_blank" rel="nofollow"><code>Win32</code></a>应用程序控件），本质上都是一个窗口（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassa"  target="_blank" rel="nofollow"><code>WNDCLASSA</code></a>(已被<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa"  target="_blank" rel="nofollow"><code>WNDCLASSEX</code></a>取代)结构体描述）。</p> <p>在本节，我们将对<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/YHxyZZwF7YVHDjuiaARThQ"  target="_blank" rel="nofollow">上一篇文章</a>所建立的项目进行改造，使其弹出一个主窗体，并附加一个编辑器窗体。</p> <ol> <li>设置项目子系统</li> </ol> <p>在之前，我们为了简便，没有修改<code>vicapp</code> 项目的子系统，其默认值为控制台应用程序，所以我们可以用如下代码调用<code>vitality-controls</code> 给出的函数<code>vic_prints</code>。</p> <pre><code class="language-C">#include "../../shared-include/vitality-controls.h"  int main(int argc, char** argv) { 	vic_prints("hello vic."); 	return 0; }</code></pre> <p>但是，对于一个编辑器来说，应该是一个窗体应用程序。所以，我们要对<code>vicapp</code> 进行子系统设置，打开<code>vicapp</code> 项目属性（参考<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/YHxyZZwF7YVHDjuiaARThQ"  target="_blank" rel="nofollow">上一篇文章</a>），最终设置如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/b6446213d065542d4447528e23688f3a.jpg" alt="让我们写一个 Win32 文本编辑器吧 - 2. 计划和显示"></p> <ol start="2"> <li>修改主程序代码</li> </ol> <p>修改之系统为<code>窗口</code>后，编译程序，会发现如下错误：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/7c437c89d4fecaad243e92de664ac2b2.jpg" alt="让我们写一个 Win32 文本编辑器吧 - 2. 计划和显示"></p> <p>这是因为，链接程序会根据项目设置，去查找不同的主函数名称，而对于<code>窗体</code>应用程序，其主函数名应为<code>WinMain</code>，所以这里会报找不到符号<code>WinMain</code>，因为我们没有定义它。</p> <p>对于不同项目类型的启动函数定义，参考文件<code>VS安装目录\VC\Tools\MSVC\14.31.31103\crt\src\vcruntime\exe_common.inl</code>, 现在将相关代码列出如下：</p> <pre><code class="language-C">#if defined _SCRT_STARTUP_MAIN      using main_policy = __scrt_main_policy;     using file_policy = __scrt_file_policy;     using argv_policy = __scrt_narrow_argv_policy;     using environment_policy = __scrt_narrow_environment_policy;      static int __cdecl invoke_main()     {         return main(__argc, __argv, _get_initial_narrow_environment());     }  #elif defined _SCRT_STARTUP_WMAIN      using main_policy = __scrt_main_policy;     using file_policy = __scrt_file_policy;     using argv_policy = __scrt_wide_argv_policy;     using environment_policy = __scrt_wide_environment_policy;      static int __cdecl invoke_main()     {         return wmain(__argc, __wargv, _get_initial_wide_environment());     }  #elif defined _SCRT_STARTUP_WINMAIN      using main_policy = __scrt_winmain_policy;     using file_policy = __scrt_file_policy;     using argv_policy = __scrt_narrow_argv_policy;     using environment_policy = __scrt_narrow_environment_policy;      static int __cdecl invoke_main()     {         return WinMain(             reinterpret_cast&lt;HINSTANCE&gt;(&amp;__ImageBase),             nullptr,             _get_narrow_winmain_command_line(),             __scrt_get_show_window_mode());     }  #elif defined _SCRT_STARTUP_WWINMAIN      using main_policy = __scrt_winmain_policy;     using file_policy = __scrt_file_policy;     using argv_policy = __scrt_wide_argv_policy;     using environment_policy = __scrt_wide_environment_policy;      static int __cdecl invoke_main()     {         return wWinMain(             reinterpret_cast&lt;HINSTANCE&gt;(&amp;__ImageBase),             nullptr,             _get_wide_winmain_command_line(),             __scrt_get_show_window_mode());     }  #elif defined _SCRT_STARTUP_ENCLAVE || defined _SCRT_STARTUP_WENCLAVE      using main_policy = __scrt_enclavemain_policy;     using file_policy = __scrt_nofile_policy;     using argv_policy = __scrt_no_argv_policy;     using environment_policy = __scrt_no_environment_policy;  #if defined _SCRT_STARTUP_ENCLAVE     static int __cdecl invoke_main()     {         return main(0, nullptr, nullptr);     } #else     static int __cdecl invoke_main()     {         return wmain(0, nullptr, nullptr);     } #endif  #endif</code></pre> <p>可以看到，根据不同的宏定义，函数<code>invoke_main()</code> 函数的定义也不相同，由于我们的编辑器应该支持<code>Unicode</code>字符，并且我们是一个窗体应用程序。所以，我们主函数应该参考<code>_SCRT_STARTUP_WWINMAIN</code> 宏定义内的主函数定义。</p> <p>除了在<code>exe_common.inl</code> 中定义了主函数的调用函数，另外，窗体应用程序的主函数还在<code>WinBase.h</code>（该文件可以通过<code>Windows.h</code> 查找到<code>#include "WinBase.h"</code> 一行，然后打开，或者可以直接引用） 文件中做了定义，如下：</p> <pre><code class="language-C">#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)  int #if !defined(_MAC) #if defined(_M_CEE_PURE) __clrcall #else WINAPI #endif #else CALLBACK #endif WinMain (     _In_ HINSTANCE hInstance,     _In_opt_ HINSTANCE hPrevInstance,     _In_ LPSTR lpCmdLine,     _In_ int nShowCmd     );  int #if defined(_M_CEE_PURE) __clrcall #else WINAPI #endif wWinMain(     _In_ HINSTANCE hInstance,     _In_opt_ HINSTANCE hPrevInstance,     _In_ LPWSTR lpCmdLine,     _In_ int nShowCmd     );  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */</code></pre> <p>根据之前的描述，我们把之前的<code>vitality-controls.h</code> 修改为如下代码：</p> <pre><code class="language-C">#pragma once  #ifdef VITALITY_CONTROLS_EXPORTS #define VIC_API __declspec(dllexport) #else #define VIC_API __declspec(dllimport) #endif // VITALITY_CONTROLS_EXPORTS  #include &lt;Windows.h&gt;  /** * 函数描述： *	初始化编辑器环境，需要在调用任何本程序集的函数之前， *	调用本函数。 *  * 返回值： *	如果初始化成功，返回 TRUE，否则返回 FALSE，并设置错误码， *	错误码可以通过 GetLastError() 获取。 */ VIC_API BOOL Vic_Init();  /** * 函数描述： *	创建并初始化一个编辑器。 *  * 参数： *	parent: 新创建的编辑器的父窗体。 *  * 返回值： *	如果创建控件成功，返回该控件的句柄，否则返回 -1 并设置错误码。 *	错误码可以通过 GetLastError() 获取。 */ VIC_API HWND Vic_CreateEditor( 	HWND parent );</code></pre> <p>首先，我们将<code>stdio.h</code> 的引用，换成了<code>Windows.h</code>，这允许我们使用<code>Windows</code> 关于桌面应用程序的<code>API</code>。</p> <p>其次，我们去除了<code>vic_print</code> 函数的定义。因为该函数主要是<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/YHxyZZwF7YVHDjuiaARThQ"  target="_blank" rel="nofollow">上一篇文章</a>测试跨<code>DLL</code> 调用函数的测试函数。现在，我们不再需要它。</p> <p>同时，我们添加了两个函数：</p> <ul> <li>Vic_Init<br /> 用于初始化环境，主要是注册我们编辑器的窗体类。至于要特别添加一个初始化函数，主要是由于<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-best-practices"  target="_blank" rel="nofollow"><code>微软官方文档</code></a>中明确指出，在<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain"  target="_blank" rel="nofollow"><code>DllMain</code></a> 中调用复杂的函数，可能会造成死锁。</li> <li>Vic_CreateEditor<br /> 用于创建一个编辑器，这里暂时不需要指定编辑器的信息，只是指定一个父窗体的句柄，以便将编辑器添加到窗体。参考<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s/gcGNQnoAjsy1vdHkDVzBaA"  target="_blank" rel="nofollow"><code>曾经我认为C语言就是个弟弟</code></a>中创建编辑器控件的代码。</li> </ul> <p>接下来，我们还要实现这两个函数。<br /> 在项目<code>vitality-controls</code> 的<code>src\include\</code> 目录，建立一个<code>common.h</code> 文件，输入如下内容：</p> <pre><code class="language-C">#pragma once  #include "../../../shared-include/vitality-controls.h"  #define EDITOR_CLASS_NAME L"VicEditor"    LRESULT CALLBACK TextEditorWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);</code></pre> <p>其中，该文件引入了外部<code>API</code> 文件定义，同时，声明了一个宏<code>EDITOR_CLASS_NAME</code>，该宏定义了我们要创建的目标编辑器的类名。</p> <p>在项目<code>vitality-controls</code> 的<code>src\controls\</code> 文件夹下，建立一个<code>init.c</code> 文件，并编辑如下代码：</p> <pre><code class="language-C">#include "../include/common.h"  /** * 函数描述： *	初始化编辑器环境，需要在调用任何本程序集的函数之前， *	调用本函数。 */ VIC_API BOOL Vic_Init() { 	WNDCLASSEX wnd = { 0 };  	wnd.cbSize = sizeof(wnd); 	wnd.hInstance = GetModuleHandle(NULL); 	wnd.lpszClassName = EDITOR_CLASS_NAME; 	wnd.hbrBackground = CreateSolidBrush(RGB(255, 0, 0)); 	wnd.hCursor = LoadCursor(NULL, IDC_IBEAM); 	wnd.style = CS_GLOBALCLASS | CS_PARENTDC | CS_DBLCLKS; 	wnd.lpfnWndProc = TextEditorWindowProc;  	return RegisterClassEx(&amp;wnd) != 0; }</code></pre> <p>在项目<code>vitality-controls</code> 的<code>src\controls\</code> 文件夹下，建立一个<code>common.c</code> 文件，并输入如下代码：</p> <pre><code class="language-C">#include "../include/common.h"  /** * 函数描述： *	创建并初始化一个编辑器。 * * 参数： *	parent: 新创建的编辑器的父窗体。 * * 返回值： *	如果创建控件成功，返回该控件的句柄，否则返回 NULL 并设置错误码。 *	错误码可以通过 GetLastError() 获取。 */ VIC_API HWND Vic_CreateEditor( 	HWND parent ) { 	RECT rect = { 0 };  	if (!GetClientRect(parent, &amp;rect)) { 		return NULL; 	}  	return CreateWindowEx( 		0, 		EDITOR_CLASS_NAME, 		L"", 		WS_CHILD | WS_VISIBLE | ES_MULTILINE | 		WS_VSCROLL | WS_HSCROLL | 		ES_AUTOHSCROLL | ES_AUTOVSCROLL, 		0, 0, 		rect.right, 		rect.bottom, 		parent, 		NULL, 		GetModuleHandle(NULL), 		NULL 	); }  LRESULT CALLBACK TextEditorWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) { 	switch (uMsg) { 	case WM_PAINT: { 		PAINTSTRUCT ps; 		HDC hdc = BeginPaint(hwnd, &amp;ps);  		TextOut(hdc, 0, 0, L"HELLO", 5);  		EndPaint(hwnd, &amp;ps); 		return 0; 	} 	default: 		break; 	} 	return DefWindowProc(hwnd, uMsg, wParam, lParam); }</code></pre> <p>其中，新增了一个<code>TextEditorWindowProc</code> 函数，该函数是我们编辑器的回调函数，参考<code>init.c</code> 文件中，对<code>wnd.lpfnWndProc</code> 字段的赋值。关于回调函数，<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexw"  target="_blank" rel="nofollow"><code>参考文档</code></a>。</p> <p>最后，让我们修改我们应用程序的主函数，修改项目<code>vicapp</code> 的主程序文件<code>vicapp-main.c</code> 如下所示：</p> <pre><code class="language-C"> #include &lt;Windows.h&gt; #include "../../shared-include/vitality-controls.h"  LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);  PCWSTR MAIN_CLASS_NAME = L"VIC-APP-MAIN";  HWND editorHwnd = NULL;  LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) { 	switch (uMsg) 	{ 	case WM_DESTROY: 		PostQuitMessage(0); 		return 0; 	case WM_CREATE: { 		editorHwnd = Vic_CreateEditor(hwnd); 		if (editorHwnd == 0) { 			int lastError = GetLastError(); 			ShowWindow(hwnd, 0); 		} 		return 0; 	} 	case WM_SIZE: { 		RECT rect = { 0 }; 		if (!GetWindowRect(hwnd, &amp;rect)) { 			break; 		} 		MoveWindow( 			editorHwnd, 			0, 			0, 			rect.right, 			rect.bottom, 			TRUE 		); 		return 0; 	} 	default: 		break; 	} 	return DefWindowProc(hwnd, uMsg, wParam, lParam); }  BOOL InitApplication(HINSTANCE hinstance) { 	WNDCLASSEX wcx = { 0 };  	wcx.cbSize = sizeof(wcx); 	wcx.style = CS_HREDRAW | CS_VREDRAW; 	wcx.lpfnWndProc = MainWindowProc; 	wcx.cbClsExtra = 0; 	wcx.cbWndExtra = 0; 	wcx.hInstance = hinstance; 	wcx.hIcon = LoadIcon(NULL, IDI_APPLICATION); 	wcx.hCursor = LoadCursor(NULL, IDC_ARROW); 	wcx.hbrBackground = GetStockObject(WHITE_BRUSH); 	wcx.lpszClassName = MAIN_CLASS_NAME; 	wcx.hIconSm = LoadImage( 		hinstance, 		MAKEINTRESOURCE(5), 		IMAGE_ICON, 		GetSystemMetrics(SM_CXSMICON), 		GetSystemMetrics(SM_CYSMICON), 		LR_DEFAULTCOLOR 	);  	return RegisterClassEx(&amp;wcx); }  BOOL InitInstance(HINSTANCE hinstance, int nCmdShow) { 	HWND hwnd = CreateWindowEx( 		0, 		MAIN_CLASS_NAME, 		L"VicApp", 		WS_OVERLAPPEDWINDOW, 		CW_USEDEFAULT, 		CW_USEDEFAULT, 		CW_USEDEFAULT, 		CW_USEDEFAULT, 		(HWND)NULL, 		(HMENU)NULL, 		hinstance, 		(LPVOID)NULL 	);  	if (!hwnd) { 		return FALSE; 	}  	ShowWindow(hwnd, nCmdShow); 	UpdateWindow(hwnd); 	return TRUE; }  int WINAPI wWinMain( 	_In_ HINSTANCE hInstance, 	_In_opt_ HINSTANCE hPrevInstance, 	_In_ LPWSTR lpCmdLine, 	_In_ int nShowCmd ) { 	MSG msg = { 0 };  	if (!Vic_Init()) { 		int err = GetLastError();  		return FALSE; 	}  	if (!InitApplication(hInstance)) 		return FALSE;  	if (!InitInstance(hInstance, nShowCmd)) 		return FALSE;  	BOOL fGotMessage; 	while ((fGotMessage = GetMessage(&amp;msg, (HWND)NULL, 0, 0)) != 0 &amp;&amp; fGotMessage != -1) 	{ 		TranslateMessage(&amp;msg); 		DispatchMessage(&amp;msg); 	} 	return msg.wParam; }</code></pre> <p>其中，在出程序的第一句，我们调用了控件初始化函数<code>Vic_Init</code>，并在创建主窗体的事件处理过程中，调用了<code>Vic_CreateEditor</code> 函数，创建了一个子窗体，该子窗体就是我们的编辑器。</p> <p>为了突出显示我们的编辑器，我们在<code>Vic_Init</code> 函数中，设置背景颜色为红色，代码如下：</p> <pre><code class="language-C">wnd.hbrBackground = CreateSolidBrush(RGB(255, 0, 0));</code></pre> <p>编译，并运行我们的程序，可以看到如下窗体：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/07f0d223bebc29bffb96f881ccb64621.jpg" alt="让我们写一个 Win32 文本编辑器吧 - 2. 计划和显示"></p> <p>由于我们在处理函数<code>TextEditorWindowProc</code> 中，在窗体上绘制了字符串<code>"HELLO"</code>。所以，可以看到界面上出现了<code>"HELLO"</code> 的字样，并且背景色为红色。</p> <h2 id="2-之后的计划">2. 之后的计划</h2> <p>由于代码编辑的过程中，想法可能发生改变，所以未来的计划并不是固定死的，有可能发生变更。</p> <p>通常情况下，变更的可能有：</p> <ul> <li>发现了某个功能的更好的实现方式。</li> <li>某个功能过于复杂，导致一篇文章写不完。</li> </ul> <p>虽然计划可能会变更，但是大致的思路如下：</p> <ol> <li> <p>背景设置</p> <p>在这里，你将看到，如何设置背景色，或者将我们的编辑器背景设置为一张图片。<br /> 这个过程可能要耗费一节。</p> </li> <li> <p>文本绘制</p> <p>主要目的是将当前使用<code>GDI</code> 的文本绘制转换为<code>DirectWrite</code> 绘制。<br /> 这个过程可能要耗费一节。</p> </li> <li> <p>光标</p> <p>在此小节，我们将会看到如何将光标显示在编辑器的指定位置。<br /> 这个过程可能要耗费一节。</p> </li> <li> <p>鼠标选择和高亮</p> <p>在此主题下，我们将会为我们的编辑器添加鼠标选择，以及选择区域高亮显示的支持。<br /> 这个过程可能要耗费 2~3 个小结。</p> </li> <li> <p>文本内存结构</p> <p>这将是一个比较大的主题，因为文件内容在内存中的保存，根据不同的考虑，将会采用不同的内存结构。<br /> 这个过程可能要耗费 2~3 个小结。</p> </li> <li> <p>滚动条实现</p> <p>由于我们计划让我们的编辑器可编辑的文件尽可能的大，并且<code>Windows</code> 自带的滚动条的取值范围有限，所以我们打算实现一个滚动条，其最大取值为<code>UINT64</code> 的最大取值，这样我们可以处理总行数就大大增加。<br /> 这个过程可能要耗费一节。</p> </li> <li> <p><code>Unicode</code> 支持</p> <p>这个主题下，我们会对<code>Unicode</code> 编码格式做一个简单的介绍，并实现对<code>Unicode</code> 字符的显示。<br /> 这个过程可能要耗费 2~3 个小结。</p> </li> <li> <p>文本透明度设置</p> <p>由于我们的编辑器允许我们设置背景颜色，甚至背景图片，考虑到文本颜色可能和背景色相近，导致不容易区分，那么文本的透明渲染就很有必要了。如果我们的文本是透明的，那就可以和背景色相结合，生成更丰富的颜色搭配，起到更好的阅读体验的目的。<br /> 这个过程可能要耗费 1~2 个小结。</p> </li> <li> <p>添加注解</p> <p>到此为止，我们的编辑器已经可以显示内容，选择内容，上下左右滚动，是时候添加注解功能了。<br /> 这个过程可能要耗费 1~2 个小结。</p> </li> <li> <p>添加样式支持</p> <p>这里所谓的样式，是根据配置，识别出文件的不同组成部分，然后将给定识别部分显示为固定颜色。如下方代码：</p> <pre><code class="language-C">int main(int argc, char** argv) {     return 0; }</code></pre> <p>根据配置，将会分别以不同的颜色/字体显示不同的元素，如类型<code>int</code> 将会被显示为蓝色等等。<br /> 这意味着，过了本节，你将至少可以实现一种编程语言的高亮功能。<br /> 当前，我们考虑实现<code>C语言</code> 的高亮显示。</p> </li> </ol> <p>好了，到此为止，我们已经能够将我们的控件显示出来了，计划也已经说明。如果你有什么建议，或者发现程序中有<code>BUG</code>，欢迎到本文档所在项目<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/vitalitylee/lets-write-a-edit-control"  target="_blank" rel="nofollow"><code>lets-write-a-edit-control</code></a>下留言，或者到源代码项目<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/vitalitylee/vitality-controls"  target="_blank" rel="nofollow"><code>vitality-controls</code></a> 下提交<code>issue</code>。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-21271.htm">动物医院申请材料（动物医院诊疗许可证办理）</a></p>
+                                        <p>下一个：<a href="/news/article-21765.htm">长春市领养猫咪去哪里领（长春市宠物猫领养）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-node-share.htm" title="FlClash节点订阅每天更新19.4M/S免费节点订阅链接">FlClash节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-29-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新21M/S免费节点订阅链接">FlClash节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-42188.htm" title="动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）</a></li>
+                        <li class="py-2"><a href="/news/article-32942.htm" title="广州领养宠物的平台有哪些（广州有没有领养宠物狗）">广州领养宠物的平台有哪些（广州有没有领养宠物狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新20.4M/S免费节点订阅链接">FlClash节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-26365.htm" title="开宠物美容店需要什么手续和证件（开宠物美容店需要什么证书）">开宠物美容店需要什么手续和证件（开宠物美容店需要什么证书）</a></li>
+                        <li class="py-2"><a href="/news/article-32452.htm" title="南京领养宠物的地方在哪里啊多少钱（南京领养宠物的地方在哪里啊多少钱一个月）">南京领养宠物的地方在哪里啊多少钱（南京领养宠物的地方在哪里啊多少钱一个月）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.2M/S免费节点订阅链接">FlClash节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-39198.htm" title="免费领养宠物包邮吗现在（免费领养宠物送到家）">免费领养宠物包邮吗现在（免费领养宠物送到家）</a></li>
+                        <li class="py-2"><a href="/news/article-33383.htm" title="Vue中使用el-table组件多页选择数据回显，分页记录保存选中的数据">Vue中使用el-table组件多页选择数据回显，分页记录保存选中的数据</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

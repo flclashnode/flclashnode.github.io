@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-37689.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue的混合mixins学习</title>
+        <meta name="description" content="  混合 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式。    混合对象可以包含任意组件选项。    当组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。  例" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-37689.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="vue的混合mixins学习" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/83ad4f09af228aeb1e883b40f4ca0bc9.webp" />
+        <meta property="og:release_date" content="2025-01-08T10:02:06" />
+    <meta property="og:updated_time" content="2025-01-08T10:02:06" />
+        <meta property="og:description" content="  混合 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式。    混合对象可以包含任意组件选项。    当组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。  例" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue的混合mixins学习">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>vue的混合mixins学习</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> </h1> <p>  <strong>混合 (mixins)</strong> 是一种分发 Vue 组件中可复用功能的非常灵活的方式。 <br />   混合对象可以<strong>包含任意组件选项</strong>。 <br />   当组件使用混合对象时，所有混合对象的选项将被<strong>混入</strong>该组件本身的选项。</p> <hr/> <h2 id="例子">例子</h2> <p>  新建一个 base.js 文件用于定义混合对象：</p> <pre class="prettyprint"><code class="hljs rust"><span class="hljs-comment">// base.js</span> <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> mixin = {     created: function () {             console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'混入对象的钩子被调用'</span>)     },     methods: {         foo(){             console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'foo'</span>);         },         conflicting(){             console.<span class="hljs-keyword">log</span>(<span class="hljs-string">'from mixin'</span>);         }     } }</code></pre> <p>  在 App.vue 组件中使用混合对象：</p> <pre class="prettyprint"><code class="hljs xml">// App.vue <span class="hljs-tag">&lt;<span class="hljs-title">template</span>&gt;</span>     <span class="hljs-comment">&lt;!-- ... --&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">     import {mixin} from <span class="hljs-string">"./base.js"</span>;    <span class="hljs-comment">// 导入混合对象</span>      export <span class="hljs-keyword">default</span> {         mixins: [mixin],    <span class="hljs-comment">// 记得一定要添加 mixins 属性，要求赋值一个数组，意味着可以使用多个混合对象</span>         <span class="hljs-comment">// ...</span>         created:<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{<!-- --></span>             console.log(<span class="hljs-string">'组件钩子被调用'</span>)             <span class="hljs-keyword">this</span>.foo();             <span class="hljs-keyword">this</span>.conflicting();         },         method: {             conflicting(){                 console.log(<span class="hljs-string">"from self"</span>);             }         }     } </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>   </code></pre> <p>    <img decoding="async" src="http://img.555519.xyz/uploads/20230119/2823c33a4997906250dae77201dae6bd.jpg" alt="vue的混合mixins学习"></p> <hr/> <h2 id="要点">要点</h2> <ol> <li>当组件和混入对象含有同名选项时，这些选项将以恰当的方式混合–数据对象在内部会进行浅合并 (一层属性深度)。</li> <li>在和组件的数据发生冲突时以组件数据优先。</li> <li>同名钩子函数将混合为一个数组，因此都将被调用</li> <li>混入对象的钩子将在组件自身钩子之前调用。</li> <li>值为对象的选项，例如 methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。</li> </ol> <hr/> <h2 id="实际应用">实际应用</h2> <p>  混合对象的使用主要是在项目中提取出常用的公共方法，提高代码的重用率。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-37243.htm">狗亲近的人,都是灵魂很轻的人（狗是与人最亲近的动物）</a></p>
+                                        <p>下一个：<a href="/news/article-37691.htm">pymysql 插入数据 转义处理</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-32941.htm" title="动物疫苗公司上海地址（上海动物防疫站打疫苗）">动物疫苗公司上海地址（上海动物防疫站打疫苗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-free-clash.htm" title="FlClash机场订阅推荐 | 18M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-46151.htm" title="宠物领养网站app名字叫什么来着（宠物领养软件推荐）">宠物领养网站app名字叫什么来着（宠物领养软件推荐）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-16-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新18.5M/S免费节点订阅链接">FlClash节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-36756.htm" title="领养宠物狗狗免费（领养宠物狗免费的平台）">领养宠物狗狗免费（领养宠物狗免费的平台）</a></li>
+                        <li class="py-2"><a href="/news/article-24954.htm" title="成都宠物收容机构排名（成都收宠物的宠物店）">成都宠物收容机构排名（成都收宠物的宠物店）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新22.6M/S免费节点订阅链接">FlClash节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-45168.htm" title="vue中使用geobuf的示例详解_vue.js">vue中使用geobuf的示例详解_vue.js</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.5M/S免费节点订阅链接">FlClash节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-15-free-clash.htm" title="FlClash机场订阅推荐 | 23M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

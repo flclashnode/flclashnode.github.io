@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-19435.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Java基础之浅谈继承、多态</title>
+        <meta name="description" content="继承：简单通俗的来讲，继承就是一个类继承另一个类，通常用extends表示继承。 继承的类叫子类，被继承的类叫父类。 子类可以使用父类的变量和方法，同时也可以重写父类的方法。 在Java中没有多继承这" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-19435.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Java基础之浅谈继承、多态" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/2264057b4a79eef4f455febd3bee6b17.webp" />
+        <meta property="og:release_date" content="2024-11-30T10:45:02" />
+    <meta property="og:updated_time" content="2024-11-30T10:45:02" />
+        <meta property="og:description" content="继承：简单通俗的来讲，继承就是一个类继承另一个类，通常用extends表示继承。 继承的类叫子类，被继承的类叫父类。 子类可以使用父类的变量和方法，同时也可以重写父类的方法。 在Java中没有多继承这" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java基础之浅谈继承、多态">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Java基础之浅谈继承、多态</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				</h1> <ul> <li>继承：简单通俗的来讲，继承就是一个类继承另一个类，通常用extends表示继承。</li> <li>继承的类叫子类，被继承的类叫父类。</li> <li>子类可以使用父类的变量和方法，同时也可以重写父类的方法。</li> <li>在Java中没有多继承这一概念，但是有类似多继承的方法！(通常来讲一个父类可以有多个子类，而一个子类只能有一个父类)</li> </ul> <pre><code>//继承简单表示 public class Son extends Father{ //将特殊的方法放在子类中 } class Father { //我们通常将一般的方法放在父类中，因为父类的方法子类都可以用。 }</code></pre> </h1> <h2 id="this">this</h2> <ul> <li>上一篇文章已经说过了方法重写的概念，在这里就不再重复了。</li> <li>this关键字也在上一篇讲过，我们可以在构造器中通过this()来调用本类的不同参数构造器。通常我们都写在第一行！</li> <li>还可以通过<code>this.变量</code>的方式表示使用的是本类的变量</li> </ul> <h2 id="super">super</h2> <ul> <li>super关键字就是在继承中应用的，我们可以通过super()调用父类的不同参数构造器</li> <li>同时还可以通过<code>super.方法</code>，调用父类的方法。</li> <li>同时它也是写在第一行！</li> <li>通常使用super是因为子类继承了父类，这样子类就不必要在写一些成员变量，直接在构造器中通过super()调用父类的构造器，将参数初始化即可。</li> </ul> <pre><code>public class Son extends Father{     Son(String name, int age) {         super(name, age);//如果子类的构造器没有显示的调用父类的构造器，则将默认的调用父类的无参构造。     } } class Father {     String name;     int age;     Father(String name,int age) {         this.name = name;         this.age = age;     } } //若父类中没有无参构造，而子类构造器中又没有调用父类的其它构造器，则Java编译器会报错。</code></pre> <blockquote> <p>对于继承简言之就是：父类有的子类都有，父类没有的子类也可以有</p> </blockquote> <h2 id="instanceof">instanceof</h2> <pre><code>public void instanceOf(Animal T) {         if(T instanceof Dog) { //我们传进来的dog就是此时的T，通过instanceof检测它是否属于Dog或者Animal，可以判断对象的类型。 //此时的语句应该是这样的 Animal T = new Dog(); 而我们应该将T向下转型             t = (Dog) T;             System.out.println("yes");         }     }</code></pre> <pre><code>        Animal dog = new Dog();         Animal cat = new Cat();         cat.instanceOf(dog);//程序将输出"yes"</code></pre> </h1> <ul> <li>多态是在继承的基础上实现的。也称之为(向上转型)</li> <li>大家只需要记住对于成员变量：编译看左边，运行也看左边。</li> <li>而对于方法：则是编译看左边，运行看右边。</li> </ul> <pre><code>public class Animal {     public void play() {         System.out.println("玩");     }     public void eat() {         System.out.println("吃");     } }</code></pre> <pre><code>public class Cat extends Animal{     public void eat() {         System.out.println("猫吃饭，亲密度+8");     }     public void play() {         System.out.println("撸猫，体力值-9");     } }</code></pre> <pre><code>public class Test {     public static void main(String[] args) {         Animal cat = new Cat();//此时cat被看成是Animal的对象，但实际上本质是Cat的。 //在编译阶段我们看左边，它是Animal骗过编译器，但真正运行的时候它会看右边。         cat.eat();         cat.play(); //最终输出“猫吃饭，亲密度+8”和“撸猫，体力值-9”。这就是多态的应用 //看右边，就是先去寻找Cat中是否有重写的父类方法，如果有则调用自己的。如果没有则用父类的。 //可以记为：先调子类，再调父类。     } }</code></pre> <p><code>Animal cat = new Cat();这也是向上转型，将Cat类的转成了Animal</code></p> <h2 id="31abstract">3.1abstract</h2> <ul> <li>抽象类：使用abstract关键字</li> <li>抽象类中的方法不需要实现，只需要声明占一个位置就行。我们可以在子类中去具体实现这个方法。</li> <li>这样更有灵活性，就像我们定义了一个抽象方法eat()，而不同的子类可以去实现成不同的方法，猫可以实现吃鱼，狗可以实现吃翔，使程序更加简单化。</li> <li>抽象类无法实例化，也就不能造对象了。</li> </ul> <h2 id="32权限修饰">3.2权限修饰</h2> <ol> <li>再次总结权限修饰范围</li> <li>仅对本类可见————private</li> <li>对外部完全可见————public</li> <li>对本包和所有子类可见————protected</li> <li>对本包可见————缺省，也就使默认的</li> </ol> </h1> <ul> <li>Object是所有类的父类</li> <li>既是没有明显写出继承Object，但也默认认为Object是父类</li> </ul> <h2 id="41equals方法">4.1equals方法</h2> <ul> <li>Object类中的equals()方法比较的是内存地址，通常我们都会重写equals()方法，达到值比较的目的。</li> <li>getClass方法将返回一个对象所属的类。我们可以通过它检测两个对象是否属于同一个类。</li> </ul> <blockquote> <p>Java规范要求equals方法具有下面的特性：<br /> 1.自反性：对于任何非空引用x，x.equals(x)应该返回true。<br /> 2.对称性：对于任何引用x和y，当且仅当y.equals(x)返回true时，x.equals(y)返回true。<br /> 3.传递性：对于任何引用x、y和z，如果x.equals(y)返回true，y.equals(z)返回true，则x.equals(z)也应该为true。<br /> 4.一致性：如果x和y引用的对象没有发生变化，反复调用x.equals(y)应该返回同样的结果。<br /> 5.对于任意非空引用x，x.equals(null)应该返回false。</p> </blockquote> <ul> <li>但是对于一个e是Employee对象，m是Manager对象，并且两个对象的值都是相同的。如果调用e.equals(m)则返回true。若反过来调用m.equals(e)则返回false。这就违反了我们的对称性。</li> <li>因为我们用的是instanceof检测的，但是<strong>子类instanceof父类</strong>是无法进行的。所以这也是instanceof的缺点</li> <li>我们可以通过getClass来比较两个对象是否属于同一个类，但是这样也有限制，就是多态的情况下返回false。<br /><strong>如何正确重写equals方法：</strong></li> <li>比较常见的两种重写方法： <ul> <li>用<code>instanceof</code>实现重写<code>equals</code>方法</li> <li>用<code>getClass</code>实现重写<code>equals</code>方法</li> </ul> </li> </ul> <pre><code>class Son extends Father{     public static void main(String[] args) {         Son son = new Son();         Father father = new Father();         Father sss = new Son();         System.out.println(father.equals(son));      } } class Father{     public boolean equals(Object obj) {         if(this == obj) return true;//判断是否同一个对象         //如果两个类不是同一个类 //        if(obj == null || obj.getClass() != this.getClass()) { //            return false; //        }         //传进来的对象不属于这个类或者它的父类，返回false         System.out.println(obj.getClass());         if(obj == null || !(obj instanceof Father)) {//左边是子类或者本类的对象             return false;         }         Father obj1 = (Father) obj;//强转然后判断         return true;     } }</code></pre> <p><strong>-  这里instanceof的缺点就是，父类调用比较子类为true，子类调用比较父类为false，所以我们可以尽量调用父类的equals来避免这个问题。</strong><br /><strong>- 同时也可以使用getClass进行判断，是否为同一个类对象。</strong></p> <h2 id="42hashcode方法">4.2hashCode方法</h2> <ul> <li>String类计算散列码算法：</li> </ul> <details> <summary>点击查看代码</summary> <pre><code>int hash = 0;     for(int i = 0; i &lt; length(); i++) {       hash = 31*hash + charAt(i);   }</code></pre> </details> <p>-  对于字符串的散列码，是看字符串的内容而定的。意味着两个字符串内容相同，则他们的散列码也相同。</p> <h2 id="43tostring方法">4.3toString方法</h2> <ul> <li>其实这个方法非常简单，就是把我们的字段以字符串的形式，好看的输出出来。</li> </ul> <pre><code>@Override     public String toString() {         return getClass().getName()                 +"{"                  + "tili="                  + tili                  + ", qimi="                  + qimi                  + '}';     }</code></pre> <ul> <li>在使用的时候我们可以写成</li> <li><code>System.out.println(x.toString());</code></li> <li><code>System.out.println(x);这样会默认调用toString()方法，可以简略不写</code></li> </ul> <blockquote> <p>但是在有时候我们用toString方法是会出现输出java.io.PrintStream@2f6684和[I@1a46e30的情况</p> </blockquote> <p>1.这是因为Objcet类定义了toString方法，可以打印<strong>对象的类名和散列码</strong>，所以需要我们对toString方法进行重写<br /> 2.数组也继承了Objcet类的toString,如果我们使用时不重写toString，则会出现<code>[I@1a46e30</code>，补救办法就时使用<code>Arrays.toString()</code><br /> 3.若是二维数组，则可以使用<code>Arrays.deepToString()方法</code><br /><strong>4.强烈建议在每一个类中都重写toString方法。</strong></p> </h1> <ul> <li>在做题时，必须确定数组的长度以后才能够使用，这样使我们非常的不方便！</li> <li>所以我们就可以使用一个动态扩容的数组，这样就不必定义它的初始化长度。</li> <li>ArraysList<integer> list = new ArrayList&lt;&gt;(100) 这是初始化100的数组，可动态扩容</integer></li> <li>如果说空间过多浪费了，可以使用trimToSize()方法，将没用过的空间释放掉。</li> <li>具体详细的ArrayList用法，我们在日后的集合学习。</li> </ul> <h2 id="51将字符串转成整型">5.1将字符串转成整型</h2> <p><code>int x = Integer.parseInt(s);</code></p> <h2 id="52将数字转成字符串">5.2将数字转成字符串</h2> <p><code>String s = String.ValueOf(x);</code></p> <h2 id="53可变参数">5.3可变参数</h2> <pre><code>System.out.println(sum(1,2,3,4,5));     public static int sum(int... a) {         int total = 0;         for(int i:a) {             total += i;         }         return total;     }</code></pre> </h1> <ul> <li>枚举用enum表示</li> <li>public enum Size{1,2,3,4,5};一次自增1</li> <li>枚举的构造器总是私有的</li> </ul> </h1> <ul> <li>对于继承、多态内容就总结这么多，希望大家可以多多练习。如果有不足之处，希望大家多多包涵，多多支持。如果有不懂的地方可以直接私信问我，欢迎来访！</li> <li>我将会继续更新关于Java的学习知识，感兴趣的小伙伴可以关注一下。</li> <li>文章写得比较走心，用了很长时间，绝对不是copy过来的！</li> <li>尊重每一位学习知识的人，同时也尊重每一位分享知识的人。</li> </ul> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-18964.htm">宠物粮厂名称好寓意吗怎么取（宠物粮厂家）</a></p>
+                                        <p>下一个：<a href="/news/article-19436.htm">开宠物店有前途吗?（开宠物店好吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-29605.htm" title="C#实现DataTable转TXT、CSV文件_C#教程_">C#实现DataTable转TXT、CSV文件_C#教程_</a></li>
+                        <li class="py-2"><a href="/news/article-18964.htm" title="宠物粮厂名称好寓意吗怎么取（宠物粮厂家）">宠物粮厂名称好寓意吗怎么取（宠物粮厂家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新20.6M/S免费节点订阅链接">FlClash节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-25879.htm" title="动物疫苗价格排行榜最新图片高清版 动物疫苗价格排行榜最新图片高清版大全">动物疫苗价格排行榜最新图片高清版 动物疫苗价格排行榜最新图片高清版大全</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-node-share.htm" title="FlClash节点订阅每天更新19.1M/S免费节点订阅链接">FlClash节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-35214.htm" title="HttpServletRequest.getInputStream()多次读取问题">HttpServletRequest.getInputStream()多次读取问题</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-7-node-share.htm" title="FlClash节点订阅 | 22.5M/S，V2ray/Clash/Shadowrocket/SSR免费节点订阅链接">FlClash节点订阅 | 22.5M/S，V2ray/Clash/Shadowrocket/SSR免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-38718.htm" title="属相养狗（属狗养狗有什么说法吗）">属相养狗（属狗养狗有什么说法吗）</a></li>
+                        <li class="py-2"><a href="/news/article-35215.htm" title="vue 动态样式绑定">vue 动态样式绑定</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-29-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新21M/S免费节点订阅链接">FlClash节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

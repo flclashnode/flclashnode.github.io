@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-23551.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>【Android】ListView 控件的简单使用</title>
+        <meta name="description" content="1. 效果预览  2. 在布局文件中放置 ListView 控件 &lt;?xml version="1.0" encoding="utf-8"?&gt; &lt;LinearLayout xmlns" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-23551.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="【Android】ListView 控件的简单使用" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/65845bb25d53551caac078946948a84c.webp" />
+        <meta property="og:release_date" content="2024-12-09T10:28:00" />
+    <meta property="og:updated_time" content="2024-12-09T10:28:00" />
+        <meta property="og:description" content="1. 效果预览  2. 在布局文件中放置 ListView 控件 &lt;?xml version="1.0" encoding="utf-8"?&gt; &lt;LinearLayout xmlns" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="【Android】ListView 控件的简单使用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>【Android】ListView 控件的简单使用</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>1. 效果预览</p> <p class="img-center"><img fetchpriority="high" decoding="async" alt="" height="818" src="http://img.555519.xyz/uploads/20230202/10236495c042a53b1b6eb2758e8a9265.jpg"></p> <p>2. 在布局文件中放置 ListView 控件</p> <pre><code class="language-XML">&lt;?xml version="1.0" encoding="utf-8"?&gt; &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"     xmlns:tools="http://schemas.android.com/tools"     android:layout_width="match_parent"     android:layout_height="match_parent"     tools:context=".MainActivity"&gt;      &lt;ListView         android:id="@+id/listView"         android:layout_width="match_parent"         android:layout_height="wrap_content"/&gt;  &lt;/LinearLayout&gt;</code></pre> <p>3. 创建 ListView 的 item 布局</p> <pre><code class="language-XML">&lt;?xml version="1.0" encoding="utf-8"?&gt; &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"     xmlns:tools="http://schemas.android.com/tools"     android:layout_width="match_parent"     android:layout_height="wrap_content"&gt;      &lt;ImageView         android:id="@+id/iv_interaction"         android:layout_alignParentStart="true"         android:padding="10dp"         android:layout_width="wrap_content"         android:layout_height="wrap_content"         tools:ignore="ContentDescription" /&gt;      &lt;TextView         android:id="@+id/tv_interaction"         android:layout_toEndOf="@+id/iv_interaction"         android:layout_centerVertical="true"         android:textSize="20sp"         android:layout_width="wrap_content"         android:layout_height="wrap_content"         tools:ignore="RelativeOverlap" /&gt;      &lt;ImageView         android:id="@+id/messages_into"         android:layout_alignParentEnd="true"         android:padding="10dp"         android:layout_width="wrap_content"         android:layout_height="wrap_content"         tools:ignore="ContentDescription" /&gt;  &lt;/RelativeLayout&gt;</code></pre> <p>4. 创建实体类</p> <pre><code class="language-java">public class InteractionBean {      private final int iv_interaction;     private final String tv_interaction;     private final int messages_into;      public InteractionBean(int iv_interaction, String tv_interaction, int messages_into){         this.iv_interaction = iv_interaction;         this.tv_interaction = tv_interaction;         this.messages_into = messages_into;     }      public int getIv_interaction() {         return iv_interaction;     }      public String getTv_interaction() {         return tv_interaction;     }      public int getMessages_into() {         return messages_into;     }  }</code></pre> <p>5. 创建适配器继承自 BaseAdapter</p> <pre><code class="language-java">public class InteractionAdapter extends BaseAdapter {      private final Context context;     private final List&lt;InteractionBean&gt; interactions;      public InteractionAdapter(Context context, List&lt;InteractionBean&gt; interactions){         this.context = context;         this.interactions = interactions;     }      @Override     public int getCount() {         return interactions.size();     }      @Override     public Object getItem(int i) {         return interactions.get(i);     }      @Override     public long getItemId(int i) {         return i;     }      @Override     public View getView(int i, View view, ViewGroup viewGroup) {          ViewHolder holder;          if (view == null){             view = LayoutInflater.from(context).inflate(R.layout.interaction_item, viewGroup, false);             holder = new ViewHolder();             holder.iv_interaction = view.findViewById(R.id.iv_interaction);             holder.tv_interaction = view.findViewById(R.id.tv_interaction);             holder.messages_into = view.findViewById(R.id.messages_into);             view.setTag(holder);         }else {             holder = (ViewHolder) view.getTag();         }          holder.iv_interaction.setImageResource(interactions.get(i).getIv_interaction());         holder.tv_interaction.setText(interactions.get(i).getTv_interaction());         holder.messages_into.setImageResource(interactions.get(i).getMessages_into());          return view;      }      static class ViewHolder{         ImageView iv_interaction;         TextView tv_interaction;         ImageView messages_into;     }  }</code></pre> <p>6. 为 item 设置数据，为 ListView 设置适配器</p> <pre><code class="language-java">public class MainActivity extends AppCompatActivity {      @Override     protected void onCreate(Bundle savedInstanceState) {         super.onCreate(savedInstanceState);         setContentView(R.layout.activity_main);          ListView listView = findViewById(R.id.listView);         List&lt;InteractionBean&gt; interactions = new ArrayList&lt;&gt;();         InteractionAdapter adapter = new InteractionAdapter(MainActivity.this, interactions);          InteractionBean at = new InteractionBean(R.drawable.messages_at, "有人@你", R.drawable.messages_into);         InteractionBean comment = new InteractionBean(R.drawable.messages_comment, "评论提醒", R.drawable.messages_into);         InteractionBean like = new InteractionBean(R.drawable.messages_like, "点赞提醒", R.drawable.messages_into);          interactions.add(at);         interactions.add(comment);         interactions.add(like);          listView.setAdapter(adapter);      } }</code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-23105.htm">猫咪的三针疫苗（猫咪的3针疫苗）</a></p>
+                                        <p>下一个：<a href="/news/article-23552.htm">聊城宠物食品公司工作怎么样（山东聊城宠物产业基地）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-35835.htm" title="根据第一个值分割数组-JavaScript">根据第一个值分割数组-JavaScript</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-24-node-share.htm" title="FlClash节点订阅每天更新21.8M/S免费节点订阅链接">FlClash节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-39718.htm" title="动物疫苗检测报告查询（动物疫苗查询系统）">动物疫苗检测报告查询（动物疫苗查询系统）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-3-node-share.htm" title="FlClash节点订阅每天更新23M/S免费节点订阅链接">FlClash节点订阅每天更新23M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-node-share.htm" title="FlClash节点订阅每天更新19.4M/S免费节点订阅链接">FlClash节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21270.htm" title="动物疫苗的概念和特点是什么 动物疫苗的概念和特点是什么呢">动物疫苗的概念和特点是什么 动物疫苗的概念和特点是什么呢</a></li>
+                        <li class="py-2"><a href="/news/article-25419.htm" title="动物接种疫苗的好处有哪些呢 动物接种疫苗的好处有哪些呢视频">动物接种疫苗的好处有哪些呢 动物接种疫苗的好处有哪些呢视频</a></li>
+                        <li class="py-2"><a href="/news/article-39198.htm" title="免费领养宠物包邮吗现在（免费领养宠物送到家）">免费领养宠物包邮吗现在（免费领养宠物送到家）</a></li>
+                        <li class="py-2"><a href="/news/article-44654.htm" title="猫咪全套疫苗打下来要多少钱（猫三联最晚什么时候打）">猫咪全套疫苗打下来要多少钱（猫三联最晚什么时候打）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

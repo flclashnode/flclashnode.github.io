@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-24014.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vue实战：基于Vue-ElementUI的权限管理系统之动态路由和动态按钮显示</title>
+        <meta name="description" content="1.首先登录 2.调用permission.js 的router.beforeEach((to, from, next)  to：进入到哪个路由去 from：从哪个路由离开 next：路由的控制参数，" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-24014.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Vue实战：基于Vue-ElementUI的权限管理系统之动态路由和动态按钮显示" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/83ad4f09af228aeb1e883b40f4ca0bc9.webp" />
+        <meta property="og:release_date" content="2024-12-10T10:00:23" />
+    <meta property="og:updated_time" content="2024-12-10T10:00:23" />
+        <meta property="og:description" content="1.首先登录 2.调用permission.js 的router.beforeEach((to, from, next)  to：进入到哪个路由去 from：从哪个路由离开 next：路由的控制参数，" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Vue实战：基于Vue-ElementUI的权限管理系统之动态路由和动态按钮显示">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Vue实战：基于Vue-ElementUI的权限管理系统之动态路由和动态按钮显示</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h3></h3> <h3>1.首先登录</h3> <h3>2.调用permission.js 的router.beforeEach((to, from, next)</h3> <blockquote> <p>to：进入到哪个路由去<br /> from：从哪个路由离开<br /> next：路由的控制参数，常用的有next(true)和next(false)<br /> 首先判断进入的是否是login页面？然后再判断是否已经登陆？<br /> 已经登陆了就进入你要跳转的页面，没登录就进入login页面</p> <p>为了更加明显一点，我将页面命名的简单一些，ps：</p> <p>Login.vue是登陆页面<br /> Index.vue是全局页面（包含公共导航组件）<br /> A.vue是普通页面（此处我做为首页）<br /> B.vue是普通页面</p> </blockquote> <pre><code class="language-javascript">permission.js router.beforeEach(async(to, from, next) =&gt; {   NProgress.start()   document.title = getPageTitle(to.meta.title)   const hasToken = getToken()   // 判断是否存在token,没有就重新登陆   if (hasToken) {     if (to.path === '/login') {       // if is logged in, redirect to the home page       next({ path: '/' })       NProgress.done()     } else {       // 这里指的是src/store/getters.js的roles       const hasRoles = store.getters.roles &amp;&amp; store.getters.roles.length &gt; 0       if (hasRoles) {         next()       } else {         try {           // 获取roles           // get user info 获取当前登录用户的Button按钮列表,和当前用户角色名           store.dispatch('user/getInfo')            // generate accessible routes map based on roles 获取后端角色列表            const DbRoutes = await store.dispatch('permission/getSideMenus')           router.addRoutes(DbRoutes)           next({ ...to, replace: true })         } catch (error) {           // remove token and go to login page to re-login           await store.dispatch('user/resetToken')           Message.error(error || 'Has Error')           next(`/login?redirect=${to.path}`)           NProgress.done()         }       }     }   } })</code></pre> <h3>2.store.getter</h3> <pre><code class="language-javascript">const getters = {   token: state =&gt; state.user.token,   name: state =&gt; state.user.name,   roles: state =&gt; state.user.roles,//角色名列表   permission_routes: state =&gt; state.permission.routes,//页面路由   permissions: state =&gt; state.user.permissions //菜单按钮列表 } export default getters</code></pre> <h3>3.store.dispatch('user/getInfo')调用&nbsp;Store文件夹下user.js的 getInfo方法&nbsp;获取当前登录用户的Button按钮列表,和当前用户角色名</h3> <pre><code class="language-javascript">import { login, logout, getInfo, getRoleList } from '@/api/user' import { getToken, setToken, removeToken } from '@/utils/auth' import router, { resetRouter } from '@/router'  const state = {   token: getToken(),   roles: [] }  const mutations = {   SET_TOKEN: (state, token) =&gt; {     state.token = token   },   //存储登录角色信息   SET_ROLES: (state, roles) =&gt; {     state.roles = roles   },  //存储按钮信息   SET_PERMISSIONS: (state, permissions) =&gt; {     state.permissions = permissions   } }  const actions = {     // get user info   getInfo({ commit, state }) {     return new Promise((resolve, reject) =&gt; {       getInfo(state.token).then(response =&gt; {         const { data } = response         if (!data) {           reject('Verification failed, please Login again.')         }         const { roles, permissions } = data         console.error('roles' + roles)         console.error('permissions' + permissions)         // roles must be a non-empty array         if (!roles || roles.length &lt;= 0) {           reject('getInfo: roles must be a non-null array!')         }         if (!permissions || permissions.length &lt;= 0) {           reject('getInfo: permissions must be a non-null array!')         }          commit('SET_ROLES', roles)         commit('SET_PERMISSIONS', permissions)         resolve(data)       }).catch(error =&gt; {         reject(error)       })     })   } }  export default {   namespaced: true,   state,   mutations,   actions }</code></pre> <h3></h3> <h3>4.&nbsp;store.dispatch('permission/getSideMenus')调用&nbsp;Store文件夹下psermission.js的 getSideMenus方法</h3> <pre><code class="language-javascript">const actions = {   getSideMenus({ commit, state }) {     return new Promise((resolve, reject) =&gt; {        //import { listForRouter } from '@/api/user'       listForRouter().then(response =&gt; {         const menus = response.data         //import { traverseRoutes } from '@/utils/router'         const remoteroutes = traverseRoutes(menus)         commit('SET_ROUTES', remoteroutes)         resolve(remoteroutes)       }).catch(error =&gt; {         console.log('list', error)         router.replace({           path: '/login',           query: { redirect: router.currentRoute.path }         })         // reject(error)       })     })   } }</code></pre> <p>import { traverseRoutes } from '@/utils/router'</p> <pre><code class="language-javascript">export function traverseRoutes(menus) {   const routes = menus.map(menu =&gt; {     if (menu.children === null) {       menu.children = []     }     if (menu.component) {       const name = menu.component       menu.component = (resolve) =&gt; require(['@/' + name], resolve)       // menu.component = resolve =&gt; require(['@/views/UserManagement/user'], resolve)     }      if (menu.children &amp;&amp; menu.children.length) {       menu.children = traverseRoutes(menu.children)     }     return menu   })   return routes }</code></pre> <pre><code class="language-javascript">api文件夹下user.js&nbsp;import { userInfo} from '@/api/user' export function getInfo(token) {   return request({     url: '/admin/info',     method: 'get',     params: { token }   }) }</code></pre> <h3>api文件夹下role.js&nbsp;import { listForRouter } from '@/api/role'</h3> <pre><code class="language-javascript">export function listForRouter() {   return request({     url: '/admin/getLoginSideBarMenus',     method: 'get'   }) }</code></pre> <h3>后端admin/Info 返回给前端信息</h3> <pre><code class="language-javascript">{ "code":200, "msg":"成功", "data": {"permissions":["userAdd","userDeleted","userUpdated","userReset","userSetRole","roleAdd","userDeleted", "roleUpdated","authAdd","authDeleted","authUpdated"], "roles":["超级管理员"] } }</code></pre> <p>后端admin/getLoginSideBarMenus返回给前端信息</p> <pre><code class="language-javascript">{"code":200,"msg":"成功", "data":[{"id":1,"parentId":0,"path":"/system","component":"layout","name":"系统管理","num":1,"hidden":false,"url":"/system","meta":{"title":"系统管理","icon":"form"},"children":[{"id":2,"parentId":1,"path":"/user","component":"views/UserManagement/user.vue","name":"用户管理","num":1,"hidden":false,"url":"/user","meta":{"title":"用户管理","icon":"user"},"children":null},{"id":8,"parentId":1,"path":"/role","component":"views/UserManagement/role.vue","name":"角色管理","num":1,"hidden":false,"url":"/role","meta":{"title":"角色管理","icon":"international"},"children":null},{"id":14,"parentId":1,"path":"/auth","component":"views/UserManagement/auth.vue","name":"资源管理","num":1,"hidden":false,"url":"/auth","meta":{"title":"资源管理","icon":"list"},"children":null},{"id":18,"parentId":1,"path":"/test","component":"views/test/index.vue","name":"测试菜单","num":1,"hidden":false,"url":"/test","meta":{"title":"测试菜单","icon":"lock"},"children":[{"id":19,"parentId":18,"path":"/children1","component":"views/test/children/children1.vue","name":"测试菜单1","num":2,"hidden":false,"url":"/children1","meta":{"title":"测试菜单1","icon":"icon"},"children":null}]}]}]}</code></pre> <h2>动态按钮显示</h2> <h2>main.js</h2> <pre><code class="language-javascript">// main.js import { checkArray } from './utils/btnPermission.js' Vue.directive('permission', {   inserted(el, binding) {     const permission = binding.value // 获取到 v-permission的值     if (permission) {       const hasPermission = checkArray(permission) // 检测是否有权限       if (!hasPermission) { // 没有权限 移除Dom元素         el.parentNode &amp;&amp; el.parentNode.removeChild(el)       }     }   } })</code></pre> <h2>./utils/btnPermission.js</h2> <pre><code class="language-javascript">import store from '@/store' export function checkArray(key) {   // store.dispatch('user/getInfo')    const arr = store.getters.permissions //store文件下getter.   const index = arr.indexOf(key)   if (index &gt; -1) {     return true // 有权限   } else {     return false // 无权限   } }</code></pre> <p>界面使用方法 auth.js</p> <pre><code class="language-html">界面使用方法 auth.js  &lt;el-table-column fixed="right" label="操作" width="300px"&gt;           &lt;template slot-scope="scope"&gt;             &lt;el-button               v-permission="'authAdd'"               icon="el-icon-plus"               type="success"               size="small"               @click="add(scope.row.code,scope.row.pcodes)"             &gt;               新增子级             &lt;/el-button&gt;             &lt;el-button               v-permission="'authUpdated'"               type="primary"               icon="el-icon-edit"               size="small"               @click="handleEdit(scope.row.id, scope.row)"             &gt;编辑&lt;/el-button&gt;             &lt;el-button               v-permission="'authDeleted'"               type="danger"               icon="el-icon-delete"               size="small"               @click.native.prevent="deleted(scope.row.id)"             &gt;               删除             &lt;/el-button&gt;           &lt;/template&gt;         &lt;/el-table-column&gt;</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-23552.htm">聊城宠物食品公司工作怎么样（山东聊城宠物产业基地）</a></p>
+                                        <p>下一个：<a href="/news/article-24017.htm">动物疫病预防中心预处员工资怎么样（动物疾病预防中心 是好单位吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-20354.htm" title="动物医院英文短语怎么写的啊（动物医院的英文翻译）">动物医院英文短语怎么写的啊（动物医院的英文翻译）</a></li>
+                        <li class="py-2"><a href="/news/article-47620.htm" title="动物医院诊室图片大全 动物医院诊室图片大全大图">动物医院诊室图片大全 动物医院诊室图片大全大图</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新18.9M/S免费节点订阅链接">FlClash节点订阅每天更新18.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-node-subscribe.htm" title="FlClash节点订阅每天更新20.8M/S免费节点订阅链接">FlClash节点订阅每天更新20.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 22.3M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 22.3M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-40204.htm" title="面试官：请用SQL模拟一个死锁">面试官：请用SQL模拟一个死锁</a></li>
+                        <li class="py-2"><a href="/news/article-44653.htm" title="动物疫苗多长时间打一次最好呢 动物疫苗多长时间打一次最好呢视频">动物疫苗多长时间打一次最好呢 动物疫苗多长时间打一次最好呢视频</a></li>
+                        <li class="py-2"><a href="/news/article-33382.htm" title="从Java的堆栈到Equals和==的比較">从Java的堆栈到Equals和==的比較</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-14-clash-windows.htm" title="FlClash机场订阅推荐 | 22.2M/S，SSR/Clash/Shadowrocket/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 22.2M/S，SSR/Clash/Shadowrocket/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-48116.htm" title="猫体外驱虫用什么药比较好 猫体外驱虫用什么药比较好知乎">猫体外驱虫用什么药比较好 猫体外驱虫用什么药比较好知乎</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

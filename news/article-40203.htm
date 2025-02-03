@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-40203.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpringBoot admin+Eureka+钉钉通知 实现微服务监控</title>
+        <meta name="description" content="一、效果 登录账号+密码  监控服务  查看实时日志  钉钉通知  &nbsp; 二、什么是Spring Boot Admin ？ Spring Boot Admin是一个开源社区项目，用于管理和监控" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-40203.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="SpringBoot admin+Eureka+钉钉通知 实现微服务监控" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/5379eeb30c189696d328346f6d06e85b.webp" />
+        <meta property="og:release_date" content="2025-01-13T08:18:05" />
+    <meta property="og:updated_time" content="2025-01-13T08:18:05" />
+        <meta property="og:description" content="一、效果 登录账号+密码  监控服务  查看实时日志  钉钉通知  &nbsp; 二、什么是Spring Boot Admin ？ Spring Boot Admin是一个开源社区项目，用于管理和监控" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot admin+Eureka+钉钉通知 实现微服务监控">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>SpringBoot admin+Eureka+钉钉通知 实现微服务监控</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <h2>一、效果</h2> <p>登录账号+密码</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20230108/3d04a2ca6eae872156dd1348220f1dd7.jpg"></p> <p>监控服务</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20230108/df807a0fd7cd15b3d2aa0bc3712e3339.jpg"></p> <p>查看实时日志</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20230108/40ef1a60392c69da8794852b0f20e1fd.jpg"></p> <p>钉钉通知</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20230108/ad4bfc9e10b9f0c5297680469b9d1f85.jpg"></p> <p>&nbsp;</p> <h2>二、什么是Spring Boot Admin ？</h2> <p>Spring Boot Admin是一个开源社区项目，用于管理和监控SpringBoot应用程序。 应用程序作为Spring Boot Admin Client向为Spring Boot Admin Server注册（通过HTTP）或使用SpringCloud注册中心（例如Eureka，Consul）发现。 UI是的Vue.js应用程序，展示Spring Boot Admin Client的Actuator端点上的一些监控。服务端采用Spring WebFlux + Netty的方式。Spring Boot Admin为注册的应用程序提供以下功能：</p> <ul> <li> <p>显示健康状况</p> </li> <li> <p>显示详细信息，例如</p> </li> <li> <p>JVM和内存指标</p> </li> <li> <p>micrometer.io指标</p> </li> <li> <p>数据源指标</p> </li> <li> <p>缓存指标</p> </li> <li> <p>显示构建信息编号</p> </li> <li> <p>关注并下载日志文件</p> </li> <li> <p>查看jvm system-和environment-properties</p> </li> <li> <p>查看Spring Boot配置属性</p> </li> <li> <p>支持Spring Cloud的postable / env-和/ refresh-endpoint</p> </li> <li> <p>轻松的日志级管理</p> </li> <li> <p>与JMX-beans交互</p> </li> <li> <p>查看线程转储</p> </li> <li> <p>查看http-traces</p> </li> <li> <p>查看auditevents</p> </li> <li> <p>查看http-endpoints</p> </li> <li> <p>查看计划任务</p> </li> <li> <p>查看和删除活动会话（使用spring-session）</p> </li> <li> <p>查看Flyway / Liquibase数据库迁移</p> </li> <li> <p>下载heapdump</p> </li> <li> <p>状态变更通知（通过电子邮件，Slack，Hipchat，......）</p> </li> <li> <p>状态更改的事件日志（非持久性）</p> </li> </ul> <h2>三、原理</h2> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://www.ityouknow.com/springboot/2018/02/06/spring-boot-actuator.html"  rel="nofollow">使用 Spring Boot Actuator 监控应用</a></p> <h2>四、集成 Eureka注册中心</h2> <h3>1. 创建 eureka-server，自行google</h3> <h3>2. 创建 spring-boot-admin</h3> <p>这是一个 Spring Boot Admin Server端。</p> <p>pom.xml</p> <pre><code>&lt;!--?xml version="1.0" encoding="UTF-8"?--&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;     &lt;modelversion&gt;4.0.0&lt;/modelversion&gt;     &lt;parent&gt;         &lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;         &lt;artifactid&gt;spring-boot-starter-parent&lt;/artifactid&gt;         &lt;version&gt;2.1.6.RELEASE&lt;/version&gt;         &lt;relativepath /&gt; &lt;!-- lookup parent from repository --&gt;     &lt;/parent&gt;     &lt;packaging&gt;jar&lt;/packaging&gt;     &lt;artifactid&gt;spring-boot-admin&lt;/artifactid&gt;     &lt;name&gt;spring-boot-admin&lt;/name&gt;     &lt;description&gt;Spring Boot Admin Server端&lt;/description&gt;       &lt;properties&gt;         &lt;java.version&gt;1.8&lt;/java.version&gt;         &lt;spring-boot-admin.version&gt;2.1.6&lt;/spring-boot-admin.version&gt;         &lt;spring-cloud.version&gt;Greenwich.RELEASE&lt;/spring-cloud.version&gt;     &lt;/properties&gt;      &lt;dependencies&gt;         &lt;dependency&gt;             &lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;             &lt;artifactid&gt;spring-boot-starter-web&lt;/artifactid&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupid&gt;de.codecentric&lt;/groupid&gt;             &lt;artifactid&gt;spring-boot-admin-starter-server&lt;/artifactid&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupid&gt;org.springframework.cloud&lt;/groupid&gt;             &lt;artifactid&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactid&gt;         &lt;/dependency&gt;          &lt;dependency&gt;             &lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;             &lt;artifactid&gt;spring-boot-starter-test&lt;/artifactid&gt;             &lt;scope&gt;test&lt;/scope&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;             &lt;artifactid&gt;spring-boot-starter-security&lt;/artifactid&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupid&gt;org.jolokia&lt;/groupid&gt;             &lt;artifactid&gt;jolokia-core&lt;/artifactid&gt;         &lt;/dependency&gt;     &lt;/dependencies&gt;      &lt;dependencymanagement&gt;         &lt;dependencies&gt;             &lt;dependency&gt;                 &lt;groupid&gt;org.springframework.cloud&lt;/groupid&gt;                 &lt;artifactid&gt;spring-cloud-dependencies&lt;/artifactid&gt;                 &lt;version&gt;${spring-cloud.version}&lt;/version&gt;                 &lt;type&gt;pom&lt;/type&gt;                 &lt;scope&gt;import&lt;/scope&gt;             &lt;/dependency&gt;             &lt;dependency&gt;                 &lt;groupid&gt;de.codecentric&lt;/groupid&gt;                 &lt;artifactid&gt;spring-boot-admin-dependencies&lt;/artifactid&gt;                 &lt;version&gt;${spring-boot-admin.version}&lt;/version&gt;                 &lt;type&gt;pom&lt;/type&gt;                 &lt;scope&gt;import&lt;/scope&gt;             &lt;/dependency&gt;         &lt;/dependencies&gt;     &lt;/dependencymanagement&gt;      &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;                 &lt;artifactid&gt;spring-boot-maven-plugin&lt;/artifactid&gt;             &lt;/plugin&gt;         &lt;/plugins&gt;     &lt;/build&gt;  &lt;/project&gt; </code></pre> <p>application.yml</p> <pre><code>spring:   application:     name: admin-server server:   port: 1300 eureka:   client:     registryFetchIntervalSeconds: 5     service-url:       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/   instance:     leaseRenewalIntervalInSeconds: 10     health-check-url-path: /actuator/health  management:   endpoints:     web:       exposure:         include: "*"   endpoint:     health:       show-details: ALWAYS </code></pre> <p>启动类 SpringbootAdminServerApplication</p> <pre><code>@SpringBootApplication @EnableAdminServer @EnableEurekaClient public class ScAdminServerApplication {      public static void main(String[] args) {         SpringApplication.run( ScAdminServerApplication.class, args );     }  } </code></pre> <h3>3. 被监控端</h3> <p>被监控端需要放开端点</p> <p>application.yml</p> <pre><code>spring:   application:     name: admin-client eureka:   instance:     leaseRenewalIntervalInSeconds: 10     health-check-url-path: /actuator/health    client:     registryFetchIntervalSeconds: 5     service-url:       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/ management:   endpoints:     web:       exposure:         include: "*"   endpoint:     health:       show-details: ALWAYS server:   port: 8762 </code></pre> <p><strong>admin 会自己拉取 Eureka 上注册的信息，主动去注册。</strong></p> <h2>五、集成 Spring Security</h2> <p>Web应用程序中的身份验证和授权有多种方法，因此Spring Boot Admin不提供默认方法。默认情况下，spring-boot-admin-server-ui提供登录页面和注销按钮。我们结合 Spring Security 实现需要用户名和密码登录的安全认证。</p> <p>springboot-admin工程的pom文件需要增加以下的依赖：</p> <pre><code>&lt;dependency&gt;     &lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;     &lt;artifactid&gt;spring-boot-starter-security&lt;/artifactid&gt; &lt;/dependency&gt; </code></pre> <p>在 spirngboot-admin工的配置文件 application.yml 中配置 spring security 的用户名和密码，这时需要在服务注册时带上 metadata-map 的信息，如下：</p> <pre><code>spring:   security:     user:       name: "admin"       password: "admin"        eureka:   instance:     metadata-map:       user.name: ${spring.security.user.name}       user.password: ${spring.security.user.password}       startup: ${random.int}    #needed to trigger info and endpoint update after restart </code></pre> <p><strong>写一个配置类SecuritySecureConfig继承WebSecurityConfigurerAdapter，配置如下：</strong></p> <pre><code>/**  * security配置  * @author wangjiafang  * @date 2019/10/10  */ @Configuration public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {      private final String adminContextPath;      public SecuritySecureConfig(AdminServerProperties adminServerProperties) {         this.adminContextPath = adminServerProperties.getContextPath();     }       @Override     protected void configure(HttpSecurity http) throws Exception {         // @formatter:off         SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();         successHandler.setTargetUrlParameter("redirectTo");         successHandler.setDefaultTargetUrl(adminContextPath + "/");          http.authorizeRequests()                 .antMatchers(adminContextPath + "/assets/**").permitAll()                 .antMatchers(adminContextPath + "/login").permitAll()                 .anyRequest().authenticated()                 .and()                 .formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler).and()                 .logout().logoutUrl(adminContextPath + "/logout").and()                 .httpBasic().and()                 .csrf()                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())                 .ignoringRequestMatchers(                         new AntPathRequestMatcher(adminContextPath + "/instances", HttpMethod.POST.toString()),                         new AntPathRequestMatcher(adminContextPath + "/instances/*", HttpMethod.DELETE.toString()),                         new AntPathRequestMatcher(adminContextPath + "/actuator/**")                 );         // @formatter:on     } }  </code></pre> <p>重新访问 http:localhost:1300 会出现登录界面，密码是配置文件中配置好的，账号 admin 密码 admin</p> <h2>六、通知</h2> <h3>自定义通知+钉钉通知</h3> <p>1、创建钉钉机器人，拿到token，怎么创建钉钉机器人,请自行google</p> <p>2、下载sdk</p> <p>钉钉官方提供了统一的SDK，使用SDK可以便捷的调用服务端API,但没有放到公共maven仓库中，需要自行<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://ding-doc.dingtalk.com/doc#/faquestions/vzbp02"  rel="nofollow">下载</a>后导入到项目，或者上传到自己的搭建的nexus私服中</p> <p>3、自定义的通知器</p> <p><strong>通过扩展 AbstractEventNotifier或AbstractStatusChangeNotifier。在springboot-admin-server工程中编写一个自定义的通知器：</strong></p> <pre><code> import com.dingtalk.api.DefaultDingTalkClient; import com.dingtalk.api.DingTalkClient; import com.dingtalk.api.request.OapiRobotSendRequest; import com.taobao.api.ApiException; import de.codecentric.boot.admin.server.domain.entities.Instance; import de.codecentric.boot.admin.server.domain.entities.InstanceRepository; import de.codecentric.boot.admin.server.domain.events.InstanceEvent; import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent; import de.codecentric.boot.admin.server.notify.AbstractEventNotifier; import lombok.extern.slf4j.Slf4j; import org.springframework.beans.factory.annotation.Value; import org.springframework.stereotype.Component; import reactor.core.publisher.Mono;   /**  * 钉钉通知  * @author wangjiafang  * @date 2019/10/10  */ @Component @Slf4j public class CustomNotifier  extends AbstractEventNotifier {      /**      * 消息模板      */     private static final String template = "服务名:%s(%s) \n状态:%s(%s) \n服务ip:%s";      @Value("${spring.admin.ding-talk-token}")     private String dingTalkToken;       public CustomNotifier(InstanceRepository repository) {         super(repository);     }      @Override     protected Mono&lt;void&gt; doNotify(InstanceEvent event, Instance instance) {         return Mono.fromRunnable(() -&amp;gt; {             if (event instanceof InstanceStatusChangedEvent) {                 log.info("Instance {} ({}) is {}", instance.getRegistration().getName(), event.getInstance(),                         ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus());                   String status = ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();                 String messageText = null;                 switch (status) {                     // 健康检查没通过                     case "DOWN":                         log.info("发送 健康检查没通过 的通知！");                         messageText = String.format(template, instance.getRegistration().getName(),event.getInstance(), ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),"健康检查没通过",instance.getRegistration().getServiceUrl());                         this.sendMessage(messageText);                         break;                     // 服务离线                     case "OFFLINE":                         log.info("发送 服务离线 的通知！");                         messageText = String.format(template, instance.getRegistration().getName(),event.getInstance(), ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),"服务离线",instance.getRegistration().getServiceUrl());                         this.sendMessage(messageText);                         break;                     //服务上线                     case "UP":                         log.info("发送 服务上线 的通知！");                         messageText = String.format(template, instance.getRegistration().getName(),event.getInstance(), ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),"服务上线",instance.getRegistration().getServiceUrl());                         this.sendMessage(messageText);                         break;                     // 服务未知异常                     case "UNKNOWN":                         log.info("发送 服务未知异常 的通知！");                         messageText = String.format(template, instance.getRegistration().getName(),event.getInstance(), ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),"服务未知异常",instance.getRegistration().getServiceUrl());                         this.sendMessage(messageText);                         break;                     default:                         break;                 }             } else {                 log.info("Instance {} ({}) {}", instance.getRegistration().getName(), event.getInstance(),                     event.getType());             }         });     }      /**      * 发送消息      * @param messageText      */     private void sendMessage(String messageText){         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/robot/send?access_token="+dingTalkToken);         OapiRobotSendRequest request = new OapiRobotSendRequest();          request.setMsgtype("text");         OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();         text.setContent(messageText);         request.setText(text);          try {             client.execute(request);         } catch (ApiException e) {             log.info("[ERROR] sendMessage", e);         }     } } </code></pre> <h2>七 查看实时日志</h2> <p>要在springbootadmin面板中查看实时日志，需要指定项目中日志输出的地址,比如我的日志是在/logs/项目名称/项目名称-info.log下</p> <pre><code>logging:   file: /logs/${spring.application.name}/${spring.application.name}-info.log </code></pre> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-39718.htm">动物疫苗检测报告查询（动物疫苗查询系统）</a></p>
+                                        <p>下一个：<a href="/news/article-40204.htm">面试官：请用SQL模拟一个死锁</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新20.9M/S免费节点订阅链接">FlClash节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.2M/S免费节点订阅链接">FlClash节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-free-clash.htm" title="FlClash机场订阅推荐 | 18M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-26362.htm" title="宠物粮食在哪里进货好（宠物粮食批发进货渠道）">宠物粮食在哪里进货好（宠物粮食批发进货渠道）</a></li>
+                        <li class="py-2"><a href="/news/article-22646.htm" title="养鱼在线咨询（专业养鱼咨询）">养鱼在线咨询（专业养鱼咨询）</a></li>
+                        <li class="py-2"><a href="/news/article-35835.htm" title="根据第一个值分割数组-JavaScript">根据第一个值分割数组-JavaScript</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-2-free-node-subscribe-links.htm" title="FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/V2ray/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/V2ray/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-node-share.htm" title="FlClash节点订阅每天更新20.2M/S免费节点订阅链接">FlClash节点订阅每天更新20.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-36272.htm" title="随系统字体放大，某个View内容显示不全问题怎么修改？">随系统字体放大，某个View内容显示不全问题怎么修改？</a></li>
+                        <li class="py-2"><a href="/news/article-26365.htm" title="开宠物美容店需要什么手续和证件（开宠物美容店需要什么证书）">开宠物美容店需要什么手续和证件（开宠物美容店需要什么证书）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

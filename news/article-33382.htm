@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-33382.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>从Java的堆栈到Equals和==的比較</title>
+        <meta name="description" content="认识Java中堆和栈  栈与堆都是Java用来在Ram中存放数据的地方。 与C++不同。Java自己主动管理栈和堆，程序猿不能直接地设置栈或堆。 Java的堆是一个执行时数据区,类的对象从中分配空间。" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-33382.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="从Java的堆栈到Equals和==的比較" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/f8e7dc604b4e9ee756376b9faaf0afab.webp" />
+        <meta property="og:release_date" content="2024-12-30T09:02:42" />
+    <meta property="og:updated_time" content="2024-12-30T09:02:42" />
+        <meta property="og:description" content="认识Java中堆和栈  栈与堆都是Java用来在Ram中存放数据的地方。 与C++不同。Java自己主动管理栈和堆，程序猿不能直接地设置栈或堆。 Java的堆是一个执行时数据区,类的对象从中分配空间。" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="从Java的堆栈到Equals和==的比較">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>从Java的堆栈到Equals和==的比較</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div id="cnblogs_post_body" class="blogpost-body"> <div id="article_content" class="article_content"> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">认识Java中堆和栈</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">栈与堆都是Java用来在Ram中存放数据的地方。</span></p> <p>与C++不同。Java自己主动管理栈和堆，程序猿不能直接地设置栈或堆。<br /> Java的堆是一个执行时数据区,类的对象从中分配空间。这些对象通过new、newarray、anewarray和 multianewarray等指令建立，它们不须要程序代码来显式的释放。</p> <p>堆是由垃圾回收来负责的，堆的优势是能够动态地分配内存大小，生存期也不必事先告诉编译器。由于它是在执行时动态分配内存的。Java的垃圾收集器会自己主动收走这些不再使用的数据。但缺点是，由于要在执行时动态分配内存，存取速度较慢。</p> <p> 栈的优势是，存取速度比堆要快。仅次于寄存器，栈数据能够共享。</p> <p>但缺点是。存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。栈中主要存放一些基本类型的变量（,int, short, long, byte, float, double, boolean, char）和对象句柄。</p> <p>栈有一个非常重要的特殊性，就是存在栈中的数据能够共享。</p> <p> 如果我们同一时候定义：<br /> int a = 3。<br /> int b = 3；</p> <p> 编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用。然后查找栈中是否有3这个值。假设没找到。就将3存放进来，然后将a指向3。</p> <p>接着处理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同一时候均指向3的情况。</p> <p>这时。假设再令a=4。那么编译器会又一次搜索栈中是否有4值，假设没有，则将4存放进来。并令a指向4；假设已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。&nbsp;</p> <p> &nbsp;要注意这样的数据的共享与两个对象的引用同一时候指向一个对象的这样的共享是不同的。由于这样的情况a的改动并不会影响到b, 它是由编译器完毕的，它有利于节省空间。</p> <p>而一个对象引用变量改动了这个对象的内部状态。会影响到还有一个对象引用变量。&nbsp;<br /> String是一个特殊的包装类数据。</p> <p> 能够用：&nbsp;<br /> String str = new String("abc");&nbsp;<br /> String str = "abc";&nbsp;</p> <p> &nbsp;两种的形式来创建，第一种是用new()来新建对象的。它会在存放于堆中。每调用一次就会创建一个新的对象。 而另外一种是先在栈中创建一个对String类的对象引用变量str，然后查找栈中有没有存放"abc"，假设没有。则将"abc"存放进栈，并令str指 向”abc”，假设已经有”abc” 则直接令str指向“abc”。&nbsp;</p> <p> 比較类里面的数值是否相等时，用equals()方法。当測试两个包装类的引用是否指向同一个对象时，用==，以下用样例说明上面的理论。&nbsp;<br /> String str1 = "abc";&nbsp;<br /> String str2 = "abc";&nbsp;<br /> System.out.println(str1==str2); //true&nbsp;<br /> 能够看出str1和str2是指向同一个对象的。&nbsp;</p> <p> String str1 =new String ("abc");&nbsp;<br /> String str2 =new String ("abc");&nbsp;<br /> System.out.println(str1==str2); // false&nbsp;<br /> 用new的方式是生成不同的对象。</p> <p>每一次生成一个。</p> <p> 因此用另外一种方式(String str1 ="abc")创建多个”abc”字符串,在内存中事实上仅仅存在一个对象而已. 这样的写法有利与节省内存空间. 同一时候它能够在一定程度上提高程序的执行速度，由于JVM会自己主动依据栈中数据的实际情况来决定是否有必要创建新对象。而对于String str = new String("abc")的代码。则一概在堆中创建新对象，而无论其字符串值是否相等，是否有必要创建新对象，从而加重了程序的负担。</p> <p> &nbsp;还有一方面, 要注意: 我们在使用诸如String str = "abc"；的格式定义类时。总是想当然地觉得，创建了String类的对象str。操心陷阱！对象可能并没有被创建！</p> <p>而可能仅仅是指向一个先前已经创建的 对象。仅仅有通过new()方法才干保证每次都创建一个新的对象。&nbsp;<br /> 因为String类的immutable性质，当String变量须要常常变换其值时。应该考虑使用StringBuffer类，以提高程序效率。&nbsp;</p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">************************************************************************************************************************************************************</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">Java中Equals和==的差别</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">java中的数据类型，可分为两类：&nbsp;<br /> 1.基本数据类型，也称原始数据类型。byte,short,char,int,long,float,double,boolean&nbsp;<br /> &nbsp; 他们之间的比較，应用双等号（==）,比較的是他们的值。</span></p> <p>&nbsp;<br /> 2.复合数据类型(类)&nbsp;<br /> &nbsp; 当他们用（==）进行比較的时候，比較的是他们在内存中的存放地址，所以，除非是同一个new出来的对象，他们的比較后的结果为true，否则比較后结果为false。</p> <p> JAVA其中全部的类都是继承于Object这个基类的。在Object中的基类中定义了一个equals的方法，这种方法的初始行为是比較对象的内存地 址，但在一些类库其中这种方法被覆盖掉了。如String,Integer,Date在这些类其中equals有其自身的实现。而不再是比較类在堆内存中的存放地址了。</p> <p> &nbsp; 对于复合数据类型之间进行equals比較。在没有覆写equals方法的情况下，他们之间的比較还是基于他们在内存中的存放位置的地址值的，由于Object的equals方法也是用双等号（==）进行比較的。所以比較后的结果跟双等号（==）的结果同样。</p> <p></p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public class TestString { 	public static void main(String[] args) { 		String s1 = "Monday"; 		String s2 = "Monday"; 		if (s1 == s2) { 			System.out.println("s1 == s2"); 		} else { 			System.out.println("s1 != s2"); 		} 	} }&lt;/span&gt;</code></pre> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;">编译并执行程序，输出：s1 == s2说明：s1 与 s2 引用同一个 String 对象 -- "Monday"!<br /> 2.再略微修改一下程序，会有更奇怪的发现：</span> </p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public class TestString { public static void main(String[] args) { String s1 = "Monday"; String s2 = new String("Monday"); if (s1 == s2) {System.out.println("s1 == s2");} else {System.out.println("s1 != s2");} if (s1.equals(s2)) {System.out.println("s1 equals s2");} else{ System.out.println("s1 not equals s2");} } }&lt;/span&gt;</code></pre> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;"><br /> 我们将s2用new操作符创建<br /> 程序输出：<br /> s1 != s2<br /> s1 equals s2<br /> 说明：s1 s2分别引用了两个"Monday"String对象</p> <p> 3. 字符串缓冲池<br /> 原来，程序在执行的时候会创建一个字符串缓冲池当使用 s2 = "Monday" 这种表达是创建字符串的时候，程序首先会在这个String缓冲池中寻找同样值的对象，在第一个程序中。s1先被放到了池中，所以在s2被创建的时候，程序找到了具有同样值的 s1<br /> 将s2引用s1所引用的对象"Monday"<br /> 第二段程序中，使用了 new 操作符，他明确的告诉程序："我要一个新的！不要旧的。"于是一个新的"Monday"Sting对象被创建在内存中。他们的值同样。可是位置不同。一个在池中游泳一个在岸边歇息。哎呀。真是资源浪费。明明是一样的非要分开做什么呢？</p> <p> 4.再次更改程序：</span> </p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public class TestString { public static void main(String[] args) { String s1 = "Monday"; String s2 = new String("Monday"); s2 = s2.intern(); if (s1 == s2) {System.out.println("s1 == s2");} else {System.out.println("s1 != s2");} if (s1.equals(s2)) {System.out.println("s1 equals s2");} else{ System.out.println("s1 not equals s2");} } }&lt;/span&gt;</code></pre> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;"><br /> 这次增加：s2 = s2.intern();<br /> 程序输出：<br /> s1 == s2<br /> s1 equals s2<br /> 原 来。（java.lang.String的intern()方法"abc".intern()方法的返回值还是字符串"abc"，表面上看起来好像这个方 法没什么用处。但实际上。它做了个小动作：检查字符串池里是否存在"abc"这么一个字符串，假设存在，就返回池里的字符串。假设不存在。该方法会 把"abc"加入到字符串池中，然后再返回它的引用。<br /> ）</span> </p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">************************************************************************************************************************************************************</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">查看源代码发表小结：</span></p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public boolean equals(Object anObject) {         if (this == anObject) {             return true;         }         if (anObject instanceof String) {             String anotherString = (String) anObject;             int n = value.length;             if (n == anotherString.value.length) {                 char v1[] = value;                 char v2[] = anotherString.value;                 int i = 0;                 while (n-- != 0) {                     if (v1[i] != v2[i])                             return false;                     i++;                 }                 return true;             }         }         return false;     }&lt;/span&gt;</code></pre> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;">上面的这一段是String的equals源代码，通过细心的解读我们能够发现当中的奥妙。</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">String重写的equals方法保留了Object比較两个对象内容地址是否相等。</span></p> <p>在此基础上添加了一个比較String的值是否相等。这是什么意思呢。 假设equals括号中的对象不是String类型的。那么比較他和原对象的内存地址是否相等。假设instanceofString 那么先把这个对象转为String，再把它的值变为char数组，也就是以下的value，假设他们的char数组长度相等再对这个数组的char进行一个个遍历比較是否一样。假设都一样就equals为true，否则为false。</p> </p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> </p></div> </div></div> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">认识Java中堆和栈</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">栈与堆都是Java用来在Ram中存放数据的地方。</span></p> <p>与C++不同。Java自己主动管理栈和堆，程序猿不能直接地设置栈或堆。<br /> Java的堆是一个执行时数据区,类的对象从中分配空间。这些对象通过new、newarray、anewarray和 multianewarray等指令建立，它们不须要程序代码来显式的释放。</p> <p>堆是由垃圾回收来负责的，堆的优势是能够动态地分配内存大小，生存期也不必事先告诉编译器。由于它是在执行时动态分配内存的。Java的垃圾收集器会自己主动收走这些不再使用的数据。但缺点是，由于要在执行时动态分配内存，存取速度较慢。</p> <p> 栈的优势是，存取速度比堆要快。仅次于寄存器，栈数据能够共享。</p> <p>但缺点是。存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。栈中主要存放一些基本类型的变量（,int, short, long, byte, float, double, boolean, char）和对象句柄。</p> <p>栈有一个非常重要的特殊性，就是存在栈中的数据能够共享。</p> <p> 如果我们同一时候定义：<br /> int a = 3。<br /> int b = 3；</p> <p> 编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用。然后查找栈中是否有3这个值。假设没找到。就将3存放进来，然后将a指向3。</p> <p>接着处理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同一时候均指向3的情况。</p> <p>这时。假设再令a=4。那么编译器会又一次搜索栈中是否有4值，假设没有，则将4存放进来。并令a指向4；假设已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。&nbsp;</p> <p> &nbsp;要注意这样的数据的共享与两个对象的引用同一时候指向一个对象的这样的共享是不同的。由于这样的情况a的改动并不会影响到b, 它是由编译器完毕的，它有利于节省空间。</p> <p>而一个对象引用变量改动了这个对象的内部状态。会影响到还有一个对象引用变量。&nbsp;<br /> String是一个特殊的包装类数据。</p> <p> 能够用：&nbsp;<br /> String str = new String("abc");&nbsp;<br /> String str = "abc";&nbsp;</p> <p> &nbsp;两种的形式来创建，第一种是用new()来新建对象的。它会在存放于堆中。每调用一次就会创建一个新的对象。 而另外一种是先在栈中创建一个对String类的对象引用变量str，然后查找栈中有没有存放"abc"，假设没有。则将"abc"存放进栈，并令str指 向”abc”，假设已经有”abc” 则直接令str指向“abc”。&nbsp;</p> <p> 比較类里面的数值是否相等时，用equals()方法。当測试两个包装类的引用是否指向同一个对象时，用==，以下用样例说明上面的理论。&nbsp;<br /> String str1 = "abc";&nbsp;<br /> String str2 = "abc";&nbsp;<br /> System.out.println(str1==str2); //true&nbsp;<br /> 能够看出str1和str2是指向同一个对象的。&nbsp;</p> <p> String str1 =new String ("abc");&nbsp;<br /> String str2 =new String ("abc");&nbsp;<br /> System.out.println(str1==str2); // false&nbsp;<br /> 用new的方式是生成不同的对象。</p> <p>每一次生成一个。</p> <p> 因此用另外一种方式(String str1 ="abc")创建多个”abc”字符串,在内存中事实上仅仅存在一个对象而已. 这样的写法有利与节省内存空间. 同一时候它能够在一定程度上提高程序的执行速度，由于JVM会自己主动依据栈中数据的实际情况来决定是否有必要创建新对象。而对于String str = new String("abc")的代码。则一概在堆中创建新对象，而无论其字符串值是否相等，是否有必要创建新对象，从而加重了程序的负担。</p> <p> &nbsp;还有一方面, 要注意: 我们在使用诸如String str = "abc"；的格式定义类时。总是想当然地觉得，创建了String类的对象str。操心陷阱！对象可能并没有被创建！</p> <p>而可能仅仅是指向一个先前已经创建的 对象。仅仅有通过new()方法才干保证每次都创建一个新的对象。&nbsp;<br /> 因为String类的immutable性质，当String变量须要常常变换其值时。应该考虑使用StringBuffer类，以提高程序效率。&nbsp;</p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">************************************************************************************************************************************************************</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">Java中Equals和==的差别</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">java中的数据类型，可分为两类：&nbsp;<br /> 1.基本数据类型，也称原始数据类型。byte,short,char,int,long,float,double,boolean&nbsp;<br /> &nbsp; 他们之间的比較，应用双等号（==）,比較的是他们的值。</span></p> <p>&nbsp;<br /> 2.复合数据类型(类)&nbsp;<br /> &nbsp; 当他们用（==）进行比較的时候，比較的是他们在内存中的存放地址，所以，除非是同一个new出来的对象，他们的比較后的结果为true，否则比較后结果为false。</p> <p> JAVA其中全部的类都是继承于Object这个基类的。在Object中的基类中定义了一个equals的方法，这种方法的初始行为是比較对象的内存地 址，但在一些类库其中这种方法被覆盖掉了。如String,Integer,Date在这些类其中equals有其自身的实现。而不再是比較类在堆内存中的存放地址了。</p> <p> &nbsp; 对于复合数据类型之间进行equals比較。在没有覆写equals方法的情况下，他们之间的比較还是基于他们在内存中的存放位置的地址值的，由于Object的equals方法也是用双等号（==）进行比較的。所以比較后的结果跟双等号（==）的结果同样。</p> <p></p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public class TestString { 	public static void main(String[] args) { 		String s1 = "Monday"; 		String s2 = "Monday"; 		if (s1 == s2) { 			System.out.println("s1 == s2"); 		} else { 			System.out.println("s1 != s2"); 		} 	} }&lt;/span&gt;</code></pre> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;">编译并执行程序，输出：s1 == s2说明：s1 与 s2 引用同一个 String 对象 -- "Monday"!<br /> 2.再略微修改一下程序，会有更奇怪的发现：</span> </p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public class TestString { public static void main(String[] args) { String s1 = "Monday"; String s2 = new String("Monday"); if (s1 == s2) {System.out.println("s1 == s2");} else {System.out.println("s1 != s2");} if (s1.equals(s2)) {System.out.println("s1 equals s2");} else{ System.out.println("s1 not equals s2");} } }&lt;/span&gt;</code></pre> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;"><br /> 我们将s2用new操作符创建<br /> 程序输出：<br /> s1 != s2<br /> s1 equals s2<br /> 说明：s1 s2分别引用了两个"Monday"String对象</p> <p> 3. 字符串缓冲池<br /> 原来，程序在执行的时候会创建一个字符串缓冲池当使用 s2 = "Monday" 这种表达是创建字符串的时候，程序首先会在这个String缓冲池中寻找同样值的对象，在第一个程序中。s1先被放到了池中，所以在s2被创建的时候，程序找到了具有同样值的 s1<br /> 将s2引用s1所引用的对象"Monday"<br /> 第二段程序中，使用了 new 操作符，他明确的告诉程序："我要一个新的！不要旧的。"于是一个新的"Monday"Sting对象被创建在内存中。他们的值同样。可是位置不同。一个在池中游泳一个在岸边歇息。哎呀。真是资源浪费。明明是一样的非要分开做什么呢？</p> <p> 4.再次更改程序：</span> </p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public class TestString { public static void main(String[] args) { String s1 = "Monday"; String s2 = new String("Monday"); s2 = s2.intern(); if (s1 == s2) {System.out.println("s1 == s2");} else {System.out.println("s1 != s2");} if (s1.equals(s2)) {System.out.println("s1 equals s2");} else{ System.out.println("s1 not equals s2");} } }&lt;/span&gt;</code></pre> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;"><br /> 这次增加：s2 = s2.intern();<br /> 程序输出：<br /> s1 == s2<br /> s1 equals s2<br /> 原 来。（java.lang.String的intern()方法"abc".intern()方法的返回值还是字符串"abc"，表面上看起来好像这个方 法没什么用处。但实际上。它做了个小动作：检查字符串池里是否存在"abc"这么一个字符串，假设存在，就返回池里的字符串。假设不存在。该方法会 把"abc"加入到字符串池中，然后再返回它的引用。<br /> ）</span> </p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">************************************************************************************************************************************************************</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">查看源代码发表小结：</span></p> <pre><code class="language-html">&lt;span style="font-family:Microsoft YaHei;font-size:12px;"&gt;public boolean equals(Object anObject) {         if (this == anObject) {             return true;         }         if (anObject instanceof String) {             String anotherString = (String) anObject;             int n = value.length;             if (n == anotherString.value.length) {                 char v1[] = value;                 char v2[] = anotherString.value;                 int i = 0;                 while (n-- != 0) {                     if (v1[i] != v2[i])                             return false;                     i++;                 }                 return true;             }         }         return false;     }&lt;/span&gt;</code></pre> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> <p>  <span style="font-family:'Microsoft YaHei';font-size:12px;">上面的这一段是String的equals源代码，通过细心的解读我们能够发现当中的奥妙。</span></p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;">String重写的equals方法保留了Object比較两个对象内容地址是否相等。</span></p> <p>在此基础上添加了一个比較String的值是否相等。这是什么意思呢。 假设equals括号中的对象不是String类型的。那么比較他和原对象的内存地址是否相等。假设instanceofString 那么先把这个对象转为String，再把它的值变为char数组，也就是以下的value，假设他们的char数组长度相等再对这个数组的char进行一个个遍历比較是否一样。假设都一样就equals为true，否则为false。</p> </p> <p><span style="font-family:'Microsoft YaHei';font-size:12px;"><br /></span></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-32942.htm">广州领养宠物的平台有哪些（广州有没有领养宠物狗）</a></p>
+                                        <p>下一个：<a href="/news/article-33383.htm">Vue中使用el-table组件多页选择数据回显，分页记录保存选中的数据</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-48467.htm" title="PHP索引数组详解">PHP索引数组详解</a></li>
+                        <li class="py-2"><a href="/news/article-38236.htm" title="vue路由自动加载、按组件异步载入vuex以及dll优化">vue路由自动加载、按组件异步载入vuex以及dll优化</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新18.1M/S免费节点订阅链接">FlClash节点订阅每天更新18.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-8-free-subscribe-node.htm" title="FlClash节点订阅每天更新20.9M/S免费节点订阅链接">FlClash节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21271.htm" title="动物医院申请材料（动物医院诊疗许可证办理）">动物医院申请材料（动物医院诊疗许可证办理）</a></li>
+                        <li class="py-2"><a href="/news/article-41186.htm" title="动物疫苗多长时间内打一次最好 动物疫苗多长时间内打一次最好呢">动物疫苗多长时间内打一次最好 动物疫苗多长时间内打一次最好呢</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-35835.htm" title="根据第一个值分割数组-JavaScript">根据第一个值分割数组-JavaScript</a></li>
+                        <li class="py-2"><a href="/news/article-31403.htm" title="动物疫苗是什么单位负责的呢知乎（动物疫苗是什么单位负责的呢知乎文章）">动物疫苗是什么单位负责的呢知乎（动物疫苗是什么单位负责的呢知乎文章）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新20.4M/S免费节点订阅链接">FlClash节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-38236.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue路由自动加载、按组件异步载入vuex以及dll优化</title>
+        <meta name="description" content="一、vue路由自动加载 介绍：  使用统一规则命名路由文件名，通过webpack方法require.context方法对文件进行读取，动态生成路由数据  核心代码： //param(路径，是否遍历子文" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-38236.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="vue路由自动加载、按组件异步载入vuex以及dll优化" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/5379eeb30c189696d328346f6d06e85b.webp" />
+        <meta property="og:release_date" content="2025-01-09T06:00:18" />
+    <meta property="og:updated_time" content="2025-01-09T06:00:18" />
+        <meta property="og:description" content="一、vue路由自动加载 介绍：  使用统一规则命名路由文件名，通过webpack方法require.context方法对文件进行读取，动态生成路由数据  核心代码： //param(路径，是否遍历子文" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue路由自动加载、按组件异步载入vuex以及dll优化">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>vue路由自动加载、按组件异步载入vuex以及dll优化</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <p>一、vue路由自动加载<br /> 介绍：</p> <blockquote> <p>使用统一规则命名路由文件名，通过webpack方法require.context方法对文件进行读取，动态生成路由数据</p> </blockquote> <p>核心代码：</p> <pre><code class="prism language-javascript"><span class="token comment">//param(路径，是否遍历子文件夹内文件，匹配文件正则)</span> <span class="token keyword">let</span> r <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">'./pages'</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token regex">/.vue/</span><span class="token punctuation">)</span> r<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//返回遍历的文件路径数组</span> <span class="token function">r</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">default</span><span class="token comment">//路由文件输出内容</span> </code></pre> <p>二、按组件异步载入vuex<br /> 介绍：</p> <blockquote> <p>按module划分store，在组建中定义白能量标记是否需要vuex管理状态。<br /> 使用vue插件方式，在插件中使用Vue.mixin方法全局注入组件<br /> 在beforeCreate钩子中判断变量，动态引入并注册（store.registerModule）store</p> </blockquote> <p>核心代码：</p> <pre><code class="prism language-javascript"><span class="token keyword">var</span> vuexState <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span>     <span class="token function">install</span> <span class="token punctuation">(</span>vue<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         vue<span class="token punctuation">.</span><span class="token function">mixin</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>             beforeCreate<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>                 <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$options<span class="token punctuation">.</span>isVuex<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>                     <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$options<span class="token punctuation">.</span>name                     <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"../store/module/"</span><span class="token operator">+</span>name<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{<!-- --></span>                         <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>res<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token comment">//注册模块名称、注册store</span>                     <span class="token punctuation">}</span><span class="token punctuation">)</span>                 <span class="token punctuation">}</span>             <span class="token punctuation">}</span>         <span class="token punctuation">}</span><span class="token punctuation">)</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token keyword">export</span> <span class="token keyword">default</span> vuexState </code></pre> <p>三、dll打包优化<br /> 介绍：</p> <blockquote> <p>使用webpack.DllPlugin将第三方包进行预处理<br /> 使用webpack.DllReferencePlugin在正式打包时配置不需要处理的第三方包</p> </blockquote> <p>核心代码：</p> <pre><code class="prism language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span> <span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack'</span><span class="token punctuation">)</span> module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span>     entry<span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span>         vendor<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'vue/dist/vue.esm.js'</span><span class="token punctuation">,</span><span class="token string">'vue-router'</span><span class="token punctuation">]</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span>     output<span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span>         path<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./static/js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>         filename<span class="token punctuation">:</span><span class="token string">'[name].dll.js'</span><span class="token punctuation">,</span>         library<span class="token punctuation">:</span><span class="token string">'[name]_library'</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span>     plugins<span class="token punctuation">:</span><span class="token punctuation">[</span>         <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>DllPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>             path<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'.'</span><span class="token punctuation">,</span><span class="token string">'[name]-manifest.json'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>             name<span class="token punctuation">:</span><span class="token string">'[name]_library'</span>         <span class="token punctuation">}</span><span class="token punctuation">)</span>     <span class="token punctuation">]</span> <span class="token punctuation">}</span> </code></pre> <p>webpack.prod.conf.js</p> <pre><code class="prism language-javascript">webpack<span class="token punctuation">.</span><span class="token function">DllReferencePlugin</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>   contet<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">".."</span><span class="token punctuation">)</span>   manifest<span class="token punctuation">:</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./vendor-manifest.json"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-37691.htm">pymysql 插入数据 转义处理</a></p>
+                                        <p>下一个：<a href="/news/article-38237.htm">宠物粮进货平台有哪些好用的软件（宠物粮进货平台有哪些好用的软件推荐）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-clash-windows.htm" title="FlClash机场订阅推荐 | 19.7M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.7M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-node-share.htm" title="FlClash节点订阅每天更新20.5M/S免费节点订阅链接">FlClash节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/Clash/V2ray/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/Clash/V2ray/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-45678.htm" title="动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询">动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询</a></li>
+                        <li class="py-2"><a href="/news/article-37691.htm" title="pymysql 插入数据 转义处理">pymysql 插入数据 转义处理</a></li>
+                        <li class="py-2"><a href="/news/article-42689.htm" title="动物疫苗经营许可证怎么申请流程图片（经营动物疫苗药品需要什么手续）">动物疫苗经营许可证怎么申请流程图片（经营动物疫苗药品需要什么手续）</a></li>
+                        <li class="py-2"><a href="/news/article-44653.htm" title="动物疫苗多长时间打一次最好呢 动物疫苗多长时间打一次最好呢视频">动物疫苗多长时间打一次最好呢 动物疫苗多长时间打一次最好呢视频</a></li>
+                        <li class="py-2"><a href="/news/article-20814.htm" title="动物医院仪器有哪些种类的（动物医院常见的诊疗设备）">动物医院仪器有哪些种类的（动物医院常见的诊疗设备）</a></li>
+                        <li class="py-2"><a href="/news/article-27275.htm" title="C语言 模拟实现strlen函数详解_C 语言">C语言 模拟实现strlen函数详解_C 语言</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-17-free-clash-stash.htm" title="FlClash机场订阅推荐 | 18.9M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18.9M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-24953.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>tensorflow 的模型保存和调用</title>
+        <meta name="description" content="&nbsp;&nbsp;我们通常采用tensorflow来训练，训练完之后应当保存模型,即保存模型的记忆（权重和偏置），这样就可以来进行人脸识别或语音识别了。 &nbsp;&nbsp;1.模型的保存 " />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-24953.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="tensorflow 的模型保存和调用" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/f8e7dc604b4e9ee756376b9faaf0afab.webp" />
+        <meta property="og:release_date" content="2024-12-12T10:07:12" />
+    <meta property="og:updated_time" content="2024-12-12T10:07:12" />
+        <meta property="og:description" content="&nbsp;&nbsp;我们通常采用tensorflow来训练，训练完之后应当保存模型,即保存模型的记忆（权重和偏置），这样就可以来进行人脸识别或语音识别了。 &nbsp;&nbsp;1.模型的保存 " />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="tensorflow 的模型保存和调用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>tensorflow 的模型保存和调用</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p><font color="gray" size="4">&nbsp;&nbsp;我们通常采用tensorflow来训练，训练完之后应当保存模型,即保存模型的记忆（权重和偏置），这样就可以来进行人脸识别或语音识别了。</font></p> <p><font color="Darkblue" size="5.5">&nbsp;&nbsp;1.模型的保存</font></p> <pre class="prettyprint"><code class="hljs avrasm"><span class="hljs-preprocessor"># 声明两个变量</span> v1 = tf<span class="hljs-preprocessor">.Variable</span>(tf<span class="hljs-preprocessor">.random</span>_normal([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]), name=<span class="hljs-string">"v1"</span>) v2 = tf<span class="hljs-preprocessor">.Variable</span>(tf<span class="hljs-preprocessor">.random</span>_normal([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]), name=<span class="hljs-string">"v2"</span>) init_op = tf<span class="hljs-preprocessor">.global</span>_variables_initializer() <span class="hljs-preprocessor"># 初始化全部变量</span> saver = tf<span class="hljs-preprocessor">.train</span><span class="hljs-preprocessor">.Saver</span>() <span class="hljs-preprocessor"># 声明tf.train.Saver类用于保存模型</span> with tf<span class="hljs-preprocessor">.Session</span>() as sess:     sess<span class="hljs-preprocessor">.run</span>(init_op)     print(<span class="hljs-string">"v1:"</span>, sess<span class="hljs-preprocessor">.run</span>(v1)) <span class="hljs-preprocessor"># 打印v1、v2的值一会读取之后对比</span>     print(<span class="hljs-string">"v2:"</span>, sess<span class="hljs-preprocessor">.run</span>(v2))      <span class="hljs-preprocessor">#定义保存路径，一定要是绝对路径，且用‘/ ’分隔父目录与子目录</span>     saver_path = saver<span class="hljs-preprocessor">.save</span>(sess, <span class="hljs-string">"C:/Users/Administrator/Desktop/tt/model.ckpt"</span>)  <span class="hljs-preprocessor"># 将模型保存到save/model.ckpt文件</span>     print(<span class="hljs-string">"Model saved in file:"</span>, saver_path)</code></pre> <p><font color="Darkblue" size="5.5">&nbsp;&nbsp;2.模型的读取 <br /><font color="red" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接读取模型时，可能会报错，我是用Spyder编译的，可以把Spyder关掉，再重新打开，就可以读取数据了。原因可能是：在模型保存时将变量初始化了。</font></font></p> <pre class="prettyprint"><code class="hljs avrasm">import tensorflow as tf  <span class="hljs-preprocessor"># 使用和保存模型代码中一样的方式来声明变量</span> v1 = tf<span class="hljs-preprocessor">.Variable</span>(tf<span class="hljs-preprocessor">.random</span>_normal([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]), name=<span class="hljs-string">"v1"</span>) v2 = tf<span class="hljs-preprocessor">.Variable</span>(tf<span class="hljs-preprocessor">.random</span>_normal([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]), name=<span class="hljs-string">"v2"</span>) saver = tf<span class="hljs-preprocessor">.train</span><span class="hljs-preprocessor">.Saver</span>() <span class="hljs-preprocessor"># 声明tf.train.Saver类用于保存模型</span> with tf<span class="hljs-preprocessor">.Session</span>() as sess:     saver<span class="hljs-preprocessor">.restore</span>(sess, <span class="hljs-string">"C:/Users/Administrator/Desktop/tt/model.ckpt"</span>) <span class="hljs-preprocessor"># 即将固化到硬盘中的Session从保存路径再读取出来</span>     print(<span class="hljs-string">"v1:"</span>, sess<span class="hljs-preprocessor">.run</span>(v1)) <span class="hljs-preprocessor"># 打印v1、v2的值和之前的进行对比</span>     print(<span class="hljs-string">"v2:"</span>, sess<span class="hljs-preprocessor">.run</span>(v2))     print(<span class="hljs-string">"Model Restored"</span>)</code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-24429.htm">人用针剂跟畜用针剂一样吗 人用针剂跟畜用针剂一样吗图片</a></p>
+                                        <p>下一个：<a href="/news/article-24954.htm">成都宠物收容机构排名（成都收宠物的宠物店）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-23-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-23105.htm" title="猫咪的三针疫苗（猫咪的3针疫苗）">猫咪的三针疫苗（猫咪的3针疫苗）</a></li>
+                        <li class="py-2"><a href="/news/article-45678.htm" title="动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询">动物疫苗价格一览表图片大全及价格查询 动物疫苗价格一览表图片大全及价格查询</a></li>
+                        <li class="py-2"><a href="/news/article-21270.htm" title="动物疫苗的概念和特点是什么 动物疫苗的概念和特点是什么呢">动物疫苗的概念和特点是什么 动物疫苗的概念和特点是什么呢</a></li>
+                        <li class="py-2"><a href="/news/article-40204.htm" title="面试官：请用SQL模拟一个死锁">面试官：请用SQL模拟一个死锁</a></li>
+                        <li class="py-2"><a href="/news/article-32942.htm" title="广州领养宠物的平台有哪些（广州有没有领养宠物狗）">广州领养宠物的平台有哪些（广州有没有领养宠物狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-12-node-share-links.htm" title="FlClash节点订阅每天更新19.1M/S免费节点订阅链接">FlClash节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新20.4M/S免费节点订阅链接">FlClash节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-29605.htm" title="C#实现DataTable转TXT、CSV文件_C#教程_">C#实现DataTable转TXT、CSV文件_C#教程_</a></li>
+                        <li class="py-2"><a href="/news/article-20813.htm" title="动物疫苗上市公司排名榜最新公布（动物疫苗上市企业）">动物疫苗上市公司排名榜最新公布（动物疫苗上市企业）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

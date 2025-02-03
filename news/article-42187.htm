@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-42187.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>.NET 7 Preview 3添加了这些增强功能</title>
+        <meta name="description" content=".NET 7 Preview 3已发布， .NET 7 的第三个预览版包括对可观察性、启动时间、代码生成、GC Region、Native AOT 编译等方面的增强。 有兴趣的用户可以下载适用于 Wi" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-42187.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content=".NET 7 Preview 3添加了这些增强功能" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/ce5849b05a64072dd8232bbf8798f40b.webp" />
+        <meta property="og:release_date" content="2025-01-17T09:32:18" />
+    <meta property="og:updated_time" content="2025-01-17T09:32:18" />
+        <meta property="og:description" content=".NET 7 Preview 3已发布， .NET 7 的第三个预览版包括对可观察性、启动时间、代码生成、GC Region、Native AOT 编译等方面的增强。 有兴趣的用户可以下载适用于 Wi" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content=".NET 7 Preview 3添加了这些增强功能">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>.NET 7 Preview 3添加了这些增强功能</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<p>.NET 7 Preview 3<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-preview-3/"  target="_blank" rel="nofollow">已发布</a>， .NET 7 的第三个预览版包括对可观察性、启动时间、代码生成、GC Region、Native AOT 编译等方面的增强。</p> <p>有兴趣的用户可以<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://dotnet.microsoft.com/zh-cn/download/dotnet/7.0"  rel="nofollow">下载</a>适用于 Windows、macOS 和 Linux 的 .NET 7 Preview 3。Microsoft 建议使用Visual Studio 17.2 Preview 3 的<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://visualstudio.microsoft.com/vs/preview/"  rel="nofollow">预览频道版本</a>来试用 .NET 7。</p> </h1> <p>简而言之，Ahead of Time（AOT）编译可以预先构建所有内容，以避免在应用程序首次运行时需要“JIT”。很长一段时间以来，.NET 团队一直在不知疲倦地工作，为dotnet带来适当的Native pre-Time编译。虽然部分AOT一直存在，但完全的“真实”支持从未开箱即用。</p> <p>使用Native AOT，将预编译引入 .NET 桌面客户端和服务器方案<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/dotnet/core/deploying/ready-to-run"  rel="nofollow">ReadyToRun</a>，以及适用于移动设备和 WASM 的 Mono AOT。根据.NET团队博客的说法，添加这一功能并不是为了取代现有技术，而是为了提供一组新的功能，允许用户访问新的外形规格。 Native AOT 的主要优势在于启动时间、内存使用、访问受限平台（不允许 JIT）以及磁盘空间更小。Preview 3 版本对 Native AOT 性能进行了优化更新，以下是最新的 Native AOT 性能（与现有的 AOT 编译 “ReadyToRun” 对比）：</p> <p><a href="https://img2022.cnblogs.com/blog/510/202204/510-20220415220327160-1505009022.png" rel="nofollow" class="fancybox" data-fancybox-group="button"><img fetchpriority="high" decoding="async" width="674" height="350" title="image" style="display: inline; background-image: none" alt="image" src="http://img.555519.xyz/uploads3/20220509/ea76f187c5303eb2050e194b593d3cf4.jpg"></a></p> <p>接下来的几个 .NET 版本将<strong>持续改进</strong>Native AOT 兼容性，且将在 dotnet SDK 中添加一流的支持（Crossgen 应用程序），以支持使用 Native AOT 发布项目。 有关原生AOT如何工作以及如何开始的更多信息，请查看<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/dotnet/runtime/blob/main/src/coreclr/nativeaot/docs/compiling.md"  rel="nofollow">官方文档</a>。</p> <pre><code><br/></code></pre> </h1> <p>此预览版还添加了对新的云原生 OpenTelemetry 规范的支持。这包括规范更新<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/open-telemetry/opentelemetry-specification/pull/988"  rel="nofollow">#988</a> 和<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/open-telemetry/opentelemetry-dotnet/issues/1708"  rel="nofollow">#1708</a>，它们使采样器的跟踪状态可变。</p> <ul> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/dotnet/runtime/pull/65530"  target="_blank" rel="nofollow">允许跟踪采样器修改活动跟踪状态</a></li> </ul> <pre><code>    //  ActivityListener Sampling callback     listener.Sample = (ref ActivityCreationOptions&lt;ActivityContext&gt; activityOptions) =&gt;     {         activityOptions = activityOptions with { TraceState = "rojo=00f067aa0ba902b7" };         return ActivitySamplingResult.AllDataAndRecorded;     };</code></pre> </h1> <p>有了这个，最新的托管扩展性框架也进行了小的更新，以便与以前版本的API保持一致。使用新的 API，可以将单个对象实例添加到<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/dotnet/api/system.composition.hosting.containerconfiguration?view=dotnet-plat-ext-6.0"  rel="nofollow">System.Composition.Hosting 容器中</a>。</p> </h1> <p>性能仍然是 .NET 7 的主要关注点<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.oschina.net/action/GoToLink?url=https%3A%2F%2Fgithub.com%2Fdotnet%2Fruntime%2Fpull%2F65738"  rel="nofollow">。dotnet/runtime#65738 PR</a> ，重新实现了预代码和调用计数存根（使用分层编译帮助程序存根），可显著减少运行时中创建后再修改的可执行代码数量。</p> <p>启用该 Write-Xor-Execute 新功能可缩短 10-15% 启动时间。即使没有启用 Write-Xor-Execute，此更改也带来了一些微基准测试和一些 ASPNet 基准测试的稳态性能提高（高达 8%）。</p> </h1> <p>在 Preview 3 中，除了 MacOS 和 NativeAOT 之外的所有平台都默认启用 GC Regions功能，该功能有助于提升高吞吐量应用程序的内存利用率。</p> <p>有关 GC Regions 功能的详细信息可在该<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.oschina.net/action/GoToLink?url=https%3A%2F%2Fgithub.com%2Fdotnet%2Fruntime%2Fissues%2F43844"  rel="nofollow">Issue 中查看</a>。</p> </h1> <p>正如我们之前所讨论的，从.NET 6升级到7应该很简单，并且升级失败的可能性很小，但并非不可能。</p> <ul> <li>前往官方下载站点并<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://dotnet.microsoft.com/en-us/download/dotnet/7.0"  rel="nofollow">下载 .NET SDK。</a></li> <li>为了安全起见，还可以<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/dotnet/core/compatibility/7.0"  rel="nofollow">在此处查看重大更改列表。</a></li> </ul> <p>在继续之前，请确保已备份项目，然后打开项目文件并修改目标框架属性。</p> <p><code>&lt;TargetFramework&gt;net7.0&lt;/TargetFramework&gt;</code></p> <p>在很大程度上，Microsoft 将 .NET 7 Preview 3 中包含的大量优化和错误修复归功于社区贡献者。其中包括对代码生成和实时编译所做的修复。</p> <p>有关此预览版的详细信息，请参阅<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-preview-3/"  target="_blank" rel="nofollow">.NET团队官方博客文章</a>。它还包含有关路线图项目的一些非常有趣的信息。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-41682.htm">对宠物医院好评的文案（宠物医院好评文字）</a></p>
+                                        <p>下一个：<a href="/news/article-42188.htm">动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-node-share.htm" title="FlClash节点订阅每天更新20.5M/S免费节点订阅链接">FlClash节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20814.htm" title="动物医院仪器有哪些种类的（动物医院常见的诊疗设备）">动物医院仪器有哪些种类的（动物医院常见的诊疗设备）</a></li>
+                        <li class="py-2"><a href="/news/article-39717.htm" title="写给老婆的保证书挽回离婚（写给老婆的保证书挽回离婚模板）">写给老婆的保证书挽回离婚（写给老婆的保证书挽回离婚模板）</a></li>
+                        <li class="py-2"><a href="/news/article-49096.htm" title="Spring中ApplicationEvent和ApplicationListener的应用">Spring中ApplicationEvent和ApplicationListener的应用</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新19.1M/S免费节点订阅链接">FlClash节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.2M/S免费节点订阅链接">FlClash节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-49632.htm" title="动物医院照片墙标语（动物医院宣传海报）">动物医院照片墙标语（动物医院宣传海报）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新22.6M/S免费节点订阅链接">FlClash节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-47620.htm" title="动物医院诊室图片大全 动物医院诊室图片大全大图">动物医院诊室图片大全 动物医院诊室图片大全大图</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/Clash/V2ray/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/Clash/V2ray/SSR免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-29130.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>前后端分离跨域问题解决</title>
+        <meta name="description" content="前言 最近在写前后端分离项目的时候，遇到了前后端分离必须解决的跨域问题，而我起初只是在 Controller 层加上了注解@CrossOrigin(allowCredentials = "true")" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-29130.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="前后端分离跨域问题解决" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/0751cc4093373c8c69c9772085789e08.webp" />
+        <meta property="og:release_date" content="2024-12-21T10:10:56" />
+    <meta property="og:updated_time" content="2024-12-21T10:10:56" />
+        <meta property="og:description" content="前言 最近在写前后端分离项目的时候，遇到了前后端分离必须解决的跨域问题，而我起初只是在 Controller 层加上了注解@CrossOrigin(allowCredentials = "true")" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="前后端分离跨域问题解决">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>前后端分离跨域问题解决</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2><a id="_0" rel="nofollow"></a>前言</h2> <p>最近在写前后端分离项目的时候，遇到了前后端分离必须解决的跨域问题，而我起初只是在 Controller 层加上了注解<code>@CrossOrigin(allowCredentials = "true")</code>，暂时解决了跨域问题。但是在开发验证码的时候，始终获取不到session中的验证码字符，获取到的验证码字符始终为null，调试之后发现放入验证码字符的session与从session中获取验证码字符的session不是同一个session，这就又遇到了跨域问题，也就是说之前处理的跨域并不生效了，或者说之前并没有完全解决前后端分离跨域问题。</p> <h2><a id="CORS_3" rel="nofollow"></a>一、什么是CORS</h2> <p>CORS 是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing），允许浏览器向跨源服务器，发出 XMLHttpRequest 请求，从而克服了AJAX只能同源使用的限制。</p> <p>它通过服务器增加一个特殊的Header[Access-Control-Allow-Origin]来告诉客户端跨域的限制，如果浏览器支持CORS、并且判断Origin通过的话，就会允许XMLHttpRequest发起跨域请求。</p> <h2><a id="CORS_Header_8" rel="nofollow"></a>二、CORS Header</h2> <table> <thead> <tr> <th>属性</th> <th>名词解释</th> </tr> </thead> <tbody> <tr> <td>Access-Control-Allow-Origin</td> <td>允许哪个域发起跨域请求</td> </tr> <tr> <td>Access-Control-Allow-Methods</td> <td>设置允许跨域请求的方法</td> </tr> <tr> <td>Access-Control-Max-Age</td> <td>设置在多少秒内无需再发送预校验请求</td> </tr> <tr> <td>Access-Control-Allow-Headers</td> <td>允许跨域请求包含content-type</td> </tr> <tr> <td>Access-Control-Allow-Credentials</td> <td>设置允许Cookie</td> </tr> </tbody> </table> <h2><a id="_17" rel="nofollow"></a>三、跨域错误信息</h2> <p><strong>错误一：前、后端均无跨域处理</strong></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220708/37253896f101d40c3dcec438448304e1.jpg" alt="前后端分离跨域问题解决"></p> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-2fVp6pRd-1592127844241)(https://imgkr.cn-bj.ufileos.com/b5c15ac9-236b-48fd-b11b-b3d60ecdd88e.png)]</p> <p><strong>错误二：前端跨域处理，后端无跨域处理</strong></p> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7PQmloNe-1592127844244)(https://imgkr.cn-bj.ufileos.com/3a405185-f9fe-4359-be74-9a27fce4535c.png)]</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220708/88e622cc50995398a6de1a8543fcfd1a.jpg" alt="前后端分离跨域问题解决"></p> <p><strong>错误三：前端无跨域处理，后端跨域处理</strong></p> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-SaIEnLLY-1592127844252)(https://imgkr.cn-bj.ufileos.com/3aee8e7e-b710-4111-8d78-92a710b5cade.png)]</p> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-O3YOB0jG-1592127844256)(https://imgkr.cn-bj.ufileos.com/5205eb41-90eb-4eef-a16d-f4bc115e0129.png)]</p> <h2><a id="_48" rel="nofollow"></a>四、跨域处理方法</h2> <p>前端处理方法<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220708/1bf19d180285c488c06ef58bea454e18.jpg" alt="前后端分离跨域问题解决"></p> <p>后端处理方法</p> <p>1.在controller层加上<code>@CrossOrigin</code>注解</p> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-3OArBbZB-1592127844259)(https://imgkr.cn-bj.ufileos.com/7db15168-147e-46ff-9e4b-e9ad2a05313c.png)]</p> <p>2.加一个全局跨域处理配置类</p> <pre><code class="prism language-java"><span class="token comment">/**  * @description 全局跨域配置类  * @date: 2020/6/14  * @author: PeiChen  */</span><span class="token annotation punctuation">@Configuration</span><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">GlobalCorsConfig</span><span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@Bean</span><span class="token keyword">public</span><span class="token class-name">WebMvcConfigurer</span><span class="token function">corsConfigurer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token keyword">new</span><span class="token class-name">WebMvcConfigurerAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">addCorsMappings</span><span class="token punctuation">(</span><span class="token class-name">CorsRegistry</span> registry<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>                 registry<span class="token punctuation">.</span><span class="token function">addMapping</span><span class="token punctuation">(</span><span class="token string">"/**"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">allowedOrigins</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token string">"PUT"</span><span class="token punctuation">,</span><span class="token string">"DELETE"</span><span class="token punctuation">,</span><span class="token string">"GET"</span><span class="token punctuation">,</span><span class="token string">"POST"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">allowedHeaders</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exposedHeaders</span><span class="token punctuation">(</span><span class="token string">"access-control-allow-headers"</span><span class="token punctuation">,</span><span class="token string">"access-control-allow-methods"</span><span class="token punctuation">,</span><span class="token string">"access-control-allow-origin"</span><span class="token punctuation">,</span><span class="token string">"access-control-max-age"</span><span class="token punctuation">,</span><span class="token string">"X-Frame-Options"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">allowCredentials</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">maxAge</span><span class="token punctuation">(</span><span class="token number">3600</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <h2><a id="_89" rel="nofollow"></a>五、前后端分离成功跨域</h2> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-hAXQlTgY-1592127844261)(https://imgkr.cn-bj.ufileos.com/cd03bb8e-3327-44ed-9be0-bb466b9a0b1c.png)]</p> <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-GHkwLZs9-1592127844269)(https://imgkr.cn-bj.ufileos.com/e7d01b91-f109-4321-88ea-12da8911adfa.png)]</p> <blockquote> <p>前后端分离项目，就必须要克服跨域问题，至此，本篇文章介绍的跨域问题就先告一段落了。</p> </blockquote> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-28669.htm">打动物疫苗不能吃什么东西（宠物打疫苗不能吃什么）</a></p>
+                                        <p>下一个：<a href="/news/article-29131.htm">梦见自己抱别的女人睡觉好不好（梦到自己抱别的女人）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-24-node-share.htm" title="FlClash节点订阅每天更新19.5M/S免费节点订阅链接">FlClash节点订阅每天更新19.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-44165.htm" title="C语言与java中函数传参比较">C语言与java中函数传参比较</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-5-clash-v2ray-ss-ssr.htm" title="FlClash节点订阅 | 19.5M/S，SSR/Shadowrocket/Clash/V2ray免费节点订阅链接">FlClash节点订阅 | 19.5M/S，SSR/Shadowrocket/Clash/V2ray免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-35214.htm" title="HttpServletRequest.getInputStream()多次读取问题">HttpServletRequest.getInputStream()多次读取问题</a></li>
+                        <li class="py-2"><a href="/news/article-50153.htm" title="MultipartFile转成File类型">MultipartFile转成File类型</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新20.9M/S免费节点订阅链接">FlClash节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-37689.htm" title="vue的混合mixins学习">vue的混合mixins学习</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-node-share.htm" title="FlClash节点订阅每天更新20.2M/S免费节点订阅链接">FlClash节点订阅每天更新20.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-49095.htm" title="springboot常用组件的集成">springboot常用组件的集成</a></li>
+                        <li class="py-2"><a href="/news/article-25416.htm" title="动物疫苗使用注意事项有哪些方面 动物疫苗使用注意事项有哪些方面的问题">动物疫苗使用注意事项有哪些方面 动物疫苗使用注意事项有哪些方面的问题</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

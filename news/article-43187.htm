@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-43187.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MySQL中一条SQL查询语句是如何执行的_Mysql</title>
+        <meta name="description" content="1.1.1 TCP/IP协议  1.1.2 UNIX域套接字  1.1.3 命名管道和共享内存  2.2.2 语法分析  2.2.3 预处理器  2.3.1 什么是查询优化器？  2.3.2 优化器究" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-43187.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="MySQL中一条SQL查询语句是如何执行的_Mysql" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/ce5849b05a64072dd8232bbf8798f40b.webp" />
+        <meta property="og:release_date" content="2025-01-19T07:11:16" />
+    <meta property="og:updated_time" content="2025-01-19T07:11:16" />
+        <meta property="og:description" content="1.1.1 TCP/IP协议  1.1.2 UNIX域套接字  1.1.3 命名管道和共享内存  2.2.2 语法分析  2.2.3 预处理器  2.3.1 什么是查询优化器？  2.3.2 优化器究" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MySQL中一条SQL查询语句是如何执行的_Mysql">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>Fl Clash</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            关于
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            联系
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        关于
+                    </a>
+                </div>
+                <div class="accordion-item">
+                    <a class="accordion-link" href="#">
+                        联系
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>MySQL中一条SQL查询语句是如何执行的_Mysql</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				  			 <div id="log-box">  				<div id="catalog"><ul id="catalog-ul"> <li><i class="be be-arrowright"></i> <a href="#title-0" title="1.1.1 TCP/IP协议">1.1.1 TCP/IP协议</a></li> <li><i class="be be-arrowright"></i> <a href="#title-1" title="1.1.2 UNIX域套接字">1.1.2 UNIX域套接字</a></li> <li><i class="be be-arrowright"></i> <a href="#title-2" title="1.1.3 命名管道和共享内存">1.1.3 命名管道和共享内存</a></li> <li><i class="be be-arrowright"></i> <a href="#title-3" title="2.2.2 语法分析">2.2.2 语法分析</a></li> <li><i class="be be-arrowright"></i> <a href="#title-4" title="2.2.3 预处理器">2.2.3 预处理器</a></li> <li><i class="be be-arrowright"></i> <a href="#title-5" title="2.3.1 什么是查询优化器？">2.3.1 什么是查询优化器？</a></li> <li><i class="be be-arrowright"></i> <a href="#title-6" title="2.3.2 优化器究竟做了什么？">2.3.2 优化器究竟做了什么？</a></li> <li><i class="be be-arrowright"></i> <a href="#title-7" title="2.3.3 执行计划">2.3.3 执行计划</a></li> <li><i class="be be-arrowright"></i> <a href="#title-8" title="3.3.1 创建表的时候指定存储引擎">3.3.1 创建表的时候指定存储引擎</a></li> <li><i class="be be-arrowright"></i> <a href="#title-9" title="3.3.2 修改表的存储引擎">3.3.2 修改表的存储引擎</a></li> <li><i class="be be-arrowright"></i> <a href="#title-10" title="3.5.1 MylSAM">3.5.1 MylSAM</a></li> <li><i class="be be-arrowright"></i> <a href="#title-11" title="3.5.2 InnoDB">3.5.2 InnoDB</a></li> <li><i class="be be-arrowright"></i> <a href="#title-12" title="3.5.3 Memory">3.5.3 Memory</a></li> <li><i class="be be-arrowright"></i> <a href="#title-13" title="3.5.4 CSV">3.5.4 CSV</a></li> <li><i class="be be-arrowright"></i> <a href="#title-14" title="3.5.5 Archive">3.5.5 Archive</a></li> </ul><span class="log-zd"><span class="log-close"><a title="隐藏目录"><i class="be be-cross"></i><strong>目录</strong></a></span></span></div>  			</div> <div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">前言</a></li> <li><a href="#_label1" rel="nofollow">1. 处理连接</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_1_0" rel="nofollow">1.1 客户端和服务端的通信方式</a></li> <ul class="third_class_ul"> <li><a href="#_label3_1_0_0" rel="nofollow">1.1.1 TCP/IP协议</a></li> <li><a href="#_label3_1_0_1" rel="nofollow">1.1.2 UNIX域套接字</a></li> <li><a href="#_label3_1_0_2" rel="nofollow">1.1.3 命名管道和共享内存</a></li> </ul> <li><a href="#_lab2_1_1" rel="nofollow">1.2 权限验证</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_1_2" rel="nofollow">1.3 查看MySQL连接</a></li> <ul class="third_class_ul"></ul> </ul> <li><a href="#_label2" rel="nofollow">2. 解析与优化</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_2_3" rel="nofollow">2.1 查询缓存</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_2_4" rel="nofollow">2.2 解析器 &amp; 预处理器（Parser &amp; Preprocessor）</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_2_5" rel="nofollow">2.2.1 词法解析</a></li> <ul class="third_class_ul"> <li><a href="#_label3_2_5_3" rel="nofollow">2.2.2 语法分析</a></li> <li><a href="#_label3_2_5_4" rel="nofollow">2.2.3 预处理器</a></li> </ul> <li><a href="#_lab2_2_6" rel="nofollow">2.3 查询优化器（Optimizer）与查询执行计划</a></li> <ul class="third_class_ul"> <li><a href="#_label3_2_6_5" rel="nofollow">2.3.1 什么是查询优化器？</a></li> <li><a href="#_label3_2_6_6" rel="nofollow">2.3.2 优化器究竟做了什么？</a></li> <li><a href="#_label3_2_6_7" rel="nofollow">2.3.3 执行计划</a></li> </ul> </ul> <li><a href="#_label3" rel="nofollow">3. 存储引擎</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_3_7" rel="nofollow">3.1 什么是存储引擎</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_3_8" rel="nofollow">3.2 为什么需要存储引擎</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_3_9" rel="nofollow">3.3 存储引擎怎么用</a></li> <ul class="third_class_ul"> <li><a href="#_label3_3_9_8" rel="nofollow">3.3.1 创建表的时候指定存储引擎</a></li> <li><a href="#_label3_3_9_9" rel="nofollow">3.3.2 修改表的存储引擎</a></li> </ul> <li><a href="#_lab2_3_10" rel="nofollow">3.4 存储引擎底层区别</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_3_11" rel="nofollow">3.5 常见存储引擎比较</a></li> <ul class="third_class_ul"> <li><a href="#_label3_3_11_10" rel="nofollow">3.5.1 MylSAM</a></li> <li><a href="#_label3_3_11_11" rel="nofollow">3.5.2 InnoDB</a></li> <li><a href="#_label3_3_11_12" rel="nofollow">3.5.3 Memory</a></li> <li><a href="#_label3_3_11_13" rel="nofollow">3.5.4 CSV</a></li> <li><a href="#_label3_3_11_14" rel="nofollow">3.5.5 Archive</a></li> </ul> <li><a href="#_lab2_3_12" rel="nofollow">3.6 如何选择存储引擎</a></li> <ul class="third_class_ul"></ul> </ul> <li><a href="#_label4" rel="nofollow">总结</a></li> <ul class="second_class_ul"></ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>前言</h2> <p>MySQL是典型的C/S架构（客户端/服务器架构），客户端进程向服务端进程发送一段文本（MySQL指令），服务器进程进行语句处理然后返回执行结果。</p> <p>问题来了。服务器进程对客户端发送的请求究竟做了什么处理呢？本文以查询请求为例，讲解MySQL服务器进程的处理流程。</p> <p>如下图所示，服务器进程在处理客户端请求的时候，大致需要进行3个步骤：</p> <ul> <li> <p>处理连接</p> </li> <li> <p>解析与优化</p> </li> <li> <p>存储引擎</p> </li> </ul> <p>接下来我们来详细了解一下这3步具体都做了什么。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220424/fba3e534352ee8efe7248980965cc41e.jpg"></p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>1. 处理连接</h2> <p>客户端向服务器发送请求并最终收到响应，本质上是一个进程间通信的过程。</p> <p>MySQL有专门用于处理连接的模块——连接器。</p> <p class="maodian"><a name="_lab2_1_0" rel="nofollow"></a></p> <h3>1.1 客户端和服务端的通信方式</h3> <p class="maodian"><a name="_label3_1_0_0" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-0">1.1.1 TCP/IP协议</h4> <p>TCP/IP协议是MySQL客户端和服务器最常用的通信方式。</p> <p>我们平时所说的MySQL服务器默认监听的端口是3306，这句话的前提是客户端进程和服务器进程使用的是TCP/IP协议进行通信。</p> <p>我们在使用mysql命令启动客户端程序时，只要在-h参数后跟随IP地址作为服务器进程所在的主机地址，那么通讯方式便是TCP/IP协议。</p> <blockquote> <p>如果客户端进程和服务器进程位于同一台主机，且要使用TCP/IP协议进行通信，则IP地址需要指定为127.0.0.1，而不能使用localhost</p> </blockquote> <p class="maodian"><a name="_label3_1_0_1" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-1">1.1.2 UNIX域套接字</h4> <p>如果客户端进程和服务器进程都位于类UNIX操作系统（MacOS、Centos、Ubuntu等）的主机之上，并且在启动客户端程序时没有指定主机名，或者指定的主机名为localhost，又或者指定了--protocol=socket的启动参数，那么客户端进程和服务器进程就会使用UNIX域套接字进行进程间通信。</p> <p>MySQL服务器进程默认监听的UNIX域套接字文件为/temp/mysql.sock，客户端进程启动时也默认会连接到这个UNIX域套接字文件之上。</p> <blockquote> <p>如果不明白UNIX域套接字到底是什么也没关系，只要知道这是进程之间的一种通讯方式就可以了，这里提及的主要目的是希望读者知晓MySQL客户端和进程通讯方式不止于TCP/IP协议</p> </blockquote> <p class="maodian"><a name="_label3_1_0_2" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-2">1.1.3 命名管道和共享内存</h4> <p>如果你的MySQL是安装在Windows主机之上，客户端和服务器进程可以使用命名管道和共享内存的方式进行通信。</p> <p>不过使用这些通信方式需要在服务端和客户端启动时添加一些启动参数。</p> <ul> <li> <p>使用命名管道进行通信。需要在启动服务器时添加--enable-named-pipe参数，同时在启动客户端进程时添加--pipe或者--protocol=pipe参数</p> </li> <li> <p>使用共享内存进行通信。需要在启动服务器时添加--shared-memory参数，启动成功后，共享内存便成为本地客户端程序的默认连接方式；也可以在启动客户端进程的命令中加上--protocol=memory参数明确指定使用共享内存进行通信</p> </li> </ul> <blockquote> <p>如果不明白命名管道和共享内存到底是什么没关系，只要知道这是进程之间的一种通讯方式就可以了，这里提及的主要目的是希望读者知晓MySQL客户端和进程通讯方式不止于TCP/IP协议</p> </blockquote> <p class="maodian"><a name="_lab2_1_1" rel="nofollow"></a></p> <h3>1.2 权限验证</h3> <p>确认通信方式并且成功建立连接之后，连接器就要开始验证你的身份了，使用的信息就是你的用户名和密码。</p> <ul> <li> <p>如果用户名或者密码错误，客户端连接会立即断开</p> </li> <li> <p>如果用户名密码认证通过，连接器会到权限表里面查出当前登陆用户拥有的权限。之后这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。</p> </li> </ul> <p class="maodian"><a name="_lab2_1_2" rel="nofollow"></a></p> <h3>1.3 查看MySQL连接</h3> <p>每当一个客户端连接到服务端时，服务端进程都会创建一个单独的线程来处理当前客户端的交互操作。</p> <p>那么如何查看MySQL当前所有的连接？</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; show global status like 'Thread%';    +-------------------+-------+  | Variable_name     | Value |  +-------------------+-------+  | Threads_cached    | 0     |  | Threads_connected | 1     |  | Threads_created   | 1     |  | Threads_running   | 1     |  +-------------------+-------+</pre> </div> <p>各字段含义如下表</p> <table> <tbody> <tr> <th>字段</th> <th>含义</th> </tr> <tr> <td>Threads_cached</td> <td>缓存中的线程连接数</td> </tr> <tr> <td>Threads_connected</td> <td>当前打开的连接数</td> </tr> <tr> <td>Threads_created</td> <td>为处理连接创建的线程数</td> </tr> <tr> <td>Threads_running</td> <td>非睡眠状态的连接数，通常指并发连接数</td> </tr> </tbody> </table> <p>建立连接之后，除非客户端主动断开连接，否则服务器会等待客户端发送请求。但是线程的创建和保持是需要消耗服务器资源的，因此服务器会把长时间不活动的客户端连接断开。</p> <p>有2个参数控制这个自动断开连接的行为，每个参数都默认为28800秒，8小时。</p> <div class="ay1code"> <pre class="brush:sql;">-- 非交互式超时时间，如JDBC连接  mysql&gt; show global variables like 'wait_timeout';  +---------------+-------+  | Variable_name | Value |  +---------------+-------+  | wait_timeout  | 28800 |  +---------------+-------+    -- 交互式超时时间，如数据库查看工具Navicat等  mysql&gt; show global variables like 'interactive_timeout';  +---------------------+-------+  | Variable_name       | Value |  +---------------------+-------+  | interactive_timeout | 28800 |  +---------------------+-------+</pre> </div> <p>既然连接消耗资源，那是不是MySQL的最大连接数也有默认限制呢？没错！默认最大连接数为151。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; show variables like 'max_connections';  +-----------------+-------+  | Variable_name   | Value |  +-----------------+-------+  | max_connections | 151   |  +-----------------+-------+</pre> </div> <blockquote> <p>题外话：细心的读者可能会发现MySQL某些查询语句带有global关键字，这个关键字有什么含义呢？</p> </blockquote> <p>MySQL的系统变量有两个作用范围（不区分大小写），分别是</p> <ul> <li> <p>GLOBAL（全局范围）：变量的设置影响服务器和所有客户端</p> </li> <li> <p>SESSION（会话范围）：变量的设置仅影响当前连接（会话）</p> </li> </ul> <p>但是并非每个参数都具有两个作用范围，比如允许同时连接到服务器的客户端的数量max_connections就只有全局级别。</p> <p>当没有带作用范围关键字时，默认是SESSION级别，包括查询和修改操作。</p> <p>比如修改一个参数之后，在当前窗口生效了，但是在其他窗口却没有生效</p> <div class="ay1code"> <pre class="brush:sql;">show VARIABLES like 'autocommit';  set autocommit = on;</pre> </div> <p>因此，如果只是临时修改，请使用SESSION级别，如果需要当前设置在其他会话中生效，需要使用GLOBAL关键字。</p> <p>到此为止，服务器进程已经和客户端进程建立了连接，下一步将处理客户端传来的请求了。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>2. 解析与优化</h2> <p>服务器收到客户端传来的请求之后，还需要经过查询缓存、词法语法解析和预处理、查询优化的处理。</p> <p class="maodian"><a name="_lab2_2_3" rel="nofollow"></a></p> <h3>2.1 查询缓存</h3> <p>如果我们两次都执行同一条查询指令，第二次的响应时间会不会比第一次的响应时间短一些？</p> <p>之前使用过Redis缓存工具的读者应该会有这个很自然的想法，MySQL收到查询请求之后应该先到缓存中查看一下，看一下之前是不是执行过这条指令。如果缓存命中，则直接返回结果；否则重新进行查询，然后加入缓存。</p> <p>MySQL确实内部自带了一个缓存模块。</p> <p>现在有一张500W行且没有添加索引的数据表，我执行以下命令两次，第二次会不会变得很快？</p> <div class="ay1code"> <pre class="brush:sql;">SELECT * FROM t_user WHERE user_name = '蝉沐风'</pre> </div> <p>并不会！说明缓存没有生效，为什么？MySQL默认是关闭自身的缓存功能的，查看一下query_cache_type变量设置。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; show variables like 'query_cache_type';  +------------------------------+---------+  | Variable_name                | Value   |  +------------------------------+---------+  | query_cache_type             | OFF     |  +------------------------------+---------+</pre> </div> <p>默认关闭就意味着不推荐，MySQL为什么不推荐用户使用自己的缓存功能呢？</p> <ul> <li> <p>MySQL自带的缓存系统应用场景非常有限，它要求SQL语句必须一模一样，多一个空格，变一个大小写都被认为是两条不同的SQL语句</p> </li> <li> <p>缓存失效非常频繁。只要一个表的数据有任何修改，针对该表的所有缓存都会失效。对于更新频繁的数据表而言，缓存命中率非常低！</p> </li> </ul> <p>所以缓存的功能还是交给专业的ORM框架（比如MyBatis默认开启一级缓存）或者独立的缓存服务Redis更加适合。</p> <blockquote> <p>MySQL8.0已经彻底移除了缓存功能</p> </blockquote> <p class="maodian"><a name="_lab2_2_4" rel="nofollow"></a></p> <h3>2.2 解析器 &amp; 预处理器（Parser &amp; Preprocessor）</h3> <p>现在跳过缓存这一步了，接下来需要做什么了？</p> <p>如果我随便在客户端终端里输入一个字符串chanmufeng，服务器返回了一个1064的错误</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; chanmufeng;  ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'chanmufeng' at line 1  </pre> </div> <p>服务器是怎么判断出我的输入是错误的呢？这就是MySQL的Parser解析器的作用了，它主要包含两步，分别是词法解析和语法分析。</p> <p class="maodian"><a name="_lab2_2_5" rel="nofollow"></a></p> <h3>2.2.1 词法解析</h3> <p>以下面的SQL语句为例</p> <div class="ay1code"> <pre class="brush:sql;">SELECT * FROM t_user WHERE user_name = '蝉沐风' AND age &gt; 3;  </pre> </div> <p>分析器先会做“词法分析”，就是把一条完整的SQL语句打碎成一个个单词，比如一条简单的SQL语句，会打碎成8个符号，每个符号是什么类型，从哪里开始到哪里结束。</p> <p>MySQL 从你输入的SELECT这个关键字识别出来，这是一个查询语句。它也要把字符串t_user识 别成“表名 t_user”，把字符串user_name识别成“列 user_name"。</p> <p class="maodian"><a name="_label3_2_5_3" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-3">2.2.2 语法分析</h4> <p>做完词法解析，接下来需要做语法分析了。</p> <p>根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个 SQL 语句是否满足 MySQL 语法，比如单引号是否闭合，关键词拼写是否正确等。</p> <p>解析器会根据SQL语句生成一个数据结构，这个数据结构我们成为解析树。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220424/3fbebb55ea35a6e825c1ba423a684ad8.jpg"></p> <p>我故意拼错了SELECT关键字，MySQL报了语法错误，就是在语法分析这一步。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; ELECT * FROM t_user WHERE user_name = '蝉沐风' AND age &gt; 3;  ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ELECT * FROM t_user WHERE user_name = '蝉沐风'' at line 1  </pre> </div> <p>词法语法分析是一个非常基础的功能，Java 的编译器、百度搜索引擎如果要识别语句，必须也要有词法语法分析功能。</p> <p>任何数据库的中间件，要解析 SQL完成路由功能，也必须要有词法和语法分析功能，比如 Mycat，Sharding-JDBC（用到了Druid Parser）等都是如此。在市面上也有很多的开源的词法解析的工具，比如 LEX，Yacc等。</p> <p class="maodian"><a name="_label3_2_5_4" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-4">2.2.3 预处理器</h4> <p>如果我们写了一条语法和词法都没有问题的SQL，但是字段名和表名却不存在，这个错误是在哪一个阶段爆出的呢？</p> <p>词法解析和语法分析是无法知道数据库里有什么表，有哪些字段的。要知道这些信息还需要解析阶段的另一个工具——预处理器。</p> <p>它会检查生成的解析树，解决解析器无法解析的语义。比如，它会检查表和列名是否存在，检查名字和别名，保证没有歧义。预处理之后得到一个新的解析树。</p> <blockquote> <p>本质上，解析和预处理是一个编译过程，涉及到词法解析、语法和语义分析，更多细节我们不会探究，感兴趣的读者可以看一下编译原理方面的书籍。</p> </blockquote> <p class="maodian"><a name="_lab2_2_6" rel="nofollow"></a></p> <h3>2.3 查询优化器（Optimizer）与查询执行计划</h3> <p>到了这一步，MySQL终于知道我们想查询的表和列以及相应的搜索条件了，是不是可以直接进行查询了？</p> <p>还不行。MySQL作者担心我们写的SQL太垃圾，所以有设计出一个叫做查询优化器的东东，辅助我们提高查询效率。</p> <p class="maodian"><a name="_label3_2_6_5" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-5">2.3.1 什么是查询优化器？</h4> <p>一条 SQL语句是不是只有一种执行方式？或者说数据库最终执行的 SQL是不是就是我们发送的 SQL?</p> <p>不是。一条 SQL 语句是可以有很多种执行方式的，最终返回相同的结果，他们是等价的。</p> <p>举一个非常简单的例子，比如你执行下面这样的语句：</p> <div class="ay1code"> <pre class="brush:sql;">SELECT * FROM t1, t2 WHERE t1.id = 10 AND t2.id = 20  </pre> </div> <ul> <li> <p>既可以先从表 t1 里面取出 id=10 的记录，再根据 id 值关联到表 t2，再判断 t2 里面 id 的值是否等于 20。</p> </li> <li> <p>也可以先从表 t2 里面取出 id=20 的记录，再根据 id 值关联到表 t1，再判断 t1 里面 id 的值是否等于 10。</p> </li> </ul> <p>这两种执行方法的逻辑结果是一样的，但是执行的效率会有不同，如果有这么多种执行方式，这些执行方式怎么得到的？最终选择哪一种去执行？根据什么判断标准去选择？</p> <p>这个就是 MySQL的查询优化器的模块（Optimizer）的工作。</p> <p>查询优化器的目的就是根据解析树生成不同的执行计划（Execution Plan），然后选择一种最优的执行计划，MySQL 里面使用的是基于开销（cost）的优化器，哪种执行计划开销最小，就用哪种。</p> <p class="maodian"><a name="_label3_2_6_6" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-6">2.3.2 优化器究竟做了什么？</h4> <p>举两个简单的例子∶</p> <ul> <li> <p>当我们对多张表进行关联查询的时候，以哪个表的数据作为基准表。</p> </li> <li> <p>有多个索引可以使用的时候，选择哪个索引。</p> </li> </ul> <p>实际上，对于每一种数据库来说，优化器的模块都是必不可少的，他们通过复杂的算法实现尽可能优化查询效率。</p> <p>往细节上说，查询优化器主要做了下面几方面的优化：</p> <ul> <li> <p>子查询优化</p> </li> <li> <p>等价谓词重写</p> </li> <li> <p>条件化简</p> </li> <li> <p>外连接消除</p> </li> <li> <p>嵌套连接消除</p> </li> <li> <p>连接消除</p> </li> <li> <p>语义优化</p> </li> </ul> <blockquote> <p>本文不会对优化的细节展开讲解，大家先对MySQL的整体架构有所了解就可以了，具体细节之后单独开篇介绍</p> </blockquote> <p>但是优化器也不是万能的，如果SQL语句写得实在太垃圾，再牛的优化器也救不了你了。因此大家在编写SQL语句的时候还是要有意识地进行优化。</p> <p class="maodian"><a name="_label3_2_6_7" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-7">2.3.3 执行计划</h4> <p>优化完之后，得到一个什么东西呢？优化器最终会把解析树变成一个查询执行计划。</p> <p>查询执行计划展示了接下来执行查询的具体方式，比如多张表关联查询，先查询哪张表，在执行查询的时候有多个索引可以使用，实际上该使用哪些索引。</p> <p>MySQL提供了一个查看执行计划的工具。我们在 SQL语句前面加上 EXPLAIN就可以看到执行计划的信息。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; EXPLAIN SELECT * FROM t_user WHERE user_name = '';  +----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------------+  | id | select_type | table  | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |  +----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------------+  |  1 | SIMPLE      | t_user | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |   100.00 | Using where |  +----+-------------+--------+------------+------+---------------+------+---------+------+------+----------+-------------+  </pre> </div> <p>如果要得到更加详细的信息，还可以用FORMAT=JSON，或者开启optimizer trace。</p> <div class="ay1code"> <pre class="brush:xhtml;">mysql&amp;gt; EXPLAIN FORMAT=JSON SELECT * FROM t_user WHERE user_name = '';  </pre> </div> <blockquote> <p>文本不会带大家详细了解执行计划的每一个参数，内容很庞杂，大家先对MySQL的整体架构有所了解就可以了，具体细节之后单独开篇介绍</p> </blockquote> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>3. 存储引擎</h2> <p>经历千辛万苦，MySQL终于算出了最终的执行计划，然后就可以直接执行了吗？</p> <p>好吧。。。依然还不可以。</p> <p>我们知道，表是由一行一行的记录组成的，但这只是逻辑上的概念，或者说只是看上去是这样而已。</p> <p class="maodian"><a name="_lab2_3_7" rel="nofollow"></a></p> <h3>3.1 什么是存储引擎</h3> <p>到底该把数据存储在什么位置，是内存还是磁盘？怎么从表里读取数据，以及怎么把数据写入具体的表中，这都是存储引擎 负责的事情。</p> <p>好吧，看到这里或许你还不知道存储引擎到底是什么。毕竟存储引擎这个名字听起来太玄乎了，它的前身叫做表处理器，是不是就接地气了许多呢？</p> <p class="maodian"><a name="_lab2_3_8" rel="nofollow"></a></p> <h3>3.2 为什么需要存储引擎</h3> <p>因为存储的需求不同。</p> <p>试想一下：</p> <ul> <li> <p>如果一张表，需要很高的访问速度，而不需要考虑持久化的问题，是不是最好把数据放在内存呢？</p> </li> <li> <p>如果一张表，是用来做历史数据存档的，不需要修改，也不需要索引，那是不是要支持数据的压缩?</p> </li> <li> <p>如果一张表用在读写并发很多的业务中，是不是要支持读写互不干扰，而且要保证比较高的数据一致性呢?</p> </li> </ul> <p>大家应该明白了，为什么要支持这么多的存储引擎，因为一种存储引擎不能提供所有的特性。</p> <blockquote> <p>存储引擎是计算机抽象的典型代表，它的功能就是接受上层指令，然后对表中数据进行读取和写入，而这些操作对上层完全是屏蔽的。你甚至可以查阅MySQL文档定义自己的存储引擎，只要对外实现同样的接口就可以了。</p> </blockquote> <blockquote> <p>存储引擎就是MySQL对数据进行读写的插件而已，可以根据不同目的随意更换（插拔）</p> </blockquote> <p class="maodian"><a name="_lab2_3_9" rel="nofollow"></a></p> <h3>3.3 存储引擎怎么用</h3> <p class="maodian"><a name="_label3_3_9_8" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-8">3.3.1 创建表的时候指定存储引擎</h4> <p>在创建表的时候可以指定当前表的存储引擎，如果没有指定，默认的存储引擎为InnoDB，如果想显式指定存储引擎，可以这样</p> <div class="ay1code"> <pre class="brush:sql;">CREATE TABLE `t_user_innodb` (    `id` int(11) NOT NULL AUTO_INCREMENT,    PRIMARY KEY (`id`)  ) ENGINE=innodb DEFAULT CHARSET=utf8mb4;  </pre> </div> <p class="maodian"><a name="_label3_3_9_9" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-9">3.3.2 修改表的存储引擎</h4> <div class="ay1code"> <pre class="brush:sql;">ALTER TABLE 表名 ENGINE = 存储引擎名称;  </pre> </div> <p class="maodian"><a name="_lab2_3_10" rel="nofollow"></a></p> <h3>3.4 存储引擎底层区别</h3> <p>下面我们分别创建3张设置了不同存储引擎的表，t_user_innodb、t_user_myisam、t_user_memory</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220424/f5fd483dec0f44739445d16eaf075805.jpg"></p> <p>我们看一下不同存储引擎在底层存储方面的差异，首先找到MySQL的数据存储目录</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; show variables like 'datadir';  +---------------+-----------------+  | Variable_name | Value           |  +---------------+-----------------+  | datadir       | /var/lib/mysql/ |  +---------------+-----------------+  </pre> </div> <p>进入到目标目录之后，找到当前数据库对应的目录（MySQL会为一个数据库创建一个同名的目录），数据库中表的存储结构如下</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220424/55c29e4750ee4d975f867f75deed9f77.jpg"></p> <p>不同的存储引擎存放数据的方式不一样，产生的文件数量和格式也不一样，InnoDB文件包含2个，MEMORY文件包含1个，MYISAM文件包含3个。</p> <p class="maodian"><a name="_lab2_3_11" rel="nofollow"></a></p> <h3>3.5 常见存储引擎比较</h3> <p>首先我们查看一下当前MySQL服务器支持的存储引擎都有哪一些。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; SHOW ENGINES;  +--------------------+---------+--------------+------+------------+  | Engine             | Support | Transactions | XA   | Savepoints |  +--------------------+---------+--------------+------+------------+  | InnoDB             | DEFAULT | YES          | YES  | YES        |  | MRG_MYISAM         | YES     | NO           | NO   | NO         |  | MEMORY             | YES     | NO           | NO   | NO         |  | BLACKHOLE          | YES     | NO           | NO   | NO         |  | MyISAM             | YES     | NO           | NO   | NO         |  | CSV                | YES     | NO           | NO   | NO         |  | ARCHIVE            | YES     | NO           | NO   | NO         |  | PERFORMANCE_SCHEMA | YES     | NO           | NO   | NO         |  | FEDERATED          | NO      | NULL         | NULL | NULL       |  +--------------------+---------+--------------+------+------------+  </pre> </div> <p>其中，</p> <ul> <li> <p>Support表示该存储引擎是否可用；</p> </li> <li> <p>DEFAULT表示当前MySQL服务器默认的存储引擎；</p> </li> <li> <p>Transactions表示该存储引擎是否支持事务；</p> </li> <li> <p>XA表示该存储引擎是否支持分布式事务；</p> </li> <li> <p>Savepoints表示该存储引擎是否支持事务的部分回滚。</p> </li> </ul> <p class="maodian"><a name="_label3_3_11_10" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-10">3.5.1 MylSAM</h4> <p>应用范围比较小，表级锁定限制了读/写的性能，因此在Web和数据仓库配置中，通常用于只读或以读为主的工作。</p> <p>特点:</p> <ul> <li> <p>支持表级别的锁（插入和更新会锁表），不支持事务；</p> </li> <li> <p>拥有较高的插入（insert）和查询（select）速度；</p> </li> <li> <p>存储了表的行数（count速度更快）。</p> </li> </ul> <blockquote> <p>怎么快速向数据库插入100万条数据？</p> </blockquote> <p>可以先用MylSAM插入数据，然后修改存储引擎为InnoDB。</p> <p class="maodian"><a name="_label3_3_11_11" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-11">3.5.2 InnoDB</h4> <p>MySQL 5.7及更新版中的默认存储引擎。InnoDB是一个事务安全（与ACID兼容）的MySQL 存储引擎，它具有提交、回滚和崩溃恢复功能来保护用户数据。InnoDB行级锁（不升级为更粗粒度的锁）和Oracle风格的一致非锁读提高了多用户并发性。InnoDB将用户数据存储在聚集索引中，以减少基于主键的常见查询的I/O。为了保持数据完整性，InnoDB还支持外键引用完整性约束。</p> <p>特点：</p> <ul> <li> <p>支持事务，支持外键，因此数据的完整性、一致性更高；</p> </li> <li> <p>支持行级别的锁和表级别的锁；</p> </li> <li> <p>支持读写并发，写不阻塞读（MVCC）；</p> </li> <li> <p>特殊的索引存放方式，可以减少IO，提升査询效率。</p> </li> </ul> <blockquote> <p>番外：InnoDB本来是InnobaseOy公司开发的，它和MySQL AB公司合作开源了InnoDB的代码。但是没想到MySQL的竞争对手Oracle把InnobaseOy收购了。后来08年Sun公司（开发Java语言的Sun）收购了MySQL AB，09年Sun公司又被Oracle收购了，所以MySQL和 InnoDB又是一家了。有人觉得MySQL越来越像Oracle,其实也是这个原因。</p> </blockquote> <p class="maodian"><a name="_label3_3_11_12" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-12">3.5.3 Memory</h4> <p>将所有数据存储在RAM中，以便快速访问。这个引擎以前被称为堆引擎。</p> <p>特点：</p> <ul> <li> <p>把数据放在内存里面，读写的速度很快，但是数据库重启或者崩溃，数据会全部消失；</p> </li> <li> <p>只适合做临时表。</p> </li> </ul> <p class="maodian"><a name="_label3_3_11_13" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-13">3.5.4 CSV</h4> <p>它的表实际上是带有逗号分隔值的文本文件。csv表允许以CSV格式导入或转储数据, 以便与读写相同格式的脚本和应用程序交换数据。因为CSV表没有索引，所以通常在正常操作期间将数据保存在InnoDB表中，只在导入或导出阶段使用csv表。</p> <p>特点：</p> <ul> <li> <p>不允许空行，不支持索引；</p> </li> <li> <p>格式通用，可以直接编辑，适合在不同数据库之间导入导出。</p> </li> </ul> <p class="maodian"><a name="_label3_3_11_14" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-14">3.5.5 Archive</h4> <p>专用与存档，空间经过压缩，用于存储和检索大量很少引用的信息。</p> <p>特点：</p> <ul> <li> <p>不支持索引；</p> </li> <li> <p>不支持update、delete。</p> </li> </ul> <p class="maodian"><a name="_lab2_3_12" rel="nofollow"></a></p> <h3>3.6 如何选择存储引擎</h3> <ul> <li> <p>如果对数据一致性要求比较高，需要事务支持，可以选择InnoDB。</p> </li> <li> <p>如果数据查询多更新少，对查询性能要求比较高，可以选择MyISAM。</p> </li> <li> <p>如果需要一个用于查询的临时表，可以选择Memory。</p> </li> </ul> <p>如果所有的存储引擎都不能满足你的需求，并且技术能力足够，可以根据官网内部手册用C语言开发一个存储引擎：https://dev.mvsql.com/doc/internals/en/custom-engine.html</p> <p class="maodian"><a name="_label4" rel="nofollow"></a></p> <h2>总结</h2> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-42691.htm">领养狗协议书范本大全（领养狗协议书范本大全模板）</a></p>
+                                        <p>下一个：<a href="/news/article-43188.htm">动物医院的英文单词怎么写的呀（动物医院的英文单词怎么写的呀）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-25879.htm" title="动物疫苗价格排行榜最新图片高清版 动物疫苗价格排行榜最新图片高清版大全">动物疫苗价格排行榜最新图片高清版 动物疫苗价格排行榜最新图片高清版大全</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-node-share.htm" title="FlClash节点订阅每天更新21.8M/S免费节点订阅链接">FlClash节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22177.htm" title="2019国产放心狗粮推荐（国产十大放心狗粮）">2019国产放心狗粮推荐（国产十大放心狗粮）</a></li>
+                        <li class="py-2"><a href="/news/article-37689.htm" title="vue的混合mixins学习">vue的混合mixins学习</a></li>
+                        <li class="py-2"><a href="/news/article-23552.htm" title="聊城宠物食品公司工作怎么样（山东聊城宠物产业基地）">聊城宠物食品公司工作怎么样（山东聊城宠物产业基地）</a></li>
+                        <li class="py-2"><a href="/news/article-28208.htm" title="哈尔滨王允海宠物医院怎么样呀多少钱啊（王允海动物医院道里店怎么样）">哈尔滨王允海宠物医院怎么样呀多少钱啊（王允海动物医院道里店怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-subscribe-node.htm" title="FlClash节点订阅每天更新20.3M/S免费节点订阅链接">FlClash节点订阅每天更新20.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-47621.htm" title="猫粮制作（猫粮制作工艺流程）">猫粮制作（猫粮制作工艺流程）</a></li>
+                        <li class="py-2"><a href="/news/article-40203.htm" title="SpringBoot admin+Eureka+钉钉通知 实现微服务监控">SpringBoot admin+Eureka+钉钉通知 实现微服务监控</a></li>
+                        <li class="py-2"><a href="/news/article-20814.htm" title="动物医院仪器有哪些种类的（动物医院常见的诊疗设备）">动物医院仪器有哪些种类的（动物医院常见的诊疗设备）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
