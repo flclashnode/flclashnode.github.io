@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-56058.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>python数据可视化-matplotlib入门(5)-饼图和堆叠图</title>
+        <meta name="description" content="饼图常用于统计学模块，画饼图用到的方法为：pie( ) 一、pie()函数用来绘制饼图 pie(x, explode=None, labels=None, colors=None, autopct=N" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-56058.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="python数据可视化-matplotlib入门(5)-饼图和堆叠图" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/0751cc4093373c8c69c9772085789e08.webp" />
+        <meta property="og:release_date" content="2025-02-13T03:11:22" />
+    <meta property="og:updated_time" content="2025-02-13T03:11:22" />
+        <meta property="og:description" content="饼图常用于统计学模块，画饼图用到的方法为：pie( ) 一、pie()函数用来绘制饼图 pie(x, explode=None, labels=None, colors=None, autopct=N" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="python数据可视化-matplotlib入门(5)-饼图和堆叠图">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>python数据可视化-matplotlib入门(5)-饼图和堆叠图</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<p>饼图常用于统计学模块，画饼图用到的方法为：pie( )</p> <p>一、pie()函数用来绘制饼图</p> <p>pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, shadow=False, labeldistance=1.1, startangle=0, radius=1, counterclock=True, wedgeprops=None, textprops=None, center=0, 0, frame=False, rotatelabels=False, *, normalize=None, data=None)</p> <p>pie()函数参数较多，需要我们调整的常见为以下几个<br />x:  每个扇形的占比的序列或数组<br />explode ：如果不是None，则是一个len(x)长度的数组，指定每一块的突出程度；突出显示，设置每一块分割出来的间隙大小<br />labels：为每个扇形提供标签的字符串序列<br />colors：为每个扇形提供颜色的字符串序列<br />autopct ：如果是一个格式字符串，标签将是fmt % pct。如果是一个函数，它将被调用。<br />shadow：阴影<br />startangle：从x轴逆时针旋转,饼的旋转角度<span style="color: rgba(255, 0, 0, 1)">参数用法，可以去官网查询，并自己多去偿试。</span></p> <p>二、一个简单的例子：统计每天休息、工作、娱乐等时间的百分比</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> matplotlib.pyplot as plt  slices</span>= [7,2,9,3,3<span style="color: rgba(0, 0, 0, 1)">] activities</span>= [<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">sleeping</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">eating</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">working</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">studing</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">playing</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] cols</span>= [<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">r</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">m</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">y</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">c</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">b</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">]  plt.pie(slices,         labels</span>=<span style="color: rgba(0, 0, 0, 1)">activities,         colors</span>=cols,<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">自定义的颜色序列，对比slices，可多可少，少时自动补充，如没有，则默认不同颜色。</span>         startangle=90<span style="color: rgba(0, 0, 0, 1)">,         shadow</span>=<span style="color: rgba(0, 0, 0, 1)"> True,          explode</span>=(0,0.1,0,0,0.2),<span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">占比突出程度，</span>         autopct=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">%1.1f%%</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 128, 0, 1)">#</span><span style="color: rgba(0, 128, 0, 1)">百分比的显示格式</span><span style="color: rgba(0, 0, 0, 1)">        )  plt.title(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Time statistics</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">) plt.show()</span></pre> </div> <p>实际运行结果：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/50325ca494d12e920bc72dd1fcb36b55.jpg" alt="python数据可视化-matplotlib入门(5)-饼图和堆叠图"></p> <p><span style="color: rgba(255, 0, 0, 1)">注意：startangle=90时的开始位置。整个饼图是从0度（圆心向右方向）逆时针分布的。</span></p> <p>那继续用上篇创建的2个色子，来实现一个饼图。</p> <p>思考：上述饼图代码中最能决定饼图形状的参数是slices = [7,2,9,3,3]，在不考虑每个占比名称、美观等的情况下，先确定如何实现slices中的各数值。</p> <p>比如，当投掷2粒色子（一个8个面，一个6个面）时，1000000次时，分别统计出现点1、2、3、4、5……14的总次数，保存到slices中即可。<span style="color: rgba(255, 0, 0, 1)">用数列中的统计方法 list.count()即可。</span></p> <p><span style="color: rgba(255, 0, 0, 1)">主要就是增加两行代码：</span></p> <div class="cnblogs_code"> <pre><span style="color: rgba(255, 0, 0, 1)">new_slices=[] # 新建一个数列</span><span style="color: rgba(0, 0, 255, 1)">while</span> side &lt;=<span style="color: rgba(0, 0, 0, 1)"> max_result:      side</span>+= 1<span style="color: rgba(0, 0, 0, 1)">      new_bins.append(side) #这是之前做柱状图需要用到的<span style="color: rgba(255, 0, 0, 1)"> new_slices.append( results.count(int(side))  )<span style="color: rgba(0, 128, 0, 1)">#将保存两色子之和的数列，直接进行统计,</span></span></span><span style="color: rgba(0, 128, 0, 1)">results.count(int(side))就是在results的数列中统计出现side的次数。</span></pre> </div> <p>运行结果，一样也是显示出点数之和7，8，9的出现的次数最多，然后逐渐减小：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/2f3ad5f13482e07f966a060ffb4a5680.jpg" alt="python数据可视化-matplotlib入门(5)-饼图和堆叠图"></p> <p>总之，饼图通过将一个圆按照分类的占比划分成多个区块，整个圆饼代表数据的总量，每个区块表示该分类占总体的比例大小，所有区块的加和等于100%。</p> <p>三、 堆叠图</p> <p>使用matplotlib中的stackplot()函数可以快速绘制堆积图，stackplot()函数的语法格式如下所示<br />stackplot(x, y, labels=(), baseling='zero', data=None, *args, **kwargs)</p> <p>该函数常用参数的含义如下</p> <p>x：表示x轴的数据，可以是一维数组。<br />y：表示y轴的数据，可以是<span style="color: rgba(255, 0, 0, 1)">二维数组或一维数组序列</span>。<br />labels：表示每组折线及填充区域的标签。<br />baseline：表示计算基线的方法，包括'zero'、'sym'、'wiggle'和'weighted_wiggle'。<br />     其中，'zero'表示恒定零基线，即简单的堆积图;<br />&nbsp; 　　 'sym'表示对称于零基线;<br />               　　　'wiggle'表示最小化平方斜率的总和;<br />               　　&nbsp; &nbsp;'weighted_wiggle'表示执行相同的操作，但权重用于说明每层的大小。</p> <p>用同一个例子来看一下堆叠图的效果，代码如下：</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> matplotlib.pyplot as plt  days</span>=    [1,2,3,4,5,6,7<span style="color: rgba(0, 0, 0, 1)">]  sleeping</span>=[7,8,6,8,7,8,6<span style="color: rgba(0, 0, 0, 1)">] eating</span>= [2,3,3,3,2,2,2<span style="color: rgba(0, 0, 0, 1)">] working</span>= [7,7,7,8,10,3,4<span style="color: rgba(0, 0, 0, 1)">] studing</span>= [6,4,4,4,3,8,11<span style="color: rgba(0, 0, 0, 1)">] playing</span>= [2,2,4,1,2,3,1<span style="color: rgba(0, 0, 0, 1)">]  labellist</span>= [<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">sleeping</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">eating</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">working</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">studing</span><span style="color: rgba(128, 0, 0, 1)">'</span>,<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">playing</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">] colorlist = ['c','y','b','r','g']</span><span style="color: rgba(0, 0, 0, 1)">  plt.stackplot(days, sleeping,eating,working,studing,playing,labels</span>=labellist,colors=<span style="color: rgba(0, 0, 0, 1)">colorlist) plt.xlabel(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">x</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">) plt.ylabel(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">y</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">) plt.legend(loc</span>=(0.07, 0.05<span style="color: rgba(0, 0, 0, 1)">)) plt.title(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">Stack Plots</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">) plt.show()</span></pre> </div> <p>运行结果如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/2fb7fa89758794914f9e8df78541f5de.jpg" alt="python数据可视化-matplotlib入门(5)-饼图和堆叠图"></p> <p>plt.legend()是显示左下角的标签。而语句plt.stackplot()函数中的sleeping,eating,working,studing,playing是一维数组序列，即stackplot(x,y……)中的y值，是一系列一维数据。</p> <p>&nbsp;很明显，通过上述饼图与堆叠图的对比，它们的区别：饼图只能展示一段时间里，某个项目所花时间占总时间的比，而堆叠图可以展示这一段时间里，每天各项所花费时间。</p> <p>既然sleeping,eating,working,studing,playing形成的一维数组，感觉参数比较多，那直接形成一个二维数组如何？做如下修改：</p> <div class="cnblogs_code"> <pre>days =    [1,2,3,4,5,6,7<span style="color: rgba(0, 0, 0, 1)">]</span><span style="color: rgba(128, 0, 0, 1)">"""</span><span style="color: rgba(128, 0, 0, 1)"> sleeping =[7,8,6,8,7,8,6] eating  = [2,3,3,3,2,2,2] working = [7,7,7,8,10,3,4] studing = [6,4,4,4,3,8,11] playing = [2,2,4,1,2,3,1]</span><span style="color: rgba(128, 0, 0, 1)">"""</span><span style="color: rgba(0, 0, 0, 1)"> times</span>=<span style="color: rgba(0, 0, 0, 1)">[<span style="color: rgba(0, 128, 0, 1)"># 二维数组，以数列作为元素的数列。</span>         [</span>7,8,6,8,7,8,6<span style="color: rgba(0, 0, 0, 1)">],<span style="color: rgba(0, 128, 0, 1)">#上述sleeping数列</span>         [</span>2,3,3,3,2,2,2<span style="color: rgba(0, 0, 0, 1)">],         [</span>7,7,7,8,10,3,4<span style="color: rgba(0, 0, 0, 1)">],         [</span>6,4,4,4,3,8,11<span style="color: rgba(0, 0, 0, 1)">],         [</span>2,2,4,1,2,3,1<span style="color: rgba(0, 0, 0, 1)">]         ]<br/>plt.stackplot(days, times,labels=labellist,colors=colorlist)<br/></span></pre> </div> <p>运行结果如图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/bbec206cf95676895813f7b27aada801.jpg" alt="python数据可视化-matplotlib入门(5)-饼图和堆叠图"></p> <p>效果与原来的一维数组一样。</p> <p>但手工这样编程的时候录入数据太过麻烦，下篇介绍直接读取文件数据并进行处理。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-55521.htm">华畜兽药是正规公司吗 华畜兽药是正规公司吗 畜牧</a></p>
+                                        <p>下一个：<a href="/news/article-56060.htm">java 示例讲解循环语句的使用_java_</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-54959.htm" title="动物打了疫苗了被抓出血还要打针吗视频（动物打了疫苗了被咬还要打针吗）">动物打了疫苗了被抓出血还要打针吗视频（动物打了疫苗了被咬还要打针吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，SSR/Clash/V2ray/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-30559.htm" title="猫猫打疫苗要多少针多少钱（猫打疫苗一般需要多少钱）">猫猫打疫苗要多少针多少钱（猫打疫苗一般需要多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-node-share.htm" title="FlClash节点订阅每天更新20.5M/S免费节点订阅链接">FlClash节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22645.htm" title="南京领养宠物的地方（南京哪里领养宠物）">南京领养宠物的地方（南京哪里领养宠物）</a></li>
+                        <li class="py-2"><a href="/news/article-31981.htm" title="SpringBoot中处理的转发与重定向">SpringBoot中处理的转发与重定向</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新19.7M/S免费节点订阅链接">FlClash节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-24014.htm" title="Vue实战：基于Vue-ElementUI的权限管理系统之动态路由和动态按钮显示">Vue实战：基于Vue-ElementUI的权限管理系统之动态路由和动态按钮显示</a></li>
+                        <li class="py-2"><a href="/news/article-44654.htm" title="猫咪全套疫苗打下来要多少钱（猫三联最晚什么时候打）">猫咪全套疫苗打下来要多少钱（猫三联最晚什么时候打）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-25-free-node-subscribe-links.htm" title="FlClash机场订阅推荐 | 22.4M/S，Clash/SSR/Shadowrocket/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 22.4M/S，Clash/SSR/Shadowrocket/V2ray免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

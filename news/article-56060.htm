@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-56060.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>java 示例讲解循环语句的使用_java_</title>
+        <meta name="description" content="目录  1.跳转控制语句： 2.循环嵌套： 3.Random   目录  1.跳转控制语句： 区分continue和break；  * continue：用于循环中，基于条件控制，跳过某次循环体内容的" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-56060.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="java 示例讲解循环语句的使用_java_" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/0751cc4093373c8c69c9772085789e08.webp" />
+        <meta property="og:release_date" content="2025-02-13T03:11:22" />
+    <meta property="og:updated_time" content="2025-02-13T03:11:22" />
+        <meta property="og:description" content="目录  1.跳转控制语句： 2.循环嵌套： 3.Random   目录  1.跳转控制语句： 区分continue和break；  * continue：用于循环中，基于条件控制，跳过某次循环体内容的" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="java 示例讲解循环语句的使用_java_">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>java 示例讲解循环语句的使用_java_</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">1.跳转控制语句：</a></li> <li><a href="#_label1" rel="nofollow">2.循环嵌套：</a></li> <li><a href="#_label2" rel="nofollow">3.Random</a></li> </ul> </div> <p>目录</p> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>1.跳转控制语句：</h2> <p>区分continue和break；</p> <p> * continue：用于循环中，基于条件控制，跳过某次循环体内容的执行，继续下一次的执行；</p> <p> * break：用于循环中，基于条件控制，终止循环体内容的执行，也就是说结束当前的整个循环；</p> <p>示例代码：</p> <div class="ay1code"> <pre class="brush:java;">public static void main(String[] args) {      int i;      for (i=1;i&lt;=5;i++){      	if(i%2==0){      		//continue;      		break;      	}      	System.out.println(i);      }     	}</pre> </div> <p>如果条件控制语句为continue，则控制台输出结果为1,3,5，i=1，对于if后的条件判断语句（1%2==0），结果为false，跳过循环体内容的执行，在控制台输出1；i++，i=2，对于if后的条件判断语句结果为true，跳过system.out.println(i);的执行，i++=3....</p> <p>如果条件控制语句为break，则在控制台输出结果为1，i=1，对于if后的条件判断语句（1%2==0），结果为false，然后终止循环体内容的执行，在控制台只输出一个1；</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>2.循环嵌套：</h2> <p>循环语句嵌套概述</p> <p>* 顺序语句： 以分号结尾，表示一句换的结束；</p> <p>* 分支语句： 一对大括号表示if的整体结构，整体描述一个完整的if语句</p> <p>                     一对大括号表示Switch的整体结构，整体描述一个完整的Switch语句</p> <p>* 循环语句： 一对大括号表示for的整体结构，整体描述一个完整的for语句</p> <p>                     一对大括号表示while的整体结构，整体描述一个完整的while语句</p> <p>                      do...while以分号结尾，整体描述一个完整的do...while语句</p> <p>示例代码：利用循环嵌套在控制台输出一天的小时和分钟</p> <div class="ay1code"> <pre class="brush:java;">	public static void main(String[] args) {     		for (int hour=0;hour&lt;24;hour++){  			for(int minute=0;minute&lt;60;minute++){  				System.out.println(hour+"时"+minute+"分");  			}  		}  	}</pre> </div> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>3.Random</h2> <p>Random的作用和使用步骤</p> <p>作用：用于产生一个随机数</p> <p>使用步骤：</p> <p>1. 导包</p> <div class="ay1code"> <pre class="brush:java;">import java.util.Random;</pre> </div> <p>导包的动作必须出现在类定义的上面</p> <p>2.创建对象</p> <div class="ay1code"> <pre class="brush:java;">Random r = new Random();</pre> </div> <p>上面这个格式中r为变量名，可以改变，其它的都不允许改变</p> <p>3.获取随机数</p> <div class="ay1code"> <pre class="brush:java;">int number = r.nextInt(100);   //获取随机数范围为：[0.100) ,前闭后开</pre> </div> <p>上面这个格式中，number为变量名，可以改变，100为获取随机数范围，可以改变，其它都不允许改变</p> <p>代码示例：获取100以内的随机数[0.100)，并打印在控制台</p> <div class="ay1code"> <pre class="brush:java;">import java.util.Random;     public class text051 {     	public static void main(String[] args) {  		Random r = new Random();  		int number=r.nextInt(100);  		System.out.println(number);     	}     }</pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-56058.htm">python数据可视化-matplotlib入门(5)-饼图和堆叠图</a></p>
+                                        <p>下一个：<a href="/news/article-56635.htm">Docker极简入门：使用Docker-Compose 运行网站浏览量统计Demo</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-38237.htm" title="宠物粮进货平台有哪些好用的软件（宠物粮进货平台有哪些好用的软件推荐）">宠物粮进货平台有哪些好用的软件（宠物粮进货平台有哪些好用的软件推荐）</a></li>
+                        <li class="py-2"><a href="/news/article-21270.htm" title="动物疫苗的概念和特点是什么 动物疫苗的概念和特点是什么呢">动物疫苗的概念和特点是什么 动物疫苗的概念和特点是什么呢</a></li>
+                        <li class="py-2"><a href="/news/article-47120.htm" title="免费宠物领养平台有哪些公司好一点（免费领养宠物包邮）">免费宠物领养平台有哪些公司好一点（免费领养宠物包邮）</a></li>
+                        <li class="py-2"><a href="/news/article-40203.htm" title="SpringBoot admin+Eureka+钉钉通知 实现微服务监控">SpringBoot admin+Eureka+钉钉通知 实现微服务监控</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-23-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-30032.htm" title="做动物疫苗检验的是做什么的（动物疫苗抗体检测）">做动物疫苗检验的是做什么的（动物疫苗抗体检测）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-node-share.htm" title="FlClash节点订阅每天更新21.8M/S免费节点订阅链接">FlClash节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-3-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 20.4M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.4M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-20354.htm" title="动物医院英文短语怎么写的啊（动物医院的英文翻译）">动物医院英文短语怎么写的啊（动物医院的英文翻译）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-node-share.htm" title="FlClash节点订阅每天更新19.1M/S免费节点订阅链接">FlClash节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
