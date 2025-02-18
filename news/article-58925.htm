@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-58925.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpringMVC之@RequestMapping注解</title>
+        <meta name="description" content="目录 1.@RequestMapping注解的功能 2.@RequestMapping注解的位置 3.@RequestMapping注解的value属性 4、@RequestMapping注解的met" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-58925.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="SpringMVC之@RequestMapping注解" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/16e1e9ee7cf8eb74738bb86da17ef5ae.webp" />
+        <meta property="og:release_date" content="2025-02-18T09:47:27" />
+    <meta property="og:updated_time" content="2025-02-18T09:47:27" />
+        <meta property="og:description" content="目录 1.@RequestMapping注解的功能 2.@RequestMapping注解的位置 3.@RequestMapping注解的value属性 4、@RequestMapping注解的met" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringMVC之@RequestMapping注解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>SpringMVC之@RequestMapping注解</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p id="main-toc"><strong>目录</strong></p> <p id="1.%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%8A%9F%E8%83%BD-toc" style="margin-left:0px;"><a href="#1.%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%8A%9F%E8%83%BD" rel="nofollow">1.@RequestMapping注解的功能</a></p> <p id="2.%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%8D%E7%BD%AE-toc" style="margin-left:0px;"><a href="#2.%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%8D%E7%BD%AE" rel="nofollow">2.@RequestMapping注解的位置</a></p> <p id="3.%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84value%E5%B1%9E%E6%80%A7-toc" style="margin-left:0px;"><a href="#3.%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84value%E5%B1%9E%E6%80%A7" rel="nofollow">3.@RequestMapping注解的value属性</a></p> <p id="4%E3%80%81%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84method%E5%B1%9E%E6%80%A7-toc" style="margin-left:0px;"><a href="#4%E3%80%81%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84method%E5%B1%9E%E6%80%A7" rel="nofollow">4、@RequestMapping注解的method属性</a></p> <p id="5%E3%80%81%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84params%E5%B1%9E%E6%80%A7%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89-toc" style="margin-left:0px;"><a href="#5%E3%80%81%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84params%E5%B1%9E%E6%80%A7%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89" rel="nofollow">5、@RequestMapping注解的params属性（了解）</a></p> <p id="6%E3%80%81%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84headers%E5%B1%9E%E6%80%A7%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89-toc" style="margin-left:0px;"><a href="#6%E3%80%81%40RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84headers%E5%B1%9E%E6%80%A7%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89" rel="nofollow">6、@RequestMapping注解的headers属性（了解）</a></p> <p id="7%E3%80%81SpringMVC%E6%94%AF%E6%8C%81ant%E9%A3%8E%E6%A0%BC(%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D)%E7%9A%84%E8%B7%AF%E5%BE%84-toc" style="margin-left:0px;"><a href="#7%E3%80%81SpringMVC%E6%94%AF%E6%8C%81ant%E9%A3%8E%E6%A0%BC%28%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D%29%E7%9A%84%E8%B7%AF%E5%BE%84" rel="nofollow">7、SpringMVC支持ant风格(模糊匹配)的路径</a></p> <p id="8%E3%80%81SpringMVC%E6%94%AF%E6%8C%81%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%9A%84%E5%8D%A0%E4%BD%8D%E7%AC%A6%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89-toc" style="margin-left:0px;"><a href="#8%E3%80%81SpringMVC%E6%94%AF%E6%8C%81%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%9A%84%E5%8D%A0%E4%BD%8D%E7%AC%A6%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89" rel="nofollow">8、SpringMVC支持路径中的占位符（重点）</a></p> <hr id="hr-toc"/> </h1> <p>从注解名称上我们可以看到，@RequestMapping注解的作用就是将请求和处理请求的控制器方法关联 起来，建立映射关系。 SpringMVC 接收到指定的请求，就会来找到在映射关系中对应的控制器方法来处理这个请求。</p> </h1> <p>2.1@RequestMapping标识一个类：设置映射请求的请求路径的初始信息</p> <p>2.2@RequestMapping标识一个方法：设置映射请求请求路径的具体信息</p> <pre><code class="language-java">@Controller @RequestMapping("/test") public class RequestMappingController { //此时请求映射所映射的请求的请求路径为：/test/testRequestMapping @RequestMapping("/testRequestMapping") public String testRequestMapping(){ return "success"; } }</code></pre> </h1> <p><img fetchpriority="high" decoding="async" alt="" height="312" src="http://img.555519.xyz/uploads3/20220830/44cfcf7ec3d67a2188683d073696879e.jpg"></p> <p>@RequestMapping注解的value属性通过请求的请求地址匹配请求映射</p> <p>@RequestMapping注解的value属性是一个字符串类型的数组，表示该请求映射能够匹配多个请求地址 所对应的请求</p> <p>@RequestMapping注解的value属性必须设置，至少通过请求地址匹配请求映射</p> </h1> <p>@RequestMapping注解的method属性通过请求的请求方式（get或post）匹配请求映射 @RequestMapping注解的method属性是一个RequestMethod类型的数组，表示该请求映射能够匹配</p> <p>多种请求方式的请求 若当前请求的请求地址满足请求映射的value属性，但是请求方式不满足method属性，则浏览器报错 405：Request method 'POST' not supported</p> <pre><code class="language-html">&lt;a th:href="@{/test}"&gt;测试@RequestMapping的value属性--&gt;/test&lt;/a&gt;&lt;br&gt; &lt;form th:action="@{/test}" method="post"&gt; &lt;input type="submit"&gt; &lt;/form&gt;</code></pre> <pre><code class="language-java">@RequestMapping( value = {"/testRequestMapping", "/test"}, method = {RequestMethod.GET, RequestMethod.POST} ) public String testRequestMapping(){ return "success"; }</code></pre> <p>注： 1、对于处理指定请求方式的控制器方法，SpringMVC中提供了@RequestMapping的派生注解 处理get请求的映射--&gt;@GetMapping 处理post请求的映射--&gt;@PostMapping 处理put请求的映射--&gt;@PutMapping 处理delete请求的映射--&gt;@DeleteMapping 2、常用的请求方式有get，post，put，delete</p> <p>但是目前浏览器只支持get和post，若在form表单提交时，为method设置了其他请求方式的字符 串（put或delete），则按照默认的请求方式get处理 若要发送put和delete请求，则需要通过spring提供的过滤器HiddenHttpMethodFilter，在 RESTful部分会讲到</p> </h1> <p>@RequestMapping注解的params属性通过请求的请求参数匹配请求映射</p> <p>@RequestMapping注解的params属性是一个字符串类型的数组，可以通过四种表达式设置请求参数 和请求映射的匹配关系</p> <p>"param"：要求请求映射所匹配的请求必须携带param请求参数</p> <p>"!param"：要求请求映射所匹配的请求必须不能携带param请求参数</p> <p>&nbsp;"param=value"：要求请求映射所匹配的请求必须携带param请求参数且param=value</p> <p>"param!=value"：要求请求映射所匹配的请求必须携带param请求参数但是param!=value</p> <pre><code class="language-html">&lt;a th:href="@{/test(username='admin',password=123456)"&gt;测试@RequestMapping的 params属性--&gt;/test&lt;/a&gt;&lt;br&gt;</code></pre> <pre><code class="language-java">@RequestMapping( value = {"/testRequestMapping", "/test"} ,method = {RequestMethod.GET, RequestMethod.POST} ,params = {"username","password!=123456"} ) public String testRequestMapping(){ return "success"; }</code></pre> <p>注： 若当前请求满足@RequestMapping注解的value和method属性，但是不满足params属性，此时 页面回报错400：Parameter conditions "username, password!=123456" not met for actual request parameters: username={admin}, password={123456}</p> </h1> <p>@RequestMapping注解的headers属性通过请求的请求头信息匹配请求映射</p> <p>@RequestMapping注解的headers属性是一个字符串类型的数组，可以通过四种表达式设置请求头信 息和请求映射的匹配关系</p> <p>"header"：要求请求映射所匹配的请求必须携带header请求头信息</p> <p>"!header"：要求请求映射所匹配的请求必须不能携带header请求头信息</p> <p>"header=value"：要求请求映射所匹配的请求必须携带header请求头信息且header=value</p> <p>"header!=value"：要求请求映射所匹配的请求必须携带header请求头信息且header!=value</p> <p>若当前请求满足@RequestMapping注解的value和method属性，但是不满足headers属性，此时页面 显示404错误，即资源未找到</p> </h1> <p>&nbsp;？：表示任意的单个字符（/ ，？不行）</p> <p>*：表示任意的0个或多个字符</p> <p>**：表示任意的一层或多层目录</p> <p>注意：在使用**时，只能使用/**/xxx的方式</p> <pre><code class="language-java"> @RequestMapping(             value = {"/a?a/test"},             method = {RequestMethod.GET,RequestMethod.POST},             params = {"username","password!=123456"},             headers = {"header"}       )</code></pre> <pre><code class="language-html">&lt;a th:href="@{//a1a/test(username'admin',password=123456)}"&gt;param&lt;/a&gt;</code></pre> </h1> <p>原始方式：/deleteUser?id=1</p> <p>user/SpringMVC/to/controller</p> <p>rest方式：/deleteUser/1</p> <p>SpringMVC路径中的占位符常用于RESTful风格中，当请求路径中将某些数据通过路径的方式传输到服 务器中，就可以在相应的@RequestMapping注解的value属性中通过占位符{xxx}表示传输的数据，在 通过@PathVariable注解，将占位符所表示的数据赋值给控制器方法的形参</p> <pre><code class="language-html">&lt;a th:href="@{/testRest/1/admin}"&gt;测试路径中的占位符--&gt;/testRest&lt;/a&gt;&lt;br&gt;</code></pre> <pre><code class="language-java">@RequestMapping("/testRest/{id}/{username}") public String testRest(@PathVariable("id") String id, @PathVariable("username") String username){ System.out.println("id:"+id+",username:"+username); return "success"; } //最终输出的内容为--&gt;id:1,username:admin</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-58924.htm">SpringCloud集成Sleuth和Zipkin</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.5M/S免费节点订阅链接">FlClash节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新18.9M/S免费节点订阅链接">FlClash节点订阅每天更新18.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-39199.htm" title="给宠物医院的好评怎么写（给宠物医院的好评怎么写简短）">给宠物医院的好评怎么写（给宠物医院的好评怎么写简短）</a></li>
+                        <li class="py-2"><a href="/news/article-47621.htm" title="猫粮制作（猫粮制作工艺流程）">猫粮制作（猫粮制作工艺流程）</a></li>
+                        <li class="py-2"><a href="/news/article-40204.htm" title="面试官：请用SQL模拟一个死锁">面试官：请用SQL模拟一个死锁</a></li>
+                        <li class="py-2"><a href="/news/article-19436.htm" title="开宠物店有前途吗?（开宠物店好吗）">开宠物店有前途吗?（开宠物店好吗）</a></li>
+                        <li class="py-2"><a href="/news/article-25419.htm" title="动物接种疫苗的好处有哪些呢 动物接种疫苗的好处有哪些呢视频">动物接种疫苗的好处有哪些呢 动物接种疫苗的好处有哪些呢视频</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-15-free-clash.htm" title="FlClash机场订阅推荐 | 23M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-clash-node.htm" title="FlClash机场订阅推荐 | 21.8M/S，Clash/SSR/V2ray/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 21.8M/S，Clash/SSR/V2ray/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-57184.htm" title="奖学金">奖学金</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
