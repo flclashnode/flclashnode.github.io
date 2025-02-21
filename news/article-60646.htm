@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-60646.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>uniapp中封装一个弹框组件</title>
+        <meta name="description" content="1，准备组件popup // components文件夹中popup组件&lt;template&gt;&lt;view&gt;&lt;viewclass="show-box-bg wx-login-" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-60646.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="uniapp中封装一个弹框组件" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/58d5aaee5dd5c3c01e464030e9025ac5.webp" />
+        <meta property="og:release_date" content="2025-02-21T09:22:17" />
+    <meta property="og:updated_time" content="2025-02-21T09:22:17" />
+        <meta property="og:description" content="1，准备组件popup // components文件夹中popup组件&lt;template&gt;&lt;view&gt;&lt;viewclass="show-box-bg wx-login-" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="uniapp中封装一个弹框组件">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>uniapp中封装一个弹框组件</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2><a id="1popup_0" rel="nofollow"></a>1，准备组件popup</h2> <pre><code class="prism language-javascript"><span class="token comment">// components文件夹中popup组件</span><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"show-box-bg wx-login-box"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"conten"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"titl"</span><span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> popupMsg<span class="token punctuation">.</span>title<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"text"</span><span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> popupMsg<span class="token punctuation">.</span>content<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn-box"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"cancel"</span> @click<span class="token operator">=</span><span class="token string">'hidePopup("no")'</span><span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> popupMsg<span class="token punctuation">.</span>cancel<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"confirm"</span> @click<span class="token operator">=</span><span class="token string">'hidePopup("yes")'</span><span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> popupMsg<span class="token punctuation">.</span>confirm<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span><span class="token keyword">export</span><span class="token keyword">default</span><span class="token punctuation">{<!-- --></span><span class="token comment">//(1)子组件中，通过props接收到数据</span> 		props<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'popupMsg'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 		methods<span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span> 			hidePopup<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token comment">//子组件中，使用$emit调用父组件自定义事件，还可以传参</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'handlePopup'</span><span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span class="token operator">&lt;</span>style scoped lang<span class="token operator">=</span><span class="token string">"scss"</span><span class="token operator">&gt;</span><span class="token punctuation">.</span>wx<span class="token operator">-</span>login<span class="token operator">-</span>box<span class="token punctuation">{<!-- --></span> 		width<span class="token punctuation">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span> 		position<span class="token punctuation">:</span> fixed<span class="token punctuation">;</span> 		top<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span> 		left<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span> 		height<span class="token punctuation">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span> 		background<span class="token operator">-</span>color<span class="token punctuation">:</span><span class="token function">rgba</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 		z<span class="token operator">-</span>index<span class="token punctuation">:</span><span class="token number">88</span><span class="token punctuation">;</span><span class="token punctuation">.</span>conten<span class="token punctuation">{<!-- --></span> 			width<span class="token punctuation">:</span><span class="token number">78</span><span class="token operator">%</span><span class="token punctuation">;</span> 			background<span class="token operator">-</span>color<span class="token punctuation">:</span> #fff<span class="token punctuation">;</span> 			z<span class="token operator">-</span>index<span class="token punctuation">:</span><span class="token number">99</span><span class="token punctuation">;</span> 			position<span class="token punctuation">:</span> absolute<span class="token punctuation">;</span> 			top<span class="token punctuation">:</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span> 			left<span class="token punctuation">:</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span> 			transform<span class="token punctuation">:</span><span class="token function">translate</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 			border<span class="token operator">-</span>radius<span class="token punctuation">:</span><span class="token number">14</span>upx<span class="token punctuation">;</span> 			overflow<span class="token punctuation">:</span> hidden<span class="token punctuation">;</span><span class="token punctuation">.</span>titl<span class="token punctuation">{<!-- --></span> 				width<span class="token punctuation">:</span><span class="token number">90</span><span class="token operator">%</span><span class="token punctuation">;</span> 				height<span class="token punctuation">:</span><span class="token number">110</span>rpx<span class="token punctuation">;</span> 				font<span class="token operator">-</span>size<span class="token punctuation">:</span><span class="token number">40</span>rpx<span class="token punctuation">;</span> 				padding<span class="token punctuation">:</span><span class="token number">0</span><span class="token number">5</span><span class="token operator">%</span><span class="token punctuation">;</span> 				line<span class="token operator">-</span>height<span class="token punctuation">:</span><span class="token number">140</span>rpx<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">.</span>text<span class="token punctuation">{<!-- --></span> 				width<span class="token punctuation">:</span><span class="token number">90</span><span class="token operator">%</span><span class="token punctuation">;</span> 				font<span class="token operator">-</span>size<span class="token punctuation">:</span><span class="token number">28</span>rpx<span class="token punctuation">;</span> 				padding<span class="token punctuation">:</span><span class="token number">0</span><span class="token number">5</span><span class="token operator">%</span><span class="token punctuation">;</span> 				margin<span class="token operator">-</span>bottom<span class="token punctuation">:</span><span class="token number">40</span>rpx<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">.</span>memberY<span class="token punctuation">{<!-- --></span> 				width<span class="token punctuation">:</span><span class="token number">90</span><span class="token operator">%</span><span class="token punctuation">;</span> 				font<span class="token operator">-</span>size<span class="token punctuation">:</span><span class="token number">28</span>rpx<span class="token punctuation">;</span> 				color<span class="token punctuation">:</span> #<span class="token constant">FFCC00</span><span class="token punctuation">;</span> 				padding<span class="token punctuation">:</span><span class="token number">0</span><span class="token number">5</span><span class="token operator">%</span><span class="token punctuation">;</span> 				text<span class="token operator">-</span>align<span class="token punctuation">:</span> center<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">.</span>memberB<span class="token punctuation">{<!-- --></span> 				width<span class="token punctuation">:</span><span class="token number">90</span><span class="token operator">%</span><span class="token punctuation">;</span> 				font<span class="token operator">-</span>size<span class="token punctuation">:</span><span class="token number">28</span>rpx<span class="token punctuation">;</span> 				color<span class="token punctuation">:</span> #<span class="token number">007</span>AFF<span class="token punctuation">;</span> 				padding<span class="token punctuation">:</span><span class="token number">0</span><span class="token number">5</span><span class="token operator">%</span><span class="token punctuation">;</span> 				text<span class="token operator">-</span>align<span class="token punctuation">:</span> center<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">.</span>btn<span class="token operator">-</span>box<span class="token punctuation">{<!-- --></span> 				width<span class="token punctuation">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span> 				height<span class="token punctuation">:</span><span class="token number">90</span>rpx<span class="token punctuation">;</span> 				display<span class="token punctuation">:</span> flex<span class="token punctuation">;</span> 				border<span class="token operator">-</span>top<span class="token punctuation">:</span><span class="token number">2</span>rpx solid #<span class="token number">969696</span><span class="token punctuation">;</span><span class="token punctuation">.</span>cancel<span class="token punctuation">{<!-- --></span> 					width<span class="token punctuation">:</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span> 					height<span class="token punctuation">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span> 					font<span class="token operator">-</span>size<span class="token punctuation">:</span><span class="token number">40</span>rpx<span class="token punctuation">;</span> 					color<span class="token punctuation">:</span> #<span class="token number">999</span><span class="token punctuation">;</span> 					text<span class="token operator">-</span>align<span class="token punctuation">:</span> center<span class="token punctuation">;</span> 					line<span class="token operator">-</span>height<span class="token punctuation">:</span><span class="token number">89</span>rpx<span class="token punctuation">;</span> 					border<span class="token operator">-</span>right<span class="token punctuation">:</span><span class="token number">2</span>rpx solid #<span class="token number">969696</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">.</span>confirm<span class="token punctuation">{<!-- --></span> 					width<span class="token punctuation">:</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span> 					height<span class="token punctuation">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span> 					font<span class="token operator">-</span>size<span class="token punctuation">:</span><span class="token number">40</span>rpx<span class="token punctuation">;</span> 					color<span class="token punctuation">:</span> #ffcc00<span class="token punctuation">;</span> 					text<span class="token operator">-</span>align<span class="token punctuation">:</span> center<span class="token punctuation">;</span> 					line<span class="token operator">-</span>height<span class="token punctuation">:</span><span class="token number">99</span>rpx<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">&gt;</span></code></pre> <h2><a id="2_119" rel="nofollow"></a>2，使用组件</h2> <pre><code class="prism language-javascript"><span class="token comment">// An highlighted block</span><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>view<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"content"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>button type<span class="token operator">=</span><span class="token string">'primary'</span> @click<span class="token operator">=</span><span class="token string">'showPopup=true'</span><span class="token operator">&gt;</span>点击弹框<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>使用<span class="token operator">--</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>popup<span class="token punctuation">:</span>popupMsg<span class="token operator">=</span><span class="token string">"popupMsg"</span>  		@handlePopup<span class="token operator">=</span><span class="token string">'handleShowOrHidePopup'</span> 		v<span class="token operator">-</span>show<span class="token operator">=</span><span class="token string">"showPopup"</span><span class="token operator">/</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span><span class="token comment">//(1)引入</span><span class="token keyword">import</span> popup<span class="token keyword">from</span><span class="token string">'@/components/popup.vue'</span><span class="token punctuation">;</span><span class="token keyword">export</span><span class="token keyword">default</span><span class="token punctuation">{<!-- --></span><span class="token comment">//(2)挂载</span> 		components<span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span>popup<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token punctuation">{<!-- --></span> 				showPopup<span class="token punctuation">:</span><span class="token boolean">false</span><span class="token punctuation">,</span> 				popupMsg<span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span> 					title<span class="token punctuation">:</span><span class="token string">'这是标题'</span><span class="token punctuation">,</span> 					content<span class="token punctuation">:</span><span class="token string">'这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容'</span><span class="token punctuation">,</span> 					cancel<span class="token punctuation">:</span><span class="token string">'取消'</span><span class="token punctuation">,</span> 					confirm<span class="token punctuation">:</span><span class="token string">'确定'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 				hotgoods<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">{<!-- --></span>id<span class="token punctuation">:</span><span class="token string">'01'</span><span class="token punctuation">,</span>title<span class="token punctuation">:</span><span class="token string">'标题一'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{<!-- --></span>id<span class="token punctuation">:</span><span class="token string">'02'</span><span class="token punctuation">,</span>title<span class="token punctuation">:</span><span class="token string">'标题二'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 		methods<span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span> 			handleShowOrHidePopup<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span>type<span class="token operator">==</span><span class="token string">'yes'</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 					console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token keyword">this</span><span class="token punctuation">.</span>showPopup<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{<!-- --></span> 					console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token keyword">this</span><span class="token punctuation">.</span>showPopup<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-60041.htm">国内十大宠物粮食品牌排行榜图片 国内十大宠物粮食品牌排行榜图片大全</a></p>
+                                        <p>下一个：<a href="/news/article-60647.htm">宠物粮食市场预测分析图表（宠物粮市场前景）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-31402.htm" title="妙三多猫三联哪个好（妙三多好还是猫三联）">妙三多猫三联哪个好（妙三多好还是猫三联）</a></li>
+                        <li class="py-2"><a href="/news/article-50153.htm" title="MultipartFile转成File类型">MultipartFile转成File类型</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-7-node-share-links.htm" title="FlClash节点订阅每天更新21.8M/S免费节点订阅链接">FlClash节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新19.7M/S免费节点订阅链接">FlClash节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-18964.htm" title="宠物粮厂名称好寓意吗怎么取（宠物粮厂家）">宠物粮厂名称好寓意吗怎么取（宠物粮厂家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-12-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 23M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-41187.htm" title="动物医院收费标准最新表格图片大全（动物医院在哪个位置）">动物医院收费标准最新表格图片大全（动物医院在哪个位置）</a></li>
+                        <li class="py-2"><a href="/news/article-43188.htm" title="动物医院的英文单词怎么写的呀（动物医院的英文单词怎么写的呀）">动物医院的英文单词怎么写的呀（动物医院的英文单词怎么写的呀）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新21.4M/S免费节点订阅链接">FlClash节点订阅每天更新21.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20814.htm" title="动物医院仪器有哪些种类的（动物医院常见的诊疗设备）">动物医院仪器有哪些种类的（动物医院常见的诊疗设备）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">63</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
