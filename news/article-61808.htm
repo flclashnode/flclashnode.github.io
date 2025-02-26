@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-61808.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>docker system全新命令集</title>
+        <meta name="description" content="docker system docker system --help 查看帮助 docker system df 提供Docker整体磁盘使用率的概况，包括镜像、容器和（本地）volume。所以我们现" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-61808.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="docker system全新命令集" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/5379eeb30c189696d328346f6d06e85b.webp" />
+        <meta property="og:release_date" content="2025-02-23T09:48:20" />
+    <meta property="og:updated_time" content="2025-02-23T09:48:20" />
+        <meta property="og:description" content="docker system docker system --help 查看帮助 docker system df 提供Docker整体磁盘使用率的概况，包括镜像、容器和（本地）volume。所以我们现" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="docker system全新命令集">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>docker system全新命令集</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p><strong>docker system</strong></p> <p>docker system --help 查看帮助<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230203/2fca7e7e6c6fd77733788ab42c1f49a5.jpg" alt="docker system全新命令集"></p> <p><strong>docker system df</strong><br /> 提供Docker整体磁盘使用率的概况，包括镜像、容器和（本地）volume。所以我们现在随时都可以查看Docker使用了多少资源。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230203/487af90abebd909beed70d9829de5849.jpg" alt="docker system全新命令集"><br /> TYPE 类型<br /> TOTAL 总数<br /> ACTIVE 正在运行<br /> SIZE 暂用磁盘大小<br /> RECLAIMABLE 可回收的（未被使用的）</p> <p>查看容器使用卷的情况和大小</p> <pre><code>docker system df -v </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230203/7de7135ef11bad5b1db68629d945e735.jpg" alt="docker system全新命令集"></p> <p><strong>docker system info（就等同于 docker info）</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20230203/b3606a17a83a5f38391093ce0851661b.jpg" alt="docker system全新命令集"></p> <p><strong>docker system events（就等同于docker events）</strong><br /> 获取docker系统实时事件，不包括容器内的</p> <p>截止（日期时间）之前的操作</p> <pre><code>docker system events --until 时间 </code></pre> <p>从（日期时间）之后的操作</p> <pre><code>docker system events --since 时间 </code></pre> <p><strong>docker system prune</strong><br /> 修剪一切<br /> docker system prune 命令是修剪镜像、容器和网络的快捷方式，在Docker 17.06.1之后要清理卷的话需要加上 --volumes</p> <pre><code>docker system prune --volumes		#使用-f 强制删除 </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230203/558f2875dbd47b14fcc51210d78afb2a.jpg" alt="docker system全新命令集"></p> <p>详细的解释<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230203/d540a781dc16a4a9276e68b0f255d75b.jpg" alt="docker system全新命令集"></p> <p>参考：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/qq_36274515/article/details/87910694?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.opensearchhbase"  rel="nofollow">docker-system-—— 一个全新的命令集合</a><br /> 单独删除某一个类型参考：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://editor.csdn.net/md/?articleId=127773048"  rel="nofollow">docker快速清理已停止的容器</a></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-61216.htm">宠物领养文章怎么写范文（领养宠物的文章）</a></p>
+                                        <p>下一个：<a href="/news/article-61809.htm">react几种点击事件</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-46151.htm" title="宠物领养网站app名字叫什么来着（宠物领养软件推荐）">宠物领养网站app名字叫什么来着（宠物领养软件推荐）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-24-node-share.htm" title="FlClash机场订阅推荐 | 18.7M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 18.7M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-8-free-subscribe-node.htm" title="FlClash节点订阅每天更新20.9M/S免费节点订阅链接">FlClash节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-41187.htm" title="动物医院收费标准最新表格图片大全（动物医院在哪个位置）">动物医院收费标准最新表格图片大全（动物医院在哪个位置）</a></li>
+                        <li class="py-2"><a href="/news/article-27276.htm" title="山东联美物流有限公司 山东联美物流有限公司怎么样">山东联美物流有限公司 山东联美物流有限公司怎么样</a></li>
+                        <li class="py-2"><a href="/news/article-52241.htm" title="动物疫苗管理部门（动物疫苗监管部门）">动物疫苗管理部门（动物疫苗监管部门）</a></li>
+                        <li class="py-2"><a href="/news/article-49096.htm" title="Spring中ApplicationEvent和ApplicationListener的应用">Spring中ApplicationEvent和ApplicationListener的应用</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-4-free-node-subscribe.htm" title="FlClash节点订阅每天更新21.5M/S免费节点订阅链接">FlClash节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新19.7M/S免费节点订阅链接">FlClash节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-57757.htm" title="给宠物医院的好评怎么写文案 给宠物医院的好评怎么写文案简短">给宠物医院的好评怎么写文案 给宠物医院的好评怎么写文案简短</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

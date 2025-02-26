@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-62987.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>【分布式锁】02-使用Redisson实现公平锁原理</title>
+        <meta name="description" content="前言 前面分析了Redisson可重入锁的原理，主要是通过lua脚本加锁及设置过期时间来保证锁执行的原子性，然后每个线程获取锁会将获取锁的次数+1，释放锁会将当前锁次数-1，如果为0则表示释放锁成功。" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-62987.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="【分布式锁】02-使用Redisson实现公平锁原理" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/58d5aaee5dd5c3c01e464030e9025ac5.webp" />
+        <meta property="og:release_date" content="2025-02-25T05:01:29" />
+    <meta property="og:updated_time" content="2025-02-25T05:01:29" />
+        <meta property="og:description" content="前言 前面分析了Redisson可重入锁的原理，主要是通过lua脚本加锁及设置过期时间来保证锁执行的原子性，然后每个线程获取锁会将获取锁的次数+1，释放锁会将当前锁次数-1，如果为0则表示释放锁成功。" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="【分布式锁】02-使用Redisson实现公平锁原理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>【分布式锁】02-使用Redisson实现公平锁原理</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p id="%E5%89%8D%E8%A8%80"><strong>前言</strong></p> <p>前面分析了Redisson可重入锁的原理，主要是通过lua脚本加锁及设置过期时间来保证锁执行的原子性，然后每个线程获取锁会将获取锁的次数+1，释放锁会将当前锁次数-1，如果为0则表示释放锁成功。</p> <p>可重入原理和JDK中的可重入锁都是一致的。</p> <p id="Redisson%E5%85%AC%E5%B9%B3%E9%94%81%E5%8E%9F%E7%90%86"><strong>Redisson公平锁原理</strong></p> <p>JDK中也有公平锁和非公平锁，所谓公平锁，就是保证客户端获取锁的顺序，跟他们请求获取锁的顺序，是一样的。公平锁需要排队，谁先申请获取这把锁，谁就可以先获取到这把锁，是按照请求的先后顺序来的。</p> <p id="Redisson%E5%AE%9E%E7%8E%B0%E5%85%AC%E5%B9%B3%E9%94%81%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><strong>Redisson实现公平锁源码分析</strong></p> <p>非公平锁使用也很简单：</p> <pre><code class="language-java">RLock lock = redisson.getFairLock("anyLock"); lock.lock(); lock.unlock();</code></pre> <p>核心lua脚本代码：</p> <pre><code class="language-java">&lt;T&gt; RFuture&lt;T&gt; tryLockInnerAsync(long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand&lt;T&gt; command) {     internalLockLeaseTime = unit.toMillis(leaseTime);      long currentTime = System.currentTimeMillis();         if (command == RedisCommands.EVAL_LONG) {         return commandExecutor.evalWriteAsync(getName(), LongCodec.INSTANCE, command,                 // remove stale threads                 "while true do "                 + "local firstThreadId2 = redis.call('lindex', KEYS[2], 0);"                 + "if firstThreadId2 == false then "                     + "break;"                 + "end; "                 + "local timeout = tonumber(redis.call('zscore', KEYS[3], firstThreadId2));"                 + "if timeout &lt;= tonumber(ARGV[4]) then "                     + "redis.call('zrem', KEYS[3], firstThreadId2); "                     + "redis.call('lpop', KEYS[2]); "                 + "else "                     + "break;"                 + "end; "               + "end;"                    + "if (redis.call('exists', KEYS[1]) == 0) and ((redis.call('exists', KEYS[2]) == 0) "                         + "or (redis.call('lindex', KEYS[2], 0) == ARGV[2])) then " +                         "redis.call('lpop', KEYS[2]); " +                         "redis.call('zrem', KEYS[3], ARGV[2]); " +                         "redis.call('hset', KEYS[1], ARGV[2], 1); " +                         "redis.call('pexpire', KEYS[1], ARGV[1]); " +                         "return nil; " +                     "end; " +                     "if (redis.call('hexists', KEYS[1], ARGV[2]) == 1) then " +                         "redis.call('hincrby', KEYS[1], ARGV[2], 1); " +                         "redis.call('pexpire', KEYS[1], ARGV[1]); " +                         "return nil; " +                     "end; " +                      "local firstThreadId = redis.call('lindex', KEYS[2], 0); " +                     "local ttl; " +                      "if firstThreadId ~= false and firstThreadId ~= ARGV[2] then " +                          "ttl = tonumber(redis.call('zscore', KEYS[3], firstThreadId)) - tonumber(ARGV[4]);" +                      "else "                       + "ttl = redis.call('pttl', KEYS[1]);" +                      "end; " +                       "local timeout = ttl + tonumber(ARGV[3]);" +                      "if redis.call('zadd', KEYS[3], timeout, ARGV[2]) == 1 then " +                         "redis.call('rpush', KEYS[2], ARGV[2]);" +                     "end; " +                     "return ttl;",                      Arrays.&lt;Object&gt;asList(getName(), threadsQueueName, timeoutSetName),                                  internalLockLeaseTime, getLockName(threadId), currentTime + threadWaitTime, currentTime);     }      throw new IllegalArgumentException(); }</code></pre> <p><strong>KEYS/ARGV参数分析</strong></p> <p>KEYS = Arrays.asList(getName(), threadsQueueName, timeoutSetName)</p> <ul> <li>KEYS<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/wang-meng/"  rel="nofollow">1</a> = getName() = 锁的名字，“anyLock”</li> <li>KEYS[2] = threadsQueueName = redisson_lock_queue:{anyLock}，基于redis的数据结构实现的一个队列</li> <li>KEYS[3] = timeoutSetName = redisson_lock_timeout:{anyLock}，基于redis的数据结构实现的一个Set数据集合，有序集合，可以自动按照你给每个数据指定的一个分数（score）来进行排序</li> </ul> <p>ARGV = internalLockLeaseTime, getLockName(threadId), currentTime + threadWaitTime, currentTime</p> <ul> <li>ARGV<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/wang-meng/"  rel="nofollow">1</a> = 30000毫秒</li> <li>ARGV[2] = UUID:threadId</li> <li>ARGV[3] = 当前时间（10:00:00） + 5000毫秒 = 10:00:05</li> <li>ARGV[4] = 当前时间（10:00:00）</li> </ul> <p><strong>模拟不同线程获取锁步骤</strong></p> <ol> <li>客户端A thread01 10:00:00 获取锁(第一次加锁)</li> <li>客户端B thread02 10:00:10 获取锁</li> <li>客户端C therad03 10:00:15 获取锁</li> </ol> <p><strong>lua脚本源码分析</strong></p> <p><strong>客户端A thread01 加锁分析</strong></p> <p>thread01 在10:00:00 执行加锁逻辑，下面开始一点点分析lua脚本执行代码：</p> <pre><code class="language-java">"while true do " + "local firstThreadId2 = redis.call('lindex', KEYS[2], 0);" + "if firstThreadId2 == false then "     + "break;"</code></pre> <p>lindex redisson_lock_queue:{anyLock} 0，就是从redisson_lock_queue:{anyLock}这个队列中弹出来第一个元素，刚开始，队列是空的，所以什么都获取不到，此时就会直接退出while true死循环</p> <pre><code class="language-java">"if (redis.call('exists', KEYS[1]) == 0) and ((redis.call('exists', KEYS[2]) == 0) " + "or (redis.call('lindex', KEYS[2], 0) == ARGV[2])) then " + "redis.call('lpop', KEYS[2]); " + "redis.call('zrem', KEYS[3], ARGV[2]); " + "redis.call('hset', KEYS[1], ARGV[2], 1); " + "redis.call('pexpire', KEYS[1], ARGV[1]); " + "return nil; " + "end; " +</code></pre> <p>这段代码判断逻辑的意思是：</p> <ol> <li>exists anyLock，锁不存在，也就是没人加锁，刚开始确实是没人加锁的，这个条件肯定是成立的；</li> <li>或者是exists redisson_lock_queue:{anyLock}，这个队列不存在</li> <li>或者是lindex redisson_lock_queue:{anyLock} 0，队列的第一个元素是UUID:threadId，或者是这个队列存在，但是排在队头的第一个元素，是当前这个线程</li> </ol> <p>那么这个条件整体就可以成立了 anyLock和队列，都是不存在的，所以这个条件肯定会成立。接着执行if中的具体逻辑：</p> <ul> <li>lpop redisson_lock_queue:{anyLock}，弹出队列的第一个元素，现在队列是空的，所以什么都不会干</li> <li>zrem redisson_lock_timeout:{anyLock} UUID:threadId，从set集合中删除threadId对应的元素，此时因为这个set集合是空的，所以什么都不会干</li> <li>hset anyLock UUID:threadId_01 1，加锁成功： anyLock: { "UUID_01:threadId_01": 1 }</li> <li>pexpire anyLock 30000，将这个锁key的生存时间设置为30000毫秒</li> </ul> <p>返回一个nil，在外层代码中，就会认为是加锁成功，此时就会开启一个watchdog看门狗定时调度的程序，每隔10秒判断一下，当前这个线程是否还对这个锁key持有着锁，如果是，则刷新锁key的生存时间为30000毫秒 (看门狗的具体流程上一篇文章有讲述)</p> <p><strong>客户端B thread02 加锁分析</strong></p> <p>此时thread01 已经获取到了锁，如果thread02 在10:00:10分来执行加锁逻辑，具体的代码逻辑是怎样执行的呢？</p> <pre><code class="language-java">"while true do " + "local firstThreadId2 = redis.call('lindex', KEYS[2], 0);" + "if firstThreadId2 == false then "     + "break;"</code></pre> <p>进入while true死循环，lindex redisson_lock_queue:{anyLock} 0，获取队列的第一个元素，此时队列还是空的，所以获取到的是false，直接退出while true死循环</p> <pre><code class="language-java">"if (redis.call('exists', KEYS[1]) == 0) and ((redis.call('exists', KEYS[2]) == 0) " + "or (redis.call('lindex', KEYS[2], 0) == ARGV[2])) then " + "redis.call('lpop', KEYS[2]); " + "redis.call('zrem', KEYS[3], ARGV[2]); " + "redis.call('hset', KEYS[1], ARGV[2], 1); " + "redis.call('pexpire', KEYS[1], ARGV[1]); " + "return nil; " + "end; " +</code></pre> <p>此时anyLock这个锁key已经存在了，说明已经有人加锁了，这个条件首先就肯定不成立了；</p> <p>接着往下执行，看下另外的逻辑：</p> <pre><code class="language-java">"if (redis.call('hexists', KEYS[1], ARGV[2]) == 1) then " +     "redis.call('hincrby', KEYS[1], ARGV[2], 1); " +     "redis.call('pexpire', KEYS[1], ARGV[1]); " +     "return nil; " + "end; " +</code></pre> <p>判断一下，此时这个第二个客户端是UUID_02，threadId_02，此时会判断一下，hexists anyLock UUID_02:threadId_02，判断一下在anyLock这个map中，是否存在UUID_02:threadId_02这个key？这个条件也不成立</p> <p>继续执行后续代码：</p> <pre><code class="language-java">"local firstThreadId = redis.call('lindex', KEYS[2], 0); " + "local ttl; " +  "if firstThreadId ~= false and firstThreadId ~= ARGV[2] then " +      "ttl = tonumber(redis.call('zscore', KEYS[3], firstThreadId)) - tonumber(ARGV[4]);" +  "else "   + "ttl = redis.call('pttl', KEYS[1]);" +  "end; " +   "local timeout = ttl + tonumber(ARGV[3]);" +  "if redis.call('zadd', KEYS[3], timeout, ARGV[2]) == 1 then " +     "redis.call('rpush', KEYS[2], ARGV[2]);" + "end; " + "return ttl;",</code></pre> <p><code>tonumber()</code> 是lua中自带的函数，tonumber会尝试将它的参数转换为数字。</p> <p>lindex redisson_lock_queue:{anyLock} 0，从队列中获取第一个元素，此时队列是空的，所以什么都不会有</p> <p>因为我们是在10:00:10 分请求的，因为anyLock默认过期时间是30s，所以在thread02请求的时候ttl还剩下20s</p> <p>ttl = pttl anyLock = 20000毫秒，获取anyLock剩余的生存时间，ttl假设这里就被设置为了20000毫秒</p> <p>timeout = ttl + 当前时间 + 5000毫秒 = 20000毫秒 + 10:00:00 + 5000毫秒 = 10:00:25</p> <p>接着执行： zadd redisson_lock_timeout:{anyLock} 10:00:25 UUID_02:threadId_02</p> <p>在set集合中插入一个元素，元素的值是UUID_02:threadId_02，他对应的分数是10:00:25（会用这个时间的long型的一个时间戳来表示这个时间，时间越靠后，时间戳就越大），sorted set，有序set集合，他会自动根据你插入的元素的分数从小到大来进行排序</p> <p>继续执行： rpush redisson_lock_queue:{anyLock} UUID_02:theadId_02</p> <p>这个指令就是将UUID_02:threadId_02，插入到队列的头部去</p> <p>返回的是ttl，也就是anyLock剩余的生存时间，如果拿到的返回值是ttl是一个数字的话，那么此时客户端B而言就会进入一个while true的死循环，每隔一段时间都尝试去进行加锁，重新执行这段lua脚本</p> <p>简单画图总结如下：</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221201/3534f97dada9c9aebeed1a83dbabf1ce.jpg"></p> <p><strong>客户端C thread03 加锁分析</strong></p> <p>此时thread03 在10:00:15来加锁，分析一下执行原理：</p> <pre><code class="language-java">"while true do " + "local firstThreadId2 = redis.call('lindex', KEYS[2], 0);" + "if firstThreadId2 == false then "     + "break;" + "end; " + "local timeout = tonumber(redis.call('zscore', KEYS[3], firstThreadId2));" + "if timeout &lt;= tonumber(ARGV[4]) then "     + "redis.call('zrem', KEYS[3], firstThreadId2); "     + "redis.call('lpop', KEYS[2]); " + "else "     + "break;" + "end; " + "end;"</code></pre> <p>while true死循环，lindex redisson_lock_queue:{anyLock} 0，获取队列中的第一个元素，UUID_02:threadId_02，代表的是这个客户端02正在队列里排队</p> <p>zscore redisson_lock_timeout:{anyLock} UUID_02:threadId_02，从有序集合中获取UUID_02:threadId_02对应的分数，timeout = 10:00:25</p> <p>判断：timeout &lt;= 10:00:15？，这个条件不成立，退出死循环</p> <pre><code class="language-java">"local firstThreadId = redis.call('lindex', KEYS[2], 0); " + "local ttl; " +  "if firstThreadId ~= false and firstThreadId ~= ARGV[2] then " +      "ttl = tonumber(redis.call('zscore', KEYS[3], firstThreadId)) - tonumber(ARGV[4]);" +  "else "   + "ttl = redis.call('pttl', KEYS[1]);" +  "end; " +   "local timeout = ttl + tonumber(ARGV[3]);" +  "if redis.call('zadd', KEYS[3], timeout, ARGV[2]) == 1 then " +     "redis.call('rpush', KEYS[2], ARGV[2]);" + "end; " + "return ttl;",</code></pre> <p>firstThreadId获取到的是队列中的第一个元素：UUID_02:thread_02</p> <p>ttl = 10:00:25 - 10:00:15 = 5000毫秒 timeout = 5000毫秒 + 10:00:15 + 5000毫秒 = 10:00:30</p> <p>将客户端C放入到对列和有序集合中： zadd redisson_lock_timeout:{anyLock} 10:00:30 UUID_03:threadId_03 rpush redisson_lock_queue:{anyLock} UUID_03:theadId_03</p> <p>最终执行完后 如下图：</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221201/6ff57aee27caa78ec063d53d2c221c85.jpg"></p> <p id="Redisson%E4%BE%9D%E6%AC%A1%E5%8A%A0%E9%94%81%E9%80%BB%E8%BE%91"><strong>Redisson依次加锁逻辑</strong></p> <p>上面已经知道了，多个线程加锁过程中实际会进行排队，根据加锁的时间来作为获取锁的优先级，如果此时客户端A释放了锁，来看下客户端B、C是如果获取锁的</p> <p><strong>当客户端A释放锁</strong>&nbsp;；<strong>客户端B请求获取锁</strong></p> <p>直接看核心逻辑：</p> <pre><code class="language-java">+ "if (redis.call('exists', KEYS[1]) == 0) and ((redis.call('exists', KEYS[2]) == 0) " + "or (redis.call('lindex', KEYS[2], 0) == ARGV[2])) then " + "redis.call('lpop', KEYS[2]); " + "redis.call('zrem', KEYS[3], ARGV[2]); " + "redis.call('hset', KEYS[1], ARGV[2], 1); " + "redis.call('pexpire', KEYS[1], ARGV[1]); " + "return nil; " + "end; " +</code></pre> <p>if中的判断： exists anyLock 是否不存在，此时客户端A已经释放锁，所以这个条件成立。</p> <p>然后判断队列不存在，或者队列中第一个元素为空，此时条件不成立，但是后面是or关联的判断，接着判断队列中的第一个元素是否为当前请求的UUID_02:threadId_02， 如果判断成功则开始加锁。</p> <p>这里就是公平锁依次加锁的核心逻辑。</p> <p>原文：</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://cloud.tencent.com/developer/article/1602467?from=article.detail.1602109"  rel="nofollow">【分布式锁】02-使用Redisson实现公平锁原理</a></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-62388.htm">跳蚤怕花露水还是风油精（跳蚤最怕的三种药）</a></p>
+                                        <p>下一个：<a href="/news/article-62988.htm">国内动物疫苗生产企业有多少家上市公司 国内动物疫苗生产企业有多少家上市公司</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-free-high-speed-nodes.htm" title="FlClash节点订阅每天更新18.1M/S免费节点订阅链接">FlClash节点订阅每天更新18.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-10-node-share-links.htm" title="FlClash节点订阅每天更新18.4M/S免费节点订阅链接">FlClash节点订阅每天更新18.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-8-node-share.htm" title="FlClash节点订阅每天更新21.6M/S免费节点订阅链接">FlClash节点订阅每天更新21.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-44165.htm" title="C语言与java中函数传参比较">C语言与java中函数传参比较</a></li>
+                        <li class="py-2"><a href="/news/article-39718.htm" title="动物疫苗检测报告查询（动物疫苗查询系统）">动物疫苗检测报告查询（动物疫苗查询系统）</a></li>
+                        <li class="py-2"><a href="/news/article-53320.htm" title="中国动物疫苗10强企业名单公布（中国动物疫苗十强上市公司）">中国动物疫苗10强企业名单公布（中国动物疫苗十强上市公司）</a></li>
+                        <li class="py-2"><a href="/news/article-61216.htm" title="宠物领养文章怎么写范文（领养宠物的文章）">宠物领养文章怎么写范文（领养宠物的文章）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-node-subscribe-links.htm" title="FlClash节点订阅每天更新18.9M/S免费节点订阅链接">FlClash节点订阅每天更新18.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-6-free-clash.htm" title="FlClash机场订阅推荐 | 22.6M/S，V2ray/Clash/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 22.6M/S，V2ray/Clash/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-29605.htm" title="C#实现DataTable转TXT、CSV文件_C#教程_">C#实现DataTable转TXT、CSV文件_C#教程_</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">78</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
