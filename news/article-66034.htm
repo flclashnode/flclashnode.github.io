@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-66034.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>iOS全埋点解决方案-UITableView和UICollectionView点击事件</title>
+        <meta name="description" content="前言 在 $AppClick 事件采集中，还有两个比较特殊的控件：  UITableView •UICollectionView  这两个控件的点击事件，一般指的是点击 UITableViewCell" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-66034.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="iOS全埋点解决方案-UITableView和UICollectionView点击事件" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/87a50c9b5caa366e6a6ee4fedca8aa3a.webp" />
+        <meta property="og:release_date" content="2025-03-02T09:39:02" />
+    <meta property="og:updated_time" content="2025-03-02T09:39:02" />
+        <meta property="og:description" content="前言 在 $AppClick 事件采集中，还有两个比较特殊的控件：  UITableView •UICollectionView  这两个控件的点击事件，一般指的是点击 UITableViewCell" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="iOS全埋点解决方案-UITableView和UICollectionView点击事件">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>iOS全埋点解决方案-UITableView和UICollectionView点击事件</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<h3 id="前言">前言</h3> <p>在 $AppClick 事件采集中，还有两个比较特殊的控件：</p> <ul> <li>UITableView</li> <li>•UICollectionView</li> </ul> <p>这两个控件的点击事件，一般指的是点击 UITableViewCell 和 UICollectionViewCell。而 UITableViewCell 和 UICollectionViewCell 都是直接继承自 UIView 类，而不是 UIControl 类。因此，我们之前实现 $AppClick 事件全埋点的两个方案均不适用于 UITableView 和 UICollectionView。</p> <p>关于实现 UITableView 和 UICollectionView $AppClick 事件的全埋点，常见的方案有三种：</p> <ul> <li>方法交换</li> <li>动态子类</li> <li>消息转发</li> </ul> <p>这三种方案，各有优缺点。</p> <p>下面，我们以 UITableView 控件为例，来分别介绍如何使用这三种方案实现 $AppClick 事件的全埋点。</p> <h3 id="一支持-uitableview-控件">一、支持 UITableView 控件</h3> <h4 id="11-方案一方法交换">1.1 方案一：方法交换</h4> <p>	大概思路：首先，我们使用 Method Swizzling 交换 UITableView 的 - setDelegate: 方法，然后能获取到实现了 UITableViewDelegate 协议的 delegate 对象，在拿到 delegate 对象之后，就可以交换 delegate 对象的 - tableView:didSelectRowAtIndexPath: 方法，最后，在交换后的方法中触发 $AppClick 事件，从而达到全埋点的效果。</p> <p>实现步骤：</p> <p>第一步: 添加 UITableView+SensorsData 类别，在类别中实现 + load 类方法，并在 + load  类方法中交换 - setDelegate: 方法</p> <pre><code>+ (void)load {     [UITableView sensorsdata_swizzleMethod:@selector(setDelegate:) withMethod:@selector(sensorsdata_setDelegate:)]; }  - (void)sensorsdata_setDelegate:(id&lt;UITableViewDelegate&gt;)delegate {          // 调用原始的设置代理方法     [self sensorsdata_setDelegate:delegate]; }</code></pre> <p>第二步：添加 sensorsdata_tableViewDidSelectRow 函数</p> <pre><code>#import &lt;objc/message.h&gt;  static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableView *tableView, NSIndexPath *indexPath) {     SEL destinationSelecotr = NSSelectorFromString(@"sensorsdata_tableView:didSelectRowAtIndexPath:");     // 通过消息发送，调用原始的 tableView:didSelectRowAtIndexPath: 方法实现     ((void(*)(id, SEL, id, id))objc_msgSend)(object, destinationSelecotr, tableView, indexPath);      // 触发 $AppClick 事件 }</code></pre> <p>第三步：添加一个私有方法 -  sensorsdata_swizzleDidSelectRowIndexPathMethodWithDelegate： 负责给 delegate 添加一个方法并进行替换</p> <pre><code>#import "NSObject+SASwizzler.h"  - (void)sensorsdata_swizzleDidSelectRowIndexPathMethodWithDelegate:(id)delegate {     // 获取 delegate 对象的类     Class delegateClass = [delegate class];     // 方法名     SEL sourceSelector = @selector(tableView:didSelectRowAtIndexPath:);     // 当 delegate 对象中没有实现 tableView:didSelectRowAtIndexPath: 方法时，直接返回     if (![delegate respondsToSelector:sourceSelector]) {         return;     }          SEL destinationSelecrot = @selector(sensorsdata_tableView:didSelectRowAtIndexPath:);     //当 delegate 对象中已经存在实现 sensorsdata_tableView:didSelectRowAtIndexPath: 方法时，说明已经交换，直接返回     if ([delegate respondsToSelector:destinationSelecrot]) {         return;     }          Method souceMethod = class_getInstanceMethod(delegateClass, sourceSelector);     const char *encoding = method_getTypeEncoding(souceMethod);     if (!class_addMethod([delegate class], destinationSelecrot, sensorsdata_tableViewDidSelectRow, encoding)) {         NSLog(@"Add %@ to %@ error", NSStringFromSelector(sourceSelector), [delegate class]);         return;     }          // 方法添加成功后进行方法交换     [delegateClass sensorsdata_swizzleMethod:sourceSelector withMethod:destinationSelecrot]; }</code></pre> <p>第四步：在 - sensorsdata_setDelegate：方法中调用 - sensorsdata_swizzleDidSelectRowIndexPathMethodWithDelegate：方法进行交换</p> <pre><code>- (void)sensorsdata_setDelegate:(id&lt;UITableViewDelegate&gt;)delegate {          // 调用原始的设置代理方法     [self sensorsdata_setDelegate:delegate];          // 方案一： 方法交换     // 交换 delegate 对象中的 tableView:didSelectRowAtIndexPath: 方法     [self sensorsdata_swizzleDidSelectRowIndexPathMethodWithDelegate:delegate]; }</code></pre> <p>第五步：在 SensorsAnalyticsSDK+Track 中新增一个触发 UITableView 控件点击事件的方法 - trackAppClickWithTableView: didSelectRowAtIndexPath: properties: 。</p> <pre><code>@interface SensorsAnalyticsSDK (Track)  /// 支持 UITableView 触发 $AppClick 事件 /// @param tableView 触发事件的 tableView 视图 /// @param indexPath 在 tableView 中点击的位置 /// @param properties 自定义事件参数 - (void)trackAppClickWithTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary &lt;NSString*, id&gt; *)properties;  @end  - (void)trackAppClickWithTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary &lt;NSString*, id&gt; *)properties {          NSMutableDictionary *eventProperties = [NSMutableDictionary dictionary];     // TODO: 获取用户点击的 UITableViewCell 控件对象     // TODO: 设置被用户点击的 UITableViewCell 控件上的内容     // TODO: 设置被用户点击 UITableViewCell 控件所在的位置          // 添加自定义属性     [eventProperties addEntriesFromDictionary:properties];     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:tableView properties:properties]; }</code></pre> <p>第六步：在 sensorsdata_tableViewDidSelectRow 函数中触发 $AppClick 事件</p> <pre><code>static void sensorsdata_tableViewDidSelectRow(id object, SEL selector, UITableView *tableView, NSIndexPath *indexPath) {     SEL destinationSelecotr = NSSelectorFromString(@"sensorsdata_tableView:didSelectRowAtIndexPath:");     // 通过消息发送，调用原始的 tableView:didSelectRowAtIndexPath: 方法实现     ((void(*)(id, SEL, id, id))objc_msgSend)(object, destinationSelecotr, tableView, indexPath);      // 触发 $AppClick 事件     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithTableView:tableView didSelectRowAtIndexPath:indexPath properties:nil]; }</code></pre> <p>第七步：测试运行</p> <p>	在 Demo 中添加 tableView， 点击 tableView 上的 cell</p> <pre><code>{   "event" : "$AppClick",   "time" : 1648801408348,   "propeerties" : {     "$model" : "x86_64",     "$manufacturer" : "Apple",     "$element_type" : "UITableView",     "$lib_version" : "1.0.0",     "$os" : "iOS",     "$app_version" : "1.0",     "$screen_name" : "ViewController",     "$os_version" : "15.2",     "$lib" : "iOS"   } }</code></pre> <p>	至此，已经通过方法交换实现了 UITableView 的 $AppClick 事件。</p> <h4 id="12-方案二动态子类">1.2 方案二：动态子类</h4> <p>	大概思路：动态子类的方案，就是在运行时，给实现了 UITableViewDelegate 协议的 - tableView:didSelectRowAtIndexPath: 方法的类创建一个子类，让这个类的对象变成我们自己创建的子类的对象。同时，还需要在创建的子类中动态添加 - tableView:didSelectRowAtIndexPath: 方法。那么，当用户点击 UITableViewCell 时，就会先运行我们创建的子类中的 - tableView:didSelectRowAtIndexPath: 方法。然后，我们在实现这个方法的时候，先调用 delegate 原来的方法实现再触发 $AppClick 事件，即可达到全埋点的效果。</p> <p>实现步骤：</p> <p>第一步：在项目创建一个动态添加子类的工具类 SensrosAnalyticsDynamicDelegate。在工具类 SensrosAnalyticsDynamicDelegate 中添加 - tableView: didSelectRowAtIndexPath: 方法。</p> <pre><code>#import "SensrosAnalyticsDynamicDelegate.h"  #import "SensorsAnalyticsSDK+Track.h" #import &lt;objc/runtime.h&gt;  /// delegate 对象的之类前缀 static NSString *const kSensorsDelegatePrefix = @"cn.SensorsData";  /// tableView:didSelectRowAtIndexPath: 方法指针类型 typedef void (*SensorsDidSelectImplementation)(id, SEL, UITableView *, NSIndexPath *);  @implementation SensrosAnalyticsDynamicDelegate  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {     // 第一步： 获取原始类     Class cla = object_getClass(tableView);     NSString *className = [NSStringFromClass(cla) stringByReplacingOccurrencesOfString:kSensorsDelegatePrefix withString:@""];     Class originalClass = objc_getClass([className UTF8String]);          // 第二步：调用开发者自己实现的方法     SEL originalSelector = NSSelectorFromString(@"tableView:didSelectRowAtIndexPath:");     Method originalMethod = class_getInstanceMethod(originalClass, originalSelector);     IMP originalImplementation = method_getImplementation(originalMethod);     if (originalImplementation) {         ((SensorsDidSelectImplementation)originalImplementation)(tableView.delegate, originalSelector, tableView, indexPath);     }          // 第三步：埋点     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithTableView:tableView didSelectRowAtIndexPath:indexPath properties:nil]; } @end</code></pre> <p>第二步：在 SensrosAnalyticsDynamicDelegate 类中添加 - proxyWithTableViewDelegate：类方法</p> <pre><code>+ (void)proxyWithTableViewDelegate:(id&lt;UITableViewDelegate&gt;)delegate {     SEL originalSelector = NSSelectorFromString(@"tableView:didSelectRowAtIndexPath:");     // 当 delegate 对象中没有实现 tableView:didSelectRowAtIndexPath: 方法时，直接返回     if (![delegate respondsToSelector:originalSelector]) {         return;     }          // 动态创建一个新类     Class originalClass = object_getClass(delegate);     NSString *originalClassName = NSStringFromClass(originalClass);     // 当 delegate 对象已经是一个动态创建的类时，无需重复创建，，直接返回     if ([originalClassName hasPrefix:kSensorsDelegatePrefix]) {         return;     }          NSString *subClassName = [kSensorsDelegatePrefix stringByAppendingString:originalClassName];     Class subClass = NSClassFromString(subClassName);     if (!subClass) {         // 注册一个新的子类，其父类为originalClass         subClass = objc_allocateClassPair(originalClass, subClassName.UTF8String, 0);                  // 获取 SensrosAnalyticsDynamicDelegate 中的 tableView:didSelecorRowIndexPath: 方法指针         Method method = class_getInstanceMethod(self, originalSelector);         // 获取方法实现         IMP methodIMP = method_getImplementation(method);         // 获取方法类型编码         const char *types = method_getTypeEncoding(method);         // 在 subClass 中添加 tableView:didSelectRowAtIndexPath: 方法         if (!class_addMethod(subClass, originalSelector, methodIMP, types)) {             NSLog(@"Cannot copy method to destination selector %@ as it already exists", NSStringFromSelector(originalSelector));         }                  // 子类和原始类的大小必须相同 ，不能有更多的成员变量或者属性         // 如果不同，将导致设置新的子类时，重新分配内存，重写对象的 isa 指针         if (class_getInstanceSize(originalClass) != class_getInstanceSize(subClass)) {             NSLog(@"Cannot create subClass of Delegate, beacause the created subClass is not the same size. %@", NSStringFromClass(originalClass));             NSAssert(NO, @"Classes must be the same size to swizzle isa");             return;         }                  // 将 delegate 对象设置成新创建的子类对象         objc_registerClassPair(subClass);     }          if (object_setClass(delegate, subClass)) {         NSLog(@"SuccessFully create Delegere Proxy automatically.");     }      }</code></pre> <p>第三步：修改 UITableView+SensorsData 中 - sensorsdata_setDelegate：方法</p> <pre><code>#import "SensrosAnalyticsDynamicDelegate.h"  - (void)sensorsdata_setDelegate:(id&lt;UITableViewDelegate&gt;)delegate {          // 调用原始的设置代理方法     // [self sensorsdata_setDelegate:delegate];          // 方案一： 方法交换     // 交换 delegate 对象中的 tableView:didSelectRowAtIndexPath: 方法 //    [self sensorsdata_swizzleDidSelectRowIndexPathMethodWithDelegate:delegate];          // 方案二：动态子类     // 调用原始的设置代理方法     [self sensorsdata_setDelegate:delegate];     // 设置 delegate 对象的动态子类     [SensrosAnalyticsDynamicDelegate proxyWithTableViewDelegate:delegate]; }</code></pre> <p>第四步：测试验证</p> <pre><code>{   "event" : "$AppClick",   "time" : 1648807502558,   "propeerties" : {     "$model" : "x86_64",     "$manufacturer" : "Apple",     "$element_type" : "UITableView",     "$lib_version" : "1.0.0",     "$os" : "iOS",     "$app_version" : "1.0",     "$screen_name" : "cn.SensorsDataViewController",     "$os_version" : "15.2",     "$lib" : "iOS"   } }</code></pre> <p>问题: "$screen_name"的名称是动态生成子类的名称 "cn.SensorsDataViewController", 我们期望是原类的名称。</p> <p>解决方案：在生成的子类中，重写 class 方法，该方法返回原始子类。</p> <p>第一步：重写 class 方法</p> <pre><code>- (Class)sensorsdata_class {     // 获取对象的类     Class class = object_getClass(self);     // 将类名前缀替换成空字符串，获取原始类名     NSString *className = [NSStringFromClass(class) stringByReplacingOccurrencesOfString:kSensorsDelegatePrefix withString:@""];     // 通过字符串获取类，返回     return objc_getClass(className.UTF8String); }</code></pre> <p>第二步：给动态创建的子类添加 class 方法</p> <pre><code>+ (void)proxyWithTableViewDelegate:(id&lt;UITableViewDelegate&gt;)delegate {     SEL originalSelector = NSSelectorFromString(@"tableView:didSelectRowAtIndexPath:");     // 当 delegate 对象中没有实现 tableView:didSelectRowAtIndexPath: 方法时，直接返回     if (![delegate respondsToSelector:originalSelector]) {         return;     }          // 动态创建一个新类     Class originalClass = object_getClass(delegate);     NSString *originalClassName = NSStringFromClass(originalClass);     // 当 delegate 对象已经是一个动态创建的类时，无需重复创建，，直接返回     if ([originalClassName hasPrefix:kSensorsDelegatePrefix]) {         return;     }          NSString *subClassName = [kSensorsDelegatePrefix stringByAppendingString:originalClassName];     Class subClass = NSClassFromString(subClassName);     if (!subClass) {         // 注册一个新的子类，其父类为originalClass         subClass = objc_allocateClassPair(originalClass, subClassName.UTF8String, 0);                  // 获取 SensrosAnalyticsDynamicDelegate 中的 tableView:didSelecorRowIndexPath: 方法指针         Method method = class_getInstanceMethod(self, originalSelector);         // 获取方法实现         IMP methodIMP = method_getImplementation(method);         // 获取方法类型编码         const char *types = method_getTypeEncoding(method);         // 在 subClass 中添加 tableView:didSelectRowAtIndexPath: 方法         if (!class_addMethod(subClass, originalSelector, methodIMP, types)) {             NSLog(@"Cannot copy method to destination selector %@ as it already exists", NSStringFromSelector(originalSelector));         }                  // 获取 SensrosAnalyticsDynamicDelegate 中的 sensorsdata_class 指针         Method classMethod = class_getInstanceMethod(self, @selector(sensorsdata_class));         // 获取方法实现         IMP classIMP = method_getImplementation(classMethod);         // 获取方法的类型编码         const char *classTypes = method_getTypeEncoding(classMethod);         if (!class_addMethod(subClass, @selector(class), classIMP, classTypes)) {             NSLog(@"Cannot copy method to destination selector -(void)class as it already exists");         }                  // 子类和原始类的大小必须相同 ，不能有更多的成员变量或者属性         // 如果不同，将导致设置新的子类时，重新分配内存，重写对象的 isa 指针         if (class_getInstanceSize(originalClass) != class_getInstanceSize(subClass)) {             NSLog(@"Cannot create subClass of Delegate, beacause the created subClass is not the same size. %@", NSStringFromClass(originalClass));             NSAssert(NO, @"Classes must be the same size to swizzle isa");             return;         }                  // 将 delegate 对象设置成新创建的子类对象         objc_registerClassPair(subClass);     }          if (object_setClass(delegate, subClass)) {         NSLog(@"SuccessFully create Delegere Proxy automatically.");     }      }</code></pre> <p>第三步：测试验证</p> <pre><code>{   "event" : "$AppClick",   "time" : 1648808663270,   "propeerties" : {     "$model" : "x86_64",     "$manufacturer" : "Apple",     "$element_type" : "UITableView",     "$lib_version" : "1.0.0",     "$os" : "iOS",     "$app_version" : "1.0",     "$screen_name" : "ViewController",     "$os_version" : "15.2",     "$lib" : "iOS"   } }</code></pre> <p>至此，已经通过动态创建子类实现了 UITableView 的 $AppClick 事件。</p> <h4 id="13-方案三消息转发">1.3 方案三：消息转发</h4> <p>	在 iOS 应用开发中，自定义一个类的时候，一般都需要继承自 NSObject 类或者 NSObject 的子类。但是 NSProxy 类却并不是继承自 NSObject 类或者 NSObject 的子类，NSProxy 是一个实现了 NSObject 协议的抽象基类。</p> <p>实现步骤</p> <p>第一步：创建 SensorsAnalyticsDelegateProxy 类，继承 NSProxy， 并添加 + proxyWithTableViewDelegate 类方法</p> <pre><code>@interface SensorsAnalyticsDelegateProxy : NSProxy  + (instancetype)proxyWithTableViewDelegate:(id&lt;UITableViewDelegate&gt;) delegate;  @end</code></pre> <pre><code>@interface SensorsAnalyticsDelegateProxy()  @property (nonatomic, weak) id delegate;  @end  @implementation SensorsAnalyticsDelegateProxy  + (instancetype)proxyWithTableViewDelegate:(id&lt;UITableViewDelegate&gt;) delegate {     SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy alloc];     proxy.delegate = delegate;     return proxy; }  @end</code></pre> <p>第二步：重写 - methodSignatureForSelector 方法，返回 delegate 对象中对应的方法签名，重写 - forwardInvocation： 方法，将消息转给 delegate 对象执行，并触发 $AppClick 事件</p> <pre><code>- (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {     // 返回 delegate 对象方法中对应的方法签名     return [(NSObject *)self.delegate methodSignatureForSelector:sel]; }  - (void)forwardInvocation:(NSInvocation *)invocation {     // 先执行 delegate 对象中的方法     [invocation invokeWithTarget:self.delegate];     // 判断是否是 cell 的点击事件代理方法     if (invocation.selector == @selector(tableView:didSelectRowAtIndexPath:)) {         // 将方法修改成采集数据行为的方法         invocation.selector = NSSelectorFromString(@"sensorsdata_tableView:didSelectRowAtIndexPath:");         // 执行是数据采集相关的方法         [invocation invokeWithTarget:self];     } }  - (void)sensorsdata_tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithTableView:tableView didSelectRowAtIndexPath:indexPath properties:nil]; }</code></pre> <p>第三步：修改 UITableView+SensorsData 中 - sensorsdata_setDelegate: 方法，创建委托对象，并设置成 UITableView 控件的 delegate 对象。</p> <pre><code>#import "SensorsAnalyticsDelegateProxy.h"  - (void)sensorsdata_setDelegate:(id&lt;UITableViewDelegate&gt;)delegate {     // 方案三：NSProxy 消息转发     SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];     [self sensorsdata_setDelegate:proxy];  }</code></pre> <p>第四步：测试验证，程序奔溃。原因是在 - sensorsdata_setDelegate：创建的 proxy 对象是一个临时变量，方法结束后，该对象被销毁。</p> <p>解决方法：</p> <p>第五步：创建 UIScrollView 的分类 UIScrollView+SensorsData，并在头文件中进行属性声明</p> <pre><code>@interface UIScrollView (SensorsData)  @property (nonatomic, strong) SensorsAnalyticsDelegateProxy *sensorsdata_delegateProxy;  @end</code></pre> <p>第六步：然后，通过 runtime 的 objc_setAssociatedObject 和 objc_getAssociatedObject 函数实现类别中添加属性</p> <pre><code>#import &lt;objc/runtime.h&gt;  @implementation UIScrollView (SensorsData)  - (void)setSensorsdata_delegateProxy:(SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {     objc_setAssociatedObject(self, @selector(setSensorsdata_delegateProxy:), sensorsdata_delegateProxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC); }  - (SensorsAnalyticsDelegateProxy *)sensorsdata_delegateProxy {     return objc_getAssociatedObject(self, @selector(sensorsdata_delegateProxy)); }  @end</code></pre> <p>第七步：修改 - sensorsdata_setDelegate：方法。增加保存委托对象的代码。</p> <pre><code>- (void)sensorsdata_setDelegate:(id&lt;UITableViewDelegate&gt;)delegate {     // 方案三：NSProxy 消息转发     // 销毁保存的委托对象     self.sensorsdata_delegateProxy = nil;     if (delegate) {         SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithTableViewDelegate:delegate];         self.sensorsdata_delegateProxy = proxy;         // 调用原始方法，将代理设置为委托对象         [self sensorsdata_setDelegate:proxy];     } else {         // 调用原始方法，将代理设置nil         [self sensorsdata_setDelegate:nil];     } }</code></pre> <p>第八步：测试验证</p> <pre><code> {   "event" : "$AppClick",   "time" : 1648882043652,   "propeerties" : {     "$model" : "x86_64",     "$manufacturer" : "Apple",     "$element_type" : "UITableView",     "$lib_version" : "1.0.0",     "$os" : "iOS",     "$app_version" : "1.0",     "$screen_name" : "ViewController",     "$os_version" : "15.2",     "$lib" : "iOS"   } }</code></pre> <h4 id="14-三种方法的总结">1.4 三种方法的总结</h4> <p>	我们可以通过方法交换、动态子类和消息转发三种方式实现 UITableViewCell 的点击事件。他们各有优缺点。</p> <p>方案一：方法交换</p> <p>优点：简单，易理解， Method Swizzling 属于成熟技术，性能相对来说比较高。</p> <p>缺点：对原始的类有入侵，容易造成冲突。</p> <p>方案二：动态子类</p> <p>优点：没有对原始的类入侵，不会修改原始类的方法，不会和第三方库冲突，是一种比较稳定的方案。</p> <p>缺点：动态创建子类对性能和内存有比较大的消耗。</p> <p>方案三：消息转发</p> <p>优点：充分利用消息转发机制，对消息进行拦截，性能较好。</p> <p>缺点：容易与一些同样使用消息转发进行拦截的第三方库冲突。</p> <h4 id="15-优化">1.5 优化</h4> <h5 id="1获取控件的内容">（1）获取控件的内容</h5> <p>大概思路：获取到 UITableViewCell 对象后，递归遍历所有的子控件，每次获取子控件的内容，并按照一定格式进行拼接，然后将拼接的内容作为 UITableViewCell 控件显示的内容。</p> <p>第一步：修改 UIView+SensorsData 的 - sensorsdata_elementContent 方法</p> <pre><code>- (NSString *)sensorsdata_elementContent {     // 如果是隐藏控件，不获取控件内容     if (self.isHidden || self.alpha == 0) {         return nil;     }     // 初始化数组，用于保存子控件的内容     NSMutableArray *contents = [NSMutableArray array];     for (UIView *view in self.subviews) {         // 获取子控件内容         // 如果子类有内容，例如 UILabel 的 text,获取到的就是 text 属性         // 如果子类没有内容，将递归调用该方法，获取其子控件的内容         NSString *content = view.sensorsdata_elementContent;         if (content.length &gt; 0) {             // 当该子控件有内容是，保存到数组中             [contents addObject:content];         }     }     // 当未获取到内容时，返回 nil,如果获取到多个子控件的内容时，使用”-“拼接     return contents.count == 0 ? nil : [contents componentsJoinedByString:@"-"]; }</code></pre> <p>第二步：修改 UIButton 控件的 - sensorsdata_elementContent 方法</p> <pre><code>#pragma mark -UIButton @implementation UIButton (SensorsData)  - (NSString *)sensorsdata_elementContent {     return self.currentTitle ?: super.sensorsdata_elementContent; }  @end</code></pre> <p>第三步：修改 UILabel 控件的 - sensorsdata_elementContent 方法</p> <pre><code>#pragma mark -UILabel @implementation UILabel (SensorsData)  - (NSString *)sensorsdata_elementContent {     return self.text ?: super.sensorsdata_elementContent; }  @end</code></pre> <p>第四步：修改 SensorsAnalyticsSDK+Track 文件中 - trackAppClickWithTableView:didSelectRowAtIndexPath: properties: 方法</p> <pre><code>- (void)trackAppClickWithTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary &lt;NSString*, id&gt; *)properties {          NSMutableDictionary *eventProperties = [NSMutableDictionary dictionary];     // TODO: 获取用户点击的 UITableViewCell 控件对象     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];     // TODO: 设置被用户点击的 UITableViewCell 控件上的内容     eventProperties[@"$element_content"] = cell.sensorsdata_elementContent;     // TODO: 设置被用户点击 UITableViewCell 控件所在的位置          // 添加自定义属性     [eventProperties addEntriesFromDictionary:properties];     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:tableView properties:eventProperties]; }</code></pre> <p>第五步：测试验证：</p> <pre><code>{   "event" : "$AppClick",   "time" : 1648885587341,   "propeerties" : {     "$model" : "x86_64",     "$manufacturer" : "Apple",     "$element_type" : "UITableView",     "$lib_version" : "1.0.0",     "$os" : "iOS",     "$element_content" : "CELL",     "$app_version" : "1.0",     "$screen_name" : "ViewController",     "$os_version" : "15.2",     "$lib" : "iOS"   } }</code></pre> <h5 id="2获取-uitableview-的位置">（2）获取 UITableView 的位置</h5> <p>通过 indexPath 获取用户点击 cell 的位置。</p> <pre><code>- (void)trackAppClickWithTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary &lt;NSString*, id&gt; *)properties {          NSMutableDictionary *eventProperties = [NSMutableDictionary dictionary];     // 获取用户点击的 UITableViewCell 控件对象     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];     // 设置被用户点击的 UITableViewCell 控件上的内容     eventProperties[@"$element_content"] = cell.sensorsdata_elementContent;     // 设置被用户点击 UITableViewCell 控件所在的位置     eventProperties[@"$element_position"] = [NSString stringWithFormat:@"%ld:%ld", (long)indexPath.section, (long)indexPath.row];     // 添加自定义属性     [eventProperties addEntriesFromDictionary:properties];     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:tableView properties:eventProperties]; }</code></pre> <p>运行 Demo 测试验证</p> <pre><code> {   "event" : "$AppClick",   "time" : 1648887065273,   "propeerties" : {     "$model" : "x86_64",     "$manufacturer" : "Apple",     "$element_position" : "0:5",     "$lib_version" : "1.0.0",     "$os" : "iOS",     "$element_content" : "CELL",     "$element_type" : "UITableView",     "$app_version" : "1.0",     "$screen_name" : "ViewController",     "$os_version" : "15.2",     "$lib" : "iOS"   } }</code></pre> <h3 id="二支持-uicollectionview">二、支持 UICollectionView</h3> <p>	UICollectionView 的 cell 的  $AppClick 全埋点点击事件，整体和  UITableView 类似，同样可以用三种方案实现。此刻，我们用第三种方案消息转发来实现UICollectionView 的 cell 的  $AppClick 全埋点点击事件。</p> <p>第一步：在 SensorsAnalyticsSDK+Track 中新增 - trackAppClickWithCollection: didSelectItemAtIndexPath: properties: 方法</p> <pre><code>/// 支持 UICollectionView 触发 $AppClick 事件 /// @param collectionView  触发事件的 tableView 视图 /// @param indexPath 在 tableView 中点击的位置 /// @param properties 自定义事件参数 - (void)trackAppClickWithCollection:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary &lt;NSString*, id&gt; *)properties;</code></pre> <pre><code>- (void)trackAppClickWithCollection:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath properties:(nullable NSDictionary &lt;NSString*, id&gt; *)properties {          NSMutableDictionary *eventProperties = [NSMutableDictionary dictionary];     // 获取用户点击的 UITableViewCell 控件对象     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];     // 设置被用户点击的 UITableViewCell 控件上的内容     eventProperties[@"$element_content"] = cell.sensorsdata_elementContent;     // 设置被用户点击 UITableViewCell 控件所在的位置     eventProperties[@"$element_position"] = [NSString stringWithFormat:@"%ld:%ld", (long)indexPath.section, (long)indexPath.row];     // 添加自定义属性     [eventProperties addEntriesFromDictionary:properties];     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithView:collectionView properties:eventProperties]; }</code></pre> <p>第二步：在 SensorsAnalyticsDelegateProxy 中新增初始化方法</p> <pre><code>@interface SensorsAnalyticsDelegateProxy : NSProxy  /// 初始化委托对象，用于拦截 UICollectionView 控件选中 cell 事件 /// @param delegate UICollectionView 控件代理 + (instancetype)proxyWithCollectionViewDelegate:(id&lt;UICollectionViewDelegate&gt;) delegate;  @end</code></pre> <pre><code>+ (instancetype)proxyWithCollectionViewDelegate:(id&lt;UICollectionViewDelegate&gt;) delegate {     SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy alloc];     proxy.delegate = delegate;     return proxy; }</code></pre> <p>第三步：修改 - forwardInvocation：方法</p> <pre><code>- (void)forwardInvocation:(NSInvocation *)invocation {     // 先执行 delegate 对象中的方法     [invocation invokeWithTarget:self.delegate];     // 判断是否是 cell 的点击事件代理方法     if (invocation.selector == @selector(tableView:didSelectRowAtIndexPath:)) {         // 将方法修改成采集数据行为的方法         invocation.selector = NSSelectorFromString(@"sensorsdata_tableView:didSelectRowAtIndexPath:");         // 执行是数据采集相关的方法         [invocation invokeWithTarget:self];     } else if (invocation.selector == @selector(collectionView:didSelectItemAtIndexPath:)) {         // 将方法修改成采集数据行为的方法         invocation.selector = NSSelectorFromString(@"sensorsdata_collectionView:didSelectItemAtIndexPath:");         // 执行是数据采集相关的方法         [invocation invokeWithTarget:self];     } }  - (void)sensorsdata_collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {     [[SensorsAnalyticsSDK sharedInstance] trackAppClickWithCollection:collectionView didSelectItemAtIndexPath:indexPath properties:nil]; }</code></pre> <p>第四步：新增 UICollectionView 类别 UICollectionView+SensorsData，实现 + load 方法交换和设置代理对象</p> <pre><code>+ (void)load {     [UICollectionView sensorsdata_swizzleMethod:@selector(setDelegate:) withMethod:@selector(sensorsdata_setDelegate:)]; }  - (void)sensorsdata_setDelegate:(id&lt;UICollectionViewDelegate&gt;) delegate {     // NSProxy 消息转发     // 销毁保存的委托对象     self.sensorsdata_delegateProxy = nil;     if (delegate) {         SensorsAnalyticsDelegateProxy *proxy = [SensorsAnalyticsDelegateProxy proxyWithCollectionViewDelegate:delegate];         self.sensorsdata_delegateProxy = proxy;         // 调用原始方法，将代理设置为委托对象         [self sensorsdata_setDelegate:proxy];     } else {         // 调用原始方法，将代理设置nil         [self sensorsdata_setDelegate:nil];     } }</code></pre> <p>第五步：测试验证</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-65424.htm">成都宠物领养中心地址在哪里啊（成都宠物领养中心官网收容中心）</a></p>
+                                        <p>下一个：<a href="/news/article-66035.htm">动物疫苗在哪里买的到呢（动物注射疫苗注射哪里）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-50153.htm" title="MultipartFile转成File类型">MultipartFile转成File类型</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 22.3M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 22.3M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-43686.htm" title="动物医院诊室的岗位职责是什么（动物诊所医院）">动物医院诊室的岗位职责是什么（动物诊所医院）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-5-free-node-subscribe.htm" title="FlClash机场订阅推荐 | 20.2M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.2M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-13-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 23M/S，V2ray/Clash/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，V2ray/Clash/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-51207.htm" title="宠物粮食厂家有哪些（宠物粮食厂家有哪些品牌）">宠物粮食厂家有哪些（宠物粮食厂家有哪些品牌）</a></li>
+                        <li class="py-2"><a href="/news/article-30559.htm" title="猫猫打疫苗要多少针多少钱（猫打疫苗一般需要多少钱）">猫猫打疫苗要多少针多少钱（猫打疫苗一般需要多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-28208.htm" title="哈尔滨王允海宠物医院怎么样呀多少钱啊（王允海动物医院道里店怎么样）">哈尔滨王允海宠物医院怎么样呀多少钱啊（王允海动物医院道里店怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-8-free-subscribe-node.htm" title="FlClash节点订阅每天更新20.9M/S免费节点订阅链接">FlClash节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-61808.htm" title="docker system全新命令集">docker system全新命令集</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">87</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
