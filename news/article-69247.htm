@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-69247.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>机器学习-学习笔记(一) &#8211;&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具</title>
+        <meta name="description" content="一、机器学习概念 啥是机器学习 机器学习：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则关于T和P，该程序对E进行了学习 通俗讲：通过计算的方式，" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-69247.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="机器学习-学习笔记(一) &#8211;&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/9e7aa12947ac990d4d09d941af87e29d.webp" />
+        <meta property="og:release_date" content="2025-03-07T06:36:35" />
+    <meta property="og:updated_time" content="2025-03-07T06:36:35" />
+        <meta property="og:description" content="一、机器学习概念 啥是机器学习 机器学习：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则关于T和P，该程序对E进行了学习 通俗讲：通过计算的方式，" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="机器学习-学习笔记(一) &#8211;&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>机器学习-学习笔记(一) &#8211;&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				</h1> <h2 id="一机器学习概念">一、机器学习概念</h2> <h3 id="啥是机器学习">啥是机器学习</h3> <p><strong>机器学习</strong>：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则关于T和P，该程序对E进行了学习<br /> 通俗讲：通过计算的方式，利用<strong>经验</strong>来改善系统自身<strong>性能</strong><br /><strong>研究主要内容</strong>：“学习算法”--&gt; 从数据中产生模型的算法</p> <hr> <h3 id="基本术语">基本术语</h3> <ol> <li> <strong>模型</strong>（model）：全局性结果；<strong>模式</strong>（mode）：局部性结果</li> <li> <strong>数据集</strong>（data set）：记录的集合（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://zhuanlan.zhihu.com/p/377746284"  target="_blank"  rel="nofollow">机器学习开源数据集</a>）</li> <li> <strong>样本</strong>（sample）、<strong>示例</strong>（instance）：关于一个事件或对象的描述</li> <li> <strong>属性</strong>（attribute）、<strong>特征</strong>（feature）：事件或对象在某方面的表现或性质</li> <li> <strong>属性值</strong>（attribute value）：属性的取值</li> <li> <strong>属性空间</strong>（attribute space）、<strong>样本空间</strong>（sample space）：属性作为坐标轴张成的空间<br /><img decoding="async" src="https://img2022.cnblogs.com/blog/2853602/202204/2853602-20220428172108460-945744774.png" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"> </li> <li> <strong>特征向量</strong>（feature vector）：一个样本在样本空间中对应的坐标向量</li> <li> <strong>维数</strong>（dimensionnality）:属性的个数</li> <li> <strong>学习</strong>（learning）、<strong>训练</strong>（training）：从数据中学得模型的过程</li> <li> <strong>标记</strong>（label）：关于示例结果的信息</li> <li> <strong>样例</strong>（example）：拥有了标记信息的示例</li> <li> <strong>标记空间</strong>（label space）：所有标记的集合</li> <li> <strong>训练</strong>（training）、<strong>学习</strong>（learning）：从数据中学得模型的过程</li> <li> <strong>测试</strong>（testing）：使用训练得出的模型，对结果进行预测的过程</li> <li> <strong>学习任务</strong>：<img decoding="async" src="https://img2022.cnblogs.com/blog/2853602/202204/2853602-20220429005523526-2018136065.png" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"> </li> <li> <strong>泛化能力</strong>（generalization ability）：训练得到的模型适用于测试样本的能力</li> </ol> <ul> <li>归纳（induction）：特殊到一般</li> <li>演绎（deduction）：一般到特殊的“特化”（specialization）</li> </ul> <ol start="17"> <li> <strong>独立同分布</strong>（independent and identically distributed）：获得的每个样本都是从这个分布上采样获得的</li> </ol> <hr> <h2 id="二假设空间--版本空间">二、假设空间 &amp; 版本空间</h2> <p>学习过程就是在假设空间中进行搜索的过程，搜索的目标是找到与训练集匹配的假设。</p> <h3 id="假设空间hypothesis-space">假设空间（hypothesis space）：</h3> <h4 id="1-假设空间的定义">1. 假设空间的定义</h4> <ul> <li>标准定义是：由<strong>输入空间</strong>到<strong>输出空间</strong>的映射的集合；</li> <li>我所理解的是：<strong>假设空间由三部分组成</strong><br /> (1) 输入的训练数据集中，每一个属性的所有取值分别组合形成所有可能性结果的集合<br /> (2) 属性取值至少含一个为“无论去什么值都合适”（即属性值为通配符“*”）的结果集合<br /> (3) 所有属性值都无法取到的结果，即为空集，一个假设空间有且仅有一个(若训练集中包含正例，则在版本空间中，空集的假设不存在)</li> </ul> <h4 id="2-假设空间的生成">2. 假设空间的生成</h4> <p>　　这里通过《机器学习》周志华原著中表1.1的示例进行阐述。<br /> 　　　<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/dae69ac668e3356750c98301fb31a78d.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"></p> <p>　　(1) 每一个属性的所有取值分别组合形成所有可能性结果。<br /> 　　　　“色泽” ： “青绿”、“乌黑”<br /> 　　　　“根蒂” ： “蜷缩”、“硬挺”、“稍蜷”<br /> 　　　　“敲声” ： “浊响”、“清脆”、“沉闷”<br /> 　　　　<strong>总共结果个数：</strong><span class="math inline">\(2*3*3 = 18\)</span></p> <pre><code class="language-txt">色泽＝青绿，根蒂＝蜷缩，敲声＝浊响 色泽＝青绿，根蒂＝蜷缩，敲声＝清脆 色泽＝青绿，根蒂＝蜷缩，敲声＝沉闷 色泽＝青绿，根蒂＝硬挺，敲声＝浊响 色泽＝青绿，根蒂＝硬挺，敲声＝清脆 色泽＝青绿，根蒂＝硬挺，敲声＝沉闷 色泽＝青绿，根蒂＝稍蜷，敲声＝浊响 色泽＝青绿，根蒂＝稍蜷，敲声＝清脆 色泽＝青绿，根蒂＝稍蜷，敲声＝沉闷 色泽＝乌黑，根蒂＝蜷缩，敲声＝浊响 色泽＝乌黑，根蒂＝蜷缩，敲声＝清脆 色泽＝乌黑，根蒂＝蜷缩，敲声＝沉闷 色泽＝乌黑，根蒂＝硬挺，敲声＝浊响 色泽＝乌黑，根蒂＝硬挺，敲声＝清脆 色泽＝乌黑，根蒂＝硬挺，敲声＝沉闷 色泽＝乌黑，根蒂＝稍蜷，敲声＝浊响 色泽＝乌黑，根蒂＝稍蜷，敲声＝清脆 色泽＝乌黑，根蒂＝稍蜷，敲声＝沉闷 </code></pre> <p>　　(2) 属性取值至少含一个为“无论去什么值都合适”（即属性值为通配符“*”）的结果集合<br /> 　　　　“色泽” ： “*”，“青绿”、“乌黑”<br /> 　　　　“根蒂” ： “*”，“蜷缩”、“硬挺”、“稍蜷”<br /> 　　　　“敲声” ： “*”，“浊响”、“清脆”、“沉闷”<br /> 　　　　<strong>总共结果个数：</strong><span class="math inline">\(3*4*4-18 = 30\)</span> (要减去不含*的项)</p> <pre><code class="language-txt">色泽＝*，   根蒂＝*，   敲声＝* 色泽＝*，   根蒂＝*，   敲声＝浊响 色泽＝*，   根蒂＝*，   敲声＝清脆 色泽＝*，   根蒂＝*，   敲声＝沉闷 色泽＝*，   根蒂＝蜷缩，敲声＝* 色泽＝*，   根蒂＝蜷缩，敲声＝浊响 色泽＝*，   根蒂＝蜷缩，敲声＝清脆 色泽＝*，   根蒂＝蜷缩，敲声＝沉闷 色泽＝*，   根蒂＝硬挺，敲声＝* 色泽＝*，   根蒂＝硬挺，敲声＝浊响 色泽＝*，   根蒂＝硬挺，敲声＝清脆 色泽＝*，   根蒂＝硬挺，敲声＝沉闷 色泽＝*，   根蒂＝稍蜷，敲声＝* 色泽＝*，   根蒂＝稍蜷，敲声＝浊响 色泽＝*，   根蒂＝稍蜷，敲声＝清脆 色泽＝*，   根蒂＝稍蜷，敲声＝沉闷 色泽＝青绿，根蒂＝*，   敲声＝* 色泽＝青绿，根蒂＝*，   敲声＝浊响 色泽＝青绿，根蒂＝*，   敲声＝清脆 色泽＝青绿，根蒂＝*，   敲声＝沉闷 色泽＝青绿，根蒂＝蜷缩，敲声＝* 色泽＝青绿，根蒂＝硬挺，敲声＝* 色泽＝青绿，根蒂＝稍蜷，敲声＝* 色泽＝乌黑，根蒂＝*，   敲声＝* 色泽＝乌黑，根蒂＝*，   敲声＝浊响 色泽＝乌黑，根蒂＝*，   敲声＝清脆 色泽＝乌黑，根蒂＝*，   敲声＝沉闷 色泽＝乌黑，根蒂＝蜷缩，敲声＝* 色泽＝乌黑，根蒂＝硬挺，敲声＝* 色泽＝乌黑，根蒂＝稍蜷，敲声＝* </code></pre> <p>　　(3) 所有属性值都无法取到的结果，即为空集，一个假设空间有且仅有一个<br /> 　　　　“色泽” ： “Ø”<br /> 　　　　“根蒂” ： “Ø”<br /> 　　　　“敲声” ： “Ø”<br /> 　　　　<strong>总共结果个数</strong>：1</p> <pre><code class="language-txt">色泽＝Ø，根蒂＝Ø，敲声＝Ø </code></pre> <p>综上所述，假设空间规模大小为<br /> 　　<span class="math inline">\(18+30+1=49\)</span><br /> 　　<span class="math inline">\((2+1)*(3+1)*(3+1)+1=49\)</span><br /> 　　(色泽两种取值，根蒂三种取值，敲声三种取值，再分别加上通配符，相乘后，加上Ø取值)</p> <h3 id="版本空间version-space">版本空间（version space）：</h3> <h4 id="1-版本空间的定义">1. 版本空间的定义</h4> <ul> <li>标准定义：一个与训练集<strong>一致</strong>的“假设集合”</li> <li>我的理解是：版本空间是假设空间的子集，包含两个部分<br /> (1)与正例一致的假设<br /> (2)与反例不一致的假设</li> </ul> <h4 id="2-版本空间的生成">2. 版本空间的生成</h4> <p>完整的假设空间：（共49条）</p> <pre><code class="language-txt">色泽＝青绿，根蒂＝蜷缩，敲声＝浊响 色泽＝青绿，根蒂＝蜷缩，敲声＝清脆 色泽＝青绿，根蒂＝蜷缩，敲声＝沉闷 色泽＝青绿，根蒂＝硬挺，敲声＝浊响 色泽＝青绿，根蒂＝硬挺，敲声＝清脆 色泽＝青绿，根蒂＝硬挺，敲声＝沉闷 色泽＝青绿，根蒂＝稍蜷，敲声＝浊响 色泽＝青绿，根蒂＝稍蜷，敲声＝清脆 色泽＝青绿，根蒂＝稍蜷，敲声＝沉闷 色泽＝乌黑，根蒂＝蜷缩，敲声＝浊响 色泽＝乌黑，根蒂＝蜷缩，敲声＝清脆 色泽＝乌黑，根蒂＝蜷缩，敲声＝沉闷 色泽＝乌黑，根蒂＝硬挺，敲声＝浊响 色泽＝乌黑，根蒂＝硬挺，敲声＝清脆 色泽＝乌黑，根蒂＝硬挺，敲声＝沉闷 色泽＝乌黑，根蒂＝稍蜷，敲声＝浊响 色泽＝乌黑，根蒂＝稍蜷，敲声＝清脆 色泽＝乌黑，根蒂＝稍蜷，敲声＝沉闷 色泽＝*，   根蒂＝*，   敲声＝* 色泽＝*，   根蒂＝*，   敲声＝浊响 色泽＝*，   根蒂＝*，   敲声＝清脆 色泽＝*，   根蒂＝*，   敲声＝沉闷 色泽＝*，   根蒂＝蜷缩，敲声＝* 色泽＝*，   根蒂＝蜷缩，敲声＝浊响 色泽＝*，   根蒂＝蜷缩，敲声＝清脆 色泽＝*，   根蒂＝蜷缩，敲声＝沉闷 色泽＝*，   根蒂＝硬挺，敲声＝* 色泽＝*，   根蒂＝硬挺，敲声＝浊响 色泽＝*，   根蒂＝硬挺，敲声＝清脆 色泽＝*，   根蒂＝硬挺，敲声＝沉闷 色泽＝*，   根蒂＝稍蜷，敲声＝* 色泽＝*，   根蒂＝稍蜷，敲声＝浊响 色泽＝*，   根蒂＝稍蜷，敲声＝清脆 色泽＝*，   根蒂＝稍蜷，敲声＝沉闷 色泽＝青绿，根蒂＝*，   敲声＝* 色泽＝青绿，根蒂＝*，   敲声＝浊响 色泽＝青绿，根蒂＝*，   敲声＝清脆 色泽＝青绿，根蒂＝*，   敲声＝沉闷 色泽＝青绿，根蒂＝蜷缩，敲声＝* 色泽＝青绿，根蒂＝硬挺，敲声＝* 色泽＝青绿，根蒂＝稍蜷，敲声＝* 色泽＝乌黑，根蒂＝*，   敲声＝* 色泽＝乌黑，根蒂＝*，   敲声＝浊响 色泽＝乌黑，根蒂＝*，   敲声＝清脆 色泽＝乌黑，根蒂＝*，   敲声＝沉闷 色泽＝乌黑，根蒂＝蜷缩，敲声＝* 色泽＝乌黑，根蒂＝硬挺，敲声＝* 色泽＝乌黑，根蒂＝稍蜷，敲声＝* 色泽＝Ø，根蒂＝Ø，敲声＝Ø </code></pre> <p>　　(1) 删除与正例不一致的假设。<br /> 　　　　正例1：色泽＝青绿，根蒂＝蜷缩，敲声＝浊响，好瓜=是</p> <pre><code class="language-txt">要删除的项：（41项） 2.	色泽＝青绿，根蒂＝蜷缩，敲声＝清脆 3.	色泽＝青绿，根蒂＝蜷缩，敲声＝沉闷 4.	色泽＝青绿，根蒂＝硬挺，敲声＝浊响 5.	色泽＝青绿，根蒂＝硬挺，敲声＝清脆 6.	色泽＝青绿，根蒂＝硬挺，敲声＝沉闷 7.	色泽＝青绿，根蒂＝稍蜷，敲声＝浊响 8.	色泽＝青绿，根蒂＝稍蜷，敲声＝清脆 9.	色泽＝青绿，根蒂＝稍蜷，敲声＝沉闷 10.	色泽＝乌黑，根蒂＝蜷缩，敲声＝浊响 11.	色泽＝乌黑，根蒂＝蜷缩，敲声＝清脆 12.	色泽＝乌黑，根蒂＝蜷缩，敲声＝沉闷 13.	色泽＝乌黑，根蒂＝硬挺，敲声＝浊响 14.	色泽＝乌黑，根蒂＝硬挺，敲声＝清脆 15.	色泽＝乌黑，根蒂＝硬挺，敲声＝沉闷 16.	色泽＝乌黑，根蒂＝稍蜷，敲声＝浊响 17.	色泽＝乌黑，根蒂＝稍蜷，敲声＝清脆 18.	色泽＝乌黑，根蒂＝稍蜷，敲声＝沉闷 21.	色泽＝*，   根蒂＝*，   敲声＝清脆 22.	色泽＝*，   根蒂＝*，   敲声＝沉闷 25.	色泽＝*，   根蒂＝蜷缩，敲声＝清脆 26.	色泽＝*，   根蒂＝蜷缩，敲声＝沉闷 27.	色泽＝*，   根蒂＝硬挺，敲声＝* 28.	色泽＝*，   根蒂＝硬挺，敲声＝浊响 29.	色泽＝*，   根蒂＝硬挺，敲声＝清脆 30.	色泽＝*，   根蒂＝硬挺，敲声＝沉闷 31.	色泽＝*，   根蒂＝稍蜷，敲声＝* 32.	色泽＝*，   根蒂＝稍蜷，敲声＝浊响 33.	色泽＝*，   根蒂＝稍蜷，敲声＝清脆 34.	色泽＝*，   根蒂＝稍蜷，敲声＝沉闷 37.	色泽＝青绿，根蒂＝*，   敲声＝清脆 38.	色泽＝青绿，根蒂＝*，   敲声＝沉闷 40.	色泽＝青绿，根蒂＝硬挺，敲声＝* 41.	色泽＝青绿，根蒂＝稍蜷，敲声＝* 42.	色泽＝乌黑，根蒂＝*，   敲声＝* 43.	色泽＝乌黑，根蒂＝*，   敲声＝浊响 44.	色泽＝乌黑，根蒂＝*，   敲声＝清脆 45.	色泽＝乌黑，根蒂＝*，   敲声＝沉闷 46.	色泽＝乌黑，根蒂＝蜷缩，敲声＝* 47.	色泽＝乌黑，根蒂＝硬挺，敲声＝* 48.	色泽＝乌黑，根蒂＝稍蜷，敲声＝* 49.	色泽＝Ø，根蒂＝Ø，敲声＝Ø </code></pre> <pre><code class="language-txt">删除后剩余项：（8项） 1.	色泽＝青绿，根蒂＝蜷缩，敲声＝浊响 19.	色泽＝*，   根蒂＝*，   敲声＝* 20.	色泽＝*，   根蒂＝*，   敲声＝浊响 23.	色泽＝*，   根蒂＝蜷缩，敲声＝* 24.	色泽＝*，   根蒂＝蜷缩，敲声＝浊响 35.	色泽＝青绿，根蒂＝*，   敲声＝* 36.	色泽＝青绿，根蒂＝*，   敲声＝浊响 39.	色泽＝青绿，根蒂＝蜷缩，敲声＝* </code></pre> <p>　　　　正例2：色泽＝乌黑，根蒂＝蜷缩，敲声＝浊响，好瓜=是</p> <pre><code class="language-txt">要删除的项：（4项） 1.	色泽＝青绿，根蒂＝蜷缩，敲声＝浊响 35.	色泽＝青绿，根蒂＝*，   敲声＝* 36.	色泽＝青绿，根蒂＝*，   敲声＝浊响 39.	色泽＝青绿，根蒂＝蜷缩，敲声＝* </code></pre> <pre><code class="language-txt">删除后的剩余项：（4项） 19.	色泽＝*，   根蒂＝*，   敲声＝* 20.	色泽＝*，   根蒂＝*，   敲声＝浊响 23.	色泽＝*，   根蒂＝蜷缩，敲声＝* 24.	色泽＝*，   根蒂＝蜷缩，敲声＝浊响 </code></pre> <p>　　(1) 删除与反例一致的假设。<br /> 　　　　反例1：色泽＝青绿，根蒂＝硬挺，敲声＝清脆，好瓜=否</p> <pre><code class="language-txt">要删除的项：（1项） 19.	色泽＝*，   根蒂＝*，   敲声＝* </code></pre> <pre><code class="language-txt">删除后的剩余项：（3项） 20.	色泽＝*，   根蒂＝*，   敲声＝浊响 23.	色泽＝*，   根蒂＝蜷缩，敲声＝* 24.	色泽＝*，   根蒂＝蜷缩，敲声＝浊响 </code></pre> <p>　　　　反例2：色泽＝乌黑，根蒂＝稍蜷，敲声＝沉闷，好瓜=否</p> <pre><code class="language-txt">要删除的项：（0项） </code></pre> <p><strong>最终得到的版本空间：</strong></p> <pre><code class="language-txt">20.	色泽＝*，   根蒂＝*，   敲声＝浊响 23.	色泽＝*，   根蒂＝蜷缩，敲声＝* 24.	色泽＝*，   根蒂＝蜷缩，敲声＝浊响 </code></pre> <hr> <h2 id="三归纳偏好">三、归纳偏好</h2> <h3 id="归纳偏好inductive-bias的定义">归纳偏好（inductive bias）的定义</h3> <ul> <li>标准定义：机器学习算法在学习过程中，对某种类型假设的<strong>偏好</strong>，称为归纳偏好。</li> <li>我所理解的是：在版本空间所产生的假设集合中，哪一个假设是在版本空间中更好的假设，则在之后的测试过程中选择时，更偏向于哪个。</li> </ul> <p><strong>任何一个有效的机器学习算法必有其归纳偏好。</strong>若其不存在归纳偏好，则训练集中假设都“等效”，则在测试过程中，训练集的假设随机选择，得到的结果时好时坏，产生波动，则结果无意义。</p> <h3 id="奥卡姆剃刀occams-razor原则">“奥卡姆剃刀”（Occam's razor）原则</h3> <p>若有多个假设与观察一致，则选择最简单的那个（使模型结构尽量简单）。</p> <p>其实，并不能完全遵循“奥卡姆剃刀”原则，因为对于“模型哪个更简单？”的定义是模糊的，并没有一个确切的标准说哪个模型最简单，并且最简单的模型一定与问题密切相关。所以，算法的归纳偏好是否与问题本身相匹配，更直接决定了算法是否取得更好的性能。</p> <h3 id="没有免费的午餐定理no-free-lunch-theorem">“没有免费的午餐定理”（No Free Lunch Theorem）</h3> <h4 id="1-定理内容">1. 定理内容</h4> <ul> <li>标准定义：无论学习算法A多聪明，学习算法B多笨拙，他们的期望性能相同。<br /><strong>重要前提：</strong>所有问题出现的机会相同、或所有问题同等重要。</li> <li>我所认为其本质想阐述的是：一个适合于某问题的算法，在另一个问题上不一定适合。<br /> 其实我们在解决问题的时候，更关注于问题本身，，就当前问题提出解决方法，在存在可能性的范围内实现“举一反三”的泛化，而非一味的将当前问题的解决方案适用于其他问题，或者找出两个及以上弱相关问题之间的通解。</li> </ul> <h4 id="2-公式推导">2. 公式推导</h4> <p><strong>这里的三个公式主要为了证明学习算法<span class="math inline">\(ε_a\)</span>与<span class="math inline">\(ε_b\)</span>在训练集之外的所有样本上（测试数据集）的误差之和即总误差与学习算法无关。</strong>即对任意的学习算法，其总误差相等。<br /> (根据《机器学习》周志华原著公式1.1，1.2，1.3来解释)</p> <h5 id="公式11">公式1.1：</h5> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/0e5441bd4cca8675c6e6aa42cbd08678.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> (1)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/b9b63538ef0b6e2624896c7779dd9372.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"> : 表示学习算法<span class="math inline">\(ε_a\)</span>在训练集之外的所有样本上的误差，也即被预测样本(测试样本)上的误差。（ote：off-training error）<br /> 我认为这里的样本应该包括两部分：训练样本和测试样本，训练样本用于学习得出模型，测试样本则用来判断模型是否与问题相匹配。所以，判断与测试样本的误差，可以确定学习算法的好坏。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/d4172763499efb796647df114f8c8061.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具">：就表示<span class="math inline">\(x\)</span>属于整个样本空间减去训练样本，即<span class="math inline">\(x\)</span>属于测试样本空间，是测试样本空间的其中一项。<br /> (2)<span class="math inline">\(P(x)\)</span>：表示<span class="math inline">\(x\)</span>在整个样本空间中出现的概率<br /> 例如：（这里的举例有待考究，还望指正）<br /><strong>色泽=*，根蒂=蜷缩，敲声=浊响</strong> 在下面的样本空间中，<span class="math inline">\(P(x)=3/3=1\)</span><br /><strong>色泽=*，根蒂=稍蜷，敲声=浊响</strong> 在下面的样本空间中，<span class="math inline">\(P(x)=1/3\)</span></p> <pre><code class="language-txt">色泽＝*，   根蒂＝*，   敲声＝浊响 色泽＝*，   根蒂＝蜷缩，敲声＝* 色泽＝*，   根蒂＝蜷缩，敲声＝浊响 </code></pre> <p>(3)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/dc5a1772b2799d4c35ced51399a4e66b.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具">：指示函数，若<span class="math inline">\(h(x)≠f(x)\)</span>则为1，否则为0，即表示学习算法基于训练数据产生的假设是否符合目标函数。<br /> (4)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/f8fe88d63dcd6abfd5d5b738236ee117.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具">：表示算法<span class="math inline">\(ε_a\)</span>基于训练数据<span class="math inline">\(X\)</span>产生假设<span class="math inline">\(h\)</span>的概率。因为算法<span class="math inline">\(ε_a\)</span>在训练数据<span class="math inline">\(X\)</span>上训练时，产生多种假设，存在其中一种假设<span class="math inline">\(h\)</span>在训练数据<span class="math inline">\(X\)</span>上的条件概率，并且，由算法<span class="math inline">\(ε_a\)</span>基于训练数据<span class="math inline">\(X\)</span>产生的所有假设的条件概率总和为1。(TODO：这里的解释可能需要修改)<br /> (5)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/b12ebc2a81646ef5ecc4b3cbf9239ab8.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具">：因为样本空间和假设空间是离散的，所以这里采用求和，而非连续的求积分。<br /> 根据条件期望公式，即可得出该式。</p> <hr> <h5 id="公式12">公式1.2</h5> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/235aceb7e66fd7830f3024b4451ed5c7.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> (1)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/e6478422bf9e2d7166c8bb6b0cca25b3.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具">：表示对所有可能的目标函数<span class="math inline">\(f\)</span>按均匀分布对误差求和。<br /> 只要满足版本空间<span class="math inline">\(χ\)</span>的假设函数，都可以是目标函数，所以目标函数<span class="math inline">\(f\)</span>可能不止一个。因为每一个目标函数<span class="math inline">\(f\)</span>均匀分布，且是二分类问题(即每一个样本，都会有两个不同的目标函数<span class="math inline">\(f\)</span>)，所以对于有<span class="math inline">\(|χ|\)</span>个样本的版本空间，则会有<span class="math inline">\(2^{|χ|}\)</span>个目标函数，但是因为有一半的目标函数<span class="math inline">\(f\)</span>对<span class="math inline">\(x\)</span>的预测与<span class="math inline">\(h(x)\)</span>不一致，即某个假设<span class="math inline">\(h\)</span>有<span class="math inline">\(\frac{1}{2}\)</span>的概率与目标函数<span class="math inline">\(f\)</span>相同。(我认为可以类比满二叉树，树高为<span class="math inline">\(|χ|\)</span>，则树中结点总数为<span class="math inline">\({1} \over {2}\)</span><span class="math inline">\(2^{|χ|}\)</span>)<br /> 故<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/198e93417b4d264ccb79364d3e1542d0.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><span class="math inline">\(=\)</span><span class="math inline">\({1} \over {2}\)</span><span class="math inline">\(2^{|χ|}\)</span><br /> 举例：<br /> 若样本空间<span class="math inline">\(χ=\{x_1, x_2\}\)</span>，则<span class="math inline">\(|χ|=2\)</span>，所有可能的目标函数<span class="math inline">\(f\)</span>为：<br /><span class="math inline">\(f_1: f_1(x_1)=0,f_1(x_2)=0\)</span><br /><span class="math inline">\(f_2: f_2(x_1)=0,f_2(x_2)=1\)</span><br /><span class="math inline">\(f_3: f_3(x_1)=1,f_3(x_2)=0\)</span><br /><span class="math inline">\(f_4: f_4(x_1)=1,f_4(x_2)=1\)</span><br /> 则总共有<span class="math inline">\(2^{|χ|}=2^2=4\)</span>个目标函数<span class="math inline">\(f\)</span>。<br /> 若学习产生的假设<span class="math inline">\(h(x_1)=0\)</span>，则仅有<span class="math inline">\({1}\over{2}\)</span>的<span class="math inline">\(f\)</span>与之相等，即<span class="math inline">\(f_1\)</span>和<span class="math inline">\(f_2\)</span>.<br /> 所以：<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/198e93417b4d264ccb79364d3e1542d0.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><span class="math inline">\(=\)</span><span class="math inline">\({1} \over {2}\)</span><span class="math inline">\(2^{|χ|}\)</span><span class="math inline">\(=2\)</span><br /> (2)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/f65f5954e8347ffd8ecdc4fc437aed18.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> 这一步其实就是一个求和运算<br /><span class="math inline">\((a_1+a_2+...+a_x)(b_1+b_2+...+b_y)(c_1+c_2+...+c_z)=a_1b_1c_1+a_1b_1c_2+...+a_1b_1c_z+a_1b_2c_1+...+a_xb_yc_z\)</span><br /> (3)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/fc9e053237fb554f893ee6350f79a866.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> 这一步在(1)中已经做过解释<br /> (4)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/da87fdbc44f5f947fd75cbeeec95c86d.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> 这一步其实就是提取公因式<br /> (5)<img decoding="async" src="http://img.555519.xyz/uploads3/20220507/4a2cdfa78696355804fb4f7da2de80b0.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> 这一步是因为由算法<span class="math inline">\(ε_a\)</span>基于训练数据<span class="math inline">\(X\)</span>产生的所有假设的条件概率总和为1<br /><strong>不难看出，所有可能的目标函数<span class="math inline">\(f\)</span>的总误差与算法<span class="math inline">\(ε_a\)</span>并无关系</strong></p> <hr> <h5 id="公式13">公式1.3</h5> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/4033d08e688090d126f133967a28fc8d.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /> 在所有可能的目标函数<span class="math inline">\(f\)</span>均匀分布的前提下(即问题出现的机会相等，所有问题同等重要)，无论学习算法<span class="math inline">\(ε_a\)</span>多聪明，<span class="math inline">\(ε_b\)</span>多笨拙，他们的期望性能(总误差)相同。<br /> 但其实，我们只是假设目标函数<span class="math inline">\(f\)</span>服从均匀分布。而真正情况是，对于某一种问题，只有与已有的样本数据或者现有问题高度拟合的函数，才是真正的目标函数，要实际问题具体分析。<br /><strong>所以，学习算法与问题的契合程度才是衡量学习算法优劣的决定性因素。</strong></p> <hr> <h2 id="四发展历程">四、发展历程</h2> <p>机器学习的发展历程在Eren Golge博客中用一张图具体阐明了，在此借鉴引用。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/e2ed5d1597f59b7a70a422358202af9a.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"></p> <hr> <h2 id="五应用现状">五、应用现状</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/85cff1378445c11ef8b0591a3d080bdd.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/d0860512830d647d5a2104f94157e14a.jpg" alt="机器学习-学习笔记(一) --&gt; （假设空间 &amp; 版本空间）及 归纳偏好_在线工具"></p> <p>（ps：本文完全是个人学习笔记，其中引用了“西瓜书”“南瓜书”的内容，对其进行理解和解释，若有问题或错误，希望各位前辈进行指正）</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-68610.htm">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></p>
+                                        <p>下一个：<a href="/news/article-69248.htm">宠物食品加工厂要投资多少亿 宠物食品加工厂要投资多少亿元</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-58330.htm" title="养狗的人容易得15种病用什么消毒（养狗的人容易得什么病怎样防治）">养狗的人容易得15种病用什么消毒（养狗的人容易得什么病怎样防治）</a></li>
+                        <li class="py-2"><a href="/news/article-52781.htm" title="猫咪免费领养中心云阳（猫免费领养中心地址）">猫咪免费领养中心云阳（猫免费领养中心地址）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 22.3M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 22.3M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-clash-node.htm" title="FlClash机场订阅推荐 | 18.2M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 18.2M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-66683.htm" title="动物疫苗公司排名前十名有哪些 动物疫苗公司排名前十名有哪些品牌">动物疫苗公司排名前十名有哪些 动物疫苗公司排名前十名有哪些品牌</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-free-clash.htm" title="FlClash机场订阅推荐 | 19.1M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.1M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-37689.htm" title="vue的混合mixins学习">vue的混合mixins学习</a></li>
+                        <li class="py-2"><a href="/news/article-55520.htm" title="猫3联疫苗多少钱（猫咪3联疫苗多少钱）">猫3联疫苗多少钱（猫咪3联疫苗多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-53856.htm" title="宜养猫的属相（宜养猫的属相是什么）">宜养猫的属相（宜养猫的属相是什么）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-2-clash-node-github.htm" title="FlClash机场订阅推荐 | 20.8M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.8M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

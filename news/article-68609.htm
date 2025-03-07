@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-68609.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ribbon（一）远程调用RestTemplate</title>
+        <meta name="description" content="目录 一、RestTemplate介绍 二、需求说明 1、业务结构及说明 三、模块搭建 1、新建一个maven项目 2、添加ribbon依赖 3、编辑yml 4、主程序 5、编辑RibbonContr" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-68609.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Ribbon（一）远程调用RestTemplate" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/9e7aa12947ac990d4d09d941af87e29d.webp" />
+        <meta property="og:release_date" content="2025-03-06T11:03:56" />
+    <meta property="og:updated_time" content="2025-03-06T11:03:56" />
+        <meta property="og:description" content="目录 一、RestTemplate介绍 二、需求说明 1、业务结构及说明 三、模块搭建 1、新建一个maven项目 2、添加ribbon依赖 3、编辑yml 4、主程序 5、编辑RibbonContr" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Ribbon（一）远程调用RestTemplate">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Ribbon（一）远程调用RestTemplate</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p id="main-toc"><strong>目录</strong></p> <p id="%E4%B8%80%E3%80%81RestTemplate%E4%BB%8B%E7%BB%8D-toc" style="margin-left:0px;"><a href="#%E4%B8%80%E3%80%81RestTemplate%E4%BB%8B%E7%BB%8D" rel="nofollow">一、RestTemplate介绍</a></p> <p id="%E4%BA%8C%E3%80%81%E9%9C%80%E6%B1%82%E8%AF%B4%E6%98%8E-toc" style="margin-left:0px;"><a href="#%E4%BA%8C%E3%80%81%E9%9C%80%E6%B1%82%E8%AF%B4%E6%98%8E" rel="nofollow">二、需求说明</a></p> <p id="1%E3%80%81%E4%B8%9A%E5%8A%A1%E7%BB%93%E6%9E%84%E5%8F%8A%E8%AF%B4%E6%98%8E-toc" style="margin-left:40px;"><a href="#1%E3%80%81%E4%B8%9A%E5%8A%A1%E7%BB%93%E6%9E%84%E5%8F%8A%E8%AF%B4%E6%98%8E" rel="nofollow">1、业务结构及说明</a></p> <p id="%E4%B8%89%E3%80%81%E6%A8%A1%E5%9D%97%E6%90%AD%E5%BB%BA-toc" style="margin-left:0px;"><a href="#%E4%B8%89%E3%80%81%E6%A8%A1%E5%9D%97%E6%90%AD%E5%BB%BA" rel="nofollow">三、模块搭建</a></p> <p id="1%E3%80%81%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAmaven%E9%A1%B9%E7%9B%AE-toc" style="margin-left:40px;"><a href="#1%E3%80%81%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAmaven%E9%A1%B9%E7%9B%AE" rel="nofollow">1、新建一个maven项目</a></p> <p id="2%E3%80%81%E6%B7%BB%E5%8A%A0ribbon%E4%BE%9D%E8%B5%96-toc" style="margin-left:40px;"><a href="#2%E3%80%81%E6%B7%BB%E5%8A%A0ribbon%E4%BE%9D%E8%B5%96" rel="nofollow">2、添加ribbon依赖</a></p> <p id="3%E3%80%81%E7%BC%96%E8%BE%91yml-toc" style="margin-left:40px;"><a href="#3%E3%80%81%E7%BC%96%E8%BE%91yml" rel="nofollow">3、编辑yml</a></p> <p id="4%E3%80%81%E4%B8%BB%E7%A8%8B%E5%BA%8F-toc" style="margin-left:40px;"><a href="#4%E3%80%81%E4%B8%BB%E7%A8%8B%E5%BA%8F" rel="nofollow">4、主程序</a></p> <p id="5%E3%80%81%E7%BC%96%E8%BE%91RibbonController-toc" style="margin-left:40px;"><a href="#5%E3%80%81%E7%BC%96%E8%BE%91RibbonController" rel="nofollow">5、编辑RibbonController</a></p> <p id="6%E3%80%81%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E6%B5%8B%E8%AF%95-toc" style="margin-left:40px;"><a href="#6%E3%80%81%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E6%B5%8B%E8%AF%95" rel="nofollow">6、发送请求测试</a></p> <hr id="hr-toc"/> <p>ribbon底层封装了RestTemplate进行Rest api远程调用</p> </h1> <p>RestTemplate是springboot提供的远程调用工具</p> <p>常用的方法：</p> <ul> <li> <span style="color:#ed7976;"><span style="background-color:#fef2f0;">getForObject()</span></span>：</li> </ul> <p>该方法是getForEntity方法的进一步封装，通过HttpMessageConverterExtractor对HTTP的请求响应体body内容进行对象转换，实现请求直接返回包装好的对象内容。有三个重载。</p> <p>getForObject(String url,Class responseType,Object ...urlVariables);</p> <p>url参数为指定访问的地址如果其中有传递的参数，使用{1}，{2}这种类型的占位符表示，responseType是参数返回结果的类型，urlVariables是前面url占位符对应的参数。</p> <p>getForObject(String url,Class responseType,Map urlVariables);</p> <p>前两个参数与前一致，最后一个参数使用Map封装替换url中出现的占位符。</p> <p>getForObject(String url,Class responseType);</p> <p>没有需要传递的参数。</p> <ul> <li><span style="color:#ed7976;"><span style="background-color:#fef2f0;">postForObject()</span></span></li> </ul> <p>用于发送post请求，与get类似</p> <p>也提供了三种重载：</p> <p>postForObject(String url,Class responseType,Object ...urlVariables);</p> <p>postForObject(String url,Class responseType,Map urlVariables);</p> <p>postForObject(String url,Class responseType);</p> </h1> <p>这里先不使用Ribbon，先单独使用RestTemplate进行远程调用</p> <h2 id="1%E3%80%81%E4%B8%9A%E5%8A%A1%E7%BB%93%E6%9E%84%E5%8F%8A%E8%AF%B4%E6%98%8E">1、业务结构及说明</h2> <p>当前是一个商品信息，用户和订单三者之间的服务，并且使用Eureka集群提供服务发现与注册</p> <p>结构及功能为：</p> <p><img fetchpriority="high" decoding="async" alt="" height="1200" src="http://img.555519.xyz/uploads/20230205/b6ab68088720eff85551991d951a730c.jpg"></p> <p>其中</p> <p>item-service 用于商品服务，其中有获取商品信息和减少库存的方法</p> <p>user-service 用于用户服务，其中有获取用户信息和增加用户积分的功能</p> <p>order-service 用于订单服务，其中有获取订单和添加订单的功能</p> <p>现在需要使用RestTemplate进行远程调用这三个服务</p> </h1> <h2 id="1%E3%80%81%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAmaven%E9%A1%B9%E7%9B%AE">1、新建一个maven项目</h2> <h2 id="2%E3%80%81%E6%B7%BB%E5%8A%A0ribbon%E4%BE%9D%E8%B5%96">2、添加ribbon依赖</h2> <p>由于Eureka-client中包含ribbon依赖，所以只需添加eureka-client依赖即可</p> <p><img decoding="async" alt="" height="317" src="http://img.555519.xyz/uploads/20230205/e90e107ff74cf4e334092716d99f4828.jpg"></p> <pre><code class="language-XML">&lt;dependency&gt; 	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; 	&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt; &lt;/dependency&gt; </code></pre> <h2 id="3%E3%80%81%E7%BC%96%E8%BE%91yml">3、编辑yml</h2> <p>服务名称为ribbon，使用3001端口，并且注册到两台eureka服务器中</p> <pre><code>spring:   application:     name: ribbon      server:   port: 3001    eureka:   client:     service-url:       defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka </code></pre> <h2 id="4%E3%80%81%E4%B8%BB%E7%A8%8B%E5%BA%8F">4、主程序</h2> <p>添加RestTemplate实例</p> <pre><code class="language-java">package cn.tedu.sp06;  ....  @EnableDiscoveryClient @SpringBootApplication public class Sp06RibbonApplication { 	 	//创建 RestTemplate 实例，并存入 spring 容器 	@Bean 	public RestTemplate getRestTemplate() { 		return new RestTemplate(); 	}  	public static void main(String[] args) { 		SpringApplication.run(Sp06RibbonApplication.class, args); 	}  } </code></pre> <h2 id="5%E3%80%81%E7%BC%96%E8%BE%91RibbonController">5、编辑RibbonController</h2> <pre><code class="language-java">package cn.tedu.sp06.controller;  ...  @RestController public class RibbonController {  	@Autowired 	private RestTemplate rt; 	 	@GetMapping("/item-service/{orderId}") 	public JsonResult&lt;List&lt;Item&gt;&gt; getItems(@PathVariable String orderId) { 	    //向指定微服务地址发送 get 请求，并获得该服务的返回结果  	    //{1} 占位符，用 orderId 填充 		return rt.getForObject("http://localhost:8001/{1}", JsonResult.class, orderId); 	}  	@PostMapping("/item-service/decreaseNumber") 	public JsonResult decreaseNumber(@RequestBody List&lt;Item&gt; items) { 	    //发送 post 请求 		return rt.postForObject("http://localhost:8001/decreaseNumber", items, JsonResult.class); 	}  	// 	 	@GetMapping("/user-service/{userId}") 	public JsonResult&lt;User&gt; getUser(@PathVariable Integer userId) { 		return rt.getForObject("http://localhost:8101/{1}", JsonResult.class, userId); 	}  	@GetMapping("/user-service/{userId}/score")  	public JsonResult addScore( 			@PathVariable Integer userId, Integer score) { 		return rt.getForObject("http://localhost:8101/{1}/score?score={2}", JsonResult.class, userId, score); 	} 	 	// 	 	@GetMapping("/order-service/{orderId}") 	public JsonResult&lt;Order&gt; getOrder(@PathVariable String orderId) { 		return rt.getForObject("http://localhost:8201/{1}", JsonResult.class, orderId); 	}  	@GetMapping("/order-service") 	public JsonResult addOrder() { 		return rt.getForObject("http://localhost:8201/", JsonResult.class); 	} } </code></pre> <p><strong>注意：</strong></p> <p><strong>1、可以看出，用户发送请求首先到RibbonController然后通过这里转发到对应的服务路径，实现远程调用。</strong></p> <p><strong>2、携带参数的GET请求，会使用{1}表示占位符进行转发。</strong></p> <h2 id="6%E3%80%81%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E6%B5%8B%E8%AF%95">6、发送请求测试</h2> <p>根据RibbonController的路径发送请求</p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">http://localhost:3001/item-service/35</span></span></p> <p>使用postman发送</p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">http://localhost:3001/item-service/decreaseNumber</span></span></p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">[{"id":1,"name":"abc","number":100},{"id":2,"name":"def","number":200}]</span></span></p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">http://localhost:3001/user-service/10</span></span></p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">http://localhost:3001/user-service/10/score?score=100</span></span></p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">http://localhost:3001/order-service/20</span></span></p> <p><span style="color:#ed7976;"><span style="background-color:#fef2f0;">http://localhost:3001/order-service</span></span></p> <p>浏览器发送请求先到ribbon服务器的RibbonController，之后通过RestTemplate的getForObject或postForObject方法分别远程调用到item-service、user-service、ordder-service。</p> <p><img decoding="async" alt="" height="1153" src="http://img.555519.xyz/uploads/20230205/94f1d00cbaeb44dc9b98041c9167c903.jpg"></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67935.htm">重庆宠物狗领养中心地址在哪里（重庆宠物领养中心宠物领养）</a></p>
+                                        <p>下一个：<a href="/news/article-68610.htm">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-37241.htm" title="动物疫苗的种类有哪些名称图片大全 动物疫苗的种类有哪些名称图片大全集">动物疫苗的种类有哪些名称图片大全 动物疫苗的种类有哪些名称图片大全集</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/Clash/V2ray/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/Clash/V2ray/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-44653.htm" title="动物疫苗多长时间打一次最好呢 动物疫苗多长时间打一次最好呢视频">动物疫苗多长时间打一次最好呢 动物疫苗多长时间打一次最好呢视频</a></li>
+                        <li class="py-2"><a href="/news/article-43685.htm" title="从 jQuery 到 Vue3 的快捷通道_在线工具">从 jQuery 到 Vue3 的快捷通道_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-60041.htm" title="国内十大宠物粮食品牌排行榜图片 国内十大宠物粮食品牌排行榜图片大全">国内十大宠物粮食品牌排行榜图片 国内十大宠物粮食品牌排行榜图片大全</a></li>
+                        <li class="py-2"><a href="/news/article-67935.htm" title="重庆宠物狗领养中心地址在哪里（重庆宠物领养中心宠物领养）">重庆宠物狗领养中心地址在哪里（重庆宠物领养中心宠物领养）</a></li>
+                        <li class="py-2"><a href="/news/article-64207.htm" title="给动物打预防针是什么部门呢图片（给动物打预防针是什么部门呢图片）">给动物打预防针是什么部门呢图片（给动物打预防针是什么部门呢图片）</a></li>
+                        <li class="py-2"><a href="/news/article-66034.htm" title="iOS全埋点解决方案-UITableView和UICollectionView点击事件">iOS全埋点解决方案-UITableView和UICollectionView点击事件</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-clash-windows.htm" title="FlClash机场订阅推荐 | 19.7M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19.7M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-61808.htm" title="docker system全新命令集">docker system全新命令集</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
