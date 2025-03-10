@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-70527.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FreeRTOS进阶之任务切换完全分析_操作系统_</title>
+        <meta name="description" content="目录  FreeRTOS任务切换过程 代码分析 运行FreeRTOS过程    FreeRTOS任务切换过程 FreeRTOS任务相关的代码大约占总代码的一半左右，这些代码都在为一件事情而努力，即找到" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-70527.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="FreeRTOS进阶之任务切换完全分析_操作系统_" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/16e1e9ee7cf8eb74738bb86da17ef5ae.webp" />
+        <meta property="og:release_date" content="2025-03-09T09:47:05" />
+    <meta property="og:updated_time" content="2025-03-09T09:47:05" />
+        <meta property="og:description" content="目录  FreeRTOS任务切换过程 代码分析 运行FreeRTOS过程    FreeRTOS任务切换过程 FreeRTOS任务相关的代码大约占总代码的一半左右，这些代码都在为一件事情而努力，即找到" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="FreeRTOS进阶之任务切换完全分析_操作系统_">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>FreeRTOS进阶之任务切换完全分析_操作系统_</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">FreeRTOS任务切换过程</a></li> <li><a href="#_label1" rel="nofollow">代码分析</a></li> <li><a href="#_label2" rel="nofollow">运行FreeRTOS过程</a></li> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>FreeRTOS任务切换过程</h2> <p>FreeRTOS任务相关的代码大约占总代码的一半左右，这些代码都在为一件事情而努力，即找到优先级最高的就绪任务，并使之获得CPU运行权。任务切换是这一过程的直接实施者，为了更快的找到优先级最高的就绪任务，任务切换的代码通常都是精心设计的，甚至会用到汇编指令或者与硬件相关的特性，比如Cortex-M3的CLZ指令。因此任务切换的大部分代码是由硬件移植层提供的，不同的平台，实现发方法也可能不同，这篇文章以Cortex-M3为例，讲述FreeRTOS任务切换的过程。</p> <p>FreeRTOS有两种方法触发任务切换：</p> <p>执行系统调用，比如普通任务可以使用taskYIELD()强制任务切换，中断服务程序中使用portYIELD_FROM_ISR()强制任务切换；</p> <p>系统节拍时钟中断</p> <p>对于Cortex-M3平台，这两种方法的实质是一样的，都会使能一个PendSV中断，在PendSV中断服务程序中，找到最高优先级的就绪任务，然后让这个任务获得CPU运行权，从而完成任务切换。<br />对于第一种任务切换方法，不管是使用taskYIELD()还是portYIELD_FROM_ISR()，最终都会执行宏portYIELD()，这个宏的定义如下：</p> <div class="ay1code"> <pre class="brush:cpp;">#define portYIELD()						\  {								\  	/*产生PendSV中断*/		                        \  	portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT;		\  }</pre> </div> <p>对于第二种任务切换方法，在系统节拍时钟中断服务函数中，首先会更新tick计数器的值、查看是否有任务解除阻塞，如果有任务解除阻塞的话，则使能PandSV中断，代码如下所示：</p> <div class="ay1code"> <pre class="brush:cpp;">void xPortSysTickHandler( void )  {  	/* 设置中断掩码 */  	vPortRaiseBASEPRI();  	{  		/* 增加tick计数器值，并检查是否有任务解除阻塞 */  		if( xTaskIncrementTick() != pdFALSE )  		{  			/* 需要任务切换。产生PendSV中断 */  			portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT;  		}  	}  	vPortClearBASEPRIFromISR();  }</pre> </div> <p>从上面的代码中可以看出，PendSV中断的产生是通过代码：portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT实现的，它向中断状态寄存器bit28位写入1，将PendSV中断设置为挂起状态，等到优先级高于PendSV的中断执行完成后，PendSV中断服务程序将被执行，进行任务切换工作。</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>代码分析</h2> <p>Cortex-M3架构下，PendSV中断服务程序源码如下所示，这篇文章重点分析这段代码。</p> <div class="ay1code"> <pre class="brush:cpp;">__asm void xPortPendSVHandler( void )  {  	extern uxCriticalNesting;  	extern pxCurrentTCB;            /* 指向当前激活的任务 */  	extern vTaskSwitchContext;        	PRESERVE8  	mrs r0, psp                   /* PSP内容存入R0 */      	isb                           /* 指令同步隔离,清流水线 */  	ldr	r3, =pxCurrentTCB     /* 当前激活的任务TCB指针存入R2 */  	ldr	r2, [r3]  	stmdb r0!, {r4-r11}          /* 保存剩余的寄存器,异常处理程序执行前,硬件自动将xPSR、PC、LR、R12、R0-R3入栈 */  	str r0, [r2]		     /* 将新的栈顶保存到任务TCB的第一个成员中 */  	stmdb sp!, {r3, r14}         /* 将R3和R14临时压入堆栈，因为即将调用函数vTaskSwitchContext,调用函数时,返回地址自动保存到R14中,所以一旦调用发生,R14的值会被覆盖,因此需要入栈保护; R3保存的当前激活的任务TCB指针(pxCurrentTCB)地址,函数调用后会用到,因此也要入栈保护*/  	mov r0, #configMAX_SYSCALL_INTERRUPT_PRIORITY   /* 进入临界区 */  	msr basepri, r0  	dsb                         /* 数据和指令同步隔离 */  	isb  	bl vTaskSwitchContext        /* 调用函数,寻找新的任务运行,通过使变量pxCurrentTCB指向新的任务来实现任务切换 */  	mov r0, #0                   /* 退出临界区*/  	msr basepri, r0  	ldmia sp!, {r3, r14}         /* 恢复R3和R14*/  	ldr r1, [r3]  	ldr r0, [r1]		     /* 当前激活的任务TCB第一项保存了任务堆栈的栈顶,现在栈顶值存入R0*/  	ldmia r0!, {r4-r11}	     /* 出栈*/  	msr psp, r0  	isb  	bx r14                      /* 异常发生时,R14中保存异常返回标志,包括返回后进入线程模式还是处理器模式、使用PSP堆栈指针还是MSP堆栈指针，当调用 bx r14指令后，硬件会知道要从异常返回，然后出栈，这个时候堆栈指针PSP已经指向了新任务堆栈的正确位置，当新任务的运行地址被出栈到PC寄存器后，新的任务也会被执行。*/  	nop  }</pre> </div> <p>为了便于理解上面的代码，我们先用流程图的方式将整个过程画出来，然后再逐句分析代码。因为图形可以简化程序，并且信息更容易接受。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220413/cfc0e134f262cc06e38cb228d61e2e81.jpg"></p> <p>图1-1：任务切换流程</p> <p>先强调图1-1中的几个术语，首先是“主堆栈指针MSP”和“进程堆栈指针PSP”。对于Cortex-M3硬件，当系统复位后，默认使用MSP指针。MSP指针用于操作系统内核以及处理异常（也就是说中断服务程序中默认强制使用MSP指针，这是硬件自动设置的）。任务（进程）使用PSP指针，操作系统负责从MSP指针切换到PSP指针。这个过程在《FreeRTOS高级篇3---启动调度器》一文的最后部分中进行了讲解：在SVC中断服务程序中启动第一个任务，当从SVC中断服务退出前，通过向r14寄存器最后4位按位或上0x0D，使得硬件在退出时使用进程堆栈指针PSP完成出栈操作并返回后进入线程模式、返回Thumb状态。<br />其次，“堆栈”和“任务堆栈”也值得强调一下。每个任务都有自己的“任务堆栈”，在任务创建时会创建指定大小的任务堆栈，这是任务能够独立运行的前提条件之一。在任务中定义的局部变量，会优先使用寄存器，寄存器不够时就使用任务堆栈的空间。如果在任务中调用其它函数，则调用前的保存信息也存到任务堆栈中去。根据任务代码来估算任务堆栈的大小是件十分重要的技能。前面也说了，Cortex-M3硬件有两个堆栈指针，操作系统内核以及异常处理程序中使用MSP指针，所以它们也需要一个堆栈空间，我们称之为“堆栈”，这个堆栈空间和任务堆栈空间在物理上是绝对不可以重叠的，图1-2展示了一个编译好的程序可能的RAM分配情况（堆栈向下生长）。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220413/1e105e95b341836a64ffe2a3918a257d.jpg"></p> <p>图1-2：RAM中的变量和堆栈分布示意图</p> <p>有了上面的基础,接下来我们来分析PendSV中断服务程序。</p> <div class="ay1code"> <pre class="brush:cpp;">mrs r0, psp </pre> </div> <p>是将任务堆栈指针PSP的值保存到寄存器R0中，因为接下来我们会将寄存器R4~R11也保存到任务堆栈中，但是我们没有哪个汇编指令能直接操作PSP完成入栈，所以只能借助R0。</p> <div class="ay1code"> <pre class="brush:cpp;">ldrr3, =pxCurrentTCB /* 当前激活的任务TCB指针存入R2 */  ldrr2, [r3]</pre> </div> <p>这两句代码是获取当前激活的任务TCP指针，指针pxCurrentTCB前面文章已经提到过很多次了，它是位于tasks.c文件中定义的唯一一个全局指针型变量，指向当前激活的任务TCB。</p> <div class="ay1code"> <pre class="brush:cpp;">stmdb r0!, {r4-r11}</pre> </div> <p>这句代码用于将寄存器R4~R11保存到当前激活的程序任务堆栈中，并且同步更新寄存器R0的值。</p> <div class="ay1code"> <pre class="brush:cpp;">str r0, [r2]</pre> </div> <p>寄存器R2中保存当前激活的任务TCB指针，在《<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.jb51.net/article/243826.htm"   target="_blank" rel="nofollow">FreeRTOS进阶之任务创建</a>》中讲任务TCB数据结构时我们知道，任务TCB数据结构第一个成员一定是指向任务当前堆栈栈顶的指针变量pxTopOfStack。这句代码将R0的内容保存到任务TCB数据结构的第一个成员pxTopOfStack中，也就是将最新的任务堆栈指针保存到任务TCB的pxTopOfStack字段中。当任务被激活时，就是从这个字段中获取任务堆栈指针，然后完成数据出栈操作的。</p> <div class="ay1code"> <pre class="brush:cpp;">stmdb sp!, {r3, r14}</pre> </div> <p>将R3和R14临时压入堆栈，因为即将调用函数vTaskSwitchContext。调用函数时，返回地址自动保存到R14中，所以一旦调用发生，R14的值会被覆盖，因此需要入栈保护。R3保存的当前激活的任务TCB指针(pxCurrentTCB)地址，函数调用后会用到，因此也要入栈保护。</p> <div class="ay1code"> <pre class="brush:cpp;">mov r0, #configMAX_SYSCALL_INTERRUPT_PRIORITY     msr basepri, r0</pre> </div> <p>这两句代码用来进入临界区，中断优先级号大于等于configMAX_SYSCALL_INTERRUPT_PRIORITY的中断都会被屏蔽。</p> <div class="ay1code"> <pre class="brush:cpp;">bl vTaskSwitchContext</pre> </div> <p>调用函数，选择下一个要执行的任务，也就是寻找处于就绪态的最高优先级任务。变量pxCurrentTCB指向找到的任务TCB。这个函数是核心中的核心，所有的其它代码都是为了保证这个函数能正确运行。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>运行FreeRTOS过程</h2> <p>某些运行FreeRTOS的硬件有两种方法：通用方法和特定于硬件的方法（以下简称“特殊方法”）。</p> <p>1.对于通用方法：</p> <ul> <li>configUSE_PORT_OPTIMISED_TASK_SELECTION设置为0或者硬件不支持这种特殊方法。</li> <li>可以用于所有FreeRTOS支持的硬件。</li> <li>完全用C实现，效率略低于特殊方法。</li> <li>不强制要求限制最大可用优先级数目</li> </ul> <p>2.对于特殊方法：</p> <ul> <li>并非所有硬件都支持。</li> <li>必须将configUSE_PORT_OPTIMISED_TASK_SELECTION设置为1。</li> <li>依赖一个或多个特定架构的汇编指令（一般是类似计算前导零[CLZ]指令）。</li> <li>比通用方法更高效。</li> <li>一般强制限定最大可用优先级数目为32（0~31）。</li> </ul> <p>Cortex-M3即支持通用方法也支持特殊方法，默认的移植层使用特殊方法。我们先来看一下通用方法如何找到下一个要执行的任务。</p> <p>在函数vTaskSwitchContext中使用宏taskSELECT_HIGHEST_PRIORITY_TASK()完成任务寻址工作，使用通用方法时，这个宏的代码如下所示。pxReadyTasksLists是定义在tasks.c中的静态列表数组，表示就绪任务列表数组。在FreeRTOS任务创建分析中讲过这个变量：新创建任务的过程中，任务TCB中的状态列表项xStateListItem会挂接到就绪任务列表数组中。uxTopReadyPriority也是定义在tasks.c中的静态变量，在此之前，它已经代表处于就绪态任务的最高优先级值，在FreeRTOS任务创建与分析一文中，我们也讲到了这个变量：每次任务创建，都会判断新任务的优先级是否大于这个变量，如果大于，还会更新这个变量的值。</p> <p>while()循环从优先级uxTopReadyPriority开始，从就绪列表数组pxReadyTasksLists中找出优先级最高的任务，然后调用宏listGET_OWNER_OF_NEXT_ENTRY获取最高优先级列表中的下一个列表项，并从该列表项中获取任务TCB指针赋给变量pxCurrentTCB。</p> <div class="ay1code"> <pre class="brush:cpp;">	#define taskSELECT_HIGHEST_PRIORITY_TASK()								\  	{																	\  		/* 从就绪列表数组中找出最高优先级列表*/				\  		while( listLIST_IS_EMPTY( &amp;( pxReadyTasksLists[ uxTopReadyPriority ] ) ) )		\  		{																\  			configASSERT( uxTopReadyPriority );								\  			--uxTopReadyPriority;											\  		}																\																		\  		/* 相同优先级的任务使用时间片共享处理器就是通过这个宏实现*/  	\  		listGET_OWNER_OF_NEXT_ENTRY(pxCurrentTCB, &amp;( pxReadyTasksLists[ uxTopReadyPriority ] ) );   \  	} /* taskSELECT_HIGHEST_PRIORITY_TASK */</pre> </div> <p>对于Cortex-M3硬件，还支持特殊方法选择下一个要执行的任务，那就是利用硬件提供的计算前导零指令CLZ。特殊方法时，宏taskSELECT_HIGHEST_PRIORITY_TASK()的代码如下所示。</p> <div class="ay1code"> <pre class="brush:cpp;">	#define taskSELECT_HIGHEST_PRIORITY_TASK()								\  	{																	\  	UBaseType_t uxTopPriority;												\																		\  		/* 从就绪列表数组中找出最高优先级列表*/          				\  		portGET_HIGHEST_PRIORITY( uxTopPriority, uxTopReadyPriority );			\  		listGET_OWNER_OF_NEXT_ENTRY(pxCurrentTCB, &amp;( pxReadyTasksLists[ uxTopPriority ] ) ); \  	} /* taskSELECT_HIGHEST_PRIORITY_TASK() */</pre> </div> <p>与通用方法相比，可以发现从就绪列表数组中找出最高优先级列表代码不同了，特殊方法使用宏portGET_HIGHEST_PRIORITY来实现，将宏定义替换后，代码为：</p> <div class="ay1code"> <pre class="brush:cpp;">uxTopPriority = ( 31UL - ( uint32_t ) __clz( (uxTopReadyPriority) ) )</pre> </div> <p>在此之前，静态变量uxTopReadyPriority同样已经包含处于就绪态任务的最高优先级的信息。与通用方法中使用任务优先级数值不同，在特殊方法中，uxTopReadyPriority使用每一位来表示任务，比如变量uxTopReadyPriority的bit0为1，则表示存在优先级为0的就绪任务，bit10为1则表示存在优先级为10的就绪任务。由于32位整形数最多只有32位，因此使用这种特殊方法限定最大可用优先级数目为32，即优先级0~31。</p> <p>我们这来看看__clz( (uxTopReadyPriority)是什么意思，__clz()会被汇编指令CLZ替换掉，这个指令用来计算一个变量从最高位开始的连续零的个数。举个例子，假如变量uxTopReadyPriority为0x09（二进制为：0000 0000 0000 0000 0000 0000 0000 1001），即bit3和bit0为1，表示存在优先级为0和3的就绪任务。则__clz( (uxTopReadyPriority)的值为28，uxTopPriority =31-28=3，即优先级为3的任务是就绪态最高优先级任务。下面的代码跟通用方法一样，调用宏listGET_OWNER_OF_NEXT_ENTRY获取最高优先级列表中的下一个列表项，并从该列表项中获取任务TCB指针赋给变量pxCurrentTCB。</p> <div class="ay1code"> <pre class="brush:cpp;">mov r0, #0 /* 退出临界区*/  msr basepri, r0</pre> </div> <p>这两句代码用来退出临界区，通过向寄存器BASEPRI写入数值0来实现。</p> <div class="ay1code"> <pre class="brush:cpp;">ldmia sp!, {r3, r14}</pre> </div> <p>这句代码将寄存器R3和R14从堆栈中恢复，现在R3保存变量pxCurrentTCB的地址，需要注意的是，变量pxCurrentTCB在函数vTaskSwitchContext中可能已被修改，指向新的最高优先级就绪任务；R14保存退出异常需要的信息。</p> <div class="ay1code"> <pre class="brush:cpp;">ldr r1, [r3]  ldr r0, [r1]</pre> </div> <p>这两句代码获取变量pxCurrentTCB指向的任务TCB指针，并将TCB的第一个成员——当前堆栈栈顶的指针变量pxTopOfStack的值保存到寄存器R0中，也就是将即将运行的任务堆栈栈顶值存入R0。</p> <div class="ay1code"> <pre class="brush:cpp;">ldmia r0!, {r4-r11}</pre> </div> <p>将寄存器R4~R11出栈，并同时更新R0的值。</p> <div class="ay1code"> <pre class="brush:cpp;">msr psp, r0</pre> </div> <p>将最新的任务堆栈栈顶赋值给线程堆栈指针PSP。</p> <div class="ay1code"> <pre class="brush:cpp;">bx r14</pre> </div> <p>从异常中断服务程序退出。异常发生时，R14中保存异常返回标志，包括返回后进入线程模式还是处理器模式、使用PSP堆栈指针还是MSP堆栈指针。当调用 bx r14指令后，硬件会知道要从异常返回，然后出栈，这个时候堆栈指针PSP已经指向了新任务堆栈的正确位置，当新任务的运行地址被出栈到PC寄存器后，新的任务也会被执行。<br />至此，任务切换完成。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-69885.htm">宠物店一个月能卖多少狗粮和狗粮（宠物店一个月能卖多少只狗）</a></p>
+                                        <p>下一个：<a href="/news/article-70528.htm">宠物粮网店名字大全四个字（宠物粮取名）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-66034.htm" title="iOS全埋点解决方案-UITableView和UICollectionView点击事件">iOS全埋点解决方案-UITableView和UICollectionView点击事件</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 19.5M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.5M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-46151.htm" title="宠物领养网站app名字叫什么来着（宠物领养软件推荐）">宠物领养网站app名字叫什么来着（宠物领养软件推荐）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-24-node-share.htm" title="FlClash机场订阅推荐 | 18.7M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 18.7M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-36759.htm" title="宠物店进货渠道怎么找货源（宠物店怎么拿货源）">宠物店进货渠道怎么找货源（宠物店怎么拿货源）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-23-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.6M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-41681.htm" title="动物疫苗打一次管多长时间有效呢（动物疫苗打一次管多长时间有效呢图片）">动物疫苗打一次管多长时间有效呢（动物疫苗打一次管多长时间有效呢图片）</a></li>
+                        <li class="py-2"><a href="/news/article-63584.htm" title="动物打疫苗图片真实（动物打疫苗注意事项）">动物打疫苗图片真实（动物打疫苗注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-56058.htm" title="python数据可视化-matplotlib入门(5)-饼图和堆叠图">python数据可视化-matplotlib入门(5)-饼图和堆叠图</a></li>
+                        <li class="py-2"><a href="/news/article-53320.htm" title="中国动物疫苗10强企业名单公布（中国动物疫苗十强上市公司）">中国动物疫苗10强企业名单公布（中国动物疫苗十强上市公司）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
