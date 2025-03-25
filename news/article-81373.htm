@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-81373.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vue3项目中的骨架屏</title>
+        <meta name="description" content="实现场景:刚进入页面的时候,需要后端接口回传的数据,还没有回来,为了客户有更好的体验,需要设置骨架屏,效果图如下:  &nbsp;实现步骤: 1.设置通用组件骨架屏(可以设置的属性:高，宽，背景颜色，" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-81373.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Vue3项目中的骨架屏" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/e9d741584a9f435d52ef684a0fbe9e51.webp" />
+        <meta property="og:release_date" content="2025-03-25T08:20:29" />
+    <meta property="og:updated_time" content="2025-03-25T08:20:29" />
+        <meta property="og:description" content="实现场景:刚进入页面的时候,需要后端接口回传的数据,还没有回来,为了客户有更好的体验,需要设置骨架屏,效果图如下:  &nbsp;实现步骤: 1.设置通用组件骨架屏(可以设置的属性:高，宽，背景颜色，" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Vue3项目中的骨架屏">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Vue3项目中的骨架屏</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>实现场景:刚进入页面的时候,需要后端接口回传的数据,还没有回来,为了客户有更好的体验,需要设置骨架屏,效果图如下:</p> <p><img fetchpriority="high" decoding="async" alt="" height="839" src="http://img.555519.xyz/uploads3/20220610/2d4593aa60d8480504ae5d88aea0d11d.jpg"><img decoding="async" alt="" height="779" src="http://img.555519.xyz/uploads3/20220610/d0a25fd7bfc056ba46af6a8dacecbd6d.jpg"></p> <p>&nbsp;实现步骤:</p> <p>1.设置通用组件骨架屏(可以设置的属性:<span style="color:#fe2c24;">高，宽，背景颜色，是否有闪动画</span>)</p> <p>基本传值如下图:</p> <p><img decoding="async" alt="" height="137" src="http://img.555519.xyz/uploads3/20220610/332d826c23c8236cbe526a99a061c55b.jpg"></p> <p>2.设置业务组件骨架屏</p> <p>1).设置通用组件骨架屏基本构建</p> <p>&nbsp;src/components/library/Skeleton.vue</p> <pre><code class="language-html">&lt;template&gt; &lt;div class="skeleton" :style="{width,height}" :class="{shan:animated}"&gt; &lt;!-- 1 盒子--&gt; &lt;div class="block" :style="{backgroundColor:bg}"&gt;&lt;/div&gt;  //一个盒子包含了另一个盒子,样式写在                                                                                                                              // 一个div中也是可以的 &lt;!-- 2 闪效果 xtx-skeleton 伪元素 ---&gt; &lt;/div&gt; &lt;/template&gt; &lt;script&gt; export default { name: 'Skeleton', // 使用的时候需要动态设置 高度，宽度，背景颜色，是否闪下 props: { bg: { type: String, default: '#efefef' }, width: { type: String, default: '100px' }, height: { type: String, default: '100px' }, animated: { type: Boolean, default: false } } } &lt;/script&gt; &lt;style scoped lang="less"&gt; .skeleton { display: inline-block; position: relative; overflow: hidden; vertical-align: middle; .block { width: 100%; height: 100%; border-radius: 2px; } } .shan { &amp;::after { content: ""; position: absolute; animation: shan 1.5s ease 0s infinite; top: 0; width: 50%; height: 100%; background: linear-gradient( to left, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100% ); transform: skewX(-45deg); } } @keyframes shan { 0% { left: -100%; } 100% { left: 120%; } } &lt;/style&gt;</code></pre> <p>&nbsp;全局注册(main.js中记得导入这个文件,并用Vue中use注册)</p> <p>src/componets/library/index.j</p> <pre><code class="language-javascript">import Skeleton from './Skeleton.vue'  export default { install (app) {  app.component(Skeleton.name, XtxSkeleton) } }</code></pre> <p>实现第一个图</p> <p><img loading="lazy" decoding="async" alt="" height="181" src="http://img.555519.xyz/uploads3/20220610/69c0d7cf461b6204f9fbb5cd42cebffa.jpg"></p> <p>&nbsp;src/views/home/components/home-cate.vue</p> <pre><code class="language-javascript">&lt;ul class="menu"&gt; &lt;li :class="{active:categoryId===item.id}" v-for="item in list" :key="item.id" @mouseenter="categoryId=item.id"&gt; &lt;RouterLink to="/"&gt;{<!-- -->{item.name}}&lt;/RouterLink&gt; &lt;template v-if="item.children"&gt; &lt;RouterLink to="/" v-for="sub in item.children" :key="sub.id"&gt;{<!-- -->{sub.name}}&lt;/RouterLink&gt; &lt;/template&gt;  &lt;span v-else&gt;  &lt;Skeleton width="60px" height="18px" style="margin-right:5px" bg="rgba(255,255,255,0.2)" /&gt;  &lt;Skeleton width="50px" height="18px" bg="rgba(255,255,255,0.2)" /&gt;  &lt;/span&gt; &lt;/li&gt; &lt;/ul&gt;</code></pre> <p>封装业务组件src/views/home/components/home-skeleton.vue,实现第二图的效果</p> <p><img loading="lazy" decoding="async" alt="" height="408" src="http://img.555519.xyz/uploads3/20220610/55086381dd679ce9efa7581d2a1dd212.jpg"></p> <pre><code class="language-html">&lt;template&gt; &lt;div class='home-skeleton'&gt; &lt;div class="item" v-for="i in 4" :key="i" :style="{backgroundColor:bg}"&gt; &lt;Skeleton bg="#e4e4e4" width="306px" height="306px" animated /&gt; &lt;Skeleton bg="#e4e4e4" width="160px" height="24px" animated /&gt; &lt;Skeleton bg="#e4e4e4" width="120px" height="24px" animated /&gt; &lt;/div&gt; &lt;/div&gt; &lt;/template&gt;  &lt;script&gt; export default { name: 'HomeSkeleton', props: { bg: { type: String, default: '#fff' } } } &lt;/script&gt;  &lt;style scoped lang='less'&gt; .home-skeleton { width: 1240px; height: 406px; display: flex; justify-content: space-between; .item { width: 306px; .xtx-skeleton ~ .xtx-skeleton{ display: block; margin: 16px auto 0; } } } &lt;/style&gt;</code></pre> <p>在需要用的组件中,导入业务组件使用</p> <pre><code class="language-html">&lt;HomePanel title="人气推荐" sub-title="人气爆款 不容错过"&gt;  &lt;Transition name="fade"&gt;  // 配合了vue中的淡入淡出的动画  &lt;ul v-if="goods.length" ref="pannel" class="goods-list"&gt;  // v-if有数据显示数据 &lt;li v-for="item in goods" :key="item.id"&gt; &lt;RouterLink to="/"&gt; &lt;img :src="item.picture" alt=""&gt; &lt;p class="name"&gt;{<!-- -->{item.title}}&lt;/p&gt; &lt;p class="desc"&gt;{<!-- -->{item.alt}}&lt;/p&gt; &lt;/RouterLink&gt; &lt;/li&gt; &lt;/ul&gt;  &lt;HomeSkeleton v-else /&gt;   // 没有数据就显示骨架  &lt;/Transition&gt;  &lt;/div&gt; &lt;/HomePanel&gt;</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-80690.htm">最新免费领养边牧 最新免费领养边牧视频</a></p>
+                                        <p>下一个：<a href="/news/article-81375.htm">宠物领养协议需要身份证复印件吗有效吗安全吗 领养宠物需要签协议吗</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-19-clash-node-github.htm" title="FlClash机场订阅推荐 | 21.1M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 21.1M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-9-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 20.8M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.8M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-6-free-clash.htm" title="FlClash机场订阅推荐 | 22.6M/S，V2ray/Clash/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 22.6M/S，V2ray/Clash/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-56058.htm" title="python数据可视化-matplotlib入门(5)-饼图和堆叠图">python数据可视化-matplotlib入门(5)-饼图和堆叠图</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-23-free-clash-subscribe.htm" title="FlClash机场订阅推荐 | 23M/S，Clash/SSR/Shadowrocket/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，Clash/SSR/Shadowrocket/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-75868.htm" title="宠物粮利润率怎么算的（宠物粮食生意怎么样）">宠物粮利润率怎么算的（宠物粮食生意怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-12-clash-node-github.htm" title="FlClash机场订阅推荐 | 19M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 19M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-42187.htm" title=".NET 7 Preview 3添加了这些增强功能">.NET 7 Preview 3添加了这些增强功能</a></li>
+                        <li class="py-2"><a href="/news/article-67935.htm" title="重庆宠物狗领养中心地址在哪里（重庆宠物领养中心宠物领养）">重庆宠物狗领养中心地址在哪里（重庆宠物领养中心宠物领养）</a></li>
+                        <li class="py-2"><a href="/news/article-60041.htm" title="国内十大宠物粮食品牌排行榜图片 国内十大宠物粮食品牌排行榜图片大全">国内十大宠物粮食品牌排行榜图片 国内十大宠物粮食品牌排行榜图片大全</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">74</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
