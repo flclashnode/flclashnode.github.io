@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-84191.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue实现拖拽排序、移除</title>
+        <meta name="description" content="vue实现拖拽排序、可用于图片、模块交换位置  效果 以“首页模块”为例    录屏软件很卡，实际效果是非常流畅的  本质都一样，只不过一个是单行、一个是双列，使用的是vuedraggle组件vued" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-84191.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="vue实现拖拽排序、移除" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/f8e7dc604b4e9ee756376b9faaf0afab.webp" />
+        <meta property="og:release_date" content="2025-03-29T09:03:16" />
+    <meta property="og:updated_time" content="2025-03-29T09:03:16" />
+        <meta property="og:description" content="vue实现拖拽排序、可用于图片、模块交换位置  效果 以“首页模块”为例    录屏软件很卡，实际效果是非常流畅的  本质都一样，只不过一个是单行、一个是双列，使用的是vuedraggle组件vued" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue实现拖拽排序、移除">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>vue实现拖拽排序、移除</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>vue实现拖拽排序、可用于图片、模块交换位置</h3> <ul> <li><a href="#_2" rel="nofollow">效果</a></li> <li><a href="#_7" rel="nofollow">以“首页模块”为例</a></li> </ul> </div> </h1> <p>录屏软件很卡，实际效果是非常流畅的<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/c9ede4f08e448ebbb6ba6774087fcf0d.jpg" alt="vue实现拖拽排序、移除"></p> </h1> <p>本质都一样，只不过一个是单行、一个是双列，使用的是vuedraggle组件<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/SortableJS/Vue.Draggable"  rel="nofollow">vuedraggle</a><br /> draggable就是组件，两个组件都写同一个group，则两栏可以互相拖拽，list绑定对应的数据源</p> <pre><code class="prism language-javascript">				<span class="token comment">// 左边栏</span>               <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token string">"float: left"</span><span class="token operator">&gt;</span>                 <span class="token operator">&lt;</span>draggable                     animation<span class="token operator">=</span><span class="token string">"300"</span>                     group<span class="token operator">=</span><span class="token string">"module"</span>                     <span class="token operator">:</span>list<span class="token operator">=</span><span class="token string">"form.left"</span><span class="token operator">&gt;</span>                   <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"left"</span> <span class="token operator">:</span>style<span class="token operator">=</span><span class="token string">"{height: leftModuleHeight}"</span> v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(item,index) in form.left"</span>                        v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"form.left[index]"</span><span class="token operator">&gt;</span>                     <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"text-option"</span><span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> item<span class="token punctuation">.</span>name <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>                     <span class="token operator">&lt;</span>i <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"el-icon-error"</span>                        style<span class="token operator">=</span><span class="token string">"color: red;font-size: 20px;display: flex;margin-top: -55px;margin-left: 190px;cursor: pointer"</span>                        @click<span class="token operator">=</span><span class="token string">"removeModule(item.name)"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>i<span class="token operator">&gt;</span>                   <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>                 <span class="token operator">&lt;</span><span class="token operator">/</span>draggable<span class="token operator">&gt;</span>               <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>               <span class="token comment">// 右边栏</span>                  <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token string">"float: right"</span><span class="token operator">&gt;</span>                 <span class="token operator">&lt;</span>draggable                     animation<span class="token operator">=</span><span class="token string">"300"</span>                     group<span class="token operator">=</span><span class="token string">"module"</span>                     <span class="token operator">:</span>list<span class="token operator">=</span><span class="token string">"form.right"</span><span class="token operator">&gt;</span>                   <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"left"</span> <span class="token operator">:</span>style<span class="token operator">=</span><span class="token string">"{height: rightModuleHeight}"</span> v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(item,index) in form.right"</span>                        v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"form.right[index]"</span><span class="token operator">&gt;</span>                     <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"text-option"</span><span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> item<span class="token punctuation">.</span>name <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>                     <span class="token operator">&lt;</span>i <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"el-icon-error"</span>                        style<span class="token operator">=</span><span class="token string">"color: red;font-size: 20px;display: flex;margin-top: -55px;margin-left: 190px;cursor: pointer"</span>                        @click<span class="token operator">=</span><span class="token string">"removeModule(item.name)"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>i<span class="token operator">&gt;</span>                   <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>                 <span class="token operator">&lt;</span><span class="token operator">/</span>draggable<span class="token operator">&gt;</span>               <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span> </code></pre> <pre><code class="prism language-javascript"><span class="token comment">// 数据</span>  form<span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>         left<span class="token operator">:</span> <span class="token punctuation">[</span>           <span class="token punctuation">{<!-- --></span>id<span class="token operator">:</span> <span class="token string">"xiangmujindu"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"项目进度"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>           <span class="token punctuation">{<!-- --></span>id<span class="token operator">:</span> <span class="token string">"huanjingjiance"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"环境检测"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>           <span class="token punctuation">{<!-- --></span>id<span class="token operator">:</span> <span class="token string">"shipingjiankong"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"视频监控"</span><span class="token punctuation">}</span>         <span class="token punctuation">]</span><span class="token punctuation">,</span>         right<span class="token operator">:</span> <span class="token punctuation">[</span>           <span class="token punctuation">{<!-- --></span>id<span class="token operator">:</span> <span class="token string">"jixiecheliang"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"机械/车辆"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>           <span class="token punctuation">{<!-- --></span>id<span class="token operator">:</span> <span class="token string">"anquanjiankong"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"安全监控"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>           <span class="token punctuation">{<!-- --></span>id<span class="token operator">:</span> <span class="token string">"xiangmudongtai"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"项目动态"</span><span class="token punctuation">}</span>         <span class="token punctuation">]</span>       <span class="token punctuation">}</span><span class="token punctuation">,</span> </code></pre> <pre><code class="prism language-javascript"><span class="token comment">// 动态计算div高度，确保拖拽是，div不会被撑开</span> computed<span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>     <span class="token function-variable function">leftModuleHeight</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>       <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">480</span> <span class="token operator">/</span> <span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>left<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'px'</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token function-variable function">rightModuleHeight</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>       <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token number">480</span> <span class="token operator">/</span> <span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>right<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'px'</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>   <span class="token punctuation">}</span><span class="token punctuation">,</span> method<span class="token operator">:</span> <span class="token punctuation">{<!-- --></span> <span class="token comment">// 移除按钮的操作</span>  <span class="token function">removeModule</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>left<span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span><span class="token parameter">v</span> <span class="token operator">=&gt;</span> v<span class="token punctuation">.</span>name <span class="token operator">===</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>left<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>left<span class="token punctuation">.</span><span class="token function">findIndex</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> value<span class="token punctuation">.</span>name <span class="token operator">===</span> name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>right<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>right<span class="token punctuation">.</span><span class="token function">findIndex</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> value<span class="token punctuation">.</span>name <span class="token operator">===</span> name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">}</span> </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-83478.htm">北京最新免费领养狗狗（北京最新免费领养狗狗地址）</a></p>
+                                        <p>下一个：<a href="/news/article-84192.htm">领养宠物需要注意的事项有哪些（领养宠物需要收费吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-11-clash-windows.htm" title="FlClash机场订阅推荐 | 18.5M/S，Shadowrocket/SSR/Clash/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18.5M/S，Shadowrocket/SSR/Clash/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-39198.htm" title="免费领养宠物包邮吗现在（免费领养宠物送到家）">免费领养宠物包邮吗现在（免费领养宠物送到家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-7-node-share.htm" title="FlClash机场订阅推荐 | 22.6M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 22.6M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-66683.htm" title="动物疫苗公司排名前十名有哪些 动物疫苗公司排名前十名有哪些品牌">动物疫苗公司排名前十名有哪些 动物疫苗公司排名前十名有哪些品牌</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-12-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 23M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-45167.htm" title="用指针低三位存放额外信息的优化方法 &#8211; 程鑫 _在线工具">用指针低三位存放额外信息的优化方法 &#8211; 程鑫 _在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-77230.htm" title="猫三联要隔多久打一针（猫三联要隔多久打一针才有效）">猫三联要隔多久打一针（猫三联要隔多久打一针才有效）</a></li>
+                        <li class="py-2"><a href="/news/article-75202.htm" title="AsyncLocal&lt;T&gt;在链路追踪中的应用_在线工具">AsyncLocal&lt;T&gt;在链路追踪中的应用_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-9-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 20.8M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.8M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-44654.htm" title="猫咪全套疫苗打下来要多少钱（猫三联最晚什么时候打）">猫咪全套疫苗打下来要多少钱（猫三联最晚什么时候打）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">92</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-# FlClash机场订阅推荐 | 18M/S，SSR/Shadowrocket/Clash/V2ray免费节点链接地址分享  更新时间 2025-03-28 10:22:00
+# FlClash机场订阅推荐 | 21.6M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享  更新时间 2025-04-01 09:59:57
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://flclashnode.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### Clash订阅链接
 
-- https://flclashnode.github.io/uploads/2025/03/0-20250328.yaml
-- https://flclashnode.github.io/uploads/2025/03/1-20250328.yaml
-- https://flclashnode.github.io/uploads/2025/03/2-20250328.yaml
-- https://flclashnode.github.io/uploads/2025/03/3-20250328.yaml
-- https://flclashnode.github.io/uploads/2025/03/4-20250328.yaml
+- https://flclashnode.github.io/uploads/2025/04/0-20250401.yaml
+- https://flclashnode.github.io/uploads/2025/04/1-20250401.yaml
+- https://flclashnode.github.io/uploads/2025/04/2-20250401.yaml
+- https://flclashnode.github.io/uploads/2025/04/3-20250401.yaml
+- https://flclashnode.github.io/uploads/2025/04/4-20250401.yaml
 
 ### V2ray订阅链接
 
-- https://flclashnode.github.io/uploads/2025/03/0-20250328.txt
-- https://flclashnode.github.io/uploads/2025/03/1-20250328.txt
-- https://flclashnode.github.io/uploads/2025/03/2-20250328.txt
-- https://flclashnode.github.io/uploads/2025/03/3-20250328.txt
-- https://flclashnode.github.io/uploads/2025/03/4-20250328.txt
+- https://flclashnode.github.io/uploads/2025/04/0-20250401.txt
+- https://flclashnode.github.io/uploads/2025/04/1-20250401.txt
+- https://flclashnode.github.io/uploads/2025/04/2-20250401.txt
+- https://flclashnode.github.io/uploads/2025/04/3-20250401.txt
+- https://flclashnode.github.io/uploads/2025/04/4-20250401.txt
 
 ### Sing-box订阅链接
 
-- https://flclashnode.github.io/uploads/2025/03/20250328.json
+- https://flclashnode.github.io/uploads/2025/04/20250401.json
 
 ## 更多clash节点订阅 ：
 
