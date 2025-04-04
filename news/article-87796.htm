@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-87796.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>python查看包版本、更新单个包、卸载单个包</title>
+        <meta name="description" content="查看python某个包的版本？ pip freeze | grep xxx  或 pip show xxx    更新单个包 使用 pip 一次性更新所有 Python 软件包并不是一个好主意。我发现" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-87796.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="python查看包版本、更新单个包、卸载单个包" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/9e7aa12947ac990d4d09d941af87e29d.webp" />
+        <meta property="og:release_date" content="2025-04-03T08:34:24" />
+    <meta property="og:updated_time" content="2025-04-03T08:34:24" />
+        <meta property="og:description" content="查看python某个包的版本？ pip freeze | grep xxx  或 pip show xxx    更新单个包 使用 pip 一次性更新所有 Python 软件包并不是一个好主意。我发现" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="python查看包版本、更新单个包、卸载单个包">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>python查看包版本、更新单个包、卸载单个包</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-dracula"> </h1> <h2> <a id="python_1" rel="nofollow"></a>查看python某个包的版本？</h2> <pre><code class="prism language-bash">pip freeze <span class="token operator">|</span> <span class="token function">grep</span> xxx </code></pre> <p>或</p> <pre><code class="prism language-bash">pip show xxx  </code></pre> <h2> <a id="_11" rel="nofollow"></a>更新单个包</h2> <p>使用 pip 一次性更新所有 Python 软件包并不是一个好主意。我发现一次性更新后，软件包之间的依赖关系被破坏了，所以请确保<strong>只更新你想要更新的软件包。</strong></p> <p>更新单个包，如celery</p> <pre><code class="prism language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-U</span> celery </code></pre> <p>或</p> <pre><code class="prism language-bash">pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span>  celery </code></pre> <p>-U:升级 原来已经安装的包，不带U不会装新版本，<strong>带上U才会更新到最新版本</strong>。</p> <p>-i: 指定库的安装源 清华源</p> <pre><code class="prism language-bash">pip <span class="token function">install</span> pyyaml <span class="token parameter variable">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple </code></pre> <h2> <a id="_30" rel="nofollow"></a>卸载某个包</h2> <p>卸载某个包，如numpy</p> <pre><code class="prism language-bash">pip uninstall numpy </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-87067.htm">开一家宠物食品加工厂赚钱吗知乎（宠物食品加工厂要投资多少）</a></p>
+                                        <p>下一个：<a href="/news/article-87797.htm">猫粮品牌推荐进口（猫粮进口什么牌子好）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-80690.htm" title="最新免费领养边牧 最新免费领养边牧视频">最新免费领养边牧 最新免费领养边牧视频</a></li>
+                        <li class="py-2"><a href="/news/article-69885.htm" title="宠物店一个月能卖多少狗粮和狗粮（宠物店一个月能卖多少只狗）">宠物店一个月能卖多少狗粮和狗粮（宠物店一个月能卖多少只狗）</a></li>
+                        <li class="py-2"><a href="/news/article-71192.htm" title="天津宠物店寄养宠物一天多少钱（天津宠物店寄养宠物一天多少钱费用）">天津宠物店寄养宠物一天多少钱（天津宠物店寄养宠物一天多少钱费用）</a></li>
+                        <li class="py-2"><a href="/news/article-82766.htm" title="动物医院开设条件是什么样的呢（开动物医院需要多少资金）">动物医院开设条件是什么样的呢（开动物医院需要多少资金）</a></li>
+                        <li class="py-2"><a href="/news/article-86348.htm" title="动物疫苗经销商电话号码（动物疫苗厂家电话）">动物疫苗经销商电话号码（动物疫苗厂家电话）</a></li>
+                        <li class="py-2"><a href="/news/article-71191.htm" title="我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？">我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-clash.htm" title="FlClash机场订阅推荐 | 21.1M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 21.1M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-78605.htm" title="领养宠物流程图（宠物领养系统流程图）">领养宠物流程图（宠物领养系统流程图）</a></li>
+                        <li class="py-2"><a href="/news/article-70527.htm" title="FreeRTOS进阶之任务切换完全分析_操作系统_">FreeRTOS进阶之任务切换完全分析_操作系统_</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-12-clash-node-github.htm" title="FlClash机场订阅推荐 | 19M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 19M/S，Clash/V2ray/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

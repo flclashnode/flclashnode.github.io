@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-87066.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>.NET混合开发解决方案WebView2的进程模型</title>
+        <meta name="description" content="系列目录【已更新最新开发文章，点击查看详细】   WebView2控件应用详解系列博客 .NET桌面程序集成Web网页开发的十种解决方案 .NET混合开发解决方案1 WebView2简介 .NET混合" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-87066.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content=".NET混合开发解决方案WebView2的进程模型" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/65845bb25d53551caac078946948a84c.webp" />
+        <meta property="og:release_date" content="2025-04-02T07:45:59" />
+    <meta property="og:updated_time" content="2025-04-02T07:45:59" />
+        <meta property="og:description" content="系列目录【已更新最新开发文章，点击查看详细】   WebView2控件应用详解系列博客 .NET桌面程序集成Web网页开发的十种解决方案 .NET混合开发解决方案1 WebView2简介 .NET混合" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content=".NET混合开发解决方案WebView2的进程模型">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>.NET混合开发解决方案WebView2的进程模型</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="comment_nav_orange"><strong>系列目录<a title="已更新最新开发文章，点击查看详细" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/SavionZhang/p/16193959.html"  target="_blank" rel="nofollow">【已更新最新开发文章，点击查看详细】</a></strong></div> <blockquote> <p><span> WebView2控件应用详解系列博客</span></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/SavionZhang/p/16194142.html"  target="_blank" rel="nofollow">.NET桌面程序集成Web网页开发的十种解决方案</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/SavionZhang/p/16193911.html"  target="_blank" rel="nofollow">.NET混合开发解决方案1 WebView2简介</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/SavionZhang/p/16194897.html"  target="_blank" rel="nofollow">.NET混合开发解决方案2 WebView2与Edge浏览器的区别</a></p> </blockquote> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">　　WebView2 运行时使用与 Microsoft Edge 浏览器相同的进程模型。<br /></span></p> <div id="comment_nav_green"><strong>WebView2 运行时中的进程</strong></div> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"></span><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">WebView2 进程组是 WebView2 运行时进程的集合。 WebView2 进程组包括以下内容：</span></p> <ul> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">单个浏览器进程。</span></li> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">一个或多个渲染器（呈现器）进程。</span></li> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">其他帮助程序进程，例如 GPU 进程和音频服务进程。</span></li> </ul> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/f94dd9f4145ccf92fe67d7f3f1390cb8.jpg" alt=".NET混合开发解决方案WebView2的进程模型"></span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">当WebView2应用程序使用WebView2功能时，WebView2进程组中进程的数量和存在可能会发生变化。（但是，WebView2进程组中只有一个特定的浏览器进程。）例如，从同一个 CoreWebView2Environment 市里创建新的WebView2实例，但在源属性中使用不同的域，通常会启动一个新的渲染器进程。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">渲染器进程的数量可能会根据以下情况而变化：</span></p> <ul> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">在WebView2运行时中使用站点隔离功能。请参见<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developers.google.com/web/updates/2018/09/inside-browser-part1#site-isolation"  target="_blank" rel="nofollow">每帧渲染器进程-站点隔离</a>。</span></li> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">在使用同一用户数据文件夹的WebView2实例中呈现的不同断开连接的源的数量。</span></li> </ul> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">控制何时创建这些额外进程的逻辑取决于Chromium体系结构，并且超出了 WebView2 运行时的范围。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"></span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">下面是在真实项目中测试的结果</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">（1）电脑关机，重新开机，未运行Edge浏览器，且未运行与WebView2相关的宿主应用程序。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/12dce4d47ddc6841c791f226e2547016.jpg" alt=".NET混合开发解决方案WebView2的进程模型" width="600"/></span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">后台进程中有5个默认Edge进程在运行</span></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/2383269f9bf454a372f775676ffb94da.jpg" alt=".NET混合开发解决方案WebView2的进程模型" width="800"/></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">（2）运行“建筑工程施工图AI审查系统”，其中红色框内是使用WebView2组件加载的网页应用</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e24ebe588c414e93366696d7cedf47d4.jpg" alt=".NET混合开发解决方案WebView2的进程模型" width="1000" loading="lazy"/></span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">任务管理器中，进程“Zjgsgts.Sczj”下启动了7个WebView2的子进程</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c343728912d973e28bf9354701cf5ecf.jpg" alt=".NET混合开发解决方案WebView2的进程模型"></span></p> <p><span style="color: rgba(0, 0, 255, 1); font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">其中某个第1个、第2个进程是渲染器进程，因为三维模型的渲染过程消耗的内存较多。第3、4、5、6、7是GPU进程或者其他帮助类程序进程。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px; color: rgba(0, 0, 255, 1)">而浏览器进程依然为5个，说明其中一个是 WebView2 进程组中的浏览器进程。</span></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/1b160a76c43548aef1effe739db29cb0.jpg" alt=".NET混合开发解决方案WebView2的进程模型"></p> <div><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">在宿主程序的根目录下多了两个文件夹</span></div> <div><strong><strong><strong><img decoding="async" src="https://img2022.cnblogs.com/blog/142275/202204/142275-20220426175549150-24247159.png" alt=".NET混合开发解决方案WebView2的进程模型"></strong></strong></strong></p> <ul> <li><strong><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">runtimes 目录</span></strong> <ul> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">结构如下图，包含一个WebView2运行时加载器组件&nbsp;&nbsp;WebView2Loader.dll 。</span></li> </ul> </li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/53c72e0a2fb90b1ba70624bccfdb00be.jpg" alt=".NET混合开发解决方案WebView2的进程模型"></p> <ul> <li><strong><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">&nbsp;Zjgsgtsc.Sczj.exe.WebView2 目录</span></strong> <ul> <li><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">结构图下图，里面包含运行过程中其他的辅助配置信息以及缓存等信息</span></li> </ul> </li> </ul> </div> <div><strong><strong><img decoding="async" src="https://img2022.cnblogs.com/blog/142275/202204/142275-20220426180049287-1049271050.png" alt=".NET混合开发解决方案WebView2的进程模型"></strong></strong></div> <div><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">关于该目录信息，在后续的博客中会详解介绍。</span></div> <div id="comment_nav_green"><strong>WebView2 运行时进程和用户数据文件夹</strong></div> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">　　WebView2 运行时进程集合中的所有进程都绑定到浏览器进程，而浏览器进程又与单个用户数据文件夹相关联。 如果应用程序使用多个用户数据文件夹，将为每个用户数据文件夹创建 WebView2 运行时进程的集合。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/bc390f80c0210ca0155465c7edfdfd3c.jpg" alt=".NET混合开发解决方案WebView2的进程模型"></span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">　　用户数据文件夹可由多个应用程序共享，但请务必考虑对性能和管理的影响，如<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/microsoft-edge/webview2/concepts/user-data-folder?tabs=win32"  target="_blank" rel="nofollow">“管理用户数据”文件夹</a>中所述。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">　　若要使用多个用户数据文件夹，WebView2 应用程序需要创建不同的 CoreWebView2Environment 对象。 WebView2通过配置的对象为给定用户数据文件夹创建CoreWebView2Environment实例。 每个 CoreWebView2Environment 对象都需要使用不同的用户数据文件夹值进行配置。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">　　为给定的用户数据文件夹创建第一个WebView2实例时，将启动与该用户数据文件夹关联的WebView2运行时进程集合的浏览器进程。所有其他进程都将在该浏览器进程的生命周期内进行管理。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">　　CoreWebView2Environment代表一个用户数据文件夹及其相关进程的集合。给定的渲染器进程与单个CoreWebView2实例不关联，因为渲染器进程可以为使用同一用户数据文件夹的多个CoreWebView2实例中的帧提供服务，具体取决于网站隔离。请参见<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developers.google.com/web/updates/2018/09/inside-browser-part1#site-isolation"  target="_blank" rel="nofollow">每帧渲染器进程-站点隔离</a></span></p> <div id="comment_nav_green"><strong><strong>处理进程事件和生命周期</strong></strong></div> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">若要对浏览器和渲染器进程中的崩溃和挂起做出反应，请使用 CoreWebView2 的 ProcessFailed 事件。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">若要安全地关闭相关的浏览器和渲染器进程，请使用 CoreWebView2Controller 的 Close 方法。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">若要打开浏览器任务管理器，请调用<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.web.webview2.core.corewebview2.opentaskmanagerwindow?view=webview2-dotnet-1.0.1185.39#microsoft-web-webview2-core-corewebview2-opentaskmanagerwindow"  target="_blank" rel="nofollow">OpenTaskManagerWindows</a> 方法。</span></p> <p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 14px">其他事件，请参考<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.web.webview2.wpf.webview2?view=webview2-dotnet-1.0.1185.39"  target="_blank" rel="nofollow">WebView2 API</a>。</span></p> <div id="comment_nav_orange"><strong>系列目录<a title="已更新最新开发文章，点击查看详细" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/SavionZhang/p/16193959.html"  target="_blank" rel="nofollow">【已更新最新开发文章，点击查看详细】</a></strong></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-86348.htm">动物疫苗经销商电话号码（动物疫苗厂家电话）</a></p>
+                                        <p>下一个：<a href="/news/article-87067.htm">开一家宠物食品加工厂赚钱吗知乎（宠物食品加工厂要投资多少）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 20.5M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.5M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 19.5M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.5M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-68610.htm" title="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-84192.htm" title="领养宠物需要注意的事项有哪些（领养宠物需要收费吗）">领养宠物需要注意的事项有哪些（领养宠物需要收费吗）</a></li>
+                        <li class="py-2"><a href="/news/article-66035.htm" title="动物疫苗在哪里买的到呢（动物注射疫苗注射哪里）">动物疫苗在哪里买的到呢（动物注射疫苗注射哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-31-free-node-subscribe.htm" title="FlClash机场订阅推荐 | 21.8M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 21.8M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-75202.htm" title="AsyncLocal&lt;T&gt;在链路追踪中的应用_在线工具">AsyncLocal&lt;T&gt;在链路追踪中的应用_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-24-free-clash-stash.htm" title="FlClash机场订阅推荐 | 20M/S，Clash/Shadowrocket/V2ray/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 20M/S，Clash/Shadowrocket/V2ray/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-74492.htm" title="成都宠物领养平台电话是多少啊（成都宠物领养机构电话）">成都宠物领养平台电话是多少啊（成都宠物领养机构电话）</a></li>
+                        <li class="py-2"><a href="/news/article-68609.htm" title="Ribbon（一）远程调用RestTemplate">Ribbon（一）远程调用RestTemplate</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
