@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-90711.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>如何在vue3使用骨架屏</title>
+        <meta name="description" content="为什么要使用  数据都都是ajax请求渲染来的 然后它可能请求的慢就会一片白 这不好 所以就要使用骨架屏了 站位 像这样   创建个组件 &lt;template&gt;&lt;divclass="x" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-90711.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="如何在vue3使用骨架屏" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/0751cc4093373c8c69c9772085789e08.webp" />
+        <meta property="og:release_date" content="2025-04-07T09:03:30" />
+    <meta property="og:updated_time" content="2025-04-07T09:03:30" />
+        <meta property="og:description" content="为什么要使用  数据都都是ajax请求渲染来的 然后它可能请求的慢就会一片白 这不好 所以就要使用骨架屏了 站位 像这样   创建个组件 &lt;template&gt;&lt;divclass="x" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="如何在vue3使用骨架屏">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>如何在vue3使用骨架屏</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <h3><a id="_0" rel="nofollow"></a>为什么要使用</h3> <blockquote> <h4><a id="ajax_______1" rel="nofollow"></a>数据都都是ajax请求渲染来的 然后它可能请求的慢就会一片白 这不好 所以就要使用骨架屏了 站位 像这样</h4> </blockquote> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220605/9633cf6f832a66320ef34beb270b8908.jpg" alt="如何在vue3使用骨架屏"></p> <h5><a id="_5" rel="nofollow"></a>创建个组件</h5> <pre><code class="prism language-js"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>div<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"xtx-skeleton shan"</span><span class="token operator">:</span>style<span class="token operator">=</span><span class="token string">"{width:'100px',height:'50px'}"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token number">1</span> 盒子<span class="token operator">--</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>div<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"block"</span><span class="token operator">:</span>style<span class="token operator">=</span><span class="token string">"{backgroundColor:'black'}"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token number">2</span> 闪效果 xtx<span class="token operator">-</span>skeleton 伪元素<span class="token operator">--</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span><span class="token keyword">export</span><span class="token keyword">default</span><span class="token punctuation">{<!-- --></span>   name<span class="token operator">:</span><span class="token string">'Skeleton'</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span class="token operator">&lt;</span>style scoped lang<span class="token operator">=</span><span class="token string">"less"</span><span class="token operator">&gt;</span><span class="token punctuation">.</span>xtx<span class="token operator">-</span>skeleton<span class="token punctuation">{<!-- --></span>   display<span class="token operator">:</span> inline<span class="token operator">-</span>block<span class="token punctuation">;</span>   position<span class="token operator">:</span> relative<span class="token punctuation">;</span>   overflow<span class="token operator">:</span> hidden<span class="token punctuation">;</span>   vertical<span class="token operator">-</span>align<span class="token operator">:</span> middle<span class="token punctuation">;</span><span class="token punctuation">.</span>block<span class="token punctuation">{<!-- --></span>     width<span class="token operator">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>     height<span class="token operator">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>     border<span class="token operator">-</span>radius<span class="token operator">:</span><span class="token number">2</span>px<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">.</span>shan<span class="token punctuation">{<!-- --></span><span class="token operator">&amp;</span><span class="token operator">:</span><span class="token operator">:</span>after<span class="token punctuation">{<!-- --></span>     content<span class="token operator">:</span><span class="token string">""</span><span class="token punctuation">;</span>     position<span class="token operator">:</span> absolute<span class="token punctuation">;</span>     animation<span class="token operator">:</span> shan<span class="token number">1.5</span>s ease<span class="token number">0</span>s infinite<span class="token punctuation">;</span>     top<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">;</span>     width<span class="token operator">:</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span>     height<span class="token operator">:</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>     background<span class="token operator">:</span> linear<span class="token operator">-</span><span class="token function">gradient</span><span class="token punctuation">(</span>       to left<span class="token punctuation">,</span><span class="token function">rgba</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token function">rgba</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0.3</span><span class="token punctuation">)</span><span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">,</span><span class="token function">rgba</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     transform<span class="token operator">:</span><span class="token function">skewX</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45</span>deg<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span> @keyframes shan<span class="token punctuation">{<!-- --></span><span class="token number">0</span><span class="token operator">%</span><span class="token punctuation">{<!-- --></span>     left<span class="token operator">:</span><span class="token operator">-</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">{<!-- --></span>     left<span class="token operator">:</span><span class="token number">120</span><span class="token operator">%</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">&gt;</span></code></pre> <p>样子是有过度效果的 闪闪的<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220605/0ab3f9440e8e980248650b87591fc1fb.jpg" alt="如何在vue3使用骨架屏"></p> <h4><a id="__62" rel="nofollow"></a>这样写都是固定大小 要修改一下</h4> <pre><code class="prism language-js"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>div<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"xtx-skeleton shan"</span><span class="token operator">:</span>style<span class="token operator">=</span><span class="token string">"{width:width,height:height}"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token number">1</span> 盒子<span class="token operator">--</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>div<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"block"</span><span class="token operator">:</span>style<span class="token operator">=</span><span class="token string">"{backgroundColor:background}"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token number">2</span> 闪效果 xtx<span class="token operator">-</span>skeleton 伪元素<span class="token operator">--</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span><span class="token operator">&lt;</span>script<span class="token operator">&gt;</span><span class="token keyword">export</span><span class="token keyword">default</span><span class="token punctuation">{<!-- --></span>   name<span class="token operator">:</span><span class="token string">'XtxSkeleton'</span><span class="token punctuation">,</span>   props<span class="token operator">:</span><span class="token punctuation">{<!-- --></span>     width<span class="token operator">:</span><span class="token punctuation">{<!-- --></span><span class="token keyword">default</span><span class="token operator">:</span><span class="token string">'30px'</span><span class="token punctuation">,</span>       type<span class="token operator">:</span> String<span class="token punctuation">}</span><span class="token punctuation">,</span>     height<span class="token operator">:</span><span class="token punctuation">{<!-- --></span><span class="token keyword">default</span><span class="token operator">:</span><span class="token string">'30px'</span><span class="token punctuation">,</span>       type<span class="token operator">:</span> String<span class="token punctuation">}</span><span class="token punctuation">,</span>     background<span class="token operator">:</span><span class="token punctuation">{<!-- --></span><span class="token keyword">default</span><span class="token operator">:</span><span class="token string">'black'</span><span class="token punctuation">,</span>       type<span class="token operator">:</span> String<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span></code></pre> <h4><a id="__93" rel="nofollow"></a>在使用的时候 传入需要的大小就行了</h4> <pre><code class="prism language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>XtxSkeleton</span><span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100px<span class="token punctuation">"</span></span><span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100px<span class="token punctuation">"</span></span><span class="token attr-name">background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>blue<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span></code></pre> <h4><a id="_98" rel="nofollow"></a>全局组成</h4> <pre><code class="prism language-js"><span class="token keyword">import</span> XtxSkeleton<span class="token keyword">from</span><span class="token string">'@/components/XtxSkeleton.vue'</span><span class="token keyword">export</span><span class="token keyword">default</span><span class="token punctuation">{<!-- --></span><span class="token function">install</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>     app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span>XtxSkeleton<span class="token punctuation">.</span>name<span class="token punctuation">,</span> XtxSkeleton<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <h4><a id="_108" rel="nofollow"></a>真实使用</h4> <pre><code class="prism language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>menu<span class="token punctuation">"</span></span><span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$store.state.category.list.length &gt; 0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token attr-name">:class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{active:item.id===id}<span class="token punctuation">"</span></span><span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item in categoryList<span class="token punctuation">"</span></span><span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item.id<span class="token punctuation">"</span></span><span class="token attr-name">@mouseenter</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>id = item.id<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RouterLink</span><span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> {<!-- -->{ item.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RouterLink</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item.children<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RouterLink</span><span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sub in item.children.slice(0, 2)<span class="token punctuation">"</span></span><span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sub.id<span class="token punctuation">"</span></span><span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>             {<!-- -->{ sub.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RouterLink</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>menu<span class="token punctuation">"</span></span><span class="token attr-name">v-else</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>(item,idx) in 10<span class="token punctuation">"</span></span><span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>idx<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>XtxSkeleton</span><span class="token style-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token style language-css"><span class="token property">margin-right</span><span class="token punctuation">:</span>10px</span><span class="token punctuation">"</span></span></span><span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>50px<span class="token punctuation">"</span></span><span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>25px<span class="token punctuation">"</span></span><span class="token attr-name">background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#3d3c3b<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>XtxSkeleton</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>XtxSkeleton</span><span class="token style-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token style language-css"><span class="token property">margin-right</span><span class="token punctuation">:</span>10px</span><span class="token punctuation">"</span></span></span><span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>50px<span class="token punctuation">"</span></span><span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>25px<span class="token punctuation">"</span></span><span class="token attr-name">background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#3d3c3b<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>XtxSkeleton</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>XtxSkeleton</span><span class="token style-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token style language-css"><span class="token property">margin-right</span><span class="token punctuation">:</span>10px</span><span class="token punctuation">"</span></span></span><span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>50px<span class="token punctuation">"</span></span><span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>25px<span class="token punctuation">"</span></span><span class="token attr-name">background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#3d3c3b<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>XtxSkeleton</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-90710.htm">vue3使用vuex实现页面实时更新数据（setup）</a></p>
+                                        <p>下一个：<a href="/news/article-90868.htm">SpringBoot 基本原理</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-84192.htm" title="领养宠物需要注意的事项有哪些（领养宠物需要收费吗）">领养宠物需要注意的事项有哪些（领养宠物需要收费吗）</a></li>
+                        <li class="py-2"><a href="/news/article-75201.htm" title="谈谈高并发系统的一些解决方案">谈谈高并发系统的一些解决方案</a></li>
+                        <li class="py-2"><a href="/news/article-92247.htm" title="动物疫苗公司10强排名最新（动物疫苗公司10强排名最新）">动物疫苗公司10强排名最新（动物疫苗公司10强排名最新）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 20.5M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.5M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-71192.htm" title="天津宠物店寄养宠物一天多少钱（天津宠物店寄养宠物一天多少钱费用）">天津宠物店寄养宠物一天多少钱（天津宠物店寄养宠物一天多少钱费用）</a></li>
+                        <li class="py-2"><a href="/news/article-71191.htm" title="我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？">我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-11-clash-stash.htm" title="FlClash机场订阅推荐 | 21.3M/S，SSR/Clash/Shadowrocket/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 21.3M/S，SSR/Clash/Shadowrocket/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-6-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.2M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.2M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-69884.htm" title="聊城宠物用品批发市场在哪里呀（聊城宠物用品批发市场在哪里呀多少钱）">聊城宠物用品批发市场在哪里呀（聊城宠物用品批发市场在哪里呀多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-92244.htm" title="动物防疫站营业时间是几点 动物防疫站营业时间是几点到几点">动物防疫站营业时间是几点 动物防疫站营业时间是几点到几点</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

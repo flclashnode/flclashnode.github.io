@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-90710.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue3使用vuex实现页面实时更新数据（setup）</title>
+        <meta name="description" content="我项目中使用ws获取数据，因为数据是不断更新的，vue页面只更新一次就不更新了，然后暂时只能想到vuex来保存更新状态，页面监听数据实现实时更新。下面是我测试时用的数据，没有用ws，用的是定时器模拟定" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-90710.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="vue3使用vuex实现页面实时更新数据（setup）" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/2264057b4a79eef4f455febd3bee6b17.webp" />
+        <meta property="og:release_date" content="2025-04-07T09:03:30" />
+    <meta property="og:updated_time" content="2025-04-07T09:03:30" />
+        <meta property="og:description" content="我项目中使用ws获取数据，因为数据是不断更新的，vue页面只更新一次就不更新了，然后暂时只能想到vuex来保存更新状态，页面监听数据实现实时更新。下面是我测试时用的数据，没有用ws，用的是定时器模拟定" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue3使用vuex实现页面实时更新数据（setup）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>vue3使用vuex实现页面实时更新数据（setup）</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>我项目中使用ws获取数据，因为数据是不断更新的，vue页面只更新一次就不更新了，然后暂时只能想到vuex来保存更新状态，页面监听数据实现实时更新。下面是我测试时用的数据，没有用ws，用的是定时器模拟定时发送数据。<br /> 1.项目引入vue</p> <pre><code class="prism language-html">npm i vuex </code></pre> <p>2.main.js引入vuex</p> <pre><code class="prism language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{<!-- --></span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span> <span class="token keyword">import</span> <span class="token string">'./style.css'</span> <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span> <span class="token comment">//vuex</span> <span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store/index.js'</span> <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> echarts <span class="token keyword">from</span> <span class="token string">'echarts'</span> <span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span> <span class="token comment">// 全局挂载echarts</span> <span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">.</span>config<span class="token punctuation">.</span>globalProperties<span class="token punctuation">.</span>$echarts <span class="token operator">=</span> echarts <span class="token function">createApp</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span> </code></pre> <p>3.新建store文件夹<br /> index.js里写vuex</p> <pre><code class="prism language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{<!-- --></span> createStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>  <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>     <span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>         <span class="token literal-property property">iotData</span><span class="token operator">:</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token punctuation">,</span>         <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token literal-property property">getters</span><span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>          <span class="token function-variable function">getStateCount</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'想发火啊'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token keyword">return</span> state<span class="token punctuation">.</span>iotData<span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>         <span class="token function">addCount</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             state<span class="token punctuation">.</span>count <span class="token operator">+=</span> payload         <span class="token punctuation">}</span><span class="token punctuation">,</span>         <span class="token function">setIOTData</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             state<span class="token punctuation">.</span>iotData <span class="token operator">=</span> data             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'setIOTData方法'</span><span class="token punctuation">,</span> state<span class="token punctuation">.</span>iotData<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span><span class="token punctuation">,</span>         <span class="token function">updateIOTTagConfig</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token comment">//重点，要不然页面数据不更新</span>             state<span class="token punctuation">.</span>iotData<span class="token operator">=</span><span class="token keyword">null</span>             state<span class="token punctuation">.</span>iotData <span class="token operator">=</span> data             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>iotData<span class="token punctuation">,</span> <span class="token string">'进入mutations'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>         <span class="token function">asyncAddStoreCount</span><span class="token punctuation">(</span><span class="token parameter">store<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> <span class="token comment">// 第一个参数是vuex固定的参数，不需要手动去传递</span>             store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">"addCount"</span><span class="token punctuation">,</span> payload<span class="token punctuation">)</span>         <span class="token punctuation">}</span><span class="token punctuation">,</span>         <span class="token function">asyncupdateIOTTagConfig</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{<!-- --></span> commit<span class="token punctuation">,</span> state <span class="token punctuation">}</span><span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'updateIOTTagConfig'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>         <span class="token punctuation">}</span><span class="token punctuation">,</span>      <span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token punctuation">{<!-- --></span>      <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>  <span class="token keyword">export</span> <span class="token keyword">default</span> store  </code></pre> <p>3.在传输数据的页面引入vuex (api.js)<br /> (注意，这里我用的是定时器，另外不要在意这么多方法传这个数组，你也可以就一个方法里使用vuex，我这个就是测试写的）</p> <pre><code class="prism language-javascript"><span class="token keyword">let</span> timer <span class="token keyword">import</span>  store  <span class="token keyword">from</span> <span class="token string">"../store/index"</span><span class="token punctuation">;</span> <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">myStopEcharts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">startEcharts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>       timer <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">var</span> ydata1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             ydata1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span> <span class="token string-property property">'id'</span><span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string-property property">'serialNumber'</span><span class="token operator">:</span> <span class="token number">2001</span><span class="token punctuation">,</span> <span class="token string-property property">'time'</span><span class="token operator">:</span> <span class="token number">2022</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>         <span class="token punctuation">}</span>         <span class="token function">jj</span><span class="token punctuation">(</span>ydata1<span class="token punctuation">)</span>             <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>  <span class="token keyword">function</span> <span class="token function">jj</span><span class="token punctuation">(</span><span class="token parameter">ydata1</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">const</span> messageList <span class="token operator">=</span> ydata1     <span class="token function">hh</span><span class="token punctuation">(</span>messageList<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token keyword">function</span> <span class="token function">hh</span><span class="token punctuation">(</span><span class="token parameter">messageList</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token function">runExit</span><span class="token punctuation">(</span>messageList<span class="token punctuation">)</span>  <span class="token punctuation">}</span> <span class="token keyword">function</span> <span class="token function">runExit</span><span class="token punctuation">(</span><span class="token parameter">message</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token function">exit</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span> <span class="token punctuation">}</span>  <span class="token keyword">var</span> exitArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">function</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>        exitArr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span>data<span class="token punctuation">)</span>     <span class="token keyword">if</span> <span class="token punctuation">(</span>exitArr<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>          exitArr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">17</span><span class="token punctuation">)</span>         <span class="token comment">// console.log(s,exitArr,'pos');</span>     <span class="token punctuation">}</span>      store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'asyncupdateIOTTagConfig'</span><span class="token punctuation">,</span>exitArr<span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>4.渲染页面</p> <pre><code class="prism language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>   {<!-- -->{name}}    <span class="token comment">&lt;!-- &lt;h1&gt;vuex中的数据{<!-- -->{ store.state.count }}&lt;/h1&gt;   &lt;button @click="changeStoreCount"&gt;改变vuex数据&lt;/button&gt;   &lt;button @click="asyncChangeStoreCount"&gt;异步改变vuex数据&lt;/button&gt; --&gt;</span>   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>echarts</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>echarts</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript"> <span class="token keyword">import</span> <span class="token punctuation">{<!-- --></span> defineComponent<span class="token punctuation">,</span> computed<span class="token punctuation">,</span>ref<span class="token punctuation">,</span> watch<span class="token punctuation">,</span> toRaw <span class="token punctuation">,</span>onUnmounted<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span> <span class="token keyword">import</span> echarts <span class="token keyword">from</span> <span class="token string">"./echarts.vue"</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token punctuation">{<!-- --></span> useStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vuex"</span><span class="token punctuation">;</span> <span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">"axios"</span><span class="token punctuation">;</span> <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>   <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"HelloWorld"</span><span class="token punctuation">,</span>   <span class="token literal-property property">components</span><span class="token operator">:</span><span class="token punctuation">{<!-- --></span>echarts<span class="token punctuation">}</span><span class="token punctuation">,</span>   <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">let</span> <span class="token punctuation">{<!-- --></span>state<span class="token punctuation">,</span> commit<span class="token punctuation">,</span>getters<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//使用计算属性动态拿到vuex的值</span>     <span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{<!-- --></span><span class="token keyword">return</span> state<span class="token punctuation">.</span>iotData<span class="token punctuation">}</span><span class="token punctuation">)</span>     <span class="token comment">// let UserInfoNoParams = computed(() =&gt; getters['getStateCount'])</span>     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>state<span class="token punctuation">.</span>iotData<span class="token punctuation">,</span><span class="token string">'哎'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// commit("setIOTData", 1);</span>     <span class="token comment">// const nextAge = computed({<!-- --></span>     <span class="token comment">//    get() {<!-- --></span>     <span class="token comment">//     return store.iotData</span>     <span class="token comment">//   },</span>     <span class="token comment">//   // set(value) {<!-- --></span>     <span class="token comment">//   //   console.log(value)  //  输出新修改的值</span>     <span class="token comment">//   //   return age.value = value - 1</span>     <span class="token comment">//   // }</span>     <span class="token comment">// })</span>     <span class="token comment">//监听数据</span>      <span class="token function">watch</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{<!-- --></span>       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span><span class="token string">"改变的值"</span><span class="token punctuation">,</span> <span class="token function">toRaw</span><span class="token punctuation">(</span>newVal<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"旧"</span><span class="token punctuation">,</span>oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{<!-- --></span><span class="token literal-property property">immediate</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token literal-property property">deep</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// console.log(nextAge,'nextAge');</span>     <span class="token keyword">return</span> <span class="token punctuation">{<!-- --></span>name<span class="token punctuation">}</span><span class="token punctuation">;</span>     <span class="token comment">//   const changeStoreCount = () =&gt; {<!-- --></span>     <span class="token comment">//     store.commit("addCount", 1)</span>     <span class="token comment">//   }</span>     <span class="token comment">//   const asyncChangeStoreCount = () =&gt; {<!-- --></span>     <span class="token comment">//     setTimeout(() =&gt; {<!-- --></span>     <span class="token comment">//  // asyncAddStoreCount是mutations中的方法，2是传递过去的数据</span>     <span class="token comment">//  // 异步改变vuex用dispatch方法，这里用setTimeout模拟异步操作</span>     <span class="token comment">//       store.dispatch("asyncAddStoreCount", 2)</span>     <span class="token comment">//     }, 1000)</span>     <span class="token comment">//   }</span>     <span class="token comment">// return { store, changeStoreCount, asyncChangeStoreCount }</span>   <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span> </code></pre> <p>代码可能有点乱，不过能实现效果。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-89980.htm">宠物领养协议书电子版怎么弄出来 宠物领养协议书电子版怎么弄出来的</a></p>
+                                        <p>下一个：<a href="/news/article-90711.htm">如何在vue3使用骨架屏</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-73168.htm" title="宠物粮行业分析报告模板怎么写（宠物粮行业环境分析）">宠物粮行业分析报告模板怎么写（宠物粮行业环境分析）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 18.1M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 18.1M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-20-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 20.3M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 20.3M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-89979.htm" title="如何在 Java 中实现无向环和有向环的检测">如何在 Java 中实现无向环和有向环的检测</a></li>
+                        <li class="py-2"><a href="/news/article-75866.htm" title="VSCode插件离线安装">VSCode插件离线安装</a></li>
+                        <li class="py-2"><a href="/news/article-90868.htm" title="SpringBoot 基本原理">SpringBoot 基本原理</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-10-node-share-links.htm" title="FlClash机场订阅推荐 | 19.2M/S，V2ray/Shadowrocket/Clash/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 19.2M/S，V2ray/Shadowrocket/Clash/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-70528.htm" title="宠物粮网店名字大全四个字（宠物粮取名）">宠物粮网店名字大全四个字（宠物粮取名）</a></li>
+                        <li class="py-2"><a href="/news/article-71191.htm" title="我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？">我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？</a></li>
+                        <li class="py-2"><a href="/news/article-73840.htm" title="省内寄宠物用什么快递（省内邮寄宠物）">省内寄宠物用什么快递（省内邮寄宠物）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

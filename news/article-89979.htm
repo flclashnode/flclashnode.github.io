@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-89979.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>如何在 Java 中实现无向环和有向环的检测</title>
+        <meta name="description" content="一个含有环的无向图如下所示，其中有两个环，分别是 0-2-1-0 和 2-3-4-2：  要检测无向图中的环，可以使用深度优先搜索。假设从顶点 0 出发，再走到相邻的顶点 2，接着走到顶点 2 相邻的" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-89979.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="如何在 Java 中实现无向环和有向环的检测" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/0751cc4093373c8c69c9772085789e08.webp" />
+        <meta property="og:release_date" content="2025-04-06T10:10:11" />
+    <meta property="og:updated_time" content="2025-04-06T10:10:11" />
+        <meta property="og:description" content="一个含有环的无向图如下所示，其中有两个环，分别是 0-2-1-0 和 2-3-4-2：  要检测无向图中的环，可以使用深度优先搜索。假设从顶点 0 出发，再走到相邻的顶点 2，接着走到顶点 2 相邻的" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="如何在 Java 中实现无向环和有向环的检测">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>如何在 Java 中实现无向环和有向环的检测</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				</h1> <p>一个含有环的无向图如下所示，其中有两个环，分别是 0-2-1-0 和 2-3-4-2：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/703b8094c58a94b2454623ffb32d12e3.jpg" alt="如何在 Java 中实现无向环和有向环的检测"></p> <p>要检测无向图中的环，可以使用深度优先搜索。假设从顶点 0 出发，再走到相邻的顶点 2，接着走到顶点 2 相邻的顶点 1，由于顶点 0 和顶点 1 相邻，并且顶点 0 被标记过了，说明我们饶了一圈，所以无向图中存在环。虽然顶点 2 和顶点 1 相邻，但是并不能说明存在环，因为我们就是从顶点 2 直接走到顶点 1 的，这二者只有边的关系。算法如下所示：</p> <pre><code class="language-java">package com.zhiyiyo.graph;  import com.zhiyiyo.collection.stack.LinkStack; import com.zhiyiyo.collection.stack.Stack;  /**  * 无向图中的环  */ public class Cycle {     private boolean[] marked;     private Graph graph;     private boolean hasCycle;      public Cycle(Graph graph) {         this.graph = graph;         marked = new boolean[graph.V()];          for (int v = 0; v &lt; graph.V(); ++v) {             if (!marked[v]) {                 dfs(v);             }         }     }      private void dfs(int s) {         if (hasCycle()) return;          Stack&lt;Integer&gt; vertexes = new LinkStack&lt;&gt;();         vertexes.push(s);         marked<span class="show-more" title="文字折叠"><span><i class="be be-squareplus"></i>展开</span></span> = true;          int lastVertex = s;         while (!vertexes.isEmpty()) {             int v = vertexes.pop();              for (int w : graph.adj(v)) {                 if (!marked[w]) {                     marked[w] = true;                     vertexes.push(w);                 } else if (w != lastVertex) {                     hasCycle = true;                     return;                 }             }              lastVertex = v;         }     }      /**      * 图中是否有环      */     public boolean hasCycle() {         return hasCycle;     } }</code></pre> </h1> <h2 id="有向图">有向图</h2> <p>有向图的实现方式和上一篇博客<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/zhiyiYo/p/16101613.html"  target="_blank" rel="nofollow">《如何在 Java 中实现无向图》</a> 中无向图的实现方式几乎一样，只是在添加边 v-w 时只在顶点 v 的链表上添加顶点 w，而不对顶点 w 的链表进行操作。如果把<code>LinkGraph</code> 中成员变量的访问权限改成<code>protected</code>，只需继承并重写<code>addEdge</code> 方法即可：</p> <pre><code class="language-java">package com.zhiyiyo.graph;   public class LinkDigraph extends LinkGraph implements Digraph {      public LinkDigraph(int V) {         super(V);     }      @Override     public void addEdge(int v, int w) {         adj[v].push(w);         E++;     }      @Override     public Digraph reverse() {         Digraph digraph = new LinkDigraph(V());         for (int v = 0; v &lt; V(); ++v) {             for (int w : adj(v)) {                 digraph.addEdge(w, v);             }         }         return digraph;     } }</code></pre> <h2 id="检测算法">检测算法</h2> <p>一个含有有向环的有向图如下所示，其中 5-4-3-5 构成了一个环：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/4ddf22fafabfa544bb54bb06efa991e7.jpg" alt="如何在 Java 中实现无向环和有向环的检测"></p> <p>这里使用递归实现的深度优先搜索来检测有向环。假设从顶点 0 开始走，一路经过 5、4、3 这三个顶点，最终又碰到了与顶点 3 相邻的顶点 5，这时候如果知道顶点 5 已经被访问过了，并且递归函数还被压在栈中，就说明深度优先搜索从顶点 5 开始走，又回到了顶点 5，也就是找到了有向环。算法如下所示：</p> <pre><code class="language-java">package com.zhiyiyo.graph;  import com.zhiyiyo.collection.stack.LinkStack; import com.zhiyiyo.collection.stack.Stack;  /**  * 有向图中的环  */ public class DirectedCycle {     private boolean[] marked;     private boolean[] onStack;     private int[] edgeTo;     private Graph graph;     private Stack&lt;Integer&gt; cycle;      public DirectedCycle(Digraph graph) {         this.graph = graph;         marked = new boolean[graph.V()];         onStack = new boolean[graph.V()];         edgeTo = new int[graph.V()];          for (int v = 0; v &lt; graph.V(); ++v) {             if (!marked[v]) {                 dfs(v);             }         }     }      private void dfs(int v) {         marked[v] = true;         onStack[v] = true;          for (int w : graph.adj(v)) {             if (hasCycle()) return;             if (!marked[w]) {                 marked[w] = true;                 edgeTo[w] = v;                 dfs(w);             } else if (onStack[w]) {                 cycle = new LinkStack&lt;&gt;();                 cycle.push(w);                 for (int i = v; i != w; i = edgeTo[i]) {                     cycle.push(i);                 }                 cycle.push(w);             }         }          onStack[v] = false;     }      /**      * 图中是否有环      */     public boolean hasCycle() {         return cycle != null;     }      /**      * 图中的一个环      */     public Iterable&lt;Integer&gt; cycle() {         return cycle;     } }</code></pre> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-89219.htm">如何给动物注射（怎么给动物注射药物）</a></p>
+                                        <p>下一个：<a href="/news/article-89980.htm">宠物领养协议书电子版怎么弄出来 宠物领养协议书电子版怎么弄出来的</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-89219.htm" title="如何给动物注射（怎么给动物注射药物）">如何给动物注射（怎么给动物注射药物）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-9-free-node-subscribe-links.htm" title="FlClash机场订阅推荐 | 22.7M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 22.7M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-7-free-clash-subscribe.htm" title="FlClash机场订阅推荐 | 18M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 18M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-81375.htm" title="宠物领养协议需要身份证复印件吗有效吗安全吗 领养宠物需要签协议吗">宠物领养协议需要身份证复印件吗有效吗安全吗 领养宠物需要签协议吗</a></li>
+                        <li class="py-2"><a href="/news/article-87797.htm" title="猫粮品牌推荐进口（猫粮进口什么牌子好）">猫粮品牌推荐进口（猫粮进口什么牌子好）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-28-clash-node.htm" title="FlClash机场订阅推荐 | 21.5M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 21.5M/S，Shadowrocket/Clash/SSR/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 19.5M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 19.5M/S，Shadowrocket/SSR/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-68610.htm" title="python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具">python数据可视化-matplotlib入门(6)-从文件中加载数据_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-75868.htm" title="宠物粮利润率怎么算的（宠物粮食生意怎么样）">宠物粮利润率怎么算的（宠物粮食生意怎么样）</a></li>
+                        <li class="py-2"><a href="/news/article-85625.htm" title="使用 shell 脚本自动获取发版指标数据">使用 shell 脚本自动获取发版指标数据</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">24</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

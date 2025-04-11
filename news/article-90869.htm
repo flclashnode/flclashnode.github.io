@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-90869.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpringBoot自定义控制层参数解析_在线工具</title>
+        <meta name="description" content="在Spring的Controller中，我们通过@RequestParam或@RequestBody就可以将请求中的参数映射到控制层具体的参数中，那么这个是怎么实现的呢？如果我现在控制层中的某个参数的" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-90869.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="SpringBoot自定义控制层参数解析_在线工具" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/9e7aa12947ac990d4d09d941af87e29d.webp" />
+        <meta property="og:release_date" content="2025-04-08T09:51:52" />
+    <meta property="og:updated_time" content="2025-04-08T09:51:52" />
+        <meta property="og:description" content="在Spring的Controller中，我们通过@RequestParam或@RequestBody就可以将请求中的参数映射到控制层具体的参数中，那么这个是怎么实现的呢？如果我现在控制层中的某个参数的" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot自定义控制层参数解析_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>SpringBoot自定义控制层参数解析_在线工具</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				</h1> <p>在Spring的Controller中，我们通过<code>@RequestParam</code>或<code>@RequestBody</code>就可以将请求中的参数映射到控制层具体的参数中，那么这个是怎么实现的呢？<strong>如果我现在控制层中的某个参数的值是从<code>Redis</code>中来，那么应该如何实现呢？</strong></p> </h1> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/bcf931b003839181229313f45e15b9d4.jpg" alt="SpringBoot自定义控制层参数解析_在线工具"></p> <p>从上图中可以我们的参数最终会通过<code>HandlerMethodArgumentResolver</code>来解析，那么知道了这个后，我们就可以实现自己的参数解析了。</p> </h1> <p>如果我们控制层方法的参数中存在<code>@Redis</code>标注，那么此参数的值应该从redis中获取，不用从请求参数中获取。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/61bfa794f56c8431981751eaa480b456.jpg" alt="SpringBoot自定义控制层参数解析_在线工具"></p> <p>从上图中可知<code>@Redis(key = "redisKey") String redisValue</code>这个参数就需要从<code>Redis</code>中获取。</p> </h1> <blockquote> <p>此处我们不会真的从<code>Redis</code>中获取值，模拟从Redis中获取值即可。</p> </blockquote> <h2 id="1编写一个redis注解">1、编写一个Redis注解</h2> <pre><code class="language-java">@Target({ElementType.PARAMETER}) @Retention(RetentionPolicy.RUNTIME) public @interface Redis {          /**      * redis中的Key      */     String key();      } </code></pre> <p>在控制层的方法上，被此处注解标注的方法参数，都从Redis中获取，都走我们自己定义的参数解析器。</p> <h2 id="2编写参数解析类">2、编写参数解析类</h2> <pre><code class="language-java">package com.huan.study.argument.resolver;  import org.slf4j.Logger; import org.slf4j.LoggerFactory; import org.springframework.core.MethodParameter; import org.springframework.web.bind.support.WebDataBinderFactory; import org.springframework.web.context.request.NativeWebRequest; import org.springframework.web.method.support.HandlerMethodArgumentResolver; import org.springframework.web.method.support.ModelAndViewContainer;  import javax.servlet.http.HttpServletRequest; import java.util.Random;  /**  * 从redis中获取值放入到参数中  *  */ public class RedisMethodArgumentResolver implements HandlerMethodArgumentResolver {          private static final Logger log = LoggerFactory.getLogger(RedisMethodArgumentResolver.class);          /**      * 处理参数上存在@Redis注解的      */     @Override     public boolean supportsParameter(MethodParameter parameter) {         return parameter.hasParameterAnnotation(Redis.class);     }          /**      * 解析参数       */     @Override     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,                                   WebDataBinderFactory binderFactory) throws Exception {         // 获取http request         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);         log.info("当前请求的路径:[{}]", request.getRequestURI());         // 获取到这个注解         Redis redis = parameter.getParameterAnnotation(Redis.class);         // 获取在redis中的key         String redisKey = redis.key();         // 模拟从redis中获取值         String redisValue = "从redis中获取的值:" + new Random().nextInt(100);         log.info("从redis中获取到的值为:[{}]", redisValue);         // 返回值         return redisValue;     } }  </code></pre> <p>1、通过<code>supportsParameter</code>方法判断我们应该处理哪些参数，此处处理的是参数上存在<code>@Redis</code>注解的。<br /> 2、通过<code>resolveArgument</code>方法，获取到参数的具体的值。比如从Redis中获取，代码中没有真的从Redis中获取，只是模拟从Redis中获取。</p> <h2 id="3配置到spring的上下文中">3、配置到Spring的上下文中</h2> <blockquote> <p>此处我们最好将我们自己的参数解析器放置在第一位，否则可能会有问题。下方提供了2种方式，第一种方式无法达到我们的需求、我们采用第二种方式来实现</p> </blockquote> <h3 id="1通过webmvcconfigurer实现">1、通过WebMvcConfigurer实现</h3> <pre><code class="language-java">@Configuration public class WebMvcConfig implements WebMvcConfigurer {          /**      * 这个地方加载的顺序是在默认的HandlerMethodArgumentResolver之后的      */     @Override     public void addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt; resolvers) {         resolvers.add(new RedisMethodArgumentResolver());     } } </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/873c8a6780f6d6e2ea63b2608c66a41c.jpg" alt="SpringBoot自定义控制层参数解析_在线工具"></p> <p><strong>从上图可知，我们自己的参数解析器不是在第一位，这样可能达不到我们想要的效果，此处不考虑这种方式。</strong></p> <h3 id="2通过beanpostprocessor来实现">2、通过BeanPostProcessor来实现</h3> <p><code>BeanPostProcessor</code>可以在一个Bean完全初始化之后来执行一些操作，此处我们通过这种方式，将我们自己的参数解析器放置在第一位。</p> <pre><code class="language-java">@Component static class CustomHandlerMethodArgumentResolverConfig implements BeanPostProcessor {     @Override     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {         if (bean instanceof RequestMappingHandlerAdapter) {             final RequestMappingHandlerAdapter adapter = (RequestMappingHandlerAdapter) bean;             final List&lt;HandlerMethodArgumentResolver&gt; argumentResolvers = Optional.ofNullable(adapter.getArgumentResolvers())                     .orElseGet(ArrayList::new);             final ArrayList&lt;HandlerMethodArgumentResolver&gt; handlerMethodArgumentResolvers = new ArrayList&lt;&gt;(argumentResolvers);             // 将我们自己的参数解析器放置到第一位             handlerMethodArgumentResolvers.add(0, new RedisMethodArgumentResolver());             adapter.setArgumentResolvers(Collections.unmodifiableList(handlerMethodArgumentResolvers));             return adapter;         }         return bean;     } } </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/32d9dd55385dc83769bae1ef486170f6.jpg" alt="SpringBoot自定义控制层参数解析_在线工具"></p> <p><strong>从上图可知，我们自己的参数解析器在第一位，这样就达到我们想要的效果，此处使用这种方式。</strong></p> <h2 id="4编写一个简单的控制层">4、编写一个简单的控制层</h2> <pre><code class="language-java">/**  * @author huan.fu 2021/12/7 - 下午3:36  */ @RestController public class RedisArgumentController {          private static final Logger log = LoggerFactory.getLogger(RedisArgumentController.class);          @GetMapping("redisArgumentResolver")     public void redisArgumentResolver(@RequestParam("hello") String hello,                                       @Redis(key = "redisKey") String redisValue) {         log.info("控制层获取到的参数值: hello:[{}],redisValue:[{}]", hello, redisValue);     } } </code></pre> <p>该控制层比较简单，对外提供来一个简单的api<code>http://localhost:8080/redisArgumentResolver?hello=123</code>。该api存在2个参数<code>hello</code>和<code>redisValue</code>，其中<code>hello</code>参数的值是从请求参数中获取,<code>redisValue</code>的值是从我们自己定义的参数<br /> 解析器中获取。</p> </h1> <pre><code class="language-curl">curl http://localhost:8080/redisArgumentResolver?hello=123 </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/23e54f453561568333d6ecb24deee1d2.jpg" alt="SpringBoot自定义控制层参数解析_在线工具"></p> <p>由上图可知我们自己定义的参数解析器工作了。</p> </h1> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://gitee.com/huan1993/spring-cloud-parent/tree/master/springboot/springboot-method-argument-resolver"  target="_blank"  rel="nofollow">完整代码</a></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-90868.htm">SpringBoot 基本原理</a></p>
+                                        <p>下一个：<a href="/news/article-92244.htm">动物防疫站营业时间是几点 动物防疫站营业时间是几点到几点</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-7-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 18.8M/S，SSR/Shadowrocket/Clash/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18.8M/S，SSR/Shadowrocket/Clash/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-80690.htm" title="最新免费领养边牧 最新免费领养边牧视频">最新免费领养边牧 最新免费领养边牧视频</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-9-node-share-links.htm" title="FlClash机场订阅推荐 | 21.9M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 21.9M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-71191.htm" title="我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？">我们如何使用MySQL函数STR_TO_DATE（Column，&#8217;％input_format&#8217;）？</a></li>
+                        <li class="py-2"><a href="/news/article-74492.htm" title="成都宠物领养平台电话是多少啊（成都宠物领养机构电话）">成都宠物领养平台电话是多少啊（成都宠物领养机构电话）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-30-clash-node.htm" title="FlClash机场订阅推荐 | 18M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 18M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-19-clash-windows.htm" title="FlClash机场订阅推荐 | 20.4M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.4M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-14-node-share.htm" title="FlClash机场订阅推荐 | 21M/S，SSR/Shadowrocket/V2ray/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 21M/S，SSR/Shadowrocket/V2ray/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-80002.htm" title="瑞鹏宠物医院营业时间表（瑞鹏宠物医院营业时间表最新）">瑞鹏宠物医院营业时间表（瑞鹏宠物医院营业时间表最新）</a></li>
+                        <li class="py-2"><a href="/news/article-89980.htm" title="宠物领养协议书电子版怎么弄出来 宠物领养协议书电子版怎么弄出来的">宠物领养协议书电子版怎么弄出来 宠物领养协议书电子版怎么弄出来的</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
