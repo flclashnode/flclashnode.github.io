@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-97402.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Python OpenCV实现3种滤镜效果实例_python_</title>
+        <meta name="description" content="目录  前言 浮雕滤镜效果 雕刻滤镜效果 凸透镜滤镜效果 总结    前言 本篇文章要使用OpenCV、Numpy 和Math这3个工具包实现一个简单的滤镜编辑器。在这个滤镜编辑器中，包含了3种滤镜效" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-97402.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Python OpenCV实现3种滤镜效果实例_python_" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/5379eeb30c189696d328346f6d06e85b.webp" />
+        <meta property="og:release_date" content="2025-04-16T08:42:02" />
+    <meta property="og:updated_time" content="2025-04-16T08:42:02" />
+        <meta property="og:description" content="目录  前言 浮雕滤镜效果 雕刻滤镜效果 凸透镜滤镜效果 总结    前言 本篇文章要使用OpenCV、Numpy 和Math这3个工具包实现一个简单的滤镜编辑器。在这个滤镜编辑器中，包含了3种滤镜效" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python OpenCV实现3种滤镜效果实例_python_">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Python OpenCV实现3种滤镜效果实例_python_</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">前言</a></li> <li><a href="#_label1" rel="nofollow">浮雕滤镜效果</a></li> <li><a href="#_label2" rel="nofollow">雕刻滤镜效果</a></li> <li><a href="#_label3" rel="nofollow">凸透镜滤镜效果</a></li> <li><a href="#_label4" rel="nofollow">总结</a></li> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>前言</h2> <p>本篇文章要使用OpenCV、Numpy 和Math这3个工具包实现一个简单的滤镜编辑器。在这个滤镜编辑器中，包含了3种滤镜效果，它们分别是浮雕滤镜、雕刻滤镜和凸透镜滤镜。本篇文章将对目标图像（如图1所示）进行处理，使得目标图像分别呈现浮雕滤镜（如图2所示）、雕刻滤镜（如图3所示）和凸透镜滤镜（如图4所示）的视觉效果。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220413/06e3852ed5a090cc3451df22fed2c24d.jpg"></p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220413/c66ffa83a043a2964660886d28d544d7.jpg"></p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220413/09e490a9749fcf5f84b6a04cb3d1adf5.jpg"></p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220413/385bd7dc214359f58688a965d857898f.jpg"></p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>浮雕滤镜效果</h2> <p>为了实现浮雕滤镜效果，首先要把实现浮雕滤镜效果的原理搞清楚、弄明白。实现浮雕滤镜效果的原理如下所示：</p> <ul> <li> <p>根据灰度图像中的某一个像素的像素值与其周围像素的像素值之间的差值，确定这个像素经过卷积处理后的像素值；</p> </li> <li> <p>由于边缘点的像素值与其周围像素的像素值之间的差值较大，经卷积处理后，导致这些边缘点较亮，从而达到凸显边缘的目的，进而形成浮雕状；</p> </li> <li> <p>为经卷积处理后的每一个像素加上一个灰度偏移值128，作为呈现浮雕滤镜效果的图像的底色。</p> </li> </ul> <p>明确了实现浮雕滤镜效果的原理后，再来学习一下实现浮雕滤镜效果的算法。实现浮雕滤镜效果的算法如下所示：</p> <ul> <li> <p>对灰度图像中的每一个像素进行卷积处理；</p> </li> <li> <p>实现浮雕滤镜效果的卷积核算子需采用如下矩阵：</p> </li> </ul> <blockquote> <p>[[1, 0], [0, -1]]</p> </blockquote> <p>掌握了实现浮雕滤镜效果的原理和算法后，下面开始编写用于实现浮雕滤镜效果的方法，即<code>fuDiao()</code>方法。<code>fuDiao()</code>方法是一个自定义的、有参且有返回值的方法，<code>fuDiao()</code>方法的语法格式如下所示：</p> <div class="ay1code"> <pre class="brush:py;">def fuDiao(img):      ……# 省略方法体中的代码      return canvas</pre> </div> <p><strong>参数说明：</strong></p> <blockquote> <p> img：与目标图像对应的灰度图像。</p> </blockquote> <p><strong>返回值说明：</strong></p> <blockquote> <p>canvas：画布，用于呈现浮雕滤镜效果的图像。</p> </blockquote> <p>那么，<code>fuDiao()方法</code>被省略的代码各自发挥怎样的作用？此外，被省略的代码又是那些呢？</p> <p><strong>先要明确fuDiao()方法中被省略的代码各自发挥的作用是什么：</strong></p> <p><strong>因为用于实现浮雕滤镜效果的卷积核算子是一个二维矩阵，所以需要使用<code>Numpy工具包</code>中的<code>array()方法</code>创建这个二维矩阵。关键代码如下所示：</strong></p> <div class="ay1code"> <pre class="brush:py;">kernel = np.array([[1, 0], [0, -1]])</pre> </div> <p><strong>分别获取灰度图像中像素的行数和列数。关键代码如下所示：</strong></p> <div class="ay1code"> <pre class="brush:py;">row = img.shape[0]  col = img.shape[1]</pre> </div> <p>根据灰度图像中像素的行数和列数，创建一个等高、等宽的，纯黑色的画布。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">canvas = np.zeros([row, col], dtype=np.uint8)</pre> </div> <p>根据横、纵坐标，使用嵌套的for循环得到灰度图像中的每一个像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">for i in range(row - 1):  for j in range(col - 1):</pre> </div> <p>使用实现浮雕滤镜效果的卷积核算子，对灰度图像中的每一个像素进行卷积处理，并且为经卷积处理后的每一个像素加上一个灰度偏移值128。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">new_value = np.sum(img[i:i + 2, j:j + 2] * kernel) + 128</pre> </div> <p>对于经卷积处理且加上一个灰度偏移值后的每一个像素的像素值，如果大于255，那么等于255；如果小于0，那么等于0。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">if new_value &gt; 255:     new_value = 255     elif new_value &lt; 0:        new_value = 0    else:      pass</pre> </div> <p>把经过比较后的每一个像素的像素值根据坐标赋值给画布对应位置上的像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:js;">canvas[i, j] = new_value</pre> </div> <p>结合<code>fuDiao()方法</code>中被省略的代码和它们各自发挥的作用，就能够迅速完成<code>fuDiao()</code>方法的编写。<code>fuDiao()</code>方法的代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">def fuDiao(img):        kernel = np.array([[1, 0], [0, -1]])        row = img.shape[0]        col = img.shape[1]        canvas = np.zeros([row, col], dtype=np.uint8)        for i in range(row - 1):           for j in range(col - 1):               new_value = np.sum(img[i:i + 2, j:j + 2] * kernel) + 128               if new_value &gt; 255:                   new_value = 255                elif new_value &lt; 0:                   new_value = 0                else:                    pass               canvas[i, j] = new_value        return canvas</pre> </div> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>雕刻滤镜效果</h2> <p><strong>实现雕刻滤镜效果的原理与实现浮雕滤镜效果的原理大致相同，实现雕刻滤镜效果的原理如下所示：</strong></p> <ul> <li> <p>根据灰度图像中的某一个像素的像素值与其周围像素的像素值之间的差值，确定这个像素经过卷积处理后的像素值；</p> </li> <li> <p>由于边缘点的像素值与其周围像素的像素值之间的差值较大，经卷积处理后，导致这些边缘点较暗，从而达到凹陷边缘的目的，进而形成雕刻状；</p> </li> <li> <p>为经卷积处理后的每一个像素加上一个灰度偏移值128，作为呈现雕刻滤镜效果的图像的底色。</p> </li> </ul> <p><strong>虽然实现雕刻滤镜效果的原理与实现浮雕滤镜效果的原理大致相同，但是实现雕刻滤镜效果的算法与实现浮雕滤镜效果的算法大不相同。实现雕刻滤镜效果的算法如下所示：</strong></p> <ul> <li> <p>对灰度图像中的每一个像素进行卷积处理；</p> </li> <li> <p>实现雕刻滤镜效果的卷积核算子需采用如下矩阵：</p> </li> </ul> <div class="ay1code"> <pre class="brush:py;">[[-1, 0],  [0, 1]]</pre> </div> <p>掌握了实现雕刻滤镜效果的原理和算法后，下面开始编写用于实现雕刻滤镜效果的方法，即<code>diaoKe()</code>方法。与<code>fuDiao()</code>方法相同，<code>diaoKe()</code>方法也是一个自定义的、有参且有返回值的方法，<code>diaoKe()</code>方法的语法格式如下所示：</p> <div class="ay1code"> <pre class="brush:py;">def diaoKe(img):     ……# 省略方法体中的代码      return canvas</pre> </div> <p><strong>参数说明：</strong></p> <blockquote> <p>img：与目标图像对应的灰度图像。</p> </blockquote> <p><strong>返回值说明：</strong></p> <blockquote> <p>canvas：画布，用于呈现雕刻滤镜效果的图像。</p> </blockquote> <p><strong>diaoKe()方法被省略的代码与fuDiao()方法被省略的代码大同小异，首先明确下diaoKe()方法中被省略的代码各自发挥的作用是什么：</strong></p> <p><strong>用于实现雕刻滤镜效果的卷积核算子与用于实现浮雕滤镜效果的卷积核算子虽然不同，但也是一个二维矩阵，因此需要使用Numpy工具包中的array()方法创建这个二维矩阵。关键代码如下所示：</strong></p> <div class="ay1code"> <pre class="brush:py;">kernel = np.array([[-1, 0], [0, 1]])</pre> </div> <p>分别获取灰度图像中像素的行数和列数。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">row = img.shape[0]  col = img.shape[1]</pre> </div> <p>根据灰度图像中像素的行数和列数，创建一个等高、等宽的，纯黑色的画布。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">canvas = np.zeros([row, col], dtype=np.uint8)</pre> </div> <p>根据横、纵坐标，使用嵌套的for循环得到灰度图像中的每一个像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">for i in range(row - 1):  for j in range(col - 1):</pre> </div> <p>使用实现雕刻滤镜效果的卷积核算子，对灰度图像中的每一个像素进行卷积处理，并且为经卷积处理后的每一个像素加上一个灰度偏移值128。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">new_value = np.sum(img[i:i + 2, j:j + 2] * kernel) + 128</pre> </div> <p>对于经卷积处理且加上一个灰度偏移值后的每一个像素的像素值，如果大于255，那么等于255；如果小于0，那么等于0。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">  if new_value &gt; 255:        new_value = 255    elif new_value &lt; 0:        new_value = 0    else:        pass</pre> </div> <p>把经过比较后的每一个像素的像素值根据坐标赋值给画布对应位置上的像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:js;">canvas[i, j] = new_value</pre> </div> <p>结合<code>diaoKe()</code>方法中被省略的代码和它们各自发挥的作用，就能够迅速完成<code>diaoKe()</code>方法的编写。<code>diaoKe()</code>方法的代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">  def diaoKe(img):        kernel = np.array([[-1, 0], [0, 1]])        row = img.shape[0]        col = img.shape[1]        canvas = np.zeros([row, col], dtype=np.uint8)        for i in range(row - 1):            for j in range(col - 1):                new_value = np.sum(img[i:i + 2, j:j + 2] * kernel) + 128                if new_value &gt; 255:                    new_value = 255                elif new_value &lt; 0:                    new_value = 0                else:                    pass                canvas[i, j] = new_value        return canvas</pre> </div> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>凸透镜滤镜效果</h2> <p>所谓凸透镜滤镜效果，相当于用户使用凸透镜观察一幅图像而成的视觉效果。实现凸透镜滤镜效果的原理与实现浮雕滤镜效果的原理和实现雕刻滤镜效果的原理大不相同。下面将着重对实现凸透镜滤镜效果的原理进行讲解：</p> <ul> <li> <p>当使用凸透镜中心观察一幅图像时，被观察的图像区域将按照一定比例进行放大；相应地，这个区域的周围区域将被压缩；</p> </li> <li> <p>为了让放大后的图像区域看起来和谐自然，这些被压缩的周围区域要保持连续性。</p> </li> </ul> <p><strong>明确了实现凸透镜滤镜效果的原理后，再来学习一下实现凸透镜滤镜效果的算法。实现凸透镜滤镜效果的算法如下所示：</strong></p> <ul> <li> <p>根据目标图像的宽、高确定凸透镜的半径；</p> </li> <li> <p>选择一个凸函数作为映射函数；</p> </li> </ul> <p>如果目标图像中的某一个像素与目标图像中心之间的距离的平方不大于凸透镜的半径的平方（两个整数进行比较，保证比较结果的精确度），就使用映射函数对这个像素的横、纵坐标进行映射处理。</p> <p><strong>掌握了实现凸透镜滤镜效果的原理和算法后，下面开始编写用于实现凸透镜滤镜效果的方法，即<code>tuTouJing()</code>方法。与<code>fuDiao()</code>方法和<code>diaoKe()</code>方法相同，<code>tuTouJing()</code>方法也是一个自定义的、有参且有返回值的方法，<code>tuTouJing()</code>方法的语法格式如下所示：</strong></p> <div class="ay1code"> <pre class="brush:py;">def tuTouJing(img):      ……# 省略方法体中的代码      return canvas</pre> </div> <p>参数说明：</p> <blockquote> <p> img：目标图像。</p> </blockquote> <p>返回值说明：</p> <blockquote> <p>canvas：画布，用于呈现凸透镜滤镜效果的图像。</p> </blockquote> <p><strong>先要明确<code>tuTouJing()</code>方法中被省略的代码各自发挥的作用是什么：</strong></p> <p>分别获取目标图像中像素的行数和列数以及目标图像的通道数。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">row = img.shape[0]  col = img.shape[1]  channel = img.shape[2]</pre> </div> <p>根据目标图像中像素的行数和列数以及目标图像的通道数，创建一个等高、等宽、等通道数的，纯黑色的画布。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">canvas = np.zeros([row, col, channel], dtype=np.uint8)</pre> </div> <p>根据目标图像中像素的行数和列数，分别获取目标图像中心的横、纵坐标。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">center_x = row/2  center_y = col/2</pre> </div> <p>比较目标图像中心的横、纵坐标的大小，把较小的数值作为凸透镜的半径。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">radius = min(center_x, center_y)</pre> </div> <p>根据横、纵坐标，使用嵌套的for循环得到目标图像中的每一个像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">for i in range(row):  for j in range(col):</pre> </div> <p>计算目标图像中的每一个像素与目标图像中心之间的距离的平方和距离。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">distance = ((i-center_x) * (i-center_x) + (j-center_y) * (j-center_y))  new_dist = math.sqrt(distance)</pre> </div> <p>把目标图像中的每一个像素的像素值根据坐标赋值给画布对应位置上的像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">canvas[i,j,:] = img[i, j, :]</pre> </div> <p>如果目标图像中的某一个像素与目标图像中心之间的距离的平方不大于凸透镜的半径的平方，就使用映射函数对这个像素的横、纵坐标进行映射处理。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">if distance &lt;= radius**2:  new_i = np.int(np.floor(new_dist * (i-center_x) / radius + center_x))  new_j = np.int(np.floor(new_dist * (j-center_y) / radius + center_y))</pre> </div> <p>把经过映射处理后的每一个像素的像素值根据坐标赋值给画布对应位置上的像素。关键代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">canvas[i,j,:] = img[new_i, new_j, :]</pre> </div> <p>结合tuTouJing()方法中被省略的代码和它们各自发挥的作用，就能够迅速完成tuTouJing()方法的编写。tuTouJing()方法的代码如下所示：</p> <div class="ay1code"> <pre class="brush:py;">  def tuTouJing(img):        row = img.shape[0]        col = img.shape[1]        channel = img.shape[2]        canvas = np.zeros([row, col, channel], dtype=np.uint8)        center_x = row/2        center_y = col/2        radius = min(center_x, center_y)        for i in range(row):            for j in range(col):                distance = ((i-center_x) * (i-center_x) + (j-center_y) * (j-center_y))                new_dist = math.sqrt(distance)                canvas[i,j,:] = img[i, j, :]                if distance &lt;= radius**2:                    new_i = np.int(np.floor(new_dist * (i-center_x) / radius + center_x))                    new_j = np.int(np.floor(new_dist * (j-center_y) / radius + center_y))                    canvas[i,j,:] = img[new_i, new_j, :]        return canvas</pre> </div> <p class="maodian"><a name="_label4" rel="nofollow"></a></p> <h2>总结</h2> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-96732.htm">动物医院医疗设备有哪些 动物医院医疗设备有哪些品牌</a></p>
+                                        <p>下一个：<a href="/news/article-97403.htm">合肥哪里能领养宠物狗 合肥哪里能领养宠物狗狗</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-96005.htm" title="Java中无法访问的语句错误">Java中无法访问的语句错误</a></li>
+                        <li class="py-2"><a href="/news/article-89218.htm" title="Android 图像显示系统基础知识之 BitTube">Android 图像显示系统基础知识之 BitTube</a></li>
+                        <li class="py-2"><a href="/news/article-73167.htm" title="宠物食品店名称大全集（宠物食品店名称大全集最新）">宠物食品店名称大全集（宠物食品店名称大全集最新）</a></li>
+                        <li class="py-2"><a href="/news/article-66035.htm" title="动物疫苗在哪里买的到呢（动物注射疫苗注射哪里）">动物疫苗在哪里买的到呢（动物注射疫苗注射哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-6-clash-windows.htm" title="FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/V2ray/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 20.3M/S，Shadowrocket/V2ray/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-87067.htm" title="开一家宠物食品加工厂赚钱吗知乎（宠物食品加工厂要投资多少）">开一家宠物食品加工厂赚钱吗知乎（宠物食品加工厂要投资多少）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-clash-stash.htm" title="FlClash机场订阅推荐 | 22.2M/S，V2ray/Clash/Shadowrocket/SSR免费节点链接地址分享">FlClash机场订阅推荐 | 22.2M/S，V2ray/Clash/Shadowrocket/SSR免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-22-free-clash.htm" title="FlClash机场订阅推荐 | 21.6M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 21.6M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-85626.htm" title="家养的布偶猫能买吗（家养布偶猫价格多少钱一只）">家养的布偶猫能买吗（家养布偶猫价格多少钱一只）</a></li>
+                        <li class="py-2"><a href="/news/article-74492.htm" title="成都宠物领养平台电话是多少啊（成都宠物领养机构电话）">成都宠物领养平台电话是多少啊（成都宠物领养机构电话）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
