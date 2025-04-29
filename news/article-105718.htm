@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-105718.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Android 12(S) 图像显示系统 &#8211; SurfaceFlinger 之 VSync &#8211; 中篇（十七）</title>
+        <meta name="description" content="必读： Android 12(S) 图像显示系统 - 开篇  1 前言 这一篇文章，将继续讲解有关VSync的知识，前一篇文章Android 12(S) 图像显示系统 - SurfaceFlinger" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-105718.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="Android 12(S) 图像显示系统 &#8211; SurfaceFlinger 之 VSync &#8211; 中篇（十七）" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/83ad4f09af228aeb1e883b40f4ca0bc9.webp" />
+        <meta property="og:release_date" content="2025-04-27T08:30:14" />
+    <meta property="og:updated_time" content="2025-04-27T08:30:14" />
+        <meta property="og:description" content="必读： Android 12(S) 图像显示系统 - 开篇  1 前言 这一篇文章，将继续讲解有关VSync的知识，前一篇文章Android 12(S) 图像显示系统 - SurfaceFlinger" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Android 12(S) 图像显示系统 &#8211; SurfaceFlinger 之 VSync &#8211; 中篇（十七）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>Android 12(S) 图像显示系统 &#8211; SurfaceFlinger 之 VSync &#8211; 中篇（十七）</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<hr/> <p><strong><span style="color: rgba(224, 62, 45, 1); font-size: 16px">必读：</span></strong></p> <h4 class="postTitle" style="text-align: left; padding-left: 40px"><strong><span style="font-size: 15px">Android 12(S) 图像显示系统 - 开篇</span></strong></h4> <hr/> <h2><span style="color: rgba(53, 152, 219, 1)">1 前言</span></h2> <p>这一篇文章，将继续讲解有关VSync的知识，前一篇文章<span style="font-size: 14px"><span role="heading" aria-level="2">Android 12(S) 图像显示系统 - SurfaceFlinger之VSync-上篇（十六）</span></span>中，主要是分析了SurfaceFlinger启动后VSync的一些初始化流程，以及vsync events的分发逻辑。</p> <p><span style="color: rgba(0, 0, 0, 1)">vsync events汇集到了两个地方：</span></p> <p style="padding-left: 40px"><span style="color: rgba(53, 152, 219, 1)">1.<strong><code><span style="color: rgba(53, 152, 219, 1)">MessageQueue::vsyncCallback</span></code></strong>&nbsp; ==&gt;<strong><code><span style="color: rgba(53, 152, 219, 1)">VSYNC-sf</span></code></strong></span></p> <p style="padding-left: 40px"><span style="color: rgba(53, 152, 219, 1)">2.<strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::onVSyncEvent</span></code></strong>&nbsp; ==&gt;<strong><code><span style="color: rgba(53, 152, 219, 1)">VSYNC-app&nbsp; &amp; VSYNC-appSf</span></code></strong></span></p> <p>本篇中，将从一个简单的demo出发，来具体分析，vsync events是如何传递到&nbsp; ==&gt; 真正需要的地方</p> <h2><span style="color: rgba(53, 152, 219, 1)">2 可以监测vsync event的应用</span></h2> <h3><span style="color: rgba(53, 152, 219, 1)">2.1 代码位置</span></h3> <p><span style="color: rgba(53, 152, 219, 1)">代码存放到了GitHub，自取哦</span></p> <p>https://github.com/yrzroger/DisplayEventTracker</p> <h3><span style="color: rgba(53, 152, 219, 1)">2.2 如何使用</span></h3> <p>1. 下载代码放到android源码目录下</p> <p>2. 执行 mm 编译得到可执行档 DisplayEventTracker</p> <p>3. 将 DisplayEventTracker，adb push 到测试板的 /system/bin/ 目录下</p> <p>4. 在console下执行 DisplayEventTracker -h，可以查看简单的命令说明</p> <pre class="language-cpp"><code>usage: DisplayEventTracker [options] ------------------------------------ options --------------------------------------------- [-i] vsync rate(default:1) [-h] help input 'r' to call requestNextVsync or input 'q' to exit when running ------------------------------------------------------------------------------------------</code></pre> <p>5. 示例命令</p> <pre class="language-cpp"><code>DisplayEventTracker          // 默认vsync rate = 1, 每个vsync到来时都会收到该event DisplayEventTracker -i 3     //表示vsync rate = 3, 每3个vsync才会通知一次 DisplayEventTracker -i 0     //除非调用requestNextVsync，否则不会收到vsync event,此时可以输入‘r’来调用requestNextVsync</code></pre> <h3><span style="color: rgba(53, 152, 219, 1)">2.3 执行结果展示</span></h3> <p>我的测试板默认的屏幕刷新率是60Hz，一个VSync间隔是16.67ms</p> <p>结果一：默认<span style="color: rgba(53, 152, 219, 1)"><code><strong><span style="color: rgba(53, 152, 219, 1)">setVsyncRate(1)</span></strong></code></span>，每一个vsync event都会都到，可以看结果Vsync period大约是16.68ms</p> <pre class="language-cpp"><code>root:/ $ DisplayEventTracker Vsync received: count=149 Vsync received: count=150       16.687281 ms (59.925879 Hz) Vsync received: count=151       16.687281 ms (59.925879 Hz) Vsync received: count=152       16.687281 ms (59.925879 Hz) Vsync received: count=153       16.687281 ms (59.925879 Hz) Vsync received: count=154       16.687281 ms (59.925879 Hz) Vsync received: count=155       16.687281 ms (59.925879 Hz)</code></pre> <p>结果二：<code><span style="color: rgba(53, 152, 219, 1)"><strong>setVsyncRate(6)</strong></span></code>，每间隔6个vsync events才投递一次</p> <pre class="language-cpp"><code>root:/ $ DisplayEventTracker -i 6 Vsync received: count=540 Vsync received: count=546       100.102455 ms (9.989765 Hz) Vsync received: count=552       100.102455 ms (9.989765 Hz) Vsync received: count=558       100.102455 ms (9.989765 Hz) Vsync received: count=564       100.102455 ms (9.989765 Hz) Vsync received: count=570       100.102455 ms (9.989765 Hz) Vsync received: count=576       100.102455 ms (9.989765 Hz) Vsync received: count=582       100.102455 ms (9.989765 Hz)</code></pre> <p>结果三：<strong><span style="color: rgba(53, 152, 219, 1)"><code><span style="color: rgba(53, 152, 219, 1)">setVsyncRate(0)</span></code></span></strong>，每次调用<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">requestNextVsync()</span></code></strong></span>后才收到一次vsync event</p> <pre class="language-cpp"><code>root:/ $ DisplayEventTracker -i 6 130|RealtekStark:/ $ DisplayEventTracker -i 0 r Vsync received: count=797 r Vsync received: count=801       583.896606 ms (1.712632 Hz) r Vsync received: count=803       583.900635 ms (1.712620 Hz) r Vsync received: count=805       633.949219 ms (1.577413 Hz) r Vsync received: count=807       2002.051880 ms (0.499488 Hz) r Vsync received: count=809       1951.946533 ms (0.512309 Hz)</code></pre> <h2><span style="background-color: rgba(255, 255, 255, 1); color: rgba(53, 152, 219, 1)">3 示例Demo源码解析</span></h2> <h3><span style="color: rgba(53, 152, 219, 1)">3.1 DisplayEventTracker类的定义</span></h3> <p>DisplayEventTracker定义很简单，继承自Thread，这意味着它可以开启一个独立的新线程，并在新线程中执行<code><span style="color: rgba(53, 152, 219, 1)">threadLoop()</span></code>中的处理逻辑。</p> <pre class="language-cpp"><code>class DisplayEventTracker : public Thread { public:     explicit DisplayEventTracker(int vsyncRate); // 构造函数     virtual ~DisplayEventTracker(); // 析构函数      void requestNextVsync(); // 请求下一个 vsync event  private:     virtual bool        threadLoop();     virtual status_t    readyToRun();     void processDisplayEvents();       // Display event handling     class DisplayEventCallback; // LooperCallback的实现类      std::unique_ptr&lt;DisplayEventReceiver&gt; mDisplayEventReceiver; // 接收 display events的核心成员     sp&lt;Looper&gt; mLooper;     int mVsyncRate; // 投递 vsync events的间隔、频率 };</code></pre> <h3><span style="color: rgba(53, 152, 219, 1)">3.2 DisplayEventTracker::readyToRun完成一些初始化设置，设置监听和回调</span></h3> <pre class="language-cpp"><code>status_t DisplayEventTracker::readyToRun() {     // Register a display event receiver     // To receive ModeChanged and/or FrameRateOverrides events specify this in the constructor.     mDisplayEventReceiver = std::make_unique&lt;DisplayEventReceiver&gt;(); // 创建 DisplayEventReceiver 对象     status_t status = mDisplayEventReceiver-&gt;initCheck(); // 检查 DisplayEventReceiver 初始化成功     if(status != NO_ERROR)         printf("Initialization of DisplayEventReceiver failed with status: %d", status);      mLooper-&gt;addFd(mDisplayEventReceiver-&gt;getFd(), 0, Looper::EVENT_INPUT, // 添加待监测的fd，并设置回调 DisplayEventCallback()             new DisplayEventCallback(), mDisplayEventReceiver.get()); //mDisplayEventReceiver.get()指针作为回调时传递给回调方法的数据      // setVsyncRate() sets the Event::VSync delivery rate.      // A value of 1 returns every Event::VSync.     // A value of 2 returns every other event, etc...     // a value of 0 returns no event unless  requestNextVsync() has been called.     mDisplayEventReceiver-&gt;setVsyncRate(mVsyncRate); // 设置投递 vsync event的频率          return NO_ERROR; }</code></pre> <h3><span style="color: rgba(53, 152, 219, 1)">3.3 新线程开启，DisplayEventTracker::threadLoop中等待事件发生</span></h3> <pre class="language-cpp"><code>bool DisplayEventTracker::threadLoop() {     processDisplayEvents();     return true; }  void DisplayEventTracker::processDisplayEvents() {     // This will poll mDisplayEventReceiver and if there are new events it'll call     // displayEventCallback synchronously.     mLooper-&gt;pollOnce(-1);// 阻塞等待事件发生 }</code></pre> <p>threadLooper返回true，所以会反复执行。</p> <hr/> <p>上面的逻辑就是典型的 Android Native Looper 机制，不熟悉的可以参见文章：</p> <p style="padding-left: 40px"><span style="font-size: 15px; color: rgba(35, 111, 161, 1)">Android Native -- Message/Handler/Looper机制（原理篇）</span></p> <p style="padding-left: 40px"><span style="font-size: 15px"><span style="color: rgba(35, 111, 161, 1)">Android Native -- Message/Handler/Looper机制（应用篇）</span></span></p> <hr/> <h3><span style="color: rgba(53, 152, 219, 1)">3.4 vsync event到来时，回调 handleEvent</span></h3> <pre class="language-cpp"><code>class DisplayEventTracker::DisplayEventCallback : public LooperCallback {     nsecs_t oldTimeStamp; // 记录前一个vsync的时间 public:     DisplayEventCallback(): oldTimeStamp(0) {}      int handleEvent(int /* fd */, int /*events*/, void* data) {         DisplayEventReceiver* displayEventReceiver = (DisplayEventReceiver*)data;         constexpr int kBufferSize = 100;         DisplayEventReceiver::Event buffer[kBufferSize];         ssize_t numEvents;         do {             numEvents = displayEventReceiver-&gt;getEvents(buffer, kBufferSize); // 获取事件             for (size_t i = 0; i &lt; static_cast&lt;size_t&gt;(numEvents); i++) {                 const auto&amp; event = buffer[i];                 if (event.header.type == DisplayEventReceiver::DISPLAY_EVENT_HOTPLUG) { // 热插拔事件                     printf("Hotplug received: %s\n", event.hotplug.connected?"connected":"disconnected");                 }                  if(event.header.type == DisplayEventReceiver::DISPLAY_EVENT_VSYNC) { // vsync 事件                     printf("Vsync received: count=%d\t", event.vsync.count); // 打印计数                     if (oldTimeStamp) {                         float t = float(event.header.timestamp - oldTimeStamp) / s2ns(1);                         printf("%f ms (%f Hz)\n", t*1000, 1.0/t); //打印 vsync 事件间隔                     } else {                         printf("\n");                     }                     oldTimeStamp = event.header.timestamp; // 记录事件                 }                  if(event.header.type == DisplayEventReceiver::DISPLAY_EVENT_MODE_CHANGE) { // 模式变化事件                     printf("Mode change received\n");                 }                              }         } while (numEvents &gt; 0);          return 1;  // keep the callback     } };</code></pre> <hr/> <p><span style="color: rgba(53, 152, 219, 1)"><strong>小结：</strong></span></p> <p><span style="color: rgba(53, 152, 219, 1)"><strong>demo的整体流程是非常简单的，本质就是通过Looper去监测DisplayEventReceiver::getFd()中的fd，当fd上有事件发生时，就会回调到我们设置的函数。然后就可以从DisplayEventReceiver中getEvents获取事件，判断事件类型进行对应处理了</strong></span></p> <p><span style="color: rgba(224, 62, 45, 1)"><strong>DisplayEventReceiver</strong><strong>由是个啥东东？它为什么可以收到vsync event呢？莫急，稍后分析</strong></span></p> <hr/> <h2><span style="color: rgba(53, 152, 219, 1)">4 DisplayEventReceiver相关原理分析</span></h2> <p><span style="color: rgba(0, 0, 0, 1)">DisplayEventReceiver创建并注册与SurfaceFlinger的事件连接。可用来监测VSync、HotPlug、ModeChange、FrameRateOverride事件。</span></p> <h3><span style="color: rgba(53, 152, 219, 1)">4.1 类定义</span></h3> <p><img fetchpriority="high" decoding="async" style="display: block; margin-left: auto; margin-right: auto" src="http://img.555519.xyz/uploads3/20220509/585a8b370e415a47c799c4ff4a5bc98c.jpg" alt="Android 12(S) 图像显示系统 - SurfaceFlinger 之 VSync - 中篇（十七）"></p> <p id="1650416109286"> <h3 id="1650416016159"><span style="color: rgba(53, 152, 219, 1)">4.2 主要方法解释</span></h3> <p style="padding-left: 40px"><strong>DisplayEventReceiver构造函数</strong></p> <p style="padding-left: 40px">可以根据需求来指定VsyncSource，并设置EventRegistrationFlags来决定是否接收ModeChanged和FrameRateOverrides事件。</p> <div style="padding-left: 40px"> <pre class="language-cpp"><code>[/frameworks/native/libs/gui/include/gui/ISurfaceComposer.h] enum VsyncSource {     eVsyncSourceApp = 0,     eVsyncSourceSurfaceFlinger = 1 };  enum class EventRegistration {     modeChanged = 1 &lt;&lt; 0,     frameRateOverride = 1 &lt;&lt; 1, };</code></pre> </div> <p style="padding-left: 40px"> <p style="padding-left: 40px"><strong>status_t setVsyncRate(uint32_t count)</strong></p> <p style="padding-left: 40px">设置投递vsync events的频率，设置1代表每个vsync event均被投递，设置2代表每隔一个投递一次，依次类推 ...</p> <p style="padding-left: 40px">设置0代表只有调用requestNextVsync()后才会投递一次vsync event</p> <p style="padding-left: 40px"> <p style="padding-left: 40px"><strong>status_t requestNextVsync()</strong></p> <p style="padding-left: 40px">请求下一个vsync event，在vsync rate大于0的时候，这个函数调用无效</p> <p style="padding-left: 40px"> <p style="padding-left: 40px"><strong>int getFd() const</strong></p> <p style="padding-left: 40px">获取用于接收事件的文件描述符</p> <p style="padding-left: 40px"> <p style="padding-left: 40px"><strong>ssize_t getEvents(Event* events, size_t count)</strong></p> <p style="padding-left: 40px">当监测到有事件发生时，通过它获取具体的事件列表，函数返回值就是事件的数量</p> <p style="padding-left: 40px"> <p style="padding-left: 40px"><strong>ssize_t sendEvents(Event const* events, size_t count)</strong></p> <p style="padding-left: 40px">发送事件，函数返回值就是事件的数量</p> <p><span style="color: rgba(206, 212, 217, 1)">本文作者@</span><span style="color: rgba(206, 212, 217, 1)">二的次方</span><span style="color: rgba(206, 212, 217, 1)">&nbsp; 2022-04-27 发布于博客园</span></p> <h3><span style="color: rgba(53, 152, 219, 1)">4.3<strong>DisplayEventReceiver工作原理，事件是怎么传递过来的？</strong></span></h3> <p>先看看它的构造函数的具体实现</p> <pre class="language-cpp"><code>[/frameworks/native/libs/gui/DisplayEventReceiver.cpp] DisplayEventReceiver::DisplayEventReceiver(         ISurfaceComposer::VsyncSource vsyncSource,         ISurfaceComposer::EventRegistrationFlags eventRegistration) {     sp&lt;ISurfaceComposer&gt; sf(ComposerService::getComposerService()); // 获取SurfaceFLinger服务     if (sf != nullptr) {         mEventConnection = sf-&gt;createDisplayEventConnection(vsyncSource, eventRegistration); // 创建远程事件连接         if (mEventConnection != nullptr) {             mDataChannel = std::make_unique&lt;gui::BitTube&gt;();             mEventConnection-&gt;stealReceiveChannel(mDataChannel.get()); // 传递 BitTube         }     } }</code></pre> <p>核心的处理应该是<strong><code><span style="color: rgba(53, 152, 219, 1)">createDisplayEventConnection</span></code></strong>和<code><strong><span style="color: rgba(53, 152, 219, 1)">stealReceiveChannel</span></strong></code>，下面分别看看这两个操作具体做了啥子</p> <p><strong>4.3.1 SurfaceFlinger::createDisplayEventConnection</strong></p> <p>这个方法通过Binder IPC跨进程，一路飞奔，直到SurfaceFlinger核心服务<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">SurfaceFlinger::createDisplayEventConnection</span></code></strong></span></p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/SurfaceFlinger.cpp] sp&lt;IDisplayEventConnection&gt; SurfaceFlinger::createDisplayEventConnection(         ISurfaceComposer::VsyncSource vsyncSource,         ISurfaceComposer::EventRegistrationFlags eventRegistration) {     const auto&amp; handle = // 判断选哪个 vsyncSource             vsyncSource == eVsyncSourceSurfaceFlinger ? mSfConnectionHandle : mAppConnectionHandle;     // 创建 DisplayEventConnection     return mScheduler-&gt;createDisplayEventConnection(handle, eventRegistration); }</code></pre> <p><strong><code><span style="color: rgba(53, 152, 219, 1)">mSfConnectionHandle</span></code></strong>和<strong><code><span style="color: rgba(53, 152, 219, 1)">mAppConnectionHandle</span></code></strong>是在initScheduler时创建的<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">scheduler::ConnectionHandle</span></code></strong></span>对象，前一篇文章中有分析过。</p> <p>通过这两个handle可以在<strong><code><span style="color: rgba(53, 152, 219, 1)">Scheduler::mConnections</span></code></strong>中找到和他们分别对应的<span style="color: rgba(53, 152, 219, 1)"><code><span style="color: rgba(53, 152, 219, 1)"><strong>Connection</strong></span></code></span>，即</p> <pre class="language-cpp"><code>    // Stores EventThread associated with a given VSyncSource, and an initial EventThreadConnection.     struct Connection {         sp&lt;EventThreadConnection&gt; connection;         std::unique_ptr&lt;EventThread&gt; thread;     };</code></pre> <p><strong>4.3.2 Scheduler::createDisplayEventConnection</strong></p> <p>先看代码</p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/Scheduler/Scheduler.cpp] sp&lt;IDisplayEventConnection&gt; Scheduler::createDisplayEventConnection(         ConnectionHandle handle, ISurfaceComposer::EventRegistrationFlags eventRegistration) {     std::lock_guard&lt;std::mutex&gt; lock(mConnectionsLock);     RETURN_IF_INVALID_HANDLE(handle, nullptr);     return createConnectionInternal(mConnections[handle].thread.get(), eventRegistration); }</code></pre> <p>根据handle，从<strong><code><span style="color: rgba(53, 152, 219, 1)">Scheduler::mConnections</span></code></strong>取出对应的<strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread</span></code></strong>对象，继续调用<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">Scheduler::createConnectionInternal</span></code></strong></span></p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/Scheduler/Scheduler.cpp] sp&lt;EventThreadConnection&gt; Scheduler::createConnectionInternal(         EventThread* eventThread, ISurfaceComposer::EventRegistrationFlags eventRegistration) {     return eventThread-&gt;createEventConnection([&amp;] { resync(); }, eventRegistration); }</code></pre> <p>继续去调用了<strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::createEventConnection</span></code></strong></p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/Scheduler/EventThread.cpp] sp&lt;EventThreadConnection&gt; EventThread::createEventConnection(         ResyncCallback resyncCallback,         ISurfaceComposer::EventRegistrationFlags eventRegistration) const {     return new EventThreadConnection(const_cast&lt;EventThread*&gt;(this),                                      IPCThreadState::self()-&gt;getCallingUid(),                                      std::move(resyncCallback), eventRegistration); }</code></pre> <p>创建了一个<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">EventThreadConnection</span></code></strong></span>对象，并返回给调用者。如下图继承关系，保证了<strong><code><span style="color: rgba(53, 152, 219, 1)">DisplayEventReceiver</span></code></strong>可以取得<span style="color: rgba(53, 152, 219, 1)"><strong><code>EventThreadConnection</code></strong></span>对象的远程代理，保存在成员<strong><code><span style="color: rgba(53, 152, 219, 1)">sp&lt;IDisplayEventConnection&gt; mEventConnection</span></code></strong></p> <p><img decoding="async" style="display: block; margin-left: auto; margin-right: auto" src="http://img.555519.xyz/uploads3/20220509/0e85601223e1823a08b5c9dc0e506586.jpg" alt="Android 12(S) 图像显示系统 - SurfaceFlinger 之 VSync - 中篇（十七）"></p> <p id="1650421833268">流程继续，创建<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">EventThreadConnection</span></code></strong></span>对象，第一次被引用时会进到<strong><code><span style="color: rgba(53, 152, 219, 1)">onFirstRef</span></code></strong>中进行注册</p> <pre class="language-cpp"><code>void EventThreadConnection::onFirstRef() {     // NOTE: mEventThread doesn't hold a strong reference on us     mEventThread-&gt;registerDisplayEventConnection(this); }</code></pre> <p>再转到<strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::registerDisplayEventConnection</span></code></strong>中，就是把这个connecttion保存到<strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::mDisplayEventConnections</span></code></strong></p> <pre class="language-cpp"><code>status_t EventThread::registerDisplayEventConnection(const sp&lt;EventThreadConnection&gt;&amp; connection) {     std::lock_guard&lt;std::mutex&gt; lock(mMutex);      // this should never happen     auto it = std::find(mDisplayEventConnections.cbegin(),             mDisplayEventConnections.cend(), connection);     if (it != mDisplayEventConnections.cend()) {  // 判断是否已经存在         ALOGW("DisplayEventConnection %p already exists", connection.get());         mCondition.notify_all();         return ALREADY_EXISTS;     }      mDisplayEventConnections.push_back(connection);// 保存到 mDisplayEventConnections 这个vector数组中     mCondition.notify_all();     return NO_ERROR; }</code></pre> <p>DisplayEventReceiver已经和SurfaceFlinger服务端的Scheduler建立了关系，再回到DisplayEventReceiver的构造函数接着分析下面的操作</p> <pre class="language-cpp"><code>[/frameworks/native/libs/gui/DisplayEventReceiver.cpp] // DisplayEventReceiver构造函数 mDataChannel = std::make_unique&lt;gui::BitTube&gt;(); mEventConnection-&gt;stealReceiveChannel(mDataChannel.get()); // 传递跨进程数据传递的对象 BitTube</code></pre> <p>下一步创建了一个<strong><code><span style="color: rgba(53, 152, 219, 1)">BitTube</span></code></strong>对象，然后调用了<strong><code><span style="color: rgba(53, 152, 219, 1)">mEventConnection-&gt;stealReceiveChannel</span></code>，</strong>这个方法会走到</p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/Scheduler/EventThread.cpp ] status_t EventThreadConnection::stealReceiveChannel(gui::BitTube* outChannel) {     outChannel-&gt;setReceiveFd(mChannel.moveReceiveFd());// resets this BitTube's receive file descriptor to receiveFd     outChannel-&gt;setSendFd(base::unique_fd(dup(mChannel.getSendFd()))); // resets this BitTube's send file descriptor to sendFd     return NO_ERROR; }</code></pre> <p>这使用到BitTube的跨进程传递数据的方式，基本原理可以参考：Android 12(S) 图像显示系统 - 基础知识之 BitTube</p> <hr/> <p><strong>到这里，我们可以清晰的看到，DisplayEventReceiver与SurfaceFlinger建立起来了一条跨进程传递事件的通道：BitTube中封装的socketpair (receive fd&nbsp; &amp; send fd)</strong></p> <hr/> <h3><span style="color: rgba(53, 152, 219, 1)">4.4 事件的传递、分发</span></h3> <p>通信线路已建立，接下来就要把事件经过这条道路向外传递了。</p> <p>上一篇文章中曾讲到过</p> <p style="padding-left: 40px"><strong><span style="color: rgba(53, 152, 219, 1)">收到vsync events的汇集到了两个地方：</span></strong></p> <p style="padding-left: 40px"><strong><span style="color: rgba(53, 152, 219, 1)">1. MessageQueue::vsyncCallback&nbsp; ==&gt; VSYNC-sf</span></strong></p> <p style="padding-left: 40px"><strong><span style="color: rgba(53, 152, 219, 1)">2. EventThread::onVSyncEvent&nbsp; ==&gt; VSYNC-app&nbsp; &amp; VSYNC-appSf</span></strong></p> <p><span style="color: rgba(0, 0, 0, 1)">我们这里<span style="background-color: rgba(255, 255, 255, 1); color: rgba(53, 152, 219, 1)"><span style="color: rgba(0, 0, 0, 1)">只看</span><strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::onVSyncEvent</span></code></strong></span></span></p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/Scheduler/EventThread.cpp] void EventThread::onVSyncEvent(nsecs_t timestamp, nsecs_t expectedVSyncTimestamp,                                nsecs_t deadlineTimestamp) {     ...     // 包装为 DisplayEventReceiver::Event对象，存入 mPendingEvents 尾部     mPendingEvents.push_back(makeVSync(mVSyncState-&gt;displayId, timestamp, ++mVSyncState-&gt;count,                                        expectedVSyncTimestamp, deadlineTimestamp, vsyncId));     mCondition.notify_all(); }</code></pre> <p>EventThread收到 vsync event回调事件后，放入<strong><code><span style="color: rgba(53, 152, 219, 1)">mPendingEvents</span></code></strong>这个待处理的事件队列中，然后唤醒等待的处理线程，即在<strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::threadMain</span></code></strong></p> <pre class="language-cpp"><code>[/frameworks/native/services/surfaceflinger/Scheduler/EventThread.cpp] void EventThread::threadMain(std::unique_lock&lt;std::mutex&gt;&amp; lock) {     // using DisplayEventConsumers = std::vector&lt;sp&lt;EventThreadConnection&gt;&gt;;     DisplayEventConsumers consumers; // consumers是一个EventThreadConnection数组      while (mState != State::Quit) {         std::optional&lt;DisplayEventReceiver::Event&gt; event;          // Determine next event to dispatch.         if (!mPendingEvents.empty()) {             event = mPendingEvents.front(); // 取出 mPendingEvents 头部第一个待处理的 event             mPendingEvents.pop_front();     // 删除开头元素              switch (event-&gt;header.type) { // 判断是什么类型的事件                 case DisplayEventReceiver::DISPLAY_EVENT_HOTPLUG: // 热插拔事件                     if (event-&gt;hotplug.connected &amp;&amp; !mVSyncState) {                         mVSyncState.emplace(event-&gt;header.displayId);                     } else if (!event-&gt;hotplug.connected &amp;&amp; mVSyncState &amp;&amp;                                mVSyncState-&gt;displayId == event-&gt;header.displayId) {                         mVSyncState.reset();                     }                     break;                  case DisplayEventReceiver::DISPLAY_EVENT_VSYNC: // VSYNC 事件                     if (mInterceptVSyncsCallback) {                          // mInterceptVSyncsCallback 是在SurfaceFlinger::initScheduler中createConnection时一路传递过来的                         // 这个回调会通知到SurfaceFlinger                         mInterceptVSyncsCallback(event-&gt;header.timestamp);                     }                     break;             }         }          bool vsyncRequested = false;          // Find connections that should consume this event.         auto it = mDisplayEventConnections.begin(); // mDisplayEventConnections 中保存了所有与这个EventThread建立的连接         while (it != mDisplayEventConnections.end()) { // 遍历所有Connection             if (const auto connection = it-&gt;promote()) {                 vsyncRequested |= connection-&gt;vsyncRequest != VSyncRequest::None;//是否请求vsync                  if (event &amp;&amp; shouldConsumeEvent(*event, connection)) { // 判断是否需要分发事件通知这个connection                     consumers.push_back(connection);                 }                  ++it;             } else {                 it = mDisplayEventConnections.erase(it);             }         }          if (!consumers.empty()) {             dispatchEvent(*event, consumers);// 分发事件，最终是使用BitTube发送数据，通知connection             consumers.clear();         }          State nextState;         if (mVSyncState &amp;&amp; vsyncRequested) {             // synthetic = True if VSYNC should be faked, e.g. when display is off. 屏幕关闭产生虚假的VSYNC             nextState = mVSyncState-&gt;synthetic ? State::SyntheticVSync : State::VSync;         } else {             ALOGW_IF(!mVSyncState, "Ignoring VSYNC request while display is disconnected");             nextState = State::Idle; // 进入Idle阻塞等待         }          if (mState != nextState) {             if (mState == State::VSync) {                 mVSyncSource-&gt;setVSyncEnabled(false); // 关闭 vsync             } else if (nextState == State::VSync) {                 mVSyncSource-&gt;setVSyncEnabled(true);  // 开启 vysnc ,作用于CallbackRepeater,循环去schedule next vsync             }              mState = nextState;         }          if (event) {             continue;         }          // Wait for event or client registration/request.         if (mState == State::Idle) {             mCondition.wait(lock);         } else {             // Generate a fake VSYNC after a long timeout in case the driver stalls. When the             // display is off, keep feeding clients at 60 Hz.             const std::chrono::nanoseconds timeout =                     mState == State::SyntheticVSync ? 16ms : 1000ms;             if (mCondition.wait_for(lock, timeout) == std::cv_status::timeout) {                 if (mState == State::VSync) {                     ALOGW("Faking VSYNC due to driver stall for thread %s", mThreadName);                     std::string debugInfo = "VsyncSource debug info:\n";                     mVSyncSource-&gt;dump(debugInfo);                     // Log the debug info line-by-line to avoid logcat overflow                     auto pos = debugInfo.find('\n');                     while (pos != std::string::npos) {                         ALOGW("%s", debugInfo.substr(0, pos).c_str());                         debugInfo = debugInfo.substr(pos + 1);                         pos = debugInfo.find('\n');                     }                 }                  LOG_FATAL_IF(!mVSyncState);                 const auto now = systemTime(SYSTEM_TIME_MONOTONIC);                 const auto deadlineTimestamp = now + timeout.count();                 const auto expectedVSyncTime = deadlineTimestamp + timeout.count();                 const int64_t vsyncId = [&amp;] {                     if (mTokenManager != nullptr) {                         return mTokenManager-&gt;generateTokenForPredictions(                                 {now, deadlineTimestamp, expectedVSyncTime});                     }                     return FrameTimelineInfo::INVALID_VSYNC_ID;                 }();                 mPendingEvents.push_back(makeVSync(mVSyncState-&gt;displayId, now,                                                    ++mVSyncState-&gt;count, expectedVSyncTime,                                                    deadlineTimestamp, vsyncId));             }         }     } }</code></pre> <p><strong><code><span style="color: rgba(53, 152, 219, 1)">EventThread::threadMain</span></code></strong>代码逻辑上也比较清晰，主体就是从<strong><code><span style="color: rgba(53, 152, 219, 1)">mPendingEvents</span></code></strong>这个待处理的事件队列中取出event，让后经过判断处理后通知到对应的connections</p> <p><span style="color: rgba(206, 212, 217, 1)">本文作者@</span><span style="color: rgba(206, 212, 217, 1)">二的次方</span><span style="color: rgba(206, 212, 217, 1)">&nbsp; 2022-04-27 发布于博客园</span></p> <p>简单说说</p> <p><strong>EventThread::shouldConsumeEvent</strong></p> <p>这个方法就如同它的名字，判断是否去消费这个事件，说白了就是判断这个事件是否要分发通知给指定的connection。</p> <p>参数event就是当前发生的，准备分发的事件</p> <p>参数connection就是客户端注册到EventThread中的connection，其中就包装了用于跨进程通信的BitTube对象</p> <p>对于VSYNC事件，在这个函数中实现了<code><span style="color: rgba(53, 152, 219, 1)"><strong>setVsyncRate</strong></span></code>中设置的分发频率</p> <pre class="language-cpp"><code>[ /frameworks/native/services/surfaceflinger/Scheduler/EventThread.cpp] bool EventThread::shouldConsumeEvent(const DisplayEventReceiver::Event&amp; event,                                      const sp&lt;EventThreadConnection&gt;&amp; connection) const {     const auto throttleVsync = [&amp;] {         return mThrottleVsyncCallback &amp;&amp;                 mThrottleVsyncCallback(event.vsync.expectedVSyncTimestamp, connection-&gt;mOwnerUid);     };      switch (event.header.type) {         case DisplayEventReceiver::DISPLAY_EVENT_HOTPLUG: // 热插拔事件             return true;          case DisplayEventReceiver::DISPLAY_EVENT_MODE_CHANGE: {// mode change事件             return connection-&gt;mEventRegistration.test( //接收者设置了modeChanged标志才会分发                     ISurfaceComposer::EventRegistration::modeChanged);         }          case DisplayEventReceiver::DISPLAY_EVENT_VSYNC: // VSYNC事件             switch (connection-&gt;vsyncRequest) { // setVsyncRate设置分发的频率                 case VSyncRequest::None: // rate==0，不分发                     return false;                 case VSyncRequest::SingleSuppressCallback:// requestNextVsync 有请求时case                     connection-&gt;vsyncRequest = VSyncRequest::None;                     return false;                 case VSyncRequest::Single: { // requestNextVsync 有请求时case                     if (throttleVsync()) {                         return false;                     }                     connection-&gt;vsyncRequest = VSyncRequest::SingleSuppressCallback;                     return true;                 }                 case VSyncRequest::Periodic: // rate==1，周期性，每个VSYNC事件都分发通知                     if (throttleVsync()) {                         return false;                     }                     return true;                 default:                     // We don't throttle vsync if the app set a vsync request rate                     // since there is no easy way to do that and this is a very                     // rare case                     // 根据setVsyncRate设置分发的频率，周期性的计数，每connection-&gt;vsyncRequest个分发一个                     return event.vsync.count % vsyncPeriod(connection-&gt;vsyncRequest) == 0;             }          case DisplayEventReceiver::DISPLAY_EVENT_FRAME_RATE_OVERRIDE:             [[fallthrough]];         case DisplayEventReceiver::DISPLAY_EVENT_FRAME_RATE_OVERRIDE_FLUSH: // frame rate override flush事件             return connection-&gt;mEventRegistration.test(// 判断接收者设置了frameRateOverride标志才会分发                     ISurfaceComposer::EventRegistration::frameRateOverride);          default:             return false;     } }</code></pre> <p><strong>EventThread::dispatchEvent</strong></p> <p>当前面判断某一个事件应该分发出去后，接下来就是去实际把事件分发出去，通知到接收者了</p> <p>最终的事件是通过调用<code><strong><span style="color: rgba(53, 152, 219, 1)">EventThreadConnection::postEvent</span></strong></code>==&gt;<code><strong><span style="color: rgba(53, 152, 219, 1)">DisplayEventReceiver::sendEvents</span></strong></code> ==&gt;<code><span style="color: rgba(53, 152, 219, 1)"><strong>gui::BitTube::sendObjects</strong></span></code></p> <p>BitTube跨进程通知到接收者</p> <pre class="language-cpp"><code>void EventThread::dispatchEvent(const DisplayEventReceiver::Event&amp; event,                                 const DisplayEventConsumers&amp; consumers) {     // 注意：using DisplayEventConsumers = std::vector&lt;sp&lt;EventThreadConnection&gt;&gt;;      // 从consumers数组中遍历EventThreadConnection     for (const auto&amp; consumer : consumers) {         DisplayEventReceiver::Event copy = event;         if (event.header.type == DisplayEventReceiver::DISPLAY_EVENT_VSYNC) {             copy.vsync.frameInterval = mGetVsyncPeriodFunction(consumer-&gt;mOwnerUid);         }         switch (consumer-&gt;postEvent(copy)) { // postEvent分发事件==&gt;EventThreadConnection::postEvent             ...         }     } }</code></pre> <p><strong>DispSyncSource::setVSyncEnabled</strong></p> <p>这个方法去call<code><strong><span style="color: rgba(53, 152, 219, 1)">mRegistration.schedule</span></strong></code>&nbsp; == &gt;<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">VSyncCallbackRegistration::schedule</span></code></strong></span> 去安排下一次的Vsync events</p> <p>大概如此，从而周期性的收到vsync events ,&nbsp; 不多讲了</p> <hr/> <p>经过上面流程的分析，事件通过<code><span style="color: rgba(53, 152, 219, 1)"><strong>BitTube::sendObjects</strong></span></code>跨进程通知到接收者，接收者通过监听<span style="color: rgba(53, 152, 219, 1)"><strong><code><span style="color: rgba(53, 152, 219, 1)">BitTube::mReceiveFd</span></code></strong></span>，并在接收到事件时调用<code><strong><span style="color: rgba(53, 152, 219, 1)">BitTube::recvObjects</span></strong></code>就可以取出事件，做后续处理了</p> <p>总结一个不是很准确的图，我也不知道该咋表达了，哈</p> <p><img decoding="async" style="display: block; margin-left: auto; margin-right: auto" src="http://img.555519.xyz/uploads3/20220509/32b103ce6687b647e2897716910d2adc.jpg" alt="Android 12(S) 图像显示系统 - SurfaceFlinger 之 VSync - 中篇（十七）"></p> <p id="1650944557703"> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-105069.htm">建议穷人养的10种猫100元以下作文（适合穷养的猫）</a></p>
+                                        <p>下一个：<a href="/news/article-105720.htm">猫体外驱虫药多久能杀死跳蚤（做完驱虫三天了还有跳蚤）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-88540.htm" title="宠物粮食加工厂怎么起步做生意呢赚钱吗 宠物粮食加工厂怎么起步做生意呢赚钱吗">宠物粮食加工厂怎么起步做生意呢赚钱吗 宠物粮食加工厂怎么起步做生意呢赚钱吗</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-26-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 18.7M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 18.7M/S，V2ray/SSR/Shadowrocket/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-80689.htm" title="宠物领养app信息架构设计方案怎么做（宠物领养网站html模板）">宠物领养app信息架构设计方案怎么做（宠物领养网站html模板）</a></li>
+                        <li class="py-2"><a href="/news/article-105720.htm" title="猫体外驱虫药多久能杀死跳蚤（做完驱虫三天了还有跳蚤）">猫体外驱虫药多久能杀死跳蚤（做完驱虫三天了还有跳蚤）</a></li>
+                        <li class="py-2"><a href="/news/article-75202.htm" title="AsyncLocal&lt;T&gt;在链路追踪中的应用_在线工具">AsyncLocal&lt;T&gt;在链路追踪中的应用_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-96732.htm" title="动物医院医疗设备有哪些 动物医院医疗设备有哪些品牌">动物医院医疗设备有哪些 动物医院医疗设备有哪些品牌</a></li>
+                        <li class="py-2"><a href="/news/article-83476.htm" title="Zookeeper的Watch机制实现配置中心">Zookeeper的Watch机制实现配置中心</a></li>
+                        <li class="py-2"><a href="/news/article-101816.htm" title="宠物粮食品牌名字4个字大全及图片视频 宠物粮食品牌名字4个字大全及图片视频教程">宠物粮食品牌名字4个字大全及图片视频 宠物粮食品牌名字4个字大全及图片视频教程</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-19-clash-windows.htm" title="FlClash机场订阅推荐 | 20.4M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.4M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-81373.htm" title="Vue3项目中的骨架屏">Vue3项目中的骨架屏</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">87</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
