@@ -1,4 +1,4 @@
-# FlClash机场订阅推荐 | 21M/S，V2ray/SSR/Clash/Shadowrocket免费节点链接地址分享  更新时间 2025-04-29 08:35:37
+# FlClash机场订阅推荐 | 18.5M/S，V2ray/Clash/SSR/Shadowrocket免费节点链接地址分享  更新时间 2025-04-29 16:16:09
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://flclashnode.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
