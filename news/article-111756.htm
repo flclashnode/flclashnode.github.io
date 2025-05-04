@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://flclashnode.github.io/news/article-111756.htm" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpringMVC对Ajax请求的处理</title>
+        <meta name="description" content="SpringMVC对Ajax请求的处理 [1] 问题:  当浏览器发起一个ajax请求给服务器，服务器调用对应的单元方法处理ajax请求。 而ajax的请求在被处理完成后，其处理结果需要直接响应。而目" />
+        <link rel="icon" href="/assets/website/img/flclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="FlClash免费机场订阅节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://flclashnode.github.io/news/article-111756.htm" />
+    <meta property="og:site_name" content="FlClash免费机场订阅节点官网" />
+    <meta property="og:title" content="SpringMVC对Ajax请求的处理" />
+    <meta property="og:image" content="https://flclashnode.github.io/uploads/20241105-1/46fb777dd83dc5dcbad07a4d52935364.webp" />
+        <meta property="og:release_date" content="2025-05-04T09:29:41" />
+    <meta property="og:updated_time" content="2025-05-04T09:29:41" />
+        <meta property="og:description" content="SpringMVC对Ajax请求的处理 [1] 问题:  当浏览器发起一个ajax请求给服务器，服务器调用对应的单元方法处理ajax请求。 而ajax的请求在被处理完成后，其处理结果需要直接响应。而目" />
+        
+    <link href="/assets/website/css/flclashnode/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/ranade-fonts.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/remixicon.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/scrollCue.css" rel="stylesheet">
+    <link href="/assets/website/css/flclashnode/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringMVC对Ajax请求的处理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRN3XTXJ9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRN3XTXJ9Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--  Cursor Point -->
+    <span id="mouse-follower"></span>
+    <span id="dot"></span>
+    <!--  Cursor Point -->
+    <!-- Start Navbar Area -->
+    <nav class="navbar navbar-expand-xl" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0" href="/">
+                                <span>FlClash Node</span>
+                            </a>
+            <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <i class="ri-menu-line"></i>
+                </span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            首页                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">
+                            免费节点                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">
+                            推荐机场                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">
+                            客户端                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">
+                            新闻资讯                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar Area -->
+    <!-- Start Mobile Device Navbar Area -->
+    <div class="responsive-navbar offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+        <div class="offcanvas-header">
+            <a href="/" class="logo d-inline-block">
+                Fl Clash
+            </a>
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="navbarAccordion">
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/">
+                        首页                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/free-nodes/">
+                        免费节点                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/paid-subscribe/">
+                        推荐机场                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/client.htm">
+                        客户端                    </a>
+                </div>
+                                <div class="accordion-item">
+                    <a class="accordion-link" href="/news/">
+                        新闻资讯                    </a>
+                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- End Mobile Device Navbar Area -->
+
+    <!-- Inner Hero Area Start -->
+    <div class="inner-hero-area">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-7">
+                    <div class="inner-hero-content">
+                        <h1>SpringMVC对Ajax请求的处理</h1>
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/news/">
+                                    新闻资讯                                </a>
+                            </li>
+                            <li>
+                                正文
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="inner-page-image">
+                        <img src="/assets/website/img/flclashnode/innar-page-shape2.png" class="inner-page-image2" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Hero Area End -->
+    <!-- About Area Start -->
+    <div class="about-area overflow-hidden ptb-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="Clash Meta免费节点订阅站" data-url="https://clash-meta.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <h2><a id="SpringMVCAjax_0" rel="nofollow"></a>SpringMVC对Ajax请求的处理</h2> <p>[1] 问题:</p> <blockquote> <p>当浏览器发起一个ajax请求给服务器，服务器调用对应的单元方法处理ajax请求。<br /> 而ajax的请求在被处理完成后，其处理结果需要直接响应。而目前我们在单元方 法中响应ajax请求，使用的是response对象，需要我们自己将要响应的数据转换 为json字符串响应，比较麻烦，而我们一直希望在单元方法中无论是否是ajax请求，都使用return语句来完成资源的响应，怎么办？</p> </blockquote> <p>[2] 解决:</p> <blockquote> <p>既然我们希望使用单元方法的返回值来响应ajax请求的处理结果，而目前 DispatcherServlet的底层会将单元方法的返回值按照请求转发或者重定向来处理，所以就需要我们告诉DispatcherServlet，单元方法的返回值不要按照请求转发或者重定向处理，而是按照直接响应处理，将单元方法的返回值直接响应给浏览器。</p> </blockquote> <p>[3] 代码示例:</p> <ol> <li> <p>导入jackson的jar<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220902/a3358e08ae20344ffcfe391290d2d55e.jpg" alt="SpringMVC对Ajax请求的处理"></p> </li> <li> <p>声明单元方法处理ajax请求，并在单元方法上新增注解@ResponseBody<br /> 注意：<br /> 把我们要响应的数据直接return即可，并且，返回值类型为要return<br /> 的数据类型。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220902/e108fe1734d69bc47b6a902ff8cd0393.jpg" alt="SpringMVC对Ajax请求的处理"></p> </li> <li> <p>在ajax的回调函数中，，无需再次使用eval函数将响应数据转换为json对象<br /> 直接使用即可。</p> </li> </ol> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220902/7e0caf9b00052b40fcc16d7941309e5f.jpg" alt="SpringMVC对Ajax请求的处理"></p> </div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-110936.htm">猫粮赚钱吗（做猫粮成本）</a></p>
+                                        <p>下一个：<a href="/news/article-111758.htm">关于宠物领养手续怎么办理的呢的信息</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-111758.htm" title="关于宠物领养手续怎么办理的呢的信息">关于宠物领养手续怎么办理的呢的信息</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-17-free-clash-stash.htm" title="FlClash机场订阅推荐 | 19M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 19M/S，SSR/V2ray/Clash/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-9-node-share-links.htm" title="FlClash机场订阅推荐 | 21.9M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享">FlClash机场订阅推荐 | 21.9M/S，V2ray/Shadowrocket/SSR/Clash免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 20.5M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20.5M/S，Clash/V2ray/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-96732.htm" title="动物医院医疗设备有哪些 动物医院医疗设备有哪些品牌">动物医院医疗设备有哪些 动物医院医疗设备有哪些品牌</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-8-node-share-links.htm" title="FlClash机场订阅推荐 | 18.5M/S，Shadowrocket/SSR/Clash/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 18.5M/S，Shadowrocket/SSR/Clash/V2ray免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-16-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 20M/S，V2ray/Clash/SSR/Shadowrocket免费节点链接地址分享">FlClash机场订阅推荐 | 20M/S，V2ray/Clash/SSR/Shadowrocket免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-109230.htm" title="动物医院仪器有哪些品牌（动物医院仪器有哪些品牌的）">动物医院仪器有哪些品牌（动物医院仪器有哪些品牌的）</a></li>
+                        <li class="py-2"><a href="/news/article-96731.htm" title="国内最大的狗粮批发市场在哪里进货（国内大型的狗粮厂在哪里）">国内最大的狗粮批发市场在哪里进货（国内大型的狗粮厂在哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-4-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 22.7M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享">FlClash机场订阅推荐 | 22.7M/S，Clash/Shadowrocket/SSR/V2ray免费节点链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
+        <!-- Footer Area Start -->
+    <div class="footer-area">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4 justify-content-center">
+                <div class="col-lg-6 col-xxl-2">
+                    <div class="footer-widget text-center middle-widget">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p>
+                            <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End -->
+    <!-- Back to Top Start-->
+    <button type="button" id="backtotop" class="position-fixed back-to-top-btn text-center border-0 p-0">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Back to Top End -->
+    <script src="/assets/website/js/frontend/flclashnode/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/smoothscroll.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/scrollCue.min.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/fslightbox.js"></script>
+    <script src="/assets/website/js/frontend/flclashnode/custom.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
