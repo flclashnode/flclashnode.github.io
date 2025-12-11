@@ -393,29 +393,9 @@ START=99
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 如何实现节点订阅自动更新？</h5></div>
-    <div class="panel-body">
-        用户可添加订阅 URL，Nekoray 定期自动下载并更新节点。这样可保持节点列表最新，有效减少手动维护，提高使用效率，同时保证网络连接稳定和可靠。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>Potatso Lite 为什么在 iOS 上广受欢迎？</h5></div>
     <div class="panel-body">
         Potatso Lite 是一款操作简洁的代理工具，支持多种代理协议和自定义规则。它适合不需要复杂配置的用户，界面友好、性能稳定，非常适合日常轻量使用和应用代理。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLess 为什么被认为是未来趋势？</h5></div>
-    <div class="panel-body">
-        VLess 去掉了内置加密层，改为依赖外部 TLS 进行安全通信，这使其更轻量化且更灵活。它能与 Hysteria、Reality 等现代传输方式结合使用，适应性更强，是取代 Vmess 的新标准。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 的节点订阅更新是否可定时执行？</h5></div>
-    <div class="panel-body">
-        是的。Nekoray 可以设置订阅更新频率，如每天或每小时。程序会自动下载更新节点并替换旧节点，保证用户始终使用最新线路。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何使用 Sing-box 配合 Clash Rules 实现精细分流？</h5></div>
-    <div class="panel-body">
-        将 Clash 的 rules 段提取出来转换为 Sing-box 的 routing 格式，或直接引用 rule-providers 源。Sing-box 的路由引擎支持更复杂的条件匹配，可结合 GeoIP 与 keyword 实现精细分流策略。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Netch 使用 TAP 驱动时 Windows 弹出网络变更提示，该如何处理？</h5></div>
@@ -428,9 +408,9 @@ START=99
         Reality 使用公私钥对进行认证，应生成唯一的公私钥对并妥善保存私钥，公钥可部署在服务端配置中。避免在多个服务共享同一密钥，定期轮换密钥并通过安全通道传输公钥以防泄露。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-heading"><h5>Nekoray 的节点订阅更新是否可定时执行？</h5></div>
     <div class="panel-body">
-        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+        是的。Nekoray 可以设置订阅更新频率，如每天或每小时。程序会自动下载更新节点并替换旧节点，保证用户始终使用最新线路。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Matsuri 是否支持延迟排序节点？</h5></div>
@@ -440,7 +420,27 @@ START=99
 <div class="panel panel-default">
     <div class="panel-heading"><h5>SSR 节点延迟高、丢包严重，常见排查步骤有哪些？</h5></div>
     <div class="panel-body">
-        先用 ping 和 traceroute 检查到服务器的延迟与路由跳数；再通过测速工具测带宽并尝试更换不同出站端口或混淆方式；若仍然不稳，考虑更换节点或联系客服查看服务端链路质量。    </div>
+        先用 ping 和 traceroute 检查到服务器的延迟与路由跳数；再通过测速工具测带宽并尝试更换不同出站端口或混淆方式；若仍然不稳，考虑更换节点或联系客服查看服务端链路质量。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-body">
+        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 如何实现节点订阅自动更新？</h5></div>
+    <div class="panel-body">
+        用户可添加订阅 URL，Nekoray 定期自动下载并更新节点。这样可保持节点列表最新，有效减少手动维护，提高使用效率，同时保证网络连接稳定和可靠。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何使用 Sing-box 配合 Clash Rules 实现精细分流？</h5></div>
+    <div class="panel-body">
+        将 Clash 的 rules 段提取出来转换为 Sing-box 的 routing 格式，或直接引用 rule-providers 源。Sing-box 的路由引擎支持更复杂的条件匹配，可结合 GeoIP 与 keyword 实现精细分流策略。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VLess 为什么被认为是未来趋势？</h5></div>
+    <div class="panel-body">
+        VLess 去掉了内置加密层，改为依赖外部 TLS 进行安全通信，这使其更轻量化且更灵活。它能与 Hysteria、Reality 等现代传输方式结合使用，适应性更强，是取代 Vmess 的新标准。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -469,16 +469,16 @@ START=99
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-2-clash-node.htm" title="FlClash机场订阅推荐 | 22.2M/S，Clash节点/Shadowrocket节点/SSR节点/Singbox节点/V2ray节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.2M/S，Clash节点/Shadowrocket节点/SSR节点/Singbox节点/V2ray节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-2-free-clash-stash.htm" title="FlClash机场订阅推荐 | 22.6M/S，Clash节点/Shadowrocket节点/Singbox节点/V2ray节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.6M/S，Clash节点/Shadowrocket节点/Singbox节点/V2ray节点/SSR节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-11-node-share.htm" title="FlClash机场订阅推荐 | 21.3M/S，SSR节点/Shadowrocket节点/V2ray节点/Singbox节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.3M/S，SSR节点/Shadowrocket节点/V2ray节点/Singbox节点/Clash节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-10-free-clash-stash.htm" title="FlClash机场订阅推荐 | 21.1M/S，SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.1M/S，SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-7-free-clash.htm" title="FlClash机场订阅推荐 | 22.5M/S，V2ray节点/Clash节点/Shadowrocket节点/Singbox节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.5M/S，V2ray节点/Clash节点/Shadowrocket节点/Singbox节点/SSR节点免费节点链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-8-free-node-subscribe.htm" title="FlClash机场订阅推荐 | 18.4M/S，Singbox节点/Shadowrocket节点/V2ray节点/Clash节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.4M/S，Singbox节点/Shadowrocket节点/V2ray节点/Clash节点/SSR节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-17-clash-node.htm" title="FlClash机场订阅推荐 | 21.3M/S，Shadowrocket节点/Clash节点/V2ray节点/Singbox节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.3M/S，Shadowrocket节点/Clash节点/V2ray节点/Singbox节点/SSR节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-5-clash-windows.htm" title="FlClash机场订阅推荐 | 21.2M/S，Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.2M/S，Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-5-node-share-links.htm" title="FlClash机场订阅推荐 | 19.1M/S，SSR节点/Singbox节点/Clash节点/V2ray节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.1M/S，SSR节点/Singbox节点/Clash节点/V2ray节点/Shadowrocket节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-12-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 18.1M/S，Singbox节点/Clash节点/SSR节点/V2ray节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.1M/S，Singbox节点/Clash节点/SSR节点/V2ray节点/Shadowrocket节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-15-clash-node-github.htm" title="FlClash机场订阅推荐 | 21.2M/S，SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.2M/S，SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-12-free-clash.htm" title="FlClash机场订阅推荐 | 22.2M/S，Clash节点/SSR节点/V2ray节点/Singbox节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.2M/S，Clash节点/SSR节点/V2ray节点/Singbox节点/Shadowrocket节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-26-node-share.htm" title="FlClash机场订阅推荐 | 23M/S，SSR节点/Singbox节点/Shadowrocket节点/Clash节点/V2ray节点免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，SSR节点/Singbox节点/Shadowrocket节点/Clash节点/V2ray节点免费节点链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-17-node-share-links.htm" title="FlClash机场订阅推荐 | 19.1M/S，SSR节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.1M/S，SSR节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-15-free-node-subscribe.htm" title="FlClash机场订阅推荐 | 22.6M/S，SSR节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.6M/S，SSR节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-3-free-clash-stash.htm" title="FlClash机场订阅推荐 | 18.1M/S，SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.1M/S，SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-27-clash-node-github.htm" title="FlClash机场订阅推荐 | 18.2M/S，Clash节点/Shadowrocket节点/V2ray节点/SSR节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.2M/S，Clash节点/Shadowrocket节点/V2ray节点/SSR节点/Singbox节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-20-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 21.3M/S，Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.3M/S，Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/SSR节点免费节点链接地址分享</a></li>
                     </ul>
     </div>
 </div>
@@ -490,13 +490,10 @@ START=99
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
+                <h4><span class="badge" style="float: right;">11</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                     </ul>
     </div>
