@@ -330,24 +330,9 @@ V2Ray采用AES加密等技术，保障用户的网络连接安全。即使是在
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 策略组如何根据节点延迟自动选择？</h5></div>
+    <div class="panel-heading"><h5>Hiddify Next 如何设置不同用户的带宽限制？</h5></div>
     <div class="panel-body">
-        策略组会根据节点延迟和丢包率自动选择最优节点。结合路由规则可保证国内流量直连，海外流量走最佳节点，提高访问速度和连接稳定性，优化整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 的策略组如何根据节点延迟自动切换？</h5></div>
-    <div class="panel-body">
-        策略组会根据节点延迟和丢包率自动选择最优节点。结合路由规则，可保证国内流量直连、海外流量走最佳节点，提高访问速度和连接稳定性，优化整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>何为 fake-ip 模式，它的优缺点是什么？</h5></div>
-    <div class="panel-body">
-        fake-ip 是通过伪造 DNS 返回的 IP 地址让客户端透明代理流量，优点是兼容性好、无需修改应用代理设置；缺点是可能导致某些证书校验或 SNI 伪装失效，需要配合 DNS 与证书策略谨慎使用。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + XTLS 的传输效率比 Trojan 高吗？</h5></div>
-    <div class="panel-body">
-        在高延迟环境下，VLESS + XTLS 的性能通常比 Trojan 高。XTLS 去掉了冗余加密开销，降低 CPU 占用，提高多连接场景下的吞吐率，尤其在服务器高负载情况下表现更佳。<hr />    </div>
+        管理员可为每个用户设置独立的带宽上限和流量配额。超过配额后可自动阻断或降速，确保服务器资源合理分配，避免单个用户占用过多带宽而影响其他用户体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Surfboard 的策略组可以根据延迟自动切换节点吗？</h5></div>
@@ -355,14 +340,34 @@ V2Ray采用AES加密等技术，保障用户的网络连接安全。即使是在
         支持。Surfboard 可定期测速节点延迟，并结合策略组自动选择延迟最低的节点。这样用户无需手动切换节点即可保持高速访问，提高网络体验和稳定性。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 如何配置混淆以应对封锁升级？</h5></div>
+    <div class="panel-body">
+        选择合适的混淆方式，如 tls1.2_ticket_auth，可模拟正常 HTTPS 流量。合理搭配协议和混淆参数，可有效降低被 DPI 检测和封锁的风险，提高节点长期稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray 策略组如何根据节点延迟自动选择？</h5></div>
+    <div class="panel-body">
+        策略组会根据节点延迟和丢包率自动选择最优节点。结合路由规则可保证国内流量直连，海外流量走最佳节点，提高访问速度和连接稳定性，优化整体网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Trojan TLS 伪装域名如何提高抗封锁能力？</h5></div>
     <div class="panel-body">
         通过选择真实可访问域名并使用有效证书，Trojan 流量可以完全模拟 HTTPS 请求。隐藏真实流量特征，降低被封锁和 DPI 检测风险，保证节点长期可用。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 如何设置不同用户的带宽限制？</h5></div>
+    <div class="panel-heading"><h5>V2Ray 的策略组如何根据节点延迟自动切换？</h5></div>
     <div class="panel-body">
-        管理员可为每个用户设置独立的带宽上限和流量配额。超过配额后可自动阻断或降速，确保服务器资源合理分配，避免单个用户占用过多带宽而影响其他用户体验。<hr />    </div>
+        策略组会根据节点延迟和丢包率自动选择最优节点。结合路由规则，可保证国内流量直连、海外流量走最佳节点，提高访问速度和连接稳定性，优化整体网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何使用 Docker 部署 sing-box 或 v2ray？</h5></div>
+    <div class="panel-body">
+        选择官方或社区维护的 Docker 镜像，编写 docker-compose.yml 指定配置文件挂载、网络模式与端口映射。使用容器管理可以隔离运行环境、便于日志采集并与反向代理（如 Nginx）协同工作。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VLESS + XTLS 的传输效率比 Trojan 高吗？</h5></div>
+    <div class="panel-body">
+        在高延迟环境下，VLESS + XTLS 的性能通常比 Trojan 高。XTLS 去掉了冗余加密开销，降低 CPU 占用，提高多连接场景下的吞吐率，尤其在服务器高负载情况下表现更佳。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 策略组如何根据延迟自动切换节点？</h5></div>
@@ -370,14 +375,9 @@ V2Ray采用AES加密等技术，保障用户的网络连接安全。即使是在
         策略组会根据节点延迟和丢包率选择最佳节点。结合路由规则，可保证国内流量直连、海外流量走最优节点，提高访问速度和连接稳定性，优化整体网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 如何配置混淆以应对封锁升级？</h5></div>
+    <div class="panel-heading"><h5>何为 fake-ip 模式，它的优缺点是什么？</h5></div>
     <div class="panel-body">
-        选择合适的混淆方式，如 tls1.2_ticket_auth，可模拟正常 HTTPS 流量。合理搭配协议和混淆参数，可有效降低被 DPI 检测和封锁的风险，提高节点长期稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何使用 Docker 部署 sing-box 或 v2ray？</h5></div>
-    <div class="panel-body">
-        选择官方或社区维护的 Docker 镜像，编写 docker-compose.yml 指定配置文件挂载、网络模式与端口映射。使用容器管理可以隔离运行环境、便于日志采集并与反向代理（如 Nginx）协同工作。    </div>
+        fake-ip 是通过伪造 DNS 返回的 IP 地址让客户端透明代理流量，优点是兼容性好、无需修改应用代理设置；缺点是可能导致某些证书校验或 SNI 伪装失效，需要配合 DNS 与证书策略谨慎使用。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -406,16 +406,16 @@ V2Ray采用AES加密等技术，保障用户的网络连接安全。即使是在
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2026-4-26-free-clash-subscribe.htm" title="FlClash机场订阅推荐 | 19.8M/S，Trojan节点/Singbox节点/Clash节点/SSR节点/V2ray节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.8M/S，Trojan节点/Singbox节点/Clash节点/SSR节点/V2ray节点/Shadowrocket节点免费节点链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-13-node-share-links.htm" title="FlClash机场订阅推荐 | 20.2M/S，Singbox节点/SSR节点/Trojan节点/V2ray节点/Clash节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.2M/S，Singbox节点/SSR节点/Trojan节点/V2ray节点/Clash节点/Shadowrocket节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-22-clash-windows.htm" title="FlClash机场订阅推荐 | 21.6M/S，SSR节点/Singbox节点/Shadowrocket节点/Trojan节点/V2ray节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.6M/S，SSR节点/Singbox节点/Shadowrocket节点/Trojan节点/V2ray节点/Clash节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-14-free-clash.htm" title="FlClash机场订阅推荐 | 19.8M/S，Clash节点/V2ray节点/SSR节点/Trojan节点/Shadowrocket节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.8M/S，Clash节点/V2ray节点/SSR节点/Trojan节点/Shadowrocket节点/Singbox节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-11-node-share-links.htm" title="FlClash机场订阅推荐 | 20.7M/S，Singbox节点/Trojan节点/Clash节点/Shadowrocket节点/SSR节点/V2ray节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.7M/S，Singbox节点/Trojan节点/Clash节点/Shadowrocket节点/SSR节点/V2ray节点免费节点链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-4-clash-stash.htm" title="FlClash机场订阅推荐 | 20.6M/S，Singbox节点/SSR节点/Clash节点/Shadowrocket节点/V2ray节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.6M/S，Singbox节点/SSR节点/Clash节点/Shadowrocket节点/V2ray节点/Trojan节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-26-free-clash-stash.htm" title="FlClash机场订阅推荐 | 21.9M/S，Shadowrocket节点/SSR节点/Trojan节点/V2ray节点/Singbox节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.9M/S，Shadowrocket节点/SSR节点/Trojan节点/V2ray节点/Singbox节点/Clash节点免费节点链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-4-18-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 22.2M/S，V2ray节点/Singbox节点/Clash节点/SSR节点/Trojan节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.2M/S，V2ray节点/Singbox节点/Clash节点/SSR节点/Trojan节点/Shadowrocket节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-28-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 22.3M/S，Trojan节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.3M/S，Trojan节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-7-clash-windows.htm" title="FlClash机场订阅推荐 | 22.8M/S，V2ray节点/Clash节点/Singbox节点/SSR节点/Trojan节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.8M/S，V2ray节点/Clash节点/Singbox节点/SSR节点/Trojan节点/Shadowrocket节点免费节点链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-15-node-share-links.htm" title="FlClash机场订阅推荐 | 22.1M/S，Trojan节点/SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.1M/S，Trojan节点/SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-5-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 23M/S，V2ray节点/SSR节点/Clash节点/Trojan节点/Singbox节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 23M/S，V2ray节点/SSR节点/Clash节点/Trojan节点/Singbox节点/Shadowrocket节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-10-free-clash-subscribe.htm" title="FlClash机场订阅推荐 | 19.6M/S，Shadowrocket节点/Clash节点/Trojan节点/Singbox节点/V2ray节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.6M/S，Shadowrocket节点/Clash节点/Trojan节点/Singbox节点/V2ray节点/SSR节点免费节点链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-21-node-share.htm" title="FlClash机场订阅推荐 | 19.2M/S，Clash节点/SSR节点/Trojan节点/V2ray节点/Shadowrocket节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.2M/S，Clash节点/SSR节点/Trojan节点/V2ray节点/Shadowrocket节点/Singbox节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-15-clash-node.htm" title="FlClash机场订阅推荐 | 18.7M/S，V2ray节点/Singbox节点/Trojan节点/Clash节点/SSR节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.7M/S，V2ray节点/Singbox节点/Trojan节点/Clash节点/SSR节点/Shadowrocket节点免费节点链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-29-clash-node-github.htm" title="FlClash机场订阅推荐 | 19.9M/S，Singbox节点/Trojan节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.9M/S，Singbox节点/Trojan节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点免费节点链接地址分享</a></li>
                     </ul>
     </div>
 </div>
@@ -427,7 +427,7 @@ V2Ray采用AES加密等技术，保障用户的网络连接安全。即使是在
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">14</span> <a href="/date/2026-04/" title="2026-04 归档">2026-04</a></h4>
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2026-04/" title="2026-04 归档">2026-04</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-03/" title="2026-03 归档">2026-03</a></h4>
