@@ -333,27 +333,13 @@ sudo </span><span><span class="hljs-built_in">mv</span></span><span> v2ray /usr/
 <div class="clearfix"></div>
 <div class="col-md-12 mt-5">
         <p>上一个：<a href="/free-nodes/2026-6-5-free-clash-stash.htm">FlClash机场订阅推荐 | 20.2M/S，Trojan节点/SSR节点/Clash节点/Shadowrocket节点/Singbox节点/V2ray节点免费节点链接地址分享</a></p>
+        <p>下一个：<a href="/free-nodes/2026-6-7-free-node-subscribe.htm">FlClash机场订阅推荐 | 22.8M/S，Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Singbox节点/Clash节点免费节点链接地址分享</a></p>
     </div>
 <h4>FAQ</h4>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>QuantumultX 与 Shadowrocket 相比的最大区别是什么？</h5></div>
-    <div class="panel-body">
-        QuantumultX 在规则系统和自动化脚本上更灵活，支持丰富的 rewrite 与 filter 功能，而 Shadowrocket 则更轻便易用，适合普通用户快速切换节点。二者可根据使用习惯与功能需求选择。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Netch 全局代理与规则代理的适用场景是什么？</h5></div>
-    <div class="panel-body">
-        全局代理适合游戏或全局科学上网，将所有流量通过节点；规则代理适合只对特定应用或网站进行代理。用户可根据需求选择，提高带宽利用和网络效率。<hr />    </div>
-</div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 的多出口功能如何使用？</h5></div>
     <div class="panel-body">
         WinXray 支持同时配置多个 outbound 节点，并通过路由规则或策略组选择不同出口。这样可以根据流量类型或目的地自动选择节点，实现灵活分流和负载均衡。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray 的 PAC 模式如何优化访问？</h5></div>
-    <div class="panel-body">
-        PAC 模式可根据规则动态判断流量是否走代理，无需手动切换节点。适合国内外混合访问场景，提高访问速度和稳定性，减少误操作导致的访问失败。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>VLESS + XTLS 模式在移动网络下的优势？</h5></div>
@@ -361,19 +347,14 @@ sudo </span><span><span class="hljs-built_in">mv</span></span><span> v2ray /usr/
         XTLS 模式减少握手次数和加密开销，适合高延迟或不稳定的移动网络。结合策略组和多出口节点，可提高访问速度和连接稳定性，保证用户体验流畅。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>如何在 Sing-box 中设置多个 outbound 实现策略路由？</h5></div>
+    <div class="panel-body">
+        在 sing-box 的配置中定义多个 outbound 对象并为 routing 模块配置 rules，将不同目的地或应用流量指向对应 outbound，从而实现分流、负载均衡或故障转移等复杂路由策略。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Mihomo 是什么项目？</h5></div>
     <div class="panel-body">
         Mihomo 是 Clash Meta 的继任版本，也被称为 Clash.Meta 的社区分支。它优化了性能，支持更多协议如 Hysteria2、TUIC 等，同时提供更灵活的规则匹配系统，是目前非常流行的分流代理核心。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 的路由规则如何实现国内直连？</h5></div>
-    <div class="panel-body">
-        通过配置域名列表或 IP 段，将国内流量指向直连出口，而国外流量走代理节点。结合策略组和定期更新规则，可保持国内访问速度，同时优化海外访问体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的协议插件如何增强连接稳定性？</h5></div>
-    <div class="panel-body">
-        SSR 的协议插件可以增加流量的伪装特性，模拟常见协议或浏览器行为，从而降低被识别和封锁的风险。这对不稳定网络或高封锁环境尤其有帮助。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Vmess 的安全加密方式推荐使用哪种？</h5></div>
@@ -381,9 +362,29 @@ sudo </span><span><span class="hljs-built_in">mv</span></span><span> v2ray /usr/
         目前推荐使用 auto 或 none（结合 TLS 加密）以提升性能。旧版 AEAD 加密已被废弃，使用 TLS/XTLS 层提供的加密即可确保安全。过度加密反而增加 CPU 占用与延迟。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>如何在 Sing-box 中设置多个 outbound 实现策略路由？</h5></div>
+    <div class="panel-heading"><h5>SSR 的协议插件如何增强连接稳定性？</h5></div>
     <div class="panel-body">
-        在 sing-box 的配置中定义多个 outbound 对象并为 routing 模块配置 rules，将不同目的地或应用流量指向对应 outbound，从而实现分流、负载均衡或故障转移等复杂路由策略。    </div>
+        SSR 的协议插件可以增加流量的伪装特性，模拟常见协议或浏览器行为，从而降低被识别和封锁的风险。这对不稳定网络或高封锁环境尤其有帮助。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Netch 全局代理与规则代理的适用场景是什么？</h5></div>
+    <div class="panel-body">
+        全局代理适合游戏或全局科学上网，将所有流量通过节点；规则代理适合只对特定应用或网站进行代理。用户可根据需求选择，提高带宽利用和网络效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>WinXray 的 PAC 模式如何优化访问？</h5></div>
+    <div class="panel-body">
+        PAC 模式可根据规则动态判断流量是否走代理，无需手动切换节点。适合国内外混合访问场景，提高访问速度和稳定性，减少误操作导致的访问失败。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>QuantumultX 与 Shadowrocket 相比的最大区别是什么？</h5></div>
+    <div class="panel-body">
+        QuantumultX 在规则系统和自动化脚本上更灵活，支持丰富的 rewrite 与 filter 功能，而 Shadowrocket 则更轻便易用，适合普通用户快速切换节点。二者可根据使用习惯与功能需求选择。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray 的路由规则如何实现国内直连？</h5></div>
+    <div class="panel-body">
+        通过配置域名列表或 IP 段，将国内流量指向直连出口，而国外流量走代理节点。结合策略组和定期更新规则，可保持国内访问速度，同时优化海外访问体验。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -433,16 +434,16 @@ sudo </span><span><span class="hljs-built_in">mv</span></span><span> v2ray /usr/
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-5-23-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 18M/S，Trojan节点/Singbox节点/Shadowrocket节点/V2ray节点/SSR节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 18M/S，Trojan节点/Singbox节点/Shadowrocket节点/V2ray节点/SSR节点/Clash节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-24-free-subscribe-node.htm" title="FlClash机场订阅推荐 | 21.1M/S，Shadowrocket节点/Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.1M/S，Shadowrocket节点/Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-9-clash-windows.htm" title="FlClash机场订阅推荐 | 18.6M/S，Trojan节点/Shadowrocket节点/V2ray节点/Singbox节点/SSR节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.6M/S，Trojan节点/Shadowrocket节点/V2ray节点/Singbox节点/SSR节点/Clash节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-22-free-clash-subscribe.htm" title="FlClash机场订阅推荐 | 22.8M/S，Singbox节点/Trojan节点/V2ray节点/Shadowrocket节点/SSR节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.8M/S，Singbox节点/Trojan节点/V2ray节点/Shadowrocket节点/SSR节点/Clash节点免费节点链接地址分享</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-5-20-node-share-links.htm" title="FlClash机场订阅推荐 | 20.2M/S，V2ray节点/Singbox节点/Shadowrocket节点/Clash节点/Trojan节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.2M/S，V2ray节点/Singbox节点/Shadowrocket节点/Clash节点/Trojan节点/SSR节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-7-clash-stash.htm" title="FlClash机场订阅推荐 | 21.2M/S，Singbox节点/Clash节点/SSR节点/V2ray节点/Trojan节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.2M/S，Singbox节点/Clash节点/SSR节点/V2ray节点/Trojan节点/Shadowrocket节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-26-clash-node.htm" title="FlClash机场订阅推荐 | 22M/S，Clash节点/Trojan节点/V2ray节点/SSR节点/Singbox节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 22M/S，Clash节点/Trojan节点/V2ray节点/SSR节点/Singbox节点/Shadowrocket节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-4-node-share.htm" title="FlClash机场订阅推荐 | 20.7M/S，Clash节点/V2ray节点/Shadowrocket节点/Singbox节点/Trojan节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.7M/S，Clash节点/V2ray节点/Shadowrocket节点/Singbox节点/Trojan节点/SSR节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-6-4-node-share-links.htm" title="FlClash机场订阅推荐 | 21M/S，SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 21M/S，SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点/Trojan节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-8-free-node-subscribe-links.htm" title="FlClash机场订阅推荐 | 20.8M/S，Shadowrocket节点/Clash节点/SSR节点/V2ray节点/Singbox节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.8M/S，Shadowrocket节点/Clash节点/SSR节点/V2ray节点/Singbox节点/Trojan节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-10-free-clash-stash.htm" title="FlClash机场订阅推荐 | 21M/S，Singbox节点/Shadowrocket节点/Clash节点/Trojan节点/V2ray节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 21M/S，Singbox节点/Shadowrocket节点/Clash节点/Trojan节点/V2ray节点/SSR节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-27-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 21.1M/S，SSR节点/Trojan节点/V2ray节点/Singbox节点/Shadowrocket节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.1M/S，SSR节点/Trojan节点/V2ray节点/Singbox节点/Shadowrocket节点/Clash节点免费节点链接地址分享</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-6-1-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 19.1M/S，Singbox节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.1M/S，Singbox节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点/Trojan节点免费节点链接地址分享</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-6-3-clash-windows.htm" title="FlClash机场订阅推荐 | 20.5M/S，Clash节点/Shadowrocket节点/Singbox节点/SSR节点/V2ray节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.5M/S，Clash节点/Shadowrocket节点/Singbox节点/SSR节点/V2ray节点/Trojan节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-18-clash-node.htm" title="FlClash机场订阅推荐 | 20M/S，Trojan节点/Singbox节点/Clash节点/Shadowrocket节点/V2ray节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 20M/S，Trojan节点/Singbox节点/Clash节点/Shadowrocket节点/V2ray节点/SSR节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-14-clash-node-github.htm" title="FlClash机场订阅推荐 | 18.3M/S，Singbox节点/Clash节点/V2ray节点/Trojan节点/SSR节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.3M/S，Singbox节点/Clash节点/V2ray节点/Trojan节点/SSR节点/Shadowrocket节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-16-clash-node.htm" title="FlClash机场订阅推荐 | 22M/S，Trojan节点/Shadowrocket节点/Singbox节点/V2ray节点/SSR节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 22M/S，Trojan节点/Shadowrocket节点/Singbox节点/V2ray节点/SSR节点/Clash节点免费节点链接地址分享</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -454,7 +455,7 @@ sudo </span><span><span class="hljs-built_in">mv</span></span><span> v2ray /usr/
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2026-06/" title="2026-06 归档">2026-06</a></h4>
+                <h4><span class="badge" style="float: right;">11</span> <a href="/date/2026-06/" title="2026-06 归档">2026-06</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-05/" title="2026-05 归档">2026-05</a></h4>
