@@ -211,6 +211,41 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 协议和混淆组合如何优化稳定性？</h5></div>
+    <div class="panel-body">
+        根据网络封锁情况选择合适协议和混淆组合，如 tls1.2_ticket_auth 模拟 HTTPS 流量。合理组合可提高抗封锁能力和稳定性，保证节点长期可用并优化网络连接。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>PassWall2 的分组策略可以自动切换节点吗？</h5></div>
+    <div class="panel-body">
+        可以。用户可以设置策略组，PassWall2 会定期测速并根据延迟或成功率自动选择最优节点，实现智能节点切换，保证网络稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Potatso Lite 能否手动添加节点？</h5></div>
+    <div class="panel-body">
+        Potatso Lite 支持手动添加 Shadowsocks 节点。用户在“配置”中选择添加节点，输入服务器、端口、加密方式等信息即可建立连接，适合手动管理单个线路。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Matsuri 节点延迟排序如何优化网络流量？</h5></div>
+    <div class="panel-body">
+        Matsuri 会定期测速节点延迟，并结合策略组自动选择延迟最低节点。无需手动切换，确保网页、视频和游戏流量通过最优节点，提高访问速度和网络稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的协议和混淆组合如何选择最适合的？</h5></div>
+    <div class="panel-body">
+        选择模拟 HTTPS 或 HTTP 的混淆方式，再搭配 AEAD 或协议插件，可以隐藏流量特征并提高抗封锁能力。不同网络环境需测试，选择最稳定和可靠的组合。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
+    <div class="panel-body">
+        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Sing-box 如何按端口匹配流量分配节点？</h5></div>
+    <div class="panel-body">
+        Sing-box 支持按端口匹配流量，将不同应用的流量分配到指定节点。结合策略组使用，可实现精准分流，优化访问速度和网络稳定性，提高整体网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Hysteria2 的拥塞控制算法是什么？</h5></div>
     <div class="panel-body">
         Hysteria2 基于 QUIC 协议，采用 BBR 拥塞控制算法。相比传统 TCP 机制，BBR 能更好地利用带宽资源，提高高延迟网络下的吞吐率和响应速度。<hr />    </div>
@@ -221,44 +256,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         Shadowrocket 会测量节点延迟和丢包率，将低延迟节点优先使用。结合策略组和规则文件，可保证网页、视频和游戏流量走最佳节点，提高访问速度和连接稳定性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 的分组策略可以自动切换节点吗？</h5></div>
-    <div class="panel-body">
-        可以。用户可以设置策略组，PassWall2 会定期测速并根据延迟或成功率自动选择最优节点，实现智能节点切换，保证网络稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Matsuri 节点延迟排序如何优化网络流量？</h5></div>
-    <div class="panel-body">
-        Matsuri 会定期测速节点延迟，并结合策略组自动选择延迟最低节点。无需手动切换，确保网页、视频和游戏流量通过最优节点，提高访问速度和网络稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Sing-box 如何按端口匹配流量分配节点？</h5></div>
-    <div class="panel-body">
-        Sing-box 支持按端口匹配流量，将不同应用的流量分配到指定节点。结合策略组使用，可实现精准分流，优化访问速度和网络稳定性，提高整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 协议和混淆组合如何优化稳定性？</h5></div>
-    <div class="panel-body">
-        根据网络封锁情况选择合适协议和混淆组合，如 tls1.2_ticket_auth 模拟 HTTPS 流量。合理组合可提高抗封锁能力和稳定性，保证节点长期可用并优化网络连接。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的协议和混淆组合如何选择最适合的？</h5></div>
-    <div class="panel-body">
-        选择模拟 HTTPS 或 HTTP 的混淆方式，再搭配 AEAD 或协议插件，可以隐藏流量特征并提高抗封锁能力。不同网络环境需测试，选择最稳定和可靠的组合。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 能否手动添加节点？</h5></div>
-    <div class="panel-body">
-        Potatso Lite 支持手动添加 Shadowsocks 节点。用户在“配置”中选择添加节点，输入服务器、端口、加密方式等信息即可建立连接，适合手动管理单个线路。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 的 gRPC 模式适合哪些场景？</h5></div>
     <div class="panel-body">
-        gRPC 支持多路复用和长连接，适合高并发访问和移动网络场景。相比 TCP 或 WebSocket，它可以减少握手次数，降低延迟，同时提高连接稳定性和吞吐量，特别适合游戏或即时通讯。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
-    <div class="panel-body">
-        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。    </div>
+        gRPC 支持多路复用和长连接，适合高并发访问和移动网络场景。相比 TCP 或 WebSocket，它可以减少握手次数，降低延迟，同时提高连接稳定性和吞吐量，特别适合游戏或即时通讯。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -288,11 +288,11 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <div class="row">
             <div class="text-center">
-                <a href="javascript:;" class="js_to" data-url="https://c.kilxs.cn/?path=register&code=" data-type="Xingchen" data-code="tlc6gYYx" target="_blank">
+                <a href="javascript:;" class="js_to" data-url="https://xc1.luniu8.com/?code=" data-type="Xingchen" data-code="tlc6gYYx" target="_blank">
                     <img src="/assets/website/img/G/xingchen.webp" class="avatar" alt="星辰机场">
                 </a>
                 <dl>
-                    <dt><a href="javascript:;" class="js_to" data-url="https://c.kilxs.cn/?path=register&code=" data-type="Xingchen" data-code="tlc6gYYx" target="_blank">星辰机场</a></dt>
+                    <dt><a href="javascript:;" class="js_to" data-url="https://xc1.luniu8.com/?code=" data-type="Xingchen" data-code="tlc6gYYx" target="_blank">星辰机场</a></dt>
                     <dd>
                         <p>【包年送2个月】</p><p>1、购买入门版年付套餐额外送2个月，共14个月，只要99元！！！</p><p>2、购买“至尊天皇”年付套餐，额外送2个月，只要299元！！！</p><p>3、购买其他包月类套餐中的年付，同样送2个月！！！</p><p>错过要再等一年！！</p>                    </dd>
                 </dl>
@@ -306,16 +306,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/free-clash-subscribe-2026-9-17.htm" title="FlClash机场订阅推荐 | 22M/S，V2ray节点/Trojan节点/Singbox节点/Clash节点/Shadowrocket节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 22M/S，V2ray节点/Trojan节点/Singbox节点/Clash节点/Shadowrocket节点/SSR节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-10-2-node-share.htm" title="FlClash机场订阅推荐 | 20.2M/S，V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Trojan节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.2M/S，V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Trojan节点/Singbox节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-10-clash-node-github.htm" title="FlClash机场订阅推荐 | 20.4M/S，Clash节点/V2ray节点/SSR节点/Trojan节点/Singbox节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.4M/S，Clash节点/V2ray节点/SSR节点/Trojan节点/Singbox节点/Shadowrocket节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-10-20-free-high-speed-nodes.htm" title="FlClash机场订阅推荐 | 19.9M/S，SSR节点/V2ray节点/Singbox节点/Clash节点/Shadowrocket节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.9M/S，SSR节点/V2ray节点/Singbox节点/Clash节点/Shadowrocket节点/Trojan节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-10-18-clash-node.htm" title="FlClash机场订阅推荐 | 20.4M/S，SSR节点/Trojan节点/Clash节点/Shadowrocket节点/Singbox节点/V2ray节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.4M/S，SSR节点/Trojan节点/Clash节点/Shadowrocket节点/Singbox节点/V2ray节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-10-6-clash-node.htm" title="FlClash机场订阅推荐 | 20.1M/S，V2ray节点/Clash节点/Trojan节点/Singbox节点/SSR节点/Shadowrocket节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.1M/S，V2ray节点/Clash节点/Trojan节点/Singbox节点/SSR节点/Shadowrocket节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/free-node-subscribe-links-2026-10-13.htm" title="FlClash机场订阅推荐 | 19.4M/S，Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.4M/S，Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-16-clash-node-github.htm" title="FlClash机场订阅推荐 | 22.9M/S，SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Trojan节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.9M/S，SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Trojan节点/Singbox节点免费节点链接地址分享</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/free-clash-subscribe-2026-9-11.htm" title="FlClash机场订阅推荐 | 21.2M/S，Trojan节点/V2ray节点/Singbox节点/Clash节点/Shadowrocket节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.2M/S，Trojan节点/V2ray节点/Singbox节点/Clash节点/Shadowrocket节点/SSR节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-10-4-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 20.7M/S，V2ray节点/Shadowrocket节点/Singbox节点/Trojan节点/SSR节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.7M/S，V2ray节点/Shadowrocket节点/Singbox节点/Trojan节点/SSR节点/Clash节点免费节点链接地址分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-14-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 22.5M/S，V2ray节点/SSR节点/Shadowrocket节点/Singbox节点/Clash节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.5M/S，V2ray节点/SSR节点/Shadowrocket节点/Singbox节点/Clash节点/Trojan节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/clash-stash-2026-9-27.htm" title="FlClash机场订阅推荐 | 22.3M/S，SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Trojan节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.3M/S，SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Trojan节点/Singbox节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-10-16-free-clash-stash.htm" title="FlClash机场订阅推荐 | 18.6M/S，Trojan节点/Clash节点/Shadowrocket节点/V2ray节点/Singbox节点/SSR节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.6M/S，Trojan节点/Clash节点/Shadowrocket节点/V2ray节点/Singbox节点/SSR节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-10-2-node-share.htm" title="FlClash机场订阅推荐 | 20.2M/S，V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Trojan节点/Singbox节点免费节点链接地址分享">FlClash机场订阅推荐 | 20.2M/S，V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Trojan节点/Singbox节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-20-clash-v2ray-ss-ssr.htm" title="FlClash机场订阅推荐 | 22.9M/S，Shadowrocket节点/Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.9M/S，Shadowrocket节点/Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/clash-windows-2026-10-17.htm" title="FlClash机场订阅推荐 | 21.5M/S，SSR节点/V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/Clash节点免费节点链接地址分享">FlClash机场订阅推荐 | 21.5M/S，SSR节点/V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/Clash节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-9-9.htm" title="FlClash机场订阅推荐 | 22.9M/S，SSR节点/Singbox节点/Trojan节点/Clash节点/Shadowrocket节点/V2ray节点免费节点链接地址分享">FlClash机场订阅推荐 | 22.9M/S，SSR节点/Singbox节点/Trojan节点/Clash节点/Shadowrocket节点/V2ray节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-7.htm" title="FlClash机场订阅推荐 | 18.4M/S，SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 18.4M/S，SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点/Trojan节点免费节点链接地址分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-clash-subscribe-2026-9-29.htm" title="FlClash机场订阅推荐 | 19.5M/S，V2ray节点/SSR节点/Shadowrocket节点/Clash节点/Singbox节点/Trojan节点免费节点链接地址分享">FlClash机场订阅推荐 | 19.5M/S，V2ray节点/SSR节点/Shadowrocket节点/Clash节点/Singbox节点/Trojan节点免费节点链接地址分享</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -327,7 +327,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">22</span> <a href="/date/2026-10/" title="2026-10 归档">2026-10</a></h4>
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-10/" title="2026-10 归档">2026-10</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
@@ -359,7 +359,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
                         <a href="/privacy.htm">隐私申明</a> |
                         <a href="/sitemap.xml">网站地图</a>
                     </p>
-                                        <div>特别推荐：<b><a href="javascript:;" class="js_to" data-url="https://c.kilxs.cn/?path=register&code=" data-type="Xingchen" data-code="tlc6gYYx" target="_blank">星辰机场</a></b> <p>【包年送2个月】</p><p>1、购买入门版年付套餐额外送2个月，共14个月，只要99元！！！</p><p>2、购买“至尊天皇”年付套餐，额外送2个月，只要299元！！！</p><p>3、购买其他包月类套餐中的年付，同样送2个月！！！</p><p>错过要再等一年！！</p></div>
+                                        <div>特别推荐：<b><a href="javascript:;" class="js_to" data-url="https://xc1.luniu8.com/?code=" data-type="Xingchen" data-code="tlc6gYYx" target="_blank">星辰机场</a></b> <p>【包年送2个月】</p><p>1、购买入门版年付套餐额外送2个月，共14个月，只要99元！！！</p><p>2、购买“至尊天皇”年付套餐，额外送2个月，只要299元！！！</p><p>3、购买其他包月类套餐中的年付，同样送2个月！！！</p><p>错过要再等一年！！</p></div>
                                             <p>
                             <a href="/">FlClash免费机场订阅节点官网</a> 版权所有 Powered by WordPress
                         </p>
